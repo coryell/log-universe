@@ -596,6 +596,14 @@ d3.json('/data.json').then(data => {
     // Ignore if holding modifier keys (Ctrl, Meta, Alt)
     if (e.ctrlKey || e.metaKey || e.altKey) return;
 
+    // Clear search on Delete or Backspace
+    if (e.key === 'Delete' || e.key === 'Backspace') {
+      searchInput.value = '';
+      renderResults([], ''); // Clear results manually
+      searchInput.focus();
+      return;
+    }
+
     // Ignore if key is not a single printable character
     // This avoids focusing on Arrow keys, Escape, Enter, etc. unless they produce input
     if (e.key.length === 1) {
