@@ -76,10 +76,18 @@ d3.json('/data.json').then(data => {
     .range([height - 50, 50]); // Add some padding
 
   // Dynamic X scale based on columns
-  // Add padding to sides (e.g. -2 to +2 relative to data)
+  // Dynamic X scale to match Y scale aspect ratio (1 unit x = 1 decade y)
+  // We want the visual distance of 1 unit in X to equal the visual height of 1 decade in Y
+  const decadeHeight = Math.abs(yScale(10) - yScale(1));
+
+  // Center the data horizontally on the screen
+  const xCenter = (minX + maxX) / 2;
+  const screenCenter = width / 2;
+
   const xScale = d3.scaleLinear()
-    .domain([Math.min(0, minX - 2), maxX + 2])
-    .range([220, width - 220]);
+    // Map [xCenter] to [screenCenter], and [xCenter + 1] to [screenCenter + decadeHeight]
+    .domain([xCenter, xCenter + 1])
+    .range([screenCenter, screenCenter + decadeHeight]);
 
   // Function to update the grid
   const updateGrid = (transform) => {
