@@ -1,919 +1,1443 @@
 [
   {
     "id": "electron_quark_radius_upper_limit",
-    "displayName": "Electron/Quark Radius Upper Limit",
+    "displayName": {
+      "en-us": "Electron/Quark Radius Upper Limit"
+    },
     "length": 1e-18,
-    "category": "Fundamental",
+    "category": {
+      "en-us": "Fundamental"
+    },
     "x": 1
   },
   {
     "id": "proton_neutron_radius",
-    "displayName": "Proton/Neutron Radius",
+    "displayName": {
+      "en-us": "Proton/Neutron Radius"
+    },
     "length": 8e-16,
-    "category": "Fundamental",
+    "category": {
+      "en-us": "Fundamental"
+    },
     "x": 1
   },
   {
     "id": "range_of_weak_force",
-    "displayName": "Range of Weak Force",
+    "displayName": {
+      "en-us": "Range of Weak Force"
+    },
     "length": 1e-17,
-    "category": "Fundamental",
+    "category": {
+      "en-us": "Fundamental"
+    },
     "x": 5
   },
   {
     "id": "planck_length",
-    "displayName": "Planck Length",
+    "displayName": {
+      "en-us": "Planck Length"
+    },
     "length": 1.6e-35,
-    "category": "Fundamental",
+    "category": {
+      "en-us": "Fundamental"
+    },
     "x": 1
   },
   {
     "id": "range_of_strong_force",
-    "displayName": "Range of Strong Force",
+    "displayName": {
+      "en-us": "Range of Strong Force"
+    },
     "length": 1e-15,
-    "category": "Fundamental",
+    "category": {
+      "en-us": "Fundamental"
+    },
     "x": 5
   },
   {
     "id": "most_energetic_photon_detected",
-    "displayName": "Most Energetic Photon Detected",
+    "displayName": {
+      "en-us": "Most Energetic Photon Detected"
+    },
     "length": 9e-22,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "lowest_energy_gamma_ray",
-    "displayName": "Lowest Energy Gamma Ray",
+    "displayName": {
+      "en-us": "Lowest Energy Gamma Ray"
+    },
     "length": 8.2e-13,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "highest_energy_x_ray",
-    "displayName": "Highest Energy X-Ray",
+    "displayName": {
+      "en-us": "Highest Energy X-Ray"
+    },
     "length": 5e-12,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "x_ray_uv_boundary",
-    "displayName": "X-Ray/UV Boundary",
-    "length": 1e-8,
-    "category": "Electromagnetic",
+    "displayName": {
+      "en-us": "X-Ray/UV Boundary"
+    },
+    "length": 1e-08,
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "highest_energy_visible_violet",
-    "displayName": "Highest Energy Visible (Violet)",
-    "length": 4e-7,
-    "category": "Electromagnetic",
+    "displayName": {
+      "en-us": "Highest Energy Visible (Violet)"
+    },
+    "length": 4e-07,
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "lowest_energy_visible_red",
-    "displayName": "Lowest Energy Visible (Red)",
-    "length": 7e-7,
-    "category": "Electromagnetic",
+    "displayName": {
+      "en-us": "Lowest Energy Visible (Red)"
+    },
+    "length": 7e-07,
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "infrared_microwave_boundary",
-    "displayName": "Infrared / Microwave Boundary",
+    "displayName": {
+      "en-us": "Infrared / Microwave Boundary"
+    },
     "length": 0.001,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "microwave_radio_boundary",
-    "displayName": "Microwave / Radio Boundary",
+    "displayName": {
+      "en-us": "Microwave / Radio Boundary"
+    },
     "length": 1,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "cell_phone_shortest_wavelength",
-    "displayName": "Cell Phone Shortest Wavelength",
+    "displayName": {
+      "en-us": "Cell Phone Shortest Wavelength"
+    },
     "length": 10,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "cell_phone_longest_wavelength",
-    "displayName": "Cell Phone Longest Wavelength",
+    "displayName": {
+      "en-us": "Cell Phone Longest Wavelength"
+    },
     "length": 1000,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "cmb_wavelength",
-    "displayName": "CMB Wavelength",
+    "displayName": {
+      "en-us": "CMB Wavelength"
+    },
     "length": 0.0016,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "longest_radio_possible_in_galaxy",
-    "displayName": "Longest Radio Possible in Galaxy",
+    "displayName": {
+      "en-us": "Longest Radio Possible in Galaxy"
+    },
     "length": 300000,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "longest_radio_possible_in_solar_system",
-    "displayName": "Longest Radio Possible in Solar System",
+    "displayName": {
+      "en-us": "Longest Radio Possible in Solar System"
+    },
     "length": 33000,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "longest_radio_that_penetrates_ionosphere",
-    "displayName": "Longest Radio That Penetrates Ionosphere",
+    "displayName": {
+      "en-us": "Longest Radio That Penetrates Ionosphere"
+    },
     "length": 30,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "lyman_alpha",
-    "displayName": "Lyman Alpha",
-    "length": 1.2e-7,
-    "category": "Electromagnetic",
+    "displayName": {
+      "en-us": "Lyman Alpha"
+    },
+    "length": 1.2e-07,
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "ir_wavelength_of_human_body",
-    "displayName": "IR Wavelength of Human Body",
-    "length": 0.0000093,
-    "category": "Electromagnetic",
+    "displayName": {
+      "en-us": "IR Wavelength of Human Body"
+    },
+    "length": 9.3e-06,
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "ir_wavelength_of_red_hot_metal",
-    "displayName": "IR Wavelength of Red Hot Metal",
-    "length": 0.000004,
-    "category": "Electromagnetic",
+    "displayName": {
+      "en-us": "IR Wavelength of Red Hot Metal"
+    },
+    "length": 4e-06,
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "hydrogen_line",
-    "displayName": "Hydrogen Line",
+    "displayName": {
+      "en-us": "Hydrogen Line"
+    },
     "length": 0.21,
-    "category": "Electromagnetic",
+    "category": {
+      "en-us": "Electromagnetic"
+    },
     "x": 20
   },
   {
     "id": "distance_between_particles_ipm",
-    "displayName": "Distance Between Particles IPM",
+    "displayName": {
+      "en-us": "Distance Between Particles IPM"
+    },
     "length": 0.005,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_particles_ism",
-    "displayName": "Distance Between Particles ISM",
+    "displayName": {
+      "en-us": "Distance Between Particles ISM"
+    },
     "length": 0.1,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_particles_igm",
-    "displayName": "Distance Between Particles IGM",
+    "displayName": {
+      "en-us": "Distance Between Particles IGM"
+    },
     "length": 1,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_particles_in_best_artificial_vacuum",
-    "displayName": "Distance Between Particles in Best Artificial Vacuum",
-    "length": 0.00001,
-    "category": "Density",
+    "displayName": {
+      "en-us": "Distance Between Particles in Best Artificial Vacuum"
+    },
+    "length": 1e-05,
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_air_molecules_at_sea_level",
-    "displayName": "Distance Between Air Molecules at Sea Level",
-    "length": 3e-9,
-    "category": "Density",
+    "displayName": {
+      "en-us": "Distance Between Air Molecules at Sea Level"
+    },
+    "length": 3e-09,
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_particles_in_earth_core",
-    "displayName": "Distance Between Particles in Earth Core",
+    "displayName": {
+      "en-us": "Distance Between Particles in Earth Core"
+    },
     "length": 2e-10,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_ions_in_sun_core",
-    "displayName": "Distance Between Ions in Sun Core",
+    "displayName": {
+      "en-us": "Distance Between Ions in Sun Core"
+    },
     "length": 3.5e-11,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_ions_in_sun_corona",
-    "displayName": "Distance Between Ions in Sun Corona",
-    "length": 0.000001,
-    "category": "Density",
+    "displayName": {
+      "en-us": "Distance Between Ions in Sun Corona"
+    },
+    "length": 1e-06,
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_water_molecules",
-    "displayName": "Distance Between Water Molecules",
+    "displayName": {
+      "en-us": "Distance Between Water Molecules"
+    },
     "length": 3.1e-10,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 43
   },
   {
     "id": "distance_between_neutrons_in_neutron_star",
-    "displayName": "Distance Between Neutrons in Neutron Star",
+    "displayName": {
+      "en-us": "Distance Between Neutrons in Neutron Star"
+    },
     "length": 1.5e-15,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_ions_in_white_dwarf",
-    "displayName": "Distance Between Ions in White Dwarf",
+    "displayName": {
+      "en-us": "Distance Between Ions in White Dwarf"
+    },
     "length": 3e-12,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_stars_in_milky_way",
-    "displayName": "Distance Between Stars in Milky Way",
+    "displayName": {
+      "en-us": "Distance Between Stars in Milky Way"
+    },
     "length": 47000000000000000,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "distance_between_galaxies_in_local_supercluster",
-    "displayName": "Distance Between Galaxies in Local Supercluster",
+    "displayName": {
+      "en-us": "Distance Between Galaxies in Local Supercluster"
+    },
     "length": 2.2e+22,
-    "category": "Density",
+    "category": {
+      "en-us": "Density"
+    },
     "x": 30
   },
   {
     "id": "smallest_atomic_radius_he",
-    "displayName": "Smallest Atomic Radius (He)",
+    "displayName": {
+      "en-us": "Smallest Atomic Radius (He)"
+    },
     "length": 3.1e-11,
-    "category": "Nuclear / Atomic / Molecular",
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
     "x": 1
   },
   {
     "id": "largest_nuclear_radius_pb_208",
-    "displayName": "Largest Nuclear Radius (Pb-208)",
+    "displayName": {
+      "en-us": "Largest Nuclear Radius (Pb-208)"
+    },
     "length": 7e-15,
-    "category": "Nuclear / Atomic / Molecular",
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
     "x": 1
   },
   {
     "id": "largest_atomic_radius_cs",
-    "displayName": "Largest Atomic Radius (Cs)",
+    "displayName": {
+      "en-us": "Largest Atomic Radius (Cs)"
+    },
     "length": 2.7e-10,
-    "category": "Nuclear / Atomic / Molecular",
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
     "x": 1
   },
   {
     "id": "smallest_molecule_h_2",
-    "displayName": "Smallest Molecule (H2)",
+    "displayName": {
+      "en-us": "Smallest Molecule (H2)"
+    },
     "length": 7.4e-11,
-    "category": "Nuclear / Atomic / Molecular",
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
     "x": 10
   },
   {
     "id": "largest_molecule_titin",
-    "displayName": "Largest Molecule (Titin)",
-    "length": 0.000001,
-    "category": "Nuclear / Atomic / Molecular",
+    "displayName": {
+      "en-us": "Largest Molecule (Titin)"
+    },
+    "length": 1e-06,
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
     "x": 10
   },
   {
     "id": "glucose_molecule",
-    "displayName": "Glucose Molecule",
-    "length": 1e-9,
-    "category": "Nuclear / Atomic / Molecular",
+    "displayName": {
+      "en-us": "Glucose Molecule"
+    },
+    "length": 1e-09,
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
     "x": 10
   },
   {
     "id": "water_molecule",
-    "displayName": "Water Molecule",
+    "displayName": {
+      "en-us": "Water Molecule"
+    },
     "length": 2.8e-10,
-    "category": "Nuclear / Atomic / Molecular",
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
     "x": 10
   },
   {
     "id": "amino_acid",
-    "displayName": "Amino Acid",
-    "length": 1e-9,
-    "category": "Nuclear / Atomic / Molecular",
+    "displayName": {
+      "en-us": "Amino Acid"
+    },
+    "length": 1e-09,
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
     "x": 1
   },
   {
     "id": "dna_polymerase",
-    "displayName": "DNA Polymerase",
-    "length": 7.5e-9,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "DNA Polymerase"
+    },
+    "length": 7.5e-09,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "collagen",
-    "displayName": "Collagen",
-    "length": 3e-7,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Collagen"
+    },
+    "length": 3e-07,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 10
   },
   {
     "id": "dna_in_human_chromosome",
-    "displayName": "DNA in Human Chromosome",
+    "displayName": {
+      "en-us": "DNA in Human Chromosome"
+    },
     "length": 0.1,
-    "category": "Biology",
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 10
   },
   {
     "id": "chromosome_during_division",
-    "displayName": "Chromosome During Division",
-    "length": 0.00001,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Chromosome During Division"
+    },
+    "length": 1e-05,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 5
   },
   {
     "id": "cell_membrane_thickness",
-    "displayName": "Cell Membrane Thickness",
-    "length": 1e-8,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Cell Membrane Thickness"
+    },
+    "length": 1e-08,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 10
   },
   {
     "id": "smallest_virus_aav",
-    "displayName": "Smallest Virus (AAV)",
-    "length": 2e-8,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Smallest Virus (AAV)"
+    },
+    "length": 2e-08,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "largest_virus_tupanvirus",
-    "displayName": "Largest Virus (Tupanvirus)",
-    "length": 0.0000012,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Largest Virus (Tupanvirus)"
+    },
+    "length": 1.2e-06,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "smallest_free_cell_mycoplasma",
-    "displayName": "Smallest Free Cell (Mycoplasma)",
-    "length": 2e-7,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Smallest Free Cell (Mycoplasma)"
+    },
+    "length": 2e-07,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "largest_cell_ostrich_egg",
-    "displayName": "Largest Cell (Ostrich Egg)",
+    "displayName": {
+      "en-us": "Largest Cell (Ostrich Egg)"
+    },
     "length": 0.15,
-    "category": "Biology",
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "smallest_human_cell_sperm",
-    "displayName": "Smallest Human Cell (Sperm)",
-    "length": 0.000005,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Smallest Human Cell (Sperm)"
+    },
+    "length": 5e-06,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "largest_human_cell_egg",
-    "displayName": "Largest Human Cell (Egg)",
+    "displayName": {
+      "en-us": "Largest Human Cell (Egg)"
+    },
     "length": 0.0001,
-    "category": "Biology",
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "human_skin_cell",
-    "displayName": "Human Skin Cell",
-    "length": 0.00003,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Human Skin Cell"
+    },
+    "length": 3e-05,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "human_white_blood_cell",
-    "displayName": "Human White Blood Cell",
-    "length": 0.00001,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Human White Blood Cell"
+    },
+    "length": 1e-05,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "human_mitochondria",
-    "displayName": "Human Mitochondria",
-    "length": 0.000002,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Human Mitochondria"
+    },
+    "length": 2e-06,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 10
   },
   {
     "id": "smallest_organelle_ribosome",
-    "displayName": "Smallest Organelle (Ribosome)",
-    "length": 2.5e-8,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Smallest Organelle (Ribosome)"
+    },
+    "length": 2.5e-08,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 10
   },
   {
     "id": "largest_organelle_nucleus",
-    "displayName": "Largest Organelle (Nucleus)",
-    "length": 0.00001,
-    "category": "Biology",
+    "displayName": {
+      "en-us": "Largest Organelle (Nucleus)"
+    },
+    "length": 1e-05,
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 10
   },
   {
     "id": "longest_human_axon",
-    "displayName": "Longest Human Axon",
+    "displayName": {
+      "en-us": "Longest Human Axon"
+    },
     "length": 1,
-    "category": "Biology",
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "longest_axon_blue_whale",
-    "displayName": "Longest Axon (Blue Whale)",
+    "displayName": {
+      "en-us": "Longest Axon (Blue Whale)"
+    },
     "length": 30,
-    "category": "Biology",
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "typical_human_axon",
-    "displayName": "Typical Human Axon",
+    "displayName": {
+      "en-us": "Typical Human Axon"
+    },
     "length": 0.001,
-    "category": "Biology",
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 1
   },
   {
     "id": "human_hair_thickness",
-    "displayName": "Human Hair Thickness",
+    "displayName": {
+      "en-us": "Human Hair Thickness"
+    },
     "length": 0.0001,
-    "category": "Biology",
+    "category": {
+      "en-us": "Biology"
+    },
     "x": 10
   },
   {
     "id": "computer_transistor_size",
-    "displayName": "Computer Transistor Size",
-    "length": 5e-8,
-    "category": "Technology",
+    "displayName": {
+      "en-us": "Computer Transistor Size"
+    },
+    "length": 5e-08,
+    "category": {
+      "en-us": "Technology"
+    },
     "x": 45
   },
   {
     "id": "highest_sounds_humans_hear",
-    "displayName": "Highest Sounds Humans Hear",
+    "displayName": {
+      "en-us": "Highest Sounds Humans Hear"
+    },
     "length": 0.17,
-    "category": "Sound",
+    "category": {
+      "en-us": "Sound"
+    },
     "x": 40
   },
   {
     "id": "lowest_sounds_humans_hear",
-    "displayName": "Lowest Sounds Humans Hear",
+    "displayName": {
+      "en-us": "Lowest Sounds Humans Hear"
+    },
     "length": 17,
-    "category": "Sound",
+    "category": {
+      "en-us": "Sound"
+    },
     "x": 40
   },
   {
     "id": "lowest_sounds_animals_hear_pigeons",
-    "displayName": "Lowest Sounds Animals Hear (Pigeons)",
+    "displayName": {
+      "en-us": "Lowest Sounds Animals Hear (Pigeons)"
+    },
     "length": 7000,
-    "category": "Sound",
+    "category": {
+      "en-us": "Sound"
+    },
     "x": 40
   },
   {
     "id": "highest_sounds_animals_hear_greater_wax_moths",
-    "displayName": "Highest Sounds Animals Hear (Greater wax moths)",
+    "displayName": {
+      "en-us": "Highest Sounds Animals Hear (Greater wax moths)"
+    },
     "length": 0.011,
-    "category": "Sound",
+    "category": {
+      "en-us": "Sound"
+    },
     "x": 40
   },
   {
     "id": "highest_sound_produced_recorded",
-    "displayName": "Highest Sound Produced/Recorded",
-    "length": 3.4e-7,
-    "category": "Sound",
+    "displayName": {
+      "en-us": "Highest Sound Produced/Recorded"
+    },
+    "length": 3.4e-07,
+    "category": {
+      "en-us": "Sound"
+    },
     "x": 40
   },
   {
     "id": "seismic_wave_shortest",
-    "displayName": "Seismic Wave (Shortest)",
+    "displayName": {
+      "en-us": "Seismic Wave (Shortest)"
+    },
     "length": 40,
-    "category": "Waves",
+    "category": {
+      "en-us": "Waves"
+    },
     "x": 40
   },
   {
     "id": "seismic_wave_longest",
-    "displayName": "Seismic Wave (Longest)",
+    "displayName": {
+      "en-us": "Seismic Wave (Longest)"
+    },
     "length": 250,
-    "category": "Waves",
+    "category": {
+      "en-us": "Waves"
+    },
     "x": 40
   },
   {
     "id": "wind_wave",
-    "displayName": "Wind Wave",
+    "displayName": {
+      "en-us": "Wind Wave"
+    },
     "length": 100,
-    "category": "Waves",
+    "category": {
+      "en-us": "Waves"
+    },
     "x": 40
   },
   {
     "id": "tsunami_shortest",
-    "displayName": "Tsunami (Shortest)",
+    "displayName": {
+      "en-us": "Tsunami (Shortest)"
+    },
     "length": 150000,
-    "category": "Waves",
+    "category": {
+      "en-us": "Waves"
+    },
     "x": 40
   },
   {
     "id": "tsunami_longest",
-    "displayName": "Tsunami (Longest)",
+    "displayName": {
+      "en-us": "Tsunami (Longest)"
+    },
     "length": 1000000,
-    "category": "Waves",
+    "category": {
+      "en-us": "Waves"
+    },
     "x": 40
   },
   {
     "id": "earth_radius",
-    "displayName": "Earth Radius",
+    "displayName": {
+      "en-us": "Earth Radius"
+    },
     "length": 6378000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "moon_radius",
-    "displayName": "Moon Radius",
+    "displayName": {
+      "en-us": "Moon Radius"
+    },
     "length": 1740000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "moon_orbit",
-    "displayName": "Moon Orbit",
+    "displayName": {
+      "en-us": "Moon Orbit"
+    },
     "length": 380000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 6
   },
   {
     "id": "sun_radius",
-    "displayName": "Sun Radius",
+    "displayName": {
+      "en-us": "Sun Radius"
+    },
     "length": 696000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "earth_orbit_1_au",
-    "displayName": "Earth Orbit (1 AU)",
+    "displayName": {
+      "en-us": "Earth Orbit (1 AU)"
+    },
     "length": 150000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "mercury_orbit",
-    "displayName": "Mercury Orbit",
+    "displayName": {
+      "en-us": "Mercury Orbit"
+    },
     "length": 58000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "jupiter_orbit",
-    "displayName": "Jupiter Orbit",
+    "displayName": {
+      "en-us": "Jupiter Orbit"
+    },
     "length": 778000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "saturn_orbit",
-    "displayName": "Saturn Orbit",
+    "displayName": {
+      "en-us": "Saturn Orbit"
+    },
     "length": 1400000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "pluto_orbit",
-    "displayName": "Pluto Orbit",
+    "displayName": {
+      "en-us": "Pluto Orbit"
+    },
     "length": 6000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "saturn_radius",
-    "displayName": "Saturn Radius",
+    "displayName": {
+      "en-us": "Saturn Radius"
+    },
     "length": 60000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "saturn_s_rings_outer_radius",
-    "displayName": "Saturn's Rings Outer Radius",
+    "displayName": {
+      "en-us": "Saturn's Rings Outer Radius"
+    },
     "length": 140000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "brown_dwarf_radius",
-    "displayName": "Brown Dwarf Radius",
+    "displayName": {
+      "en-us": "Brown Dwarf Radius"
+    },
     "length": 58000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 6
   },
   {
     "id": "saturn_s_ring_thickness",
-    "displayName": "Saturn's Ring Thickness",
+    "displayName": {
+      "en-us": "Saturn's Ring Thickness"
+    },
     "length": 100,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "earth_s_inner_core_radius",
-    "displayName": "Earth's Inner Core Radius",
+    "displayName": {
+      "en-us": "Earth's Inner Core Radius"
+    },
     "length": 1220000,
-    "category": "Geology",
+    "category": {
+      "en-us": "Geology"
+    },
     "x": 6
   },
   {
     "id": "earth_s_outer_core_radius",
-    "displayName": "Earth's Outer Core Radius",
+    "displayName": {
+      "en-us": "Earth's Outer Core Radius"
+    },
     "length": 3480000,
-    "category": "Geology",
+    "category": {
+      "en-us": "Geology"
+    },
     "x": 6
   },
   {
     "id": "earth_s_mantle_thickness",
-    "displayName": "Earth's Mantle Thickness",
+    "displayName": {
+      "en-us": "Earth's Mantle Thickness"
+    },
     "length": 2900000,
-    "category": "Geology",
+    "category": {
+      "en-us": "Geology"
+    },
     "x": 14
   },
   {
     "id": "earth_s_crust_continental",
-    "displayName": "Earth's Crust (Continental)",
+    "displayName": {
+      "en-us": "Earth's Crust (Continental)"
+    },
     "length": 40000,
-    "category": "Geology",
+    "category": {
+      "en-us": "Geology"
+    },
     "x": 6
   },
   {
     "id": "earth_s_crust_oceanic",
-    "displayName": "Earth's Crust (Oceanic)",
+    "displayName": {
+      "en-us": "Earth's Crust (Oceanic)"
+    },
     "length": 5000,
-    "category": "Geology",
+    "category": {
+      "en-us": "Geology"
+    },
     "x": 6
   },
   {
     "id": "largest_asteroid_ceres",
-    "displayName": "Largest Asteroid (Ceres)",
+    "displayName": {
+      "en-us": "Largest Asteroid (Ceres)"
+    },
     "length": 470000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "smallest_asteroid_2015_t_c_25",
-    "displayName": "Smallest Asteroid (2015 TC25)",
+    "displayName": {
+      "en-us": "Smallest Asteroid (2015 TC25)"
+    },
     "length": 2,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 10
   },
   {
     "id": "smallest_star_sgr_1935_2154",
-    "displayName": "Smallest Star (SGR 1935+2154)",
+    "displayName": {
+      "en-us": "Smallest Star (SGR 1935+2154)"
+    },
     "length": 4000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "neutron_star",
-    "displayName": "Neutron Star",
+    "displayName": {
+      "en-us": "Neutron Star"
+    },
     "length": 10000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "smallest_white_dwarf_hd_49798",
-    "displayName": "Smallest White Dwarf (HD 49798)",
+    "displayName": {
+      "en-us": "Smallest White Dwarf (HD 49798)"
+    },
     "length": 1600000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 19
   },
   {
     "id": "smallest_subdwarf",
-    "displayName": "Smallest Subdwarf",
+    "displayName": {
+      "en-us": "Smallest Subdwarf"
+    },
     "length": 46000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 19
   },
   {
     "id": "largest_white_dwarf_z_andromedae_b",
-    "displayName": "Largest White Dwarf (Z Andromedae B)",
+    "displayName": {
+      "en-us": "Largest White Dwarf (Z Andromedae B)"
+    },
     "length": 118000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 19
   },
   {
     "id": "red_dwarf",
-    "displayName": "Red Dwarf",
+    "displayName": {
+      "en-us": "Red Dwarf"
+    },
     "length": 69600000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 14
   },
   {
     "id": "largest_main_sequence_star",
-    "displayName": "Largest Main Sequence Star",
+    "displayName": {
+      "en-us": "Largest Main Sequence Star"
+    },
     "length": 10440000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "sirius",
-    "displayName": "Sirius",
+    "displayName": {
+      "en-us": "Sirius"
+    },
     "length": 1183200000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "maximum_future_sun_radius",
-    "displayName": "Maximum Future Sun Radius",
+    "displayName": {
+      "en-us": "Maximum Future Sun Radius"
+    },
     "length": 139200000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "largest_known_star_uy_scuti",
-    "displayName": "Largest Known Star (UY Scuti)",
+    "displayName": {
+      "en-us": "Largest Known Star (UY Scuti)"
+    },
     "length": 1183200000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "kuiper_belt_outer_radius",
-    "displayName": "Kuiper Belt Outer Radius",
+    "displayName": {
+      "en-us": "Kuiper Belt Outer Radius"
+    },
     "length": 7480000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 6
   },
   {
     "id": "oort_cloud_outer_radius",
-    "displayName": "Oort Cloud Outer Radius",
+    "displayName": {
+      "en-us": "Oort Cloud Outer Radius"
+    },
     "length": 29900000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 6
   },
   {
     "id": "oort_cloud_inner_radius",
-    "displayName": "Oort Cloud Inner Radius",
+    "displayName": {
+      "en-us": "Oort Cloud Inner Radius"
+    },
     "length": 299000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 6
   },
   {
     "id": "heliopause",
-    "displayName": "Heliopause",
+    "displayName": {
+      "en-us": "Heliopause"
+    },
     "length": 18400000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "voyager_1_distance",
-    "displayName": "Voyager 1 Distance",
+    "displayName": {
+      "en-us": "Voyager 1 Distance"
+    },
     "length": 24700000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 6
   },
   {
     "id": "light_year",
-    "displayName": "Light-year",
+    "displayName": {
+      "en-us": "Light-year"
+    },
     "length": 9460000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "parsec",
-    "displayName": "Parsec",
+    "displayName": {
+      "en-us": "Parsec"
+    },
     "length": 30900000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "black_hole_1_solar_mass",
-    "displayName": "Black Hole (1 Solar Mass)",
+    "displayName": {
+      "en-us": "Black Hole (1 Solar Mass)"
+    },
     "length": 3000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "distance_to_nearest_star_proxima_centauri",
-    "displayName": "Distance to Nearest Star (Proxima Centauri)",
+    "displayName": {
+      "en-us": "Distance to Nearest Star (Proxima Centauri)"
+    },
     "length": 40200000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "distance_to_furthest_known_star_earendel",
-    "displayName": "Distance to Furthest Known Star (Earendel)",
+    "displayName": {
+      "en-us": "Distance to Furthest Known Star (Earendel)"
+    },
     "length": 1.36e+26,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "distance_to_sagistarius_a_supermassive_black_hole",
-    "displayName": "Distance to Sagistarius A* (Supermassive Black Hole)",
+    "displayName": {
+      "en-us": "Distance to Sagistarius A* (Supermassive Black Hole)"
+    },
     "length": 255000000000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "milky_way_radius",
-    "displayName": "Milky Way Radius",
+    "displayName": {
+      "en-us": "Milky Way Radius"
+    },
     "length": 401000000000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "magellanic_clouds_distance_from_galactic_center",
-    "displayName": "Magellanic Clouds Distance from Galactic Center",
+    "displayName": {
+      "en-us": "Magellanic Clouds Distance from Galactic Center"
+    },
     "length": 1.7e+21,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "distance_to_closest_galaxy_andromeda",
-    "displayName": "Distance to Closest Galaxy (Andromeda)",
+    "displayName": {
+      "en-us": "Distance to Closest Galaxy (Andromeda)"
+    },
     "length": 2.36e+22,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "largest_galaxy_eso_383_76",
-    "displayName": "Largest Galaxy (ESO 383-76)",
+    "displayName": {
+      "en-us": "Largest Galaxy (ESO 383-76)"
+    },
     "length": 8.33e+21,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "globular_cluster_radius",
-    "displayName": "Globular Cluster Radius",
+    "displayName": {
+      "en-us": "Globular Cluster Radius"
+    },
     "length": 309000000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "simeis_147_supernova_remnant",
-    "displayName": "Simeis 147 (Supernova Remnant)",
+    "displayName": {
+      "en-us": "Simeis 147 (Supernova Remnant)"
+    },
     "length": 757000000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "distance_to_cosmic_event_horizon",
-    "displayName": "Distance to Cosmic Event Horizon",
+    "displayName": {
+      "en-us": "Distance to Cosmic Event Horizon"
+    },
     "length": 1.54e+26,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "local_group",
-    "displayName": "Local Group",
+    "displayName": {
+      "en-us": "Local Group"
+    },
     "length": 4.73e+22,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "local_supercluster",
-    "displayName": "Local Supercluster",
+    "displayName": {
+      "en-us": "Local Supercluster"
+    },
     "length": 4.94e+23,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "distance_to_great_attractor",
-    "displayName": "Distance to Great Attractor",
+    "displayName": {
+      "en-us": "Distance to Great Attractor"
+    },
     "length": 1.85e+24,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "sagitarius_a",
-    "displayName": "Sagitarius A*",
+    "displayName": {
+      "en-us": "Sagitarius A*"
+    },
     "length": 12000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "largest_bh_found_by_ligo",
-    "displayName": "Largest BH Found by LIGO",
+    "displayName": {
+      "en-us": "Largest BH Found by LIGO"
+    },
     "length": 420000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 10
   },
   {
     "id": "largest_bh",
-    "displayName": "Largest BH",
+    "displayName": {
+      "en-us": "Largest BH"
+    },
     "length": 300000000000000,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 1
   },
   {
     "id": "milky_way_dark_matter_halo",
-    "displayName": "Milky Way Dark Matter Halo",
+    "displayName": {
+      "en-us": "Milky Way Dark Matter Halo"
+    },
     "length": 4.63e+21,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 15
   },
   {
     "id": "longest_galactic_filament",
-    "displayName": "Longest Galactic Filament",
+    "displayName": {
+      "en-us": "Longest Galactic Filament"
+    },
     "length": 9.26e+25,
-    "category": "Astronomy",
+    "category": {
+      "en-us": "Astronomy"
+    },
     "x": 30
   }
 ]

@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import './style.css';
-import { getMatches, getHighlightedText } from './search.js';
+import { getMatches, getHighlightedText, getLocalized } from './search.js';
 
 const app = document.getElementById('app');
 const width = app.clientWidth;
@@ -249,7 +249,7 @@ d3.json('/data.json').then(data => {
     .attr('cx', d => xScale(d.x))
     .attr('cy', d => yScale(d.length))
     .attr('r', initialRadius)
-    .attr('fill', d => colorScale(d.category));
+    .attr('fill', d => colorScale(getLocalized(d.category))); // i18n update
 
   // Draw Labels
   g.selectAll('text.label')
@@ -258,9 +258,9 @@ d3.json('/data.json').then(data => {
     .attr('x', d => xScale(d.x) + 10)
     .attr('y', d => yScale(d.length))
     .attr('dy', '.35em')
-    .text(d => d.displayName)
+    .text(d => getLocalized(d.displayName)) // i18n update
     .attr('class', 'label')
-    .attr('fill', d => colorScale(d.category))
+    .attr('fill', d => colorScale(getLocalized(d.category))) // i18n update
     .style('font-family', 'monospace')
     .style('font-size', `${initialFS}px`);
 
@@ -361,14 +361,14 @@ d3.json('/data.json').then(data => {
         // Dim all points and labels that don't match the category
         g.selectAll("circle")
           .transition().duration(200)
-          .attr("opacity", d => d.category === cat ? 1 : 0.2);
+          .attr("opacity", d => getLocalized(d.category) === cat ? 1 : 0.2); // i18n update
 
         g.selectAll("text.label")
           .transition().duration(200)
-          .attr("opacity", d => d.category === cat ? 1 : 0.2);
+          .attr("opacity", d => getLocalized(d.category) === cat ? 1 : 0.2); // i18n update
         // Bring matching points and labels to the front
-        g.selectAll("circle").filter(d => d.category === cat).raise();
-        g.selectAll("text.label").filter(d => d.category === cat).raise();
+        g.selectAll("circle").filter(d => getLocalized(d.category) === cat).raise(); // i18n update
+        g.selectAll("text.label").filter(d => getLocalized(d.category) === cat).raise(); // i18n update
       })
       .on("mouseout", function () {
         // Restore opacity
@@ -386,7 +386,7 @@ d3.json('/data.json').then(data => {
       })
       .on("click", function (event, d) {
         // Filter data for this category
-        const categoryData = data.filter(item => item.category === cat);
+        const categoryData = data.filter(item => getLocalized(item.category) === cat); // i18n update
         if (categoryData.length === 0) return;
 
         // Calculate bounding box in default screen coordinates
@@ -457,7 +457,7 @@ d3.json('/data.json').then(data => {
       const div = document.createElement('div');
       div.className = 'search-result-item';
 
-      div.innerHTML = getHighlightedText(d.displayName, query);
+      div.innerHTML = getHighlightedText(getLocalized(d.displayName), query); // i18n update
 
       div.addEventListener('click', () => {
         selectResult(d);
@@ -476,7 +476,7 @@ d3.json('/data.json').then(data => {
 
   // Select Result & Zoom
   function selectResult(d) {
-    searchInput.value = d.displayName;
+    searchInput.value = getLocalized(d.displayName); // i18n update
     searchResults.style.display = 'none';
 
     // Zoom to point logic

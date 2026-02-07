@@ -1,5 +1,16 @@
 
 /**
+ * Helper to get localized string from data.
+ * Handles object (i18n) formats only.
+ */
+export function getLocalized(val) {
+    if (val && typeof val === 'object' && 'en-us' in val) {
+        return val['en-us'];
+    }
+    return '';
+}
+
+/**
  * Splits a string into tokens based on SPACES ONLY.
  * Parentheses and other chars are part of the token.
  * @param {string} text 
@@ -31,10 +42,11 @@ export function isMatch(item, query) {
     if (!query) return false;
     if (!item || !item.displayName) return false;
 
+    const displayName = getLocalized(item.displayName);
     const queryTokens = tokenize(query.toLowerCase());
     if (queryTokens.length === 0) return false;
 
-    const target = item.displayName.toLowerCase();
+    const target = displayName.toLowerCase();
 
     return queryTokens.every((token, index) => {
         const isLast = (index === queryTokens.length - 1);
@@ -68,12 +80,15 @@ export function getMatches(data, query) {
     const matches = data.filter(d => isMatch(d, query));
 
     return matches.sort((a, b) => {
+        const nameA = getLocalized(a.displayName);
+        const nameB = getLocalized(b.displayName);
+
         // 1. Length (shortest first)
-        const lenDiff = a.displayName.length - b.displayName.length;
+        const lenDiff = nameA.length - nameB.length;
         if (lenDiff !== 0) return lenDiff;
 
         // 2. Alphabetical
-        return a.displayName.localeCompare(b.displayName);
+        return nameA.localeCompare(nameB);
     });
 }
 
@@ -82,6 +97,7 @@ export function getMatches(data, query) {
  */
 export function getHighlightedText(text, query) {
     if (!query) return text;
+    // text should already be the localized string passed from main.js
 
     const queryTokens = tokenize(query.toLowerCase());
     if (queryTokens.length === 0) return text;
