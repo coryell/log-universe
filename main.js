@@ -250,7 +250,7 @@ d3.json('/data.json').then(data => {
   // Zoom Behavior
   const buffer = 300; // Visual buffer in pixels to allow labels to clear the edge/fade
   const zoom = d3.zoom()
-    .scaleExtent([0.1, 1000000]) // Allow massive zoom for log scale
+    .scaleExtent([1, 1000000]) // Prevent zooming out past initial view, allow massive zoom in
     .translateExtent([[-300, -300], [width + 300, height + 300]]) // Initial constraint
     .on('zoom', (event) => {
       const t = event.transform;
