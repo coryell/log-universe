@@ -8,7 +8,7 @@
     "category": {
       "en-us": "Fundamental"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "proton_neutron_radius",
@@ -19,7 +19,7 @@
     "category": {
       "en-us": "Fundamental"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "range_of_weak_force",
@@ -41,7 +41,7 @@
     "category": {
       "en-us": "Fundamental"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "range_of_strong_force",
@@ -404,7 +404,7 @@
     "category": {
       "en-us": "Nuclear / Atomic / Molecular"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "largest_nuclear_radius_pb_208",
@@ -415,7 +415,7 @@
     "category": {
       "en-us": "Nuclear / Atomic / Molecular"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "largest_atomic_radius_cs",
@@ -426,7 +426,7 @@
     "category": {
       "en-us": "Nuclear / Atomic / Molecular"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "smallest_molecule_h_2",
@@ -481,7 +481,7 @@
     "category": {
       "en-us": "Nuclear / Atomic / Molecular"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "dna_polymerase",
@@ -492,7 +492,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "collagen",
@@ -503,7 +503,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "dna_in_human_chromosome",
@@ -514,7 +514,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "chromosome_during_division",
@@ -525,7 +525,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 5
+    "x": 12
   },
   {
     "id": "cell_membrane_thickness",
@@ -536,7 +536,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "smallest_virus_aav",
@@ -547,7 +547,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "largest_virus_tupanvirus",
@@ -558,7 +558,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "smallest_free_cell_mycoplasma",
@@ -569,7 +569,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "largest_cell_ostrich_egg",
@@ -580,7 +580,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "smallest_human_cell_sperm",
@@ -591,7 +591,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "largest_human_cell_egg",
@@ -602,7 +602,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "human_skin_cell",
@@ -613,7 +613,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "human_white_blood_cell",
@@ -624,7 +624,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "human_mitochondria",
@@ -635,7 +635,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "smallest_organelle_ribosome",
@@ -646,7 +646,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "largest_organelle_nucleus",
@@ -657,7 +657,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "longest_human_axon",
@@ -668,7 +668,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "longest_axon_blue_whale",
@@ -679,7 +679,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "typical_human_axon",
@@ -690,7 +690,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "human_hair_thickness",
@@ -701,7 +701,7 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "computer_transistor_size",
@@ -833,7 +833,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "moon",
@@ -844,7 +844,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "moon_orbit",
@@ -866,7 +866,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "earth_orbit_1_au",
@@ -877,7 +877,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "mercury_orbit",
@@ -888,7 +888,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "jupiter_orbit",
@@ -899,7 +899,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "saturn_orbit",
@@ -910,7 +910,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "pluto_orbit",
@@ -921,7 +921,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "saturn",
@@ -932,7 +932,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "saturn_s_rings_outer_radius",
@@ -943,7 +943,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "brown_dwarf",
@@ -965,7 +965,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "earth_s_inner_core",
@@ -998,7 +998,7 @@
     "category": {
       "en-us": "Geology"
     },
-    "x": 14
+    "x": 12
   },
   {
     "id": "earth_s_crust_continental_thickness",
@@ -1031,7 +1031,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "smallest_asteroid_2015_t_c_25",
@@ -1108,7 +1108,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 14
+    "x": 10
   },
   {
     "id": "largest_main_sequence_star",
@@ -1119,7 +1119,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 6
   },
   {
     "id": "sirius",
@@ -1130,7 +1130,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 6
   },
   {
     "id": "maximum_future_sun_radius",
@@ -1141,7 +1141,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 6
   },
   {
     "id": "largest_known_star_uy_scuti",
@@ -1152,7 +1152,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 6
   },
   {
     "id": "kuiper_belt_outer_radius",
@@ -1196,7 +1196,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "voyager_1_distance",
@@ -1218,7 +1218,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "parsec",
@@ -1229,7 +1229,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "black_hole_1_solar_mass",
@@ -1240,7 +1240,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "distance_to_nearest_star_proxima_centauri",
@@ -1284,7 +1284,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "magellanic_clouds_distance_from_galactic_center",
@@ -1295,7 +1295,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "distance_to_closest_galaxy_andromeda",
@@ -1317,7 +1317,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "globular_cluster",
@@ -1328,7 +1328,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "simeis_147_supernova_remnant",
@@ -1339,7 +1339,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "distance_to_cosmic_event_horizon",
@@ -1350,7 +1350,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "local_group",
@@ -1361,7 +1361,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "local_supercluster",
@@ -1372,7 +1372,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "distance_to_great_attractor",
@@ -1383,7 +1383,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "sagitarius_a",
@@ -1394,7 +1394,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "largest_bh_found_by_ligo",
@@ -1416,7 +1416,7 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 1
+    "x": 0
   },
   {
     "id": "milky_way_dark_matter_halo",
