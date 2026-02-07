@@ -660,7 +660,40 @@ d3.json('/data.json').then(data => {
     let lengthContent = "";
     let lengthTextForCopy = "";
     if (d.length !== undefined && d.length !== null) {
-      const exp = d.length.toExponential(2);
+      // Calculate significant figures from the source string in data.json if possible
+      // But here we have d.length as a number. In JS, 640 is just 640.
+      // The user says: "for integer values like 640, assume the number of sig figs is the number of digits before the trailing zeros"
+      // So 640 -> 2 sig figs (6, 4). 600 -> 1 sig fig (6). 641 -> 3 sig figs.
+      // For floating points like 1.2e5, it's harder to know from the number alone.
+      // Helper to count sig figs from a number:
+
+      const formatWithSigFigs = (num) => {
+        let n = num;
+        if (n === 0) return "0";
+
+        // Handle integers specifically for the trailing zero rule
+        if (Number.isInteger(n) && !n.toString().includes('e')) {
+          const s = Math.abs(n).toString();
+          // Count digits excluding trailing zeros
+          const trimmed = s.replace(/0+$/, '');
+          const sigFigs = trimmed.length;
+
+          // If we have 640, sigFigs is 2. 
+          // Scientific notation: 6.4 x 10^2
+          // Formula: n.toExponential(sigFigs - 1)
+          return n.toExponential(Math.max(0, sigFigs - 1));
+        }
+
+        // For non-integers or very large numbers already in scientific notation (which JS handles automatically for >1e21)
+        // We will fallback to 3 sig figs (2 decimal places) as a default if we can't infer otherwise, 
+        // OR try to infer from string if we had it. Since we don't store the original string, 
+        // we'll try a heuristic or just stick to the requested integer rule + standard for others.
+        // User only specified the rule for integers. Let's stick to 2 decimal places (3 sig figs) for others for consistency with previous,
+        // unless they look like simple integers.
+        return n.toExponential(2);
+      };
+
+      const exp = formatWithSigFigs(d.length);
       const [mantissa, exponent] = exp.split('e');
       const expVal = parseInt(exponent, 10);
       lengthTextForCopy = `${mantissa} × 10^${expVal} m`;
