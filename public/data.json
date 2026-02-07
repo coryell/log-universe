@@ -11,9 +11,9 @@
     "x": 0
   },
   {
-    "id": "proton_neutron_radius",
+    "id": "proton_neutron",
     "displayName": {
-      "en-us": "Proton/Neutron Radius"
+      "en-us": "Proton/Neutron"
     },
     "length": 8e-16,
     "category": {
