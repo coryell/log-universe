@@ -533,6 +533,8 @@ d3.json('/data.json').then(data => {
       const matches = getMatches(data, query);
       renderResults(matches, query);
     }
+    // ensure the list starts at the top
+    searchResults.scrollTop = 0;
   });
 
   searchInput.addEventListener('keydown', (e) => {
@@ -575,6 +577,22 @@ d3.json('/data.json').then(data => {
   document.addEventListener('click', (e) => {
     if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
       searchResults.style.display = 'none';
+    }
+  });
+
+  // Global keydown listener to auto-focus search
+  document.addEventListener('keydown', (e) => {
+    // Ignore if search input is already focused
+    if (document.activeElement === searchInput) return;
+
+    // Ignore if holding modifier keys (Ctrl, Meta, Alt)
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+    // Ignore if key is not a single printable character
+    // This avoids focusing on Arrow keys, Escape, Enter, etc. unless they produce input
+    if (e.key.length === 1) {
+      searchInput.focus();
+      // Allow default action so the character is typed into the input
     }
   });
 
