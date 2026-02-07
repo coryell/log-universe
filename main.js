@@ -523,16 +523,39 @@ d3.json('/data.json').then(data => {
 
     // We want 3 decades to fill the screen height
     // k = (height * totalDecades) / (3 * availableHeight)
-    let scale = (height * totalDecades) / (3 * availableHeight);
+    let targetScale = (height * totalDecades) / (3 * availableHeight);
+
+    // Dynamic Zoom Constraint: Keep nearest neighbor visible
+    // 1. Calculate distance to nearest neighbor in base screen coordinates (transform k=1)
+    let minDiff = Infinity;
+    const x1 = xScale(d.x);
+    const y1 = yScale(d.length);
+
+    data.forEach(p => {
+      if (p.id === d.id) return; // Skip self
+      const x2 = xScale(p.x);
+      const y2 = yScale(p.length);
+      const dist = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+      if (dist < minDiff) minDiff = dist;
+    });
+
+    if (minDiff !== Infinity) {
+      // 2. We want the nearest neighbor to be ON SCREEN.
+      // Use min(width, height) / 2.2 to give some padding.
+      const safeRadius = Math.min(width, height) / 2.2;
+      const maxScaleForNeighbor = safeRadius / minDiff;
+
+      targetScale = Math.min(targetScale, maxScaleForNeighbor);
+    }
 
     // Clamp scale reasonably
-    scale = Math.max(1, Math.min(scale, 1000));
+    targetScale = Math.max(1, Math.min(targetScale, 1000));
     const x = xScale(d.x);
     const y = yScale(d.length);
 
     const transform = d3.zoomIdentity
       .translate(width / 2, height / 2) // Center of screen
-      .scale(scale)
+      .scale(targetScale)
       .translate(-x, -y); // Move point to center
 
     svg.transition()
@@ -738,7 +761,13 @@ d3.json('/data.json').then(data => {
     .on("click", (event, d) => {
       showInfobox(d);
       event.stopPropagation(); // Prevent SVG click from hiding it
+    })
+    .on("dblclick", (event, d) => {
+      selectResult(d);
+      event.stopPropagation(); // Stop zoom behavior if any, though selectResult triggers its own zoom
     });
+
+  // Hide on background click
 
   // Hide on background click
   svg.on("click", () => {
