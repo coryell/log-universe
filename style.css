@@ -236,3 +236,22 @@ svg {
   color: rgba(0, 170, 255, 0.7);
   margin-right: 5px;
 }
+
+.copy-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 170, 255, 0.5);
+  color: #00aaff;
+  font-family: inherit;
+  font-size: 10px;
+  padding: 2px 5px;
+  margin-left: 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  pointer-events: auto;
+  /* Ensure clickable */
+}
+
+.copy-btn:hover {
+  background-color: rgba(0, 170, 255, 0.2);
+  border-color: #00aaff;
+}

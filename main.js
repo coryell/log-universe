@@ -658,11 +658,13 @@ d3.json('/data.json').then(data => {
 
     // specific format: [i.j x 10^k] m
     let lengthContent = "";
+    let lengthTextForCopy = "";
     if (d.length !== undefined && d.length !== null) {
       const exp = d.length.toExponential(2);
       const [mantissa, exponent] = exp.split('e');
       const expVal = parseInt(exponent, 10);
-      lengthContent = `<div class="infobox-row"><span class="infobox-label">Length:</span>${mantissa} × 10^${expVal} m</div>`;
+      lengthTextForCopy = `${mantissa} × 10^${expVal} m`;
+      lengthContent = `<div class="infobox-row"><span class="infobox-label">Length:</span>${lengthTextForCopy}<button class="copy-btn">Copy</button></div>`;
     }
 
     const categoryColor = colorScale(localizedCategory);
@@ -674,6 +676,21 @@ d3.json('/data.json').then(data => {
       ${tagsContent}
     `)
       .style("display", "block");
+
+    // Attach copy event listener
+    if (lengthTextForCopy) {
+      infobox.select(".copy-btn").on("click", function (event) {
+        event.stopPropagation();
+        navigator.clipboard.writeText(lengthTextForCopy).then(() => {
+          const btn = d3.select(this);
+          const originalText = btn.text();
+          btn.text("Copied!");
+          setTimeout(() => btn.text(originalText), 2000);
+        }).catch(err => {
+          console.error('Failed to copy text: ', err);
+        });
+      });
+    }
     // Positioning is handled by CSS (bottom-left)
   }
 
