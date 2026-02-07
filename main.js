@@ -527,6 +527,14 @@ d3.json('/data.json').then(data => {
     renderResults(matches, query);
   });
 
+  searchInput.addEventListener('focus', () => {
+    const query = searchInput.value;
+    if (query) {
+      const matches = getMatches(data, query);
+      renderResults(matches, query);
+    }
+  });
+
   searchInput.addEventListener('keydown', (e) => {
     const items = searchResults.querySelectorAll('.search-result-item');
     if (items.length === 0) return;
