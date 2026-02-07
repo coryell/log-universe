@@ -604,4 +604,123 @@ d3.json('/data.json').then(data => {
     }
   });
 
+
+  // Cursor Ruler Implementation
+  const rulerGroup = svg.append("g")
+    .attr("class", "cursor-ruler")
+    .style("pointer-events", "none") // Let mouse events pass through
+    .style("display", "none");
+
+  const rulerLine = rulerGroup.append("line")
+    .attr("x1", 0)
+    .attr("x2", width)
+    .attr("stroke", "red")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "4,2");
+
+  const rulerLabelBackground = rulerGroup.append("rect")
+    .attr("fill", "black")
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .attr("opacity", 0.7);
+
+  const rulerLabel = rulerGroup.append("text")
+    .attr("fill", "white")
+    .style("font-family", "monospace")
+    .style("font-size", "12px")
+    .attr("dy", "0.35em")
+    .attr("text-anchor", "start");
+
+  // Track the current transform to correctly invert Y
+  let currentTransform = d3.zoomIdentity;
+
+  // We need to listen on the SVG (or a transparent rect covering it)
+  // The 'zoom' behavior on svg consumes events, so we hook into it or append a listener
+  // Since 'zoom' is on svg, standard mousemove might be blocked or consumed?
+  // Actually d3.zoom doesn't stop propagation of mousemove by default unless it's dragging.
+
+  svg.on("mousemove", (event) => {
+    // Show ruler
+    rulerGroup.style("display", null);
+
+    const [mouseX, mouseY] = d3.pointer(event);
+
+    // Update Line Position
+    rulerLine
+      .attr("y1", mouseY)
+      .attr("y2", mouseY);
+
+    // Calculate Value
+    // We need the Rescaled Y Scale to invert correctly
+    const newYScale = currentTransform.rescaleY(yScale);
+    const value = newYScale.invert(mouseY);
+
+    // Format Value (Scientific Notation)
+    const formattedValue = value.toExponential(2) + " m";
+
+    // Update Label
+    rulerLabel
+      .attr("x", 10) // Left aligned
+      .attr("y", mouseY - 10)
+      .text(formattedValue);
+
+    // Update Label Background
+    const bbox = rulerLabel.node().getBBox();
+    rulerLabelBackground
+      .attr("x", bbox.x - 4)
+      .attr("y", bbox.y - 4)
+      .attr("width", bbox.width + 8)
+      .attr("height", bbox.height + 8);
+  });
+
+  svg.on("mouseleave", () => {
+    rulerGroup.style("display", "none");
+  });
+
+  // Hook into existing zoom listener to update currentTransform
+  // We need to modify the existing zoom handler to update our variable
+  // BUT we can't easily modify the existing function closure.
+  // Instead, we can inspect d3.zoomTransform(svg.node()) inside mousemove.
+  // That is cleaner than modifying the zoom handler.
+
+  // RE-UPDATE mousemove to use d3.zoomTransform 
+  svg.on("mousemove", (event) => {
+    rulerGroup.style("display", null);
+
+    // Get current transform directly from DOM
+    const t = d3.zoomTransform(svg.node());
+
+    const [mouseX, mouseY] = d3.pointer(event);
+
+    // Update Line Position
+    rulerLine
+      .attr("y1", mouseY)
+      .attr("y2", mouseY);
+
+    // Calculate Value
+    const newYScale = t.rescaleY(yScale);
+    const value = newYScale.invert(mouseY);
+
+    // Format Value
+    const exp = value.toExponential(2);
+    const [mantissa, exponent] = exp.split('e');
+    // Remove '+' sign from exponent if present (parseInt does this, but to be clean)
+    const expVal = parseInt(exponent, 10);
+    const formattedValue = `${mantissa} × 10^${expVal} m`;
+
+    // Update Label
+    rulerLabel
+      .attr("x", 10)
+      .attr("y", mouseY - 10)
+      .text(formattedValue);
+
+    // Update Label Background
+    const bbox = rulerLabel.node().getBBox();
+    rulerLabelBackground
+      .attr("x", bbox.x - 4)
+      .attr("y", bbox.y - 4)
+      .attr("width", bbox.width + 8)
+      .attr("height", bbox.height + 8);
+  });
+
 });
