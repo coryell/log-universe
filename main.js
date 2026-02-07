@@ -202,7 +202,7 @@ d3.json('/data.json').then(data => {
       .attr("stroke-opacity", d => {
         const log10 = Math.log10(d);
         // Major lines (integer powers of 10) are more opaque
-        return Number.isInteger(log10) ? 0.4 : 0.15;
+        return Number.isInteger(log10) ? 0.4 : 0.25;
       });
 
     gridGroup.selectAll(".horizontal-grid .tick text")
