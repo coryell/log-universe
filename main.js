@@ -78,7 +78,7 @@ d3.json('/data.json').then(data => {
   // Add padding to sides (e.g. -2 to +2 relative to data)
   const xScale = d3.scaleLinear()
     .domain([Math.min(0, minX - 2), maxX + 2])
-    .range([0, width]);
+    .range([220, width - 220]);
 
   // Function to update the grid
   const updateGrid = (transform) => {
@@ -254,7 +254,7 @@ d3.json('/data.json').then(data => {
       // We want to ensure that the data bounds [x0, x1] never move too far off screen.
       // Constraint: t.applyX(x0) <= a * width  AND  t.applyX(x1) >= (1-a) * width
       // This is achieved by setting translateExtent boundaries extX0 and extX1.
-      const a = 0.8; // Allow data to shift up to 80% across the screen
+      const a = 0.2; // Allow data to shift up to 80% across the screen
       const extX0 = xScale(minX) - (a * width) / t.k;
       const extX1 = xScale(maxX) + (a * width) / t.k;
       const extY0 = yScale(maxLength) - (a * height) / t.k; // Use maxLength for top of screen
