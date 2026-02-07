@@ -1563,15 +1563,21 @@
     "x": 15
   },
   {
-    "id": "distance_to_sagistarius_a_supermassive_black_hole",
+    "id": "distance_to_sagistarius_a",
     "displayName": {
-      "en-us": "Distance to Sagistarius A* (Supermassive Black Hole)"
+      "en-us": "Distance to Sagistarius A*"
     },
     "length": 255000000000000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 15,
+    "tags": {
+      "en-us": [
+        "black hole",
+        "supermassive black hole"
+      ]
+    }
   },
   {
     "id": "milky_way",
@@ -1708,7 +1714,7 @@
     "tags": {
       "en-us": [
         "black hole",
-        "supermassive"
+        "supermassive black hole"
       ]
     }
   },
@@ -1731,7 +1737,7 @@
   {
     "id": "largest_bh",
     "displayName": {
-      "en-us": "Largest BH"
+      "en-us": "Largest Black Hole"
     },
     "length": 300000000000000,
     "category": {
@@ -1740,7 +1746,7 @@
     "x": 0,
     "tags": {
       "en-us": [
-        "black hole"
+        "supermassive black hole"
       ]
     }
   },
