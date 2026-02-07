@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import './style.css';
-import { getMatches, getHighlightedText, getLocalized } from './search.js';
+import { getMatches, getHighlightedText, getLocalized, getSearchResultContent } from './search.js';
 
 const app = document.getElementById('app');
 const width = app.clientWidth;
@@ -465,7 +465,7 @@ d3.json('/data.json').then(data => {
       const div = document.createElement('div');
       div.className = 'search-result-item';
 
-      div.innerHTML = getHighlightedText(getLocalized(d.displayName), query); // i18n update
+      div.innerHTML = getSearchResultContent(d, query); // Updated to handle tags
 
       div.addEventListener('click', () => {
         selectResult(d);

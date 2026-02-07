@@ -42,27 +42,40 @@ export function isMatch(item, query) {
     if (!query) return false;
     if (!item || !item.displayName) return false;
 
-    const displayName = getLocalized(item.displayName);
     const queryTokens = tokenize(query.toLowerCase());
     if (queryTokens.length === 0) return false;
 
-    const target = displayName.toLowerCase();
+    // Check Display Name
+    const displayName = getLocalized(item.displayName).toLowerCase();
+    if (checkMatch(displayName, queryTokens)) return true;
 
+    // Check Tags
+    if (item.tags) {
+        const tags = item.tags['en-us'] || []; // localized tags? assuming structure
+        // If data.json tags are localized objects { "en-us": ["tag1", "tag2"] }
+        // If they are just arrays ["tag1"], adjust. User diff showed localized.
+        // Diff: "tags": { "en-us": ["sol", "star"] }
+
+        // We want to return true if ANY tag matches
+        return tags.some(tag => checkMatch(tag.toLowerCase(), queryTokens));
+    }
+
+    return false;
+}
+
+/**
+ * Helper to check if a target string matches the query tokens rule.
+ */
+function checkMatch(target, queryTokens) {
     return queryTokens.every((token, index) => {
         const isLast = (index === queryTokens.length - 1);
         const safeToken = escapeRegExp(token);
-
-        // Construct regex for this token
-        // Preceded by Start or Space or ( or ) or / or -
-        // Note: match must handle the delimiter but strictness comes from token content
         const startBoundary = `(?:^|[\\s()/\-])`;
 
         let pattern;
         if (isLast) {
-            // Prefix match
             pattern = `${startBoundary}${safeToken}`;
         } else {
-            // Exact match: Followed by End or Space or ( or ) or / or -
             const endBoundary = `(?=$|[\\s()/\-])`;
             pattern = `${startBoundary}${safeToken}${endBoundary}`;
         }
@@ -134,4 +147,36 @@ export function getHighlightedText(text, query) {
     if (prefixToken) applyHighlight(prefixToken, true);
 
     return formattedText;
+}
+
+/**
+ * Returns content for search result item.
+ * - If displayName matches: returns highlighted displayName
+ * - If tag matches: returns "displayName (highlightedTag)"
+ */
+export function getSearchResultContent(item, query) {
+    if (!item || !query) return '';
+
+    const queryTokens = tokenize(query.toLowerCase());
+    const displayName = getLocalized(item.displayName);
+
+    // 1. Check if Display Name matches
+    if (checkMatch(displayName.toLowerCase(), queryTokens)) {
+        return getHighlightedText(displayName, query);
+    }
+
+    // 2. Check Tags
+    if (item.tags) {
+        const tags = item.tags['en-us'] || [];
+        // Find the FIRST tag that matches
+        const matchedTag = tags.find(tag => checkMatch(tag.toLowerCase(), queryTokens));
+
+        if (matchedTag) {
+            const tempTag = getHighlightedText(matchedTag, query);
+            return `${displayName} [${tempTag}]`;
+        }
+    }
+
+    // Fallback (shouldn't happen if isMatch was true)
+    return displayName;
 }

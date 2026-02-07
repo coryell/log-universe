@@ -866,7 +866,13 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "Sol",
+        "star"
+      ]
+    }
   },
   {
     "id": "earth_orbit_1_au",
