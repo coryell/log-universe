@@ -222,6 +222,17 @@ d3.json('/data.json').then(data => {
     gridGroup.select(".vertical-grid .domain").remove();
   };
 
+  // Define Categorical Color Scale
+  const categories = [
+    "Astronomy", "Biology", "Density", "Electromagnetic", "Fundamental",
+    "Geology", "Nuclear / Atomic / Molecular", "Sound", "Technology", "Waves"
+  ];
+  const colors = [
+    "#FFD700", "#7CFC00", "#FF8C00", "#1E90FF", "#FF00FF",
+    "#CD853F", "#00FFFF", "#FF69B4", "#C0C0C0", "#9370DB"
+  ];
+  const colorScale = d3.scaleOrdinal().domain(categories).range(colors);
+
   // Initial draw with identity transform
   updateGrid(d3.zoomIdentity);
 
@@ -237,7 +248,7 @@ d3.json('/data.json').then(data => {
     .attr('cx', d => xScale(d.x))
     .attr('cy', d => yScale(d.length))
     .attr('r', initialRadius)
-    .attr('fill', '#00aaff');
+    .attr('fill', d => colorScale(d.category));
 
   // Draw Labels
   g.selectAll('text.label')
@@ -248,7 +259,7 @@ d3.json('/data.json').then(data => {
     .attr('dy', '.35em')
     .text(d => d.displayName)
     .attr('class', 'label')
-    .attr('fill', '#00aaff')
+    .attr('fill', d => colorScale(d.category))
     .style('font-family', 'monospace')
     .style('font-size', `${initialFS}px`);
 
@@ -311,5 +322,116 @@ d3.json('/data.json').then(data => {
       .duration(750)
       .ease(d3.easeCubicInOut)
       .call(zoom.transform, d3.zoomIdentity);
+  });
+
+  // Legend
+  const legendPadding = 15;
+  const legendItemHeight = 20;
+  const legendWidth = 260;
+  const legendHeight = categories.length * legendItemHeight + legendPadding * 2;
+
+  const legendX = width - legendWidth - 20;
+  const legendY = height - legendHeight - 20;
+
+  const legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", `translate(${legendX}, ${legendY})`);
+
+  // Legend Box
+  legend.append("rect")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+    .attr("fill", "black")
+    .attr("stroke", "#00aaff")
+    .attr("stroke-width", 1);
+
+  // Legend Items
+  categories.forEach((cat, i) => {
+    legend.append("text")
+      .attr("x", legendPadding)
+      .attr("y", legendPadding + i * legendItemHeight + legendItemHeight / 2)
+      .attr("dy", "0.35em")
+      .text(cat)
+      .attr("fill", colorScale(cat))
+      .style("font-family", "monospace")
+      .style("font-size", "12px")
+      .style("cursor", "pointer")
+      .on("mouseover", function () {
+        // Dim all points and labels that don't match the category
+        g.selectAll("circle")
+          .transition().duration(200)
+          .attr("opacity", d => d.category === cat ? 1 : 0.2);
+
+        g.selectAll("text.label")
+          .transition().duration(200)
+          .attr("opacity", d => d.category === cat ? 1 : 0.2);
+        // Bring matching points and labels to the front
+        g.selectAll("circle").filter(d => d.category === cat).raise();
+        g.selectAll("text.label").filter(d => d.category === cat).raise();
+      })
+      .on("mouseout", function () {
+        // Restore opacity
+        g.selectAll("circle")
+          .transition().duration(200)
+          .attr("opacity", 1);
+
+        g.selectAll("text.label")
+          .transition().duration(200)
+          .attr("opacity", 1);
+
+        // Restore original order (assuming data index)
+        g.selectAll("circle").sort((a, b) => d3.ascending(a.id, b.id)); // Or just standard sort if data order matters
+        g.selectAll("text.label").sort((a, b) => d3.ascending(a.id, b.id));
+      })
+      .on("click", function (event, d) {
+        // Filter data for this category
+        const categoryData = data.filter(item => item.category === cat);
+        if (categoryData.length === 0) return;
+
+        // Calculate bounding box in default screen coordinates
+        // We use the default xScale and yScale (before any zoom transform)
+        const xValues = categoryData.map(d => xScale(d.x));
+        const yValues = categoryData.map(d => yScale(d.length));
+
+        let minX = d3.min(xValues);
+        let maxX = d3.max(xValues);
+        let minY = d3.min(yValues);
+        let maxY = d3.max(yValues);
+
+        // Add padding and space for labels
+        const padding = 50;
+        const labelAllowance = 200; // Estimate for label width on the right
+
+        minX -= padding;
+        maxX += labelAllowance;
+        minY -= padding;
+        maxY += padding;
+
+        const boundsWidth = maxX - minX;
+        const boundsHeight = maxY - minY;
+
+        // Calculate scale and translation to fit
+        // Scale must fit both width and height
+        const scale = 0.9 / Math.max(boundsWidth / width, boundsHeight / height);
+
+        // Clamp scale to extent
+        const clampedScale = Math.min(Math.max(scale, 1), 1000000); // Respect min scale 1
+
+        const centerX = (minX + maxX) / 2;
+        const centerY = (minY + maxY) / 2;
+
+        const translate = [
+          width / 2 - centerX * clampedScale,
+          height / 2 - centerY * clampedScale
+        ];
+
+        const transform = d3.zoomIdentity
+          .translate(translate[0], translate[1])
+          .scale(clampedScale);
+
+        svg.transition()
+          .duration(750)
+          .call(zoom.transform, transform);
+      });
   });
 });
