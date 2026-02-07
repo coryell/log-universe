@@ -408,8 +408,8 @@ d3.json('/data.json').then(data => {
         let maxY = d3.max(yValues);
 
         // Add padding and space for labels
-        const padding = 50;
-        const labelAllowance = 200; // Estimate for label width on the right
+        const padding = 20;
+        const labelAllowance = 100; // Estimate for label width on the right
 
         minX -= padding;
         maxX += labelAllowance;
@@ -421,7 +421,7 @@ d3.json('/data.json').then(data => {
 
         // Calculate scale and translation to fit
         // Scale must fit both width and height
-        const scale = 0.9 / Math.max(boundsWidth / width, boundsHeight / height);
+        const scale = 0.95 / Math.max(boundsWidth / width, boundsHeight / height);
 
         // Clamp scale to extent
         const clampedScale = Math.min(Math.max(scale, 1), 1000000); // Respect min scale 1
