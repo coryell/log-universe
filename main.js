@@ -189,8 +189,12 @@ d3.json('/data.json').then(data => {
     // Horizontal Styles
     gridGroup.selectAll(".horizontal-grid .tick line")
       .attr("stroke", "#00aaff")
-      .attr("stroke-opacity", 0.4) // Increased from 0.2
-      .attr("stroke-dasharray", "2,2");
+      .attr("stroke-dasharray", "2,2")
+      .attr("stroke-opacity", d => {
+        const log10 = Math.log10(d);
+        // Major lines (integer powers of 10) are more opaque
+        return Number.isInteger(log10) ? 0.4 : 0.15;
+      });
 
     gridGroup.selectAll(".horizontal-grid .tick text")
       .attr("x", 10)
@@ -221,18 +225,19 @@ d3.json('/data.json').then(data => {
   // Initial draw with identity transform
   updateGrid(d3.zoomIdentity);
 
-  // Draw Points
+  // Calculate initial font size based on axes (height of one decade)
+  const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
+  const initialFS = Math.min(12, initialDecadeHeight);
+
+  // Draw Points (radius proportional to font size)
+  const initialRadius = initialFS / 2.4;
   g.selectAll('circle')
     .data(data)
     .join('circle')
     .attr('cx', d => xScale(d.x))
     .attr('cy', d => yScale(d.length))
-    .attr('r', 5)
+    .attr('r', initialRadius)
     .attr('fill', '#00aaff');
-
-  // Calculate initial font size based on axes (height of one decade)
-  const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
-  const initialFS = Math.min(12, initialDecadeHeight);
 
   // Draw Labels
   g.selectAll('text.label')
@@ -283,10 +288,12 @@ d3.json('/data.json').then(data => {
       const currentDecadeHeight = Math.abs(newYScale(10) - newYScale(1));
       const currentFS = Math.min(12, currentDecadeHeight);
 
-      // Update Points Position
+      // Update Points Position and Size
+      const currentRadius = currentFS / 2.4;
       g.selectAll('circle')
         .attr('cx', d => newXScale(d.x))
-        .attr('cy', d => newYScale(d.length));
+        .attr('cy', d => newYScale(d.length))
+        .attr('r', currentRadius);
 
       // Update Labels Position and Size
       g.selectAll('text.label')
