@@ -8,7 +8,13 @@
     "category": {
       "en-us": "Fundamental"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "subatomic",
+        "particle"
+      ]
+    }
   },
   {
     "id": "proton_neutron",
@@ -19,7 +25,13 @@
     "category": {
       "en-us": "Fundamental"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "nucleon",
+        "atomic nucleus"
+      ]
+    }
   },
   {
     "id": "range_of_weak_force",
@@ -30,7 +42,13 @@
     "category": {
       "en-us": "Fundamental"
     },
-    "x": 5
+    "x": 5,
+    "tags": {
+      "en-us": [
+        "interaction",
+        "quantum"
+      ]
+    }
   },
   {
     "id": "planck_length",
@@ -41,7 +59,12 @@
     "category": {
       "en-us": "Fundamental"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "quantum"
+      ]
+    }
   },
   {
     "id": "range_of_strong_force",
@@ -52,7 +75,13 @@
     "category": {
       "en-us": "Fundamental"
     },
-    "x": 5
+    "x": 5,
+    "tags": {
+      "en-us": [
+        "interaction",
+        "quantum"
+      ]
+    }
   },
   {
     "id": "most_energetic_photon_detected",
@@ -63,7 +92,14 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "gamma ray",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "lowest_energy_gamma_ray",
@@ -74,7 +110,14 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "highest_energy_x_ray",
@@ -85,7 +128,13 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "light",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "x_ray_uv_boundary",
@@ -96,7 +145,15 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "light",
+        "photon",
+        "radiation",
+        "ultraviolet"
+      ]
+    }
   },
   {
     "id": "highest_energy_visible_violet",
@@ -107,7 +164,15 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "color",
+        "light",
+        "optical",
+        "photon"
+      ]
+    }
   },
   {
     "id": "lowest_energy_visible_red",
@@ -118,7 +183,15 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "color",
+        "light",
+        "optical",
+        "photon"
+      ]
+    }
   },
   {
     "id": "infrared_microwave_boundary",
@@ -129,7 +202,16 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "heat",
+        "IR",
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "microwave_radio_boundary",
@@ -140,7 +222,15 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "communication",
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "cell_phone_shortest_wavelength",
@@ -151,7 +241,15 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "communication",
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "cell_phone_longest_wavelength",
@@ -162,7 +260,15 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "communication",
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "cmb_wavelength",
@@ -173,7 +279,16 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "big bang",
+        "cosmic microwave background",
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "longest_radio_possible_in_galaxy",
@@ -184,7 +299,14 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "longest_radio_possible_in_solar_system",
@@ -195,7 +317,14 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "longest_radio_that_penetrates_ionosphere",
@@ -206,7 +335,14 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "lyman_alpha",
@@ -217,7 +353,16 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "hydrogen",
+        "light",
+        "photon",
+        "radiation",
+        "spectral line"
+      ]
+    }
   },
   {
     "id": "ir_wavelength_of_human_body",
@@ -228,7 +373,16 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "heat",
+        "infrared",
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "ir_wavelength_of_red_hot_metal",
@@ -239,7 +393,16 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "heat",
+        "infrared",
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "hydrogen_line",
@@ -250,7 +413,14 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20
+    "x": 20,
+    "tags": {
+      "en-us": [
+        "light",
+        "photon",
+        "radiation"
+      ]
+    }
   },
   {
     "id": "distance_between_particles_ipm",
@@ -261,7 +431,13 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 30,
+    "tags": {
+      "en-us": [
+        "interplanetary medium",
+        "space"
+      ]
+    }
   },
   {
     "id": "distance_between_particles_ism",
@@ -272,7 +448,13 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 30,
+    "tags": {
+      "en-us": [
+        "interstellar medium",
+        "space"
+      ]
+    }
   },
   {
     "id": "distance_between_particles_igm",
@@ -283,7 +465,13 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 30,
+    "tags": {
+      "en-us": [
+        "intergalactic medium",
+        "space"
+      ]
+    }
   },
   {
     "id": "distance_between_particles_in_best_artificial_vacuum",
@@ -492,7 +680,14 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "enzyme",
+        "protein",
+        "replication"
+      ]
+    }
   },
   {
     "id": "collagen",
@@ -503,7 +698,13 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6
+    "x": 6,
+    "tags": {
+      "en-us": [
+        "protein",
+        "tissue"
+      ]
+    }
   },
   {
     "id": "dna_in_human_chromosome",
@@ -514,7 +715,14 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6
+    "x": 6,
+    "tags": {
+      "en-us": [
+        "deoxyribonucleic acid",
+        "genetic",
+        "genome"
+      ]
+    }
   },
   {
     "id": "chromosome_during_division",
@@ -525,7 +733,16 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 12
+    "x": 12,
+    "tags": {
+      "en-us": [
+        "chromatid",
+        "DNA",
+        "deoxyribonucleic acid",
+        "genetic",
+        "genome"
+      ]
+    }
   },
   {
     "id": "cell_membrane_thickness",
@@ -536,7 +753,12 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6
+    "x": 6,
+    "tags": {
+      "en-us": [
+        "phospholipid bilayer"
+      ]
+    }
   },
   {
     "id": "smallest_virus_aav",
@@ -547,7 +769,13 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "microbe",
+        "pathogen"
+      ]
+    }
   },
   {
     "id": "largest_virus_tupanvirus",
@@ -558,7 +786,13 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "microbe",
+        "pathogen"
+      ]
+    }
   },
   {
     "id": "smallest_free_cell_mycoplasma",
@@ -624,7 +858,13 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "immune",
+        "leukocyte"
+      ]
+    }
   },
   {
     "id": "human_mitochondria",
@@ -635,7 +875,13 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6
+    "x": 6,
+    "tags": {
+      "en-us": [
+        "mitochondrion",
+        "organelle"
+      ]
+    }
   },
   {
     "id": "smallest_organelle_ribosome",
@@ -646,7 +892,12 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6
+    "x": 6,
+    "tags": {
+      "en-us": [
+        "cell"
+      ]
+    }
   },
   {
     "id": "largest_organelle_nucleus",
@@ -657,7 +908,13 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6
+    "x": 6,
+    "tags": {
+      "en-us": [
+        "cell",
+        "DNA storage"
+      ]
+    }
   },
   {
     "id": "longest_human_axon",
@@ -712,7 +969,12 @@
     "category": {
       "en-us": "Technology"
     },
-    "x": 45
+    "x": 45,
+    "tags": {
+      "en-us": [
+        "electronics"
+      ]
+    }
   },
   {
     "id": "highest_sounds_humans_hear",
@@ -833,7 +1095,13 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "terra",
+        "planet"
+      ]
+    }
   },
   {
     "id": "moon",
@@ -844,7 +1112,14 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "satellite",
+        "luna",
+        "lunar"
+      ]
+    }
   },
   {
     "id": "moon_orbit",
@@ -905,7 +1180,13 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "gas giant",
+        "planet"
+      ]
+    }
   },
   {
     "id": "saturn_orbit",
@@ -916,7 +1197,13 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "gas giant",
+        "planet"
+      ]
+    }
   },
   {
     "id": "pluto_orbit",
@@ -927,7 +1214,12 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "dwarf planet"
+      ]
+    }
   },
   {
     "id": "saturn",
@@ -1290,7 +1582,13 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "galaxy",
+        "spiral galaxy"
+      ]
+    }
   },
   {
     "id": "magellanic_clouds_distance_from_galactic_center",
@@ -1312,7 +1610,13 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 15,
+    "tags": {
+      "en-us": [
+        "neighbor",
+        "spiral galaxy"
+      ]
+    }
   },
   {
     "id": "largest_galaxy_eso_383_76",
@@ -1400,7 +1704,13 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "black hole",
+        "supermassive"
+      ]
+    }
   },
   {
     "id": "largest_bh_found_by_ligo",
@@ -1411,7 +1721,12 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 10
+    "x": 10,
+    "tags": {
+      "en-us": [
+        "black hole"
+      ]
+    }
   },
   {
     "id": "largest_bh",
@@ -1422,7 +1737,12 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "tags": {
+      "en-us": [
+        "black hole"
+      ]
+    }
   },
   {
     "id": "milky_way_dark_matter_halo",
@@ -1433,7 +1753,12 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 15,
+    "tags": {
+      "en-us": [
+        "galaxy"
+      ]
+    }
   },
   {
     "id": "longest_galactic_filament",
