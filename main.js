@@ -511,6 +511,9 @@ d3.json('/data.json').then(data => {
     // Highlight immediately
     highlightItem(d);
 
+    // Show Infobox immediately
+    showInfobox(d);
+
     // Zoom to point logic
     // We want to center (d.x, d.length)
     // Calculate scale to show roughly 3 decades vertically
@@ -534,10 +537,7 @@ d3.json('/data.json').then(data => {
 
     svg.transition()
       .duration(1500)
-      .call(zoom.transform, transform)
-      .on("end", () => {
-        showInfobox(d);
-      });
+      .call(zoom.transform, transform);
 
     // Optional: Trigger highlight effect for category?
     // For now, just zoom.
