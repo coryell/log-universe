@@ -18,7 +18,7 @@
     "displayName": "Range of Weak Force",
     "length": 1e-17,
     "category": "Fundamental",
-    "x": 10
+    "x": 5
   },
   {
     "id": "planck_length",
@@ -32,7 +32,7 @@
     "displayName": "Range of Strong Force",
     "length": 1e-15,
     "category": "Fundamental",
-    "x": 10
+    "x": 5
   },
   {
     "id": "most_energetic_photon_detected",
