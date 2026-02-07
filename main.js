@@ -250,24 +250,39 @@ d3.json('/data.json').then(data => {
   const initialFS = Math.min(12, initialDecadeHeight);
 
   // Draw Points (radius proportional to font size)
+  // Draw Points and Labels using Groups
   const initialRadius = initialFS / 2.4;
-  g.selectAll('circle')
+
+  const items = g.selectAll('.item-group')
     .data(data)
-    .join('circle')
-    .attr('cx', d => xScale(d.x))
-    .attr('cy', d => yScale(d.length))
+    .join('g')
+    .attr('class', 'item-group')
+    .attr('transform', d => `translate(${xScale(d.x)}, ${yScale(d.length)})`);
+
+  // Hit Area (Transparent Rect)
+  items.append('rect')
+    .attr('class', 'hit-area')
+    .attr('x', -initialRadius - 5)
+    .attr('y', -initialFS)
+    .attr('width', 100) // Generous width to cover gap and part of label
+    .attr('height', initialFS * 2)
+    .attr('fill', 'transparent')
+    .style('cursor', 'pointer');
+
+  // Circle
+  items.append('circle')
+    .attr('cx', 0)
+    .attr('cy', 0)
     .attr('r', initialRadius)
     .attr('fill', d => colorScale(getLocalized(d.category))); // i18n update
 
-  // Draw Labels
-  g.selectAll('text.label')
-    .data(data)
-    .join('text')
-    .attr('x', d => xScale(d.x) + 10)
-    .attr('y', d => yScale(d.length))
+  // Label
+  items.append('text')
+    .attr('class', 'label')
+    .attr('x', 10)
+    .attr('y', 0)
     .attr('dy', '.35em')
     .text(d => getLocalized(d.displayName)) // i18n update
-    .attr('class', 'label')
     .attr('fill', d => colorScale(getLocalized(d.category))) // i18n update
     .style('font-family', 'monospace')
     .style('font-size', `${initialFS}px`);
@@ -307,20 +322,24 @@ d3.json('/data.json').then(data => {
       // Axes-Relative Label Scaling Logic
       const currentDecadeHeight = Math.abs(newYScale(10) - newYScale(1));
       const currentFS = Math.min(12, currentDecadeHeight);
-
-      // Update Points Position and Size
       const currentRadius = currentFS / 2.4;
-      g.selectAll('circle')
-        .attr('cx', d => newXScale(d.x))
-        .attr('cy', d => newYScale(d.length))
+
+      // Update Group Positions
+      g.selectAll('.item-group')
+        .attr('transform', d => `translate(${newXScale(d.x)}, ${newYScale(d.length)})`);
+
+      // Update Sizes (Semantic Zoom)
+      g.selectAll('.item-group circle')
         .attr('r', currentRadius);
 
-      // Update Labels Position and Size
-      g.selectAll('text.label')
-        .attr('x', d => newXScale(d.x) + 10)
-        .attr('y', d => newYScale(d.length))
-        .attr('dy', '.35em')
+      g.selectAll('.item-group text.label')
         .style('font-size', `${currentFS}px`);
+
+      // Update Hit Area Size
+      g.selectAll('.item-group rect.hit-area')
+        .attr('x', -currentRadius - 5)
+        .attr('y', -currentFS)
+        .attr('height', currentFS * 2);
     });
 
   svg.call(zoom);
@@ -366,31 +385,22 @@ d3.json('/data.json').then(data => {
       .style("font-size", "12px")
       .style("cursor", "pointer")
       .on("mouseover", function () {
-        // Dim all points and labels that don't match the category
-        g.selectAll("circle")
+        // Dim all groups that don't match
+        g.selectAll(".item-group")
           .transition().duration(200)
-          .attr("opacity", d => getLocalized(d.category) === cat ? 1 : 0.2); // i18n update
+          .attr("opacity", d => getLocalized(d.category) === cat ? 1 : 0.2);
 
-        g.selectAll("text.label")
-          .transition().duration(200)
-          .attr("opacity", d => getLocalized(d.category) === cat ? 1 : 0.2); // i18n update
-        // Bring matching points and labels to the front
-        g.selectAll("circle").filter(d => getLocalized(d.category) === cat).raise(); // i18n update
-        g.selectAll("text.label").filter(d => getLocalized(d.category) === cat).raise(); // i18n update
+        // Bring matching groups to front
+        g.selectAll(".item-group").filter(d => getLocalized(d.category) === cat).raise();
       })
       .on("mouseout", function () {
         // Restore opacity
-        g.selectAll("circle")
+        g.selectAll(".item-group")
           .transition().duration(200)
           .attr("opacity", 1);
 
-        g.selectAll("text.label")
-          .transition().duration(200)
-          .attr("opacity", 1);
-
-        // Restore original order (assuming data index)
-        g.selectAll("circle").sort((a, b) => d3.ascending(a.id, b.id)); // Or just standard sort if data order matters
-        g.selectAll("text.label").sort((a, b) => d3.ascending(a.id, b.id));
+        // Restore sort order
+        g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
       })
       .on("click", function (event, d) {
         // Filter data for this category
@@ -482,10 +492,24 @@ d3.json('/data.json').then(data => {
     searchResults.style.display = 'block';
   }
 
+  // Helper functions for highlighting
+  function highlightItem(d) {
+    items.classed("highlighted", false); // Reset others
+    items.filter(item => item.id === d.id).classed("highlighted", true);
+    items.filter(item => item.id === d.id).raise(); // Bring to front
+  }
+
+  function unhighlightItems() {
+    items.classed("highlighted", false);
+  }
+
   // Select Result & Zoom
   function selectResult(d) {
     searchInput.value = getLocalized(d.displayName); // i18n update
     searchResults.style.display = 'none';
+
+    // Highlight immediately
+    highlightItem(d);
 
     // Zoom to point logic
     // We want to center (d.x, d.length)
@@ -510,7 +534,10 @@ d3.json('/data.json').then(data => {
 
     svg.transition()
       .duration(1500)
-      .call(zoom.transform, transform);
+      .call(zoom.transform, transform)
+      .on("end", () => {
+        showInfobox(d);
+      });
 
     // Optional: Trigger highlight effect for category?
     // For now, just zoom.
@@ -613,7 +640,63 @@ d3.json('/data.json').then(data => {
   });
 
 
-  // Cursor Ruler Implementation
+  // Infobox Implementation
+  const infobox = d3.select("body").append("div")
+    .attr("class", "infobox")
+    .style("display", "none");
+
+  function showInfobox(d) {
+    // Highlight the item
+    highlightItem(d);
+
+    const localizedDisplayName = getLocalized(d.displayName); // i18n update
+    const localizedCategory = getLocalized(d.category); // i18n update
+    let tagsContent = "";
+    if (d.tags && d.tags['en-us']) {
+      tagsContent = `<div class="infobox-row"><span class="infobox-label">Tags:</span>${d.tags['en-us'].join(", ")}</div>`;
+    }
+
+    // specific format: [i.j x 10^k] m
+    let lengthContent = "";
+    if (d.length !== undefined && d.length !== null) {
+      const exp = d.length.toExponential(2);
+      const [mantissa, exponent] = exp.split('e');
+      const expVal = parseInt(exponent, 10);
+      lengthContent = `<div class="infobox-row"><span class="infobox-label">Length:</span>${mantissa} × 10^${expVal} m</div>`;
+    }
+
+    const categoryColor = colorScale(localizedCategory);
+
+    infobox.html(`
+      <div class="infobox-title">${localizedDisplayName}</div>
+      ${lengthContent}
+      <div class="infobox-row"><span class="infobox-label">Category:</span><span style="color: ${categoryColor}">${localizedCategory}</span></div>
+      ${tagsContent}
+    `)
+      .style("display", "block");
+    // Positioning is handled by CSS (bottom-left)
+  }
+
+  function hideInfobox() {
+    infobox.style("display", "none");
+    unhighlightItems(); // Remove highlight
+  }
+
+  // Event Listeners for Infobox
+  // Attach to the entire group
+  g.selectAll(".item-group")
+    .on("click", (event, d) => {
+      showInfobox(d);
+      event.stopPropagation(); // Prevent SVG click from hiding it
+    });
+
+  // Hide on background click
+  svg.on("click", () => {
+    hideInfobox();
+  });
+
+  // Modify Search Selection to show Infobox
+
   const rulerGroup = svg.append("g")
     .attr("class", "cursor-ruler")
     .style("pointer-events", "none") // Let mouse events pass through

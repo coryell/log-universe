@@ -172,4 +172,67 @@ svg {
   display: block;
 }
 
-/* CSS Mask removed - using SVG mask in main.js for better coordinate control */
+
+/* Label Styling */
+.label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.horizontal-grid .tick text,
+.vertical-grid .tick text {
+  cursor: default;
+  user-select: none;
+}
+
+/* Highlighted state for Infobox selection */
+.item-group.highlighted circle {
+  stroke: white;
+  stroke-width: 2px;
+  fill: white;
+}
+
+.item-group.highlighted text.label {
+  fill: white;
+  font-weight: bold;
+}
+
+/* Infobox Styling */
+.infobox {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 1px solid #00aaff;
+  padding: 15px;
+  border-radius: 5px;
+  color: #00aaff;
+  font-family: monospace;
+  font-size: 14px;
+  z-index: 100;
+  pointer-events: auto;
+  /* Allow interaction for text selection */
+  user-select: text;
+  display: none;
+  /* Hidden by default */
+  max-width: 300px;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+.infobox-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: white;
+  border-bottom: 1px solid rgba(0, 170, 255, 0.3);
+  padding-bottom: 4px;
+}
+
+.infobox-row {
+  margin-bottom: 4px;
+}
+
+.infobox-label {
+  color: rgba(0, 170, 255, 0.7);
+  margin-right: 5px;
+}

@@ -1563,9 +1563,9 @@
     "x": 15
   },
   {
-    "id": "distance_to_sagistarius_a",
+    "id": "distance_to_sagittarius_a_star",
     "displayName": {
-      "en-us": "Distance to Sagistarius A*"
+      "en-us": "Distance to Sagittarius A*"
     },
     "length": 255000000000000000000,
     "category": {
@@ -1702,9 +1702,9 @@
     "x": 0
   },
   {
-    "id": "sagitarius_a",
+    "id": "sagittarius_a_star",
     "displayName": {
-      "en-us": "Sagitarius A*"
+      "en-us": "Sagittarius A*"
     },
     "length": 12000000000,
     "category": {
