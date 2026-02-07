@@ -230,17 +230,22 @@ d3.json('/data.json').then(data => {
     .attr('r', 5)
     .attr('fill', '#00aaff');
 
+  // Calculate initial font size based on axes (height of one decade)
+  const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
+  const initialFS = Math.min(12, initialDecadeHeight);
+
   // Draw Labels
   g.selectAll('text.label')
     .data(data)
     .join('text')
     .attr('x', d => xScale(d.x) + 10)
-    .attr('y', d => yScale(d.length) + 4) // Centered vertically relative to dot
+    .attr('y', d => yScale(d.length))
+    .attr('dy', '.35em')
     .text(d => d.displayName)
     .attr('class', 'label')
     .attr('fill', '#00aaff')
     .style('font-family', 'monospace')
-    .style('font-size', '12px');
+    .style('font-size', `${initialFS}px`);
 
   // Zoom Behavior
   const buffer = 300; // Visual buffer in pixels to allow labels to clear the edge/fade
@@ -271,18 +276,24 @@ d3.json('/data.json').then(data => {
       // Semantic Zoom: Rescale scales based on transform
       // We rescale X to handle horizontal panning/zooming
       const newXScale = t.rescaleX(xScale);
-      // We rescale Y to handle vertical panning/zooming
+      // Rescale Y to handle vertical panning/zooming
       const newYScale = t.rescaleY(yScale);
+
+      // Axes-Relative Label Scaling Logic
+      const currentDecadeHeight = Math.abs(newYScale(10) - newYScale(1));
+      const currentFS = Math.min(12, currentDecadeHeight);
 
       // Update Points Position
       g.selectAll('circle')
         .attr('cx', d => newXScale(d.x))
         .attr('cy', d => newYScale(d.length));
 
-      // Update Labels Position
+      // Update Labels Position and Size
       g.selectAll('text.label')
         .attr('x', d => newXScale(d.x) + 10)
-        .attr('y', d => newYScale(d.length) + 4);
+        .attr('y', d => newYScale(d.length))
+        .attr('dy', '.35em')
+        .style('font-size', `${currentFS}px`);
     });
 
   svg.call(zoom);
