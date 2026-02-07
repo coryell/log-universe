@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import './style.css';
+import { getMatches, getHighlightedText } from './search.js';
 
 const app = document.getElementById('app');
 const width = app.clientWidth;
@@ -434,4 +435,139 @@ d3.json('/data.json').then(data => {
           .call(zoom.transform, transform);
       });
   });
+
+
+
+  // Search Implementation
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  let selectedIndex = -1;
+
+  // Render Dropdown
+  function renderResults(matches, query) {
+    searchResults.innerHTML = '';
+    selectedIndex = -1;
+
+    if (matches.length === 0) {
+      searchResults.style.display = 'none';
+      return;
+    }
+
+    matches.forEach((d, index) => {
+      const div = document.createElement('div');
+      div.className = 'search-result-item';
+
+      div.innerHTML = getHighlightedText(d.displayName, query);
+
+      div.addEventListener('click', () => {
+        selectResult(d);
+      });
+
+      div.addEventListener('mouseenter', () => {
+        selectedIndex = index;
+        updateSelection();
+      });
+
+      searchResults.appendChild(div);
+    });
+
+    searchResults.style.display = 'block';
+  }
+
+  // Select Result & Zoom
+  function selectResult(d) {
+    searchInput.value = d.displayName;
+    searchResults.style.display = 'none';
+
+    // Zoom to point logic
+    // We want to center (d.x, d.length)
+    // Calculate scale to show roughly 3 decades vertically
+    const domain = yScale.domain();
+    const totalDecades = Math.log10(domain[1]) - Math.log10(domain[0]);
+    const availableHeight = height - 100; // From yScale range [height - 50, 50]
+
+    // We want 3 decades to fill the screen height
+    // k = (height * totalDecades) / (3 * availableHeight)
+    let scale = (height * totalDecades) / (3 * availableHeight);
+
+    // Clamp scale reasonably
+    scale = Math.max(1, Math.min(scale, 1000));
+    const x = xScale(d.x);
+    const y = yScale(d.length);
+
+    const transform = d3.zoomIdentity
+      .translate(width / 2, height / 2) // Center of screen
+      .scale(scale)
+      .translate(-x, -y); // Move point to center
+
+    svg.transition()
+      .duration(1500)
+      .call(zoom.transform, transform);
+
+    // Optional: Trigger highlight effect for category?
+    // For now, just zoom.
+  }
+
+  // Keyboard Navigation
+  function updateSelection() {
+    const items = searchResults.querySelectorAll('.search-result-item');
+    items.forEach((item, index) => {
+      if (index === selectedIndex) {
+        item.classList.add('selected');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('selected');
+      }
+    });
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value;
+    const matches = getMatches(data, query);
+    renderResults(matches, query);
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    const items = searchResults.querySelectorAll('.search-result-item');
+    if (items.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      selectedIndex = (selectedIndex + 1) % items.length;
+      updateSelection();
+      e.preventDefault();
+    } else if (e.key === 'ArrowUp') {
+      selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+      updateSelection();
+      e.preventDefault();
+    } else if (e.key === 'Enter') {
+      if (selectedIndex >= 0) {
+        // Select highlighted
+        // Re-run match to get data object properly (or store it on DOM element)
+        // Simpler: use the data from the index of matches
+        const query = searchInput.value;
+        const matches = getMatches(data, query);
+        if (matches[selectedIndex]) {
+          selectResult(matches[selectedIndex]);
+        }
+      } else if (items.length > 0) {
+        // Default to first item if none selected
+        const query = searchInput.value;
+        const matches = getMatches(data, query);
+        if (matches[0]) {
+          selectResult(matches[0]);
+        }
+      }
+      e.preventDefault();
+    } else if (e.key === 'Escape') {
+      searchResults.style.display = 'none';
+    }
+  });
+
+  // Hide dropdown on clicking outside
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.style.display = 'none';
+    }
+  });
+
 });

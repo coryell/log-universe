@@ -9,8 +9,18 @@
 
 <body>
   <header>
-    <h1 id="page-title">log(Universe)</h1>
-    <button id="recenter-btn">recenter</button>
+    <div class="header-left">
+      <h1 id="page-title">log(Universe)</h1>
+    </div>
+    <div class="header-center">
+      <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+        <div id="search-results"></div>
+      </div>
+    </div>
+    <div class="header-right">
+      <button id="recenter-btn">recenter</button>
+    </div>
   </header>
   <div id="app"></div>
   <script type="module" src="/main.js"></script>
