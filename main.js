@@ -900,7 +900,7 @@ d3.json('/data.json').then(data => {
 
         let sourceLink = "";
         if (d.sources && d.sources[dim]) {
-          sourceLink = ` <a href="${d.sources[dim]}" target="_blank" style="color: #00aaff; text-decoration: none; margin-left: 5px;">[source]</a>`;
+          sourceLink = ` <a href="${d.sources[dim]}" target="_blank" style="color: #00aaff; text-decoration: none; margin-left: 5px; opacity: 0.7;">[source]</a>`;
         }
 
         return `<div class="infobox-row"><span class="infobox-label">${label}:</span>${txt}${sourceLink}</div>`;
