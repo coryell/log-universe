@@ -603,7 +603,7 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "largest_molecule_titin",
@@ -614,7 +614,7 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "glucose_molecule",
@@ -625,7 +625,7 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "water_molecule",
@@ -636,7 +636,7 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 10
+    "x": 6
   },
   {
     "id": "amino_acid",
