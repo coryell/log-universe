@@ -1,5 +1,27 @@
 [
   {
+    "id": "electron",
+    "displayName": {
+      "en-us": "Electron"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "length": "1e-18",
+      "mass": "9.1093837139e-31"
+    },
+    "tags": {
+      "en-us": [
+        "subatomic",
+        "particle"
+      ]
+    },
+    "x_coordinates": {
+      "mass": 0
+    }
+  },
+  {
     "id": "electron_quark_radius_upper_limit",
     "displayName": {
       "en-us": "Electron/Quark Radius Upper Limit"
@@ -105,6 +127,22 @@
     },
     "x_coordinates": {
       "length": 5
+    },
+    "sources": {}
+  },
+  {
+    "id": "largest_nuclear_radius_pb_208",
+    "displayName": {
+      "en-us": "Largest Nuclear Radius (Pb-208)"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "length": "7e-15"
+    },
+    "x_coordinates": {
+      "length": 0
     },
     "sources": {}
   },
@@ -760,22 +798,6 @@
     },
     "x_coordinates": {
       "length": 40
-    },
-    "sources": {}
-  },
-  {
-    "id": "largest_nuclear_radius_pb_208",
-    "displayName": {
-      "en-us": "Largest Nuclear Radius (Pb-208)"
-    },
-    "category": {
-      "en-us": "Fundamental / Nuclear"
-    },
-    "dimensions": {
-      "length": "7e-15"
-    },
-    "x_coordinates": {
-      "length": 0
     },
     "sources": {}
   },
