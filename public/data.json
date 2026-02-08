@@ -2286,7 +2286,9 @@
         "hydrogen"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Bohr_radius",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Bohr_radius"
+    ],
     "dimensions": {
       "length": 5.29e-11
     },
@@ -2310,7 +2312,9 @@
         "smallest atom"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 3.0999999999999996e-11
     },
@@ -2333,7 +2337,9 @@
         "lithium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.45e-10
     },
@@ -2356,7 +2362,9 @@
         "beryllium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.05e-10
     },
@@ -2379,7 +2387,9 @@
         "boron"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 8.5e-11
     },
@@ -2402,7 +2412,9 @@
         "carbon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 7e-11
     },
@@ -2425,7 +2437,9 @@
         "nitrogen"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 6.5e-11
     },
@@ -2448,7 +2462,9 @@
         "oxygen"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 6e-11
     },
@@ -2471,7 +2487,9 @@
         "fluorine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 5e-11
     },
@@ -2494,7 +2512,9 @@
         "neon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 3.8e-11
     },
@@ -2517,7 +2537,9 @@
         "sodium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.8e-10
     },
@@ -2540,7 +2562,9 @@
         "magnesium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.5e-10
     },
@@ -2563,7 +2587,9 @@
         "aluminium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.25e-10
     },
@@ -2586,7 +2612,9 @@
         "silicon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.1e-10
     },
@@ -2609,7 +2637,9 @@
         "phosphorus"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1e-10
     },
@@ -2632,7 +2662,9 @@
         "sulfur"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1e-10
     },
@@ -2655,7 +2687,9 @@
         "chlorine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1e-10
     },
@@ -2678,7 +2712,9 @@
         "argon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 7.1e-11
     },
@@ -2701,7 +2737,9 @@
         "potassium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 2.2e-10
     },
@@ -2724,7 +2762,9 @@
         "calcium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.8e-10
     },
@@ -2747,7 +2787,9 @@
         "scandium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.6e-10
     },
@@ -2770,7 +2812,9 @@
         "titanium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.4e-10
     },
@@ -2793,7 +2837,9 @@
         "vanadium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -2816,7 +2862,9 @@
         "chromium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.4e-10
     },
@@ -2839,7 +2887,9 @@
         "manganese"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.4e-10
     },
@@ -2862,7 +2912,9 @@
         "iron"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.4e-10
     },
@@ -2885,7 +2937,9 @@
         "cobalt"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -2908,7 +2962,9 @@
         "nickel"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -2931,7 +2987,9 @@
         "copper"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -2954,7 +3012,9 @@
         "zinc"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -2977,7 +3037,9 @@
         "gallium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.3e-10
     },
@@ -3000,7 +3062,9 @@
         "germanium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.25e-10
     },
@@ -3023,7 +3087,9 @@
         "arsenic"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.15e-10
     },
@@ -3046,7 +3112,9 @@
         "selenium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.15e-10
     },
@@ -3069,7 +3137,9 @@
         "bromine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.15e-10
     },
@@ -3092,7 +3162,9 @@
         "krypton"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 8.799999999999999e-11
     },
@@ -3115,7 +3187,9 @@
         "rubidium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 2.35e-10
     },
@@ -3138,7 +3212,9 @@
         "strontium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 2e-10
     },
@@ -3161,7 +3237,9 @@
         "yttrium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.8e-10
     },
@@ -3184,7 +3262,9 @@
         "zirconium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.55e-10
     },
@@ -3207,7 +3287,9 @@
         "niobium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.45e-10
     },
@@ -3230,7 +3312,9 @@
         "molybdenum"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.45e-10
     },
@@ -3253,7 +3337,9 @@
         "technetium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -3276,7 +3362,9 @@
         "ruthenium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.3e-10
     },
@@ -3299,7 +3387,9 @@
         "rhodium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -3322,7 +3412,9 @@
         "palladium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.4e-10
     },
@@ -3345,7 +3437,9 @@
         "silver"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.6e-10
     },
@@ -3368,7 +3462,9 @@
         "cadmium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.55e-10
     },
@@ -3391,7 +3487,9 @@
         "indium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.55e-10
     },
@@ -3414,7 +3512,9 @@
         "tin"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.45e-10
     },
@@ -3437,7 +3537,9 @@
         "antimony"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.45e-10
     },
@@ -3460,7 +3562,9 @@
         "tellurium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.4e-10
     },
@@ -3483,7 +3587,9 @@
         "iodine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.4e-10
     },
@@ -3506,7 +3612,9 @@
         "xenon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.08e-10
     },
@@ -3530,7 +3638,9 @@
         "largest stable atom"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 2.6e-10
     },
@@ -3553,7 +3663,9 @@
         "barium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 2.15e-10
     },
@@ -3576,7 +3688,9 @@
         "lanthanum"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.95e-10
     },
@@ -3599,7 +3713,9 @@
         "cerium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.85e-10
     },
@@ -3622,7 +3738,9 @@
         "praseodymium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.85e-10
     },
@@ -3645,7 +3763,9 @@
         "neodymium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.85e-10
     },
@@ -3668,7 +3788,9 @@
         "promethium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.85e-10
     },
@@ -3691,7 +3813,9 @@
         "samarium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.85e-10
     },
@@ -3714,7 +3838,9 @@
         "europium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.85e-10
     },
@@ -3737,7 +3863,9 @@
         "gadolinium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.8e-10
     },
@@ -3760,7 +3888,9 @@
         "terbium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -3783,7 +3913,9 @@
         "dysprosium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -3806,7 +3938,9 @@
         "holmium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -3829,7 +3963,9 @@
         "erbium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -3852,7 +3988,9 @@
         "thulium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -3875,7 +4013,9 @@
         "ytterbium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -3898,7 +4038,9 @@
         "lutetium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -3921,7 +4063,9 @@
         "hafnium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.55e-10
     },
@@ -3944,7 +4088,9 @@
         "tantalum"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.45e-10
     },
@@ -3967,7 +4113,9 @@
         "tungsten"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -3990,7 +4138,9 @@
         "rhenium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -4013,7 +4163,9 @@
         "osmium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.3e-10
     },
@@ -4036,7 +4188,9 @@
         "iridium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -4059,7 +4213,9 @@
         "platinum"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -4082,7 +4238,9 @@
         "gold"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.35e-10
     },
@@ -4105,7 +4263,9 @@
         "mercury"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.5e-10
     },
@@ -4128,7 +4288,9 @@
         "thallium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.9e-10
     },
@@ -4151,7 +4313,9 @@
         "lead"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.8e-10
     },
@@ -4174,7 +4338,9 @@
         "bismuth"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.6e-10
     },
@@ -4197,7 +4363,9 @@
         "polonium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.9e-10
     },
@@ -4220,7 +4388,9 @@
         "astatine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.27e-10
     },
@@ -4243,7 +4413,9 @@
         "radon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.2e-10
     },
@@ -4267,7 +4439,9 @@
         "largest atom"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 3.48e-10
     },
@@ -4290,7 +4464,9 @@
         "radium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 2.15e-10
     },
@@ -4313,7 +4489,9 @@
         "actinium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.95e-10
     },
@@ -4336,7 +4514,9 @@
         "thorium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.8e-10
     },
@@ -4359,7 +4539,9 @@
         "protactinium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.8e-10
     },
@@ -4382,7 +4564,9 @@
         "uranium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -4405,7 +4589,9 @@
         "neptunium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -4428,7 +4614,9 @@
         "plutonium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -4451,7 +4639,9 @@
         "americium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.75e-10
     },
@@ -4474,7 +4664,9 @@
         "curium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    ],
     "dimensions": {
       "length": 1.7599999999999999e-10
     },
