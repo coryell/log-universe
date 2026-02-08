@@ -2,6 +2,8 @@ import * as d3 from 'd3';
 import './style.css';
 import { getMatches, getHighlightedText, getLocalized, getSearchResultContent } from './search.js';
 
+const LANGUAGE = "en-us";
+
 const app = document.getElementById('app');
 const width = app.clientWidth;
 const height = app.clientHeight;
@@ -274,7 +276,7 @@ d3.json('/data.json').then(data => {
     .attr('cx', 0)
     .attr('cy', 0)
     .attr('r', initialRadius)
-    .attr('fill', d => colorScale(getLocalized(d.category))); // i18n update
+    .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE))); // i18n update
 
   // Label
   items.append('text')
@@ -282,8 +284,8 @@ d3.json('/data.json').then(data => {
     .attr('x', 10)
     .attr('y', 0)
     .attr('dy', '.35em')
-    .text(d => getLocalized(d.displayName)) // i18n update
-    .attr('fill', d => colorScale(getLocalized(d.category))) // i18n update
+    .text(d => getLocalized(d.displayName, LANGUAGE)) // i18n update
+    .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE))) // i18n update
     .style('font-family', 'monospace')
     .style('font-size', `${initialFS}px`);
 
@@ -388,10 +390,10 @@ d3.json('/data.json').then(data => {
         // Dim all groups that don't match
         g.selectAll(".item-group")
           .transition().duration(200)
-          .attr("opacity", d => getLocalized(d.category) === cat ? 1 : 0.2);
+          .attr("opacity", d => getLocalized(d.category, LANGUAGE) === cat ? 1 : 0.2);
 
         // Bring matching groups to front
-        g.selectAll(".item-group").filter(d => getLocalized(d.category) === cat).raise();
+        g.selectAll(".item-group").filter(d => getLocalized(d.category, LANGUAGE) === cat).raise();
       })
       .on("mouseout", function () {
         // Restore opacity
@@ -404,7 +406,7 @@ d3.json('/data.json').then(data => {
       })
       .on("click", function (event, d) {
         // Filter data for this category
-        const categoryData = data.filter(item => getLocalized(item.category) === cat); // i18n update
+        const categoryData = data.filter(item => getLocalized(item.category, LANGUAGE) === cat); // i18n update
         if (categoryData.length === 0) return;
 
         // Calculate bounding box in default screen coordinates
@@ -475,7 +477,7 @@ d3.json('/data.json').then(data => {
       const div = document.createElement('div');
       div.className = 'search-result-item';
 
-      div.innerHTML = getSearchResultContent(d, query); // Updated to handle tags
+      div.innerHTML = getSearchResultContent(d, query, LANGUAGE); // Updated to handle tags
 
       div.addEventListener('click', () => {
         selectResult(d);
@@ -505,7 +507,7 @@ d3.json('/data.json').then(data => {
 
   // Select Result & Zoom
   function selectResult(d) {
-    searchInput.value = getLocalized(d.displayName); // i18n update
+    searchInput.value = getLocalized(d.displayName, LANGUAGE); // i18n update
     searchResults.style.display = 'none';
 
     // Highlight immediately
@@ -581,14 +583,14 @@ d3.json('/data.json').then(data => {
 
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value;
-    const matches = getMatches(data, query);
+    const matches = getMatches(data, query, LANGUAGE);
     renderResults(matches, query);
   });
 
   searchInput.addEventListener('focus', () => {
     const query = searchInput.value;
     if (query) {
-      const matches = getMatches(data, query);
+      const matches = getMatches(data, query, LANGUAGE);
       renderResults(matches, query);
     }
     // ensure the list starts at the top
@@ -613,14 +615,14 @@ d3.json('/data.json').then(data => {
         // Re-run match to get data object properly (or store it on DOM element)
         // Simpler: use the data from the index of matches
         const query = searchInput.value;
-        const matches = getMatches(data, query);
+        const matches = getMatches(data, query, LANGUAGE);
         if (matches[selectedIndex]) {
           selectResult(matches[selectedIndex]);
         }
       } else if (items.length > 0) {
         // Default to first item if none selected
         const query = searchInput.value;
-        const matches = getMatches(data, query);
+        const matches = getMatches(data, query, LANGUAGE);
         if (matches[0]) {
           selectResult(matches[0]);
         }
@@ -672,11 +674,11 @@ d3.json('/data.json').then(data => {
     // Highlight the item
     highlightItem(d);
 
-    const localizedDisplayName = getLocalized(d.displayName); // i18n update
-    const localizedCategory = getLocalized(d.category); // i18n update
+    const localizedDisplayName = getLocalized(d.displayName, LANGUAGE); // i18n update
+    const localizedCategory = getLocalized(d.category, LANGUAGE); // i18n update
     let tagsContent = "";
-    if (d.tags && d.tags['en-us']) {
-      tagsContent = `<div class="infobox-row"><span class="infobox-label">Tags:</span>${d.tags['en-us'].join(", ")}</div>`;
+    if (d.tags && d.tags[LANGUAGE]) {
+      tagsContent = `<div class="infobox-row"><span class="infobox-label">Tags:</span>${d.tags[LANGUAGE].join(", ")}</div>`;
     }
 
     // specific format: [i.j x 10^k] m

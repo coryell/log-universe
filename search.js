@@ -3,9 +3,9 @@
  * Helper to get localized string from data.
  * Handles object (i18n) formats only.
  */
-export function getLocalized(val) {
-    if (val && typeof val === 'object' && 'en-us' in val) {
-        return val['en-us'];
+export function getLocalized(val, language) {
+    if (val && typeof val === 'object' && language in val) {
+        return val[language];
     }
     return '';
 }
@@ -38,7 +38,7 @@ function escapeRegExp(string) {
  * - "Word match" means preceded by Start or Delimiter ([\s()/\-]).
  * - "Exact" means followed by End or Delimiter.
  */
-export function isMatch(item, query) {
+export function isMatch(item, query, language) {
     if (!query) return false;
     if (!item || !item.displayName) return false;
 
@@ -46,15 +46,12 @@ export function isMatch(item, query) {
     if (queryTokens.length === 0) return false;
 
     // Check Display Name
-    const displayName = getLocalized(item.displayName).toLowerCase();
+    const displayName = getLocalized(item.displayName, language).toLowerCase();
     if (checkMatch(displayName, queryTokens)) return true;
 
     // Check Tags
     if (item.tags) {
-        const tags = item.tags['en-us'] || []; // localized tags? assuming structure
-        // If data.json tags are localized objects { "en-us": ["tag1", "tag2"] }
-        // If they are just arrays ["tag1"], adjust. User diff showed localized.
-        // Diff: "tags": { "en-us": ["sol", "star"] }
+        const tags = item.tags[language] || []; // localized tags
 
         // We want to return true if ANY tag matches
         return tags.some(tag => checkMatch(tag.toLowerCase(), queryTokens));
@@ -89,12 +86,12 @@ function checkMatch(target, queryTokens) {
  * Filter data based on query.
  * Sorted by length (shortest first), then alphabetically.
  */
-export function getMatches(data, query) {
-    const matches = data.filter(d => isMatch(d, query));
+export function getMatches(data, query, language) {
+    const matches = data.filter(d => isMatch(d, query, language));
 
     return matches.sort((a, b) => {
-        const nameA = getLocalized(a.displayName);
-        const nameB = getLocalized(b.displayName);
+        const nameA = getLocalized(a.displayName, language);
+        const nameB = getLocalized(b.displayName, language);
 
         // 1. Length (shortest first)
         const lenDiff = nameA.length - nameB.length;
@@ -154,11 +151,11 @@ export function getHighlightedText(text, query) {
  * - If displayName matches: returns highlighted displayName
  * - If tag matches: returns "displayName (highlightedTag)"
  */
-export function getSearchResultContent(item, query) {
+export function getSearchResultContent(item, query, language) {
     if (!item || !query) return '';
 
     const queryTokens = tokenize(query.toLowerCase());
-    const displayName = getLocalized(item.displayName);
+    const displayName = getLocalized(item.displayName, language);
 
     // 1. Check if Display Name matches
     if (checkMatch(displayName.toLowerCase(), queryTokens)) {
@@ -167,7 +164,7 @@ export function getSearchResultContent(item, query) {
 
     // 2. Check Tags
     if (item.tags) {
-        const tags = item.tags['en-us'] || [];
+        const tags = item.tags[language] || [];
         // Find the FIRST tag that matches
         const matchedTag = tags.find(tag => checkMatch(tag.toLowerCase(), queryTokens));
 
