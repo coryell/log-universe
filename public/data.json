@@ -276,7 +276,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.001"
+      "length": "1e-3"
     },
     "x_coordinates": {
       "length": "20"
@@ -299,7 +299,7 @@
       ]
     },
     "dimensions": {
-      "length": "1"
+      "length": "1e+0"
     },
     "x_coordinates": {
       "length": "20"
@@ -322,7 +322,7 @@
       ]
     },
     "dimensions": {
-      "length": "10"
+      "length": "1e+1"
     },
     "x_coordinates": {
       "length": "20"
@@ -345,7 +345,7 @@
       ]
     },
     "dimensions": {
-      "length": "1000"
+      "length": "1e+3"
     },
     "x_coordinates": {
       "length": "20"
@@ -369,7 +369,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.0016"
+      "length": "1.6e-3"
     },
     "x_coordinates": {
       "length": "20"
@@ -391,7 +391,7 @@
       ]
     },
     "dimensions": {
-      "length": "300000"
+      "length": "3e+5"
     },
     "x_coordinates": {
       "length": "20"
@@ -413,7 +413,7 @@
       ]
     },
     "dimensions": {
-      "length": "33000"
+      "length": "3.3e+4"
     },
     "x_coordinates": {
       "length": "20"
@@ -435,7 +435,7 @@
       ]
     },
     "dimensions": {
-      "length": "30"
+      "length": "3e+1"
     },
     "x_coordinates": {
       "length": "20"
@@ -483,7 +483,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.0000093"
+      "length": "9.3e-6"
     },
     "x_coordinates": {
       "length": "20"
@@ -507,7 +507,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.000004"
+      "length": "4e-6"
     },
     "x_coordinates": {
       "length": "20"
@@ -529,7 +529,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.21"
+      "length": "2.1e-1"
     },
     "x_coordinates": {
       "length": "20"
@@ -550,7 +550,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.005"
+      "length": "5e-3"
     },
     "x_coordinates": {
       "length": "40"
@@ -571,7 +571,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.1"
+      "length": "1e-1"
     },
     "x_coordinates": {
       "length": "40"
@@ -592,7 +592,7 @@
       ]
     },
     "dimensions": {
-      "length": "1"
+      "length": "1e+0"
     },
     "x_coordinates": {
       "length": "40"
@@ -607,7 +607,7 @@
       "en-us": "Density"
     },
     "dimensions": {
-      "length": "0.00001"
+      "length": "1e-5"
     },
     "x_coordinates": {
       "length": "40"
@@ -667,7 +667,7 @@
       "en-us": "Density"
     },
     "dimensions": {
-      "length": "0.000001"
+      "length": "1e-6"
     },
     "x_coordinates": {
       "length": "40"
@@ -727,7 +727,7 @@
       "en-us": "Density"
     },
     "dimensions": {
-      "length": "47000000000000000"
+      "length": "4.7e+16"
     },
     "x_coordinates": {
       "length": "40"
@@ -772,7 +772,7 @@
       "en-us": "Molecules"
     },
     "dimensions": {
-      "length": "0.000001"
+      "length": "1e-6"
     },
     "x_coordinates": {
       "length": "6"
@@ -882,7 +882,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.1"
+      "length": "1e-1"
     },
     "x_coordinates": {
       "length": "6"
@@ -906,7 +906,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.00001"
+      "length": "1e-5"
     },
     "x_coordinates": {
       "length": "12"
@@ -968,7 +968,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.0000012"
+      "length": "1.2e-6"
     },
     "x_coordinates": {
       "length": "0"
@@ -998,7 +998,7 @@
       "en-us": "Biology"
     },
     "dimensions": {
-      "length": "0.15"
+      "length": "1.5e-1"
     },
     "x_coordinates": {
       "length": "0"
@@ -1013,7 +1013,7 @@
       "en-us": "Biology"
     },
     "dimensions": {
-      "length": "0.000005"
+      "length": "5e-6"
     },
     "x_coordinates": {
       "length": "0"
@@ -1028,7 +1028,7 @@
       "en-us": "Biology"
     },
     "dimensions": {
-      "length": "0.0001"
+      "length": "1e-4"
     },
     "x_coordinates": {
       "length": "0"
@@ -1043,7 +1043,7 @@
       "en-us": "Biology"
     },
     "dimensions": {
-      "length": "0.00003"
+      "length": "3e-5"
     },
     "x_coordinates": {
       "length": "0"
@@ -1064,7 +1064,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.00001"
+      "length": "1e-5"
     },
     "x_coordinates": {
       "length": "0"
@@ -1085,7 +1085,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.000002"
+      "length": "2e-6"
     },
     "x_coordinates": {
       "length": "6"
@@ -1126,7 +1126,7 @@
       ]
     },
     "dimensions": {
-      "length": "0.00001"
+      "length": "1e-5"
     },
     "x_coordinates": {
       "length": "6"
@@ -1141,7 +1141,7 @@
       "en-us": "Biology"
     },
     "dimensions": {
-      "length": "1"
+      "length": "1e+0"
     },
     "x_coordinates": {
       "length": "0"
@@ -1156,7 +1156,7 @@
       "en-us": "Biology"
     },
     "dimensions": {
-      "length": "30"
+      "length": "3e+1"
     },
     "x_coordinates": {
       "length": "0"
@@ -1171,7 +1171,7 @@
       "en-us": "Biology"
     },
     "dimensions": {
-      "length": "0.001"
+      "length": "1e-3"
     },
     "x_coordinates": {
       "length": "0"
@@ -1186,7 +1186,7 @@
       "en-us": "Biology"
     },
     "dimensions": {
-      "length": "0.0001"
+      "length": "1e-4"
     },
     "x_coordinates": {
       "length": "6"
@@ -1221,7 +1221,7 @@
       "en-us": "Sound"
     },
     "dimensions": {
-      "length": "0.17"
+      "length": "1.7e-1"
     },
     "x_coordinates": {
       "length": "60"
@@ -1236,7 +1236,7 @@
       "en-us": "Sound"
     },
     "dimensions": {
-      "length": "17"
+      "length": "1.7e+1"
     },
     "x_coordinates": {
       "length": "60"
@@ -1251,7 +1251,7 @@
       "en-us": "Sound"
     },
     "dimensions": {
-      "length": "7000"
+      "length": "7e+3"
     },
     "x_coordinates": {
       "length": "60"
@@ -1266,7 +1266,7 @@
       "en-us": "Sound"
     },
     "dimensions": {
-      "length": "0.011"
+      "length": "1.1e-2"
     },
     "x_coordinates": {
       "length": "60"
@@ -1296,7 +1296,7 @@
       "en-us": "Waves"
     },
     "dimensions": {
-      "length": "40"
+      "length": "4e+1"
     },
     "x_coordinates": {
       "length": "40"
@@ -1311,7 +1311,7 @@
       "en-us": "Waves"
     },
     "dimensions": {
-      "length": "250"
+      "length": "2.5e+2"
     },
     "x_coordinates": {
       "length": "40"
@@ -1326,7 +1326,7 @@
       "en-us": "Waves"
     },
     "dimensions": {
-      "length": "100"
+      "length": "1e+2"
     },
     "x_coordinates": {
       "length": "40"
@@ -1341,7 +1341,7 @@
       "en-us": "Waves"
     },
     "dimensions": {
-      "length": "150000"
+      "length": "1.5e+5"
     },
     "x_coordinates": {
       "length": "40"
@@ -1356,7 +1356,7 @@
       "en-us": "Waves"
     },
     "dimensions": {
-      "length": "1000000"
+      "length": "1e+6"
     },
     "x_coordinates": {
       "length": "40"
@@ -1377,7 +1377,7 @@
       ]
     },
     "dimensions": {
-      "length": "6378000"
+      "length": "6.378e+6"
     },
     "x_coordinates": {
       "length": "0"
@@ -1399,7 +1399,7 @@
       ]
     },
     "dimensions": {
-      "length": "1740000"
+      "length": "1.74e+6"
     },
     "x_coordinates": {
       "length": "0"
@@ -1414,7 +1414,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "380000000"
+      "length": "3.8e+8"
     },
     "x_coordinates": {
       "length": "6"
@@ -1456,7 +1456,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "150000000000"
+      "length": "1.5e+11"
     },
     "x_coordinates": {
       "length": "0"
@@ -1471,7 +1471,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "58000000000"
+      "length": "5.8e+10"
     },
     "x_coordinates": {
       "length": "0"
@@ -1492,7 +1492,7 @@
       ]
     },
     "dimensions": {
-      "length": "778000000000"
+      "length": "7.78e+11"
     },
     "x_coordinates": {
       "length": "0"
@@ -1513,7 +1513,7 @@
       ]
     },
     "dimensions": {
-      "length": "1400000000000"
+      "length": "1.4e+12"
     },
     "x_coordinates": {
       "length": "0"
@@ -1533,7 +1533,7 @@
       ]
     },
     "dimensions": {
-      "length": "6000000000000"
+      "length": "6e+12"
     },
     "x_coordinates": {
       "length": "0"
@@ -1548,7 +1548,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "60000000"
+      "length": "6e+7"
     },
     "x_coordinates": {
       "length": "0"
@@ -1563,7 +1563,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "140000000"
+      "length": "1.4e+8"
     },
     "x_coordinates": {
       "length": "0"
@@ -1578,7 +1578,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "58000000"
+      "length": "5.8e+7"
     },
     "x_coordinates": {
       "length": "6"
@@ -1593,7 +1593,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "100"
+      "length": "1e+2"
     },
     "x_coordinates": {
       "length": "0"
@@ -1608,7 +1608,7 @@
       "en-us": "Geology"
     },
     "dimensions": {
-      "length": "1220000"
+      "length": "1.22e+6"
     },
     "x_coordinates": {
       "length": "6"
@@ -1623,7 +1623,7 @@
       "en-us": "Geology"
     },
     "dimensions": {
-      "length": "3480000"
+      "length": "3.48e+6"
     },
     "x_coordinates": {
       "length": "6"
@@ -1638,7 +1638,7 @@
       "en-us": "Geology"
     },
     "dimensions": {
-      "length": "2900000"
+      "length": "2.9e+6"
     },
     "x_coordinates": {
       "length": "12"
@@ -1653,7 +1653,7 @@
       "en-us": "Geology"
     },
     "dimensions": {
-      "length": "40000"
+      "length": "4e+4"
     },
     "x_coordinates": {
       "length": "6"
@@ -1668,7 +1668,7 @@
       "en-us": "Geology"
     },
     "dimensions": {
-      "length": "5000"
+      "length": "5e+3"
     },
     "x_coordinates": {
       "length": "6"
@@ -1683,7 +1683,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "470000"
+      "length": "4.7e+5"
     },
     "x_coordinates": {
       "length": "0"
@@ -1698,7 +1698,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "2"
+      "length": "2e+0"
     },
     "x_coordinates": {
       "length": "10"
@@ -1713,7 +1713,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "4000"
+      "length": "4e+3"
     },
     "x_coordinates": {
       "length": "15"
@@ -1728,7 +1728,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "10000"
+      "length": "1e+4"
     },
     "x_coordinates": {
       "length": "15"
@@ -1743,7 +1743,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "1600000"
+      "length": "1.6e+6"
     },
     "x_coordinates": {
       "length": "19"
@@ -1758,7 +1758,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "46000000"
+      "length": "4.6e+7"
     },
     "x_coordinates": {
       "length": "19"
@@ -1773,7 +1773,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "118000000"
+      "length": "1.18e+8"
     },
     "x_coordinates": {
       "length": "19"
@@ -1788,7 +1788,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "69600000"
+      "length": "6.96e+7"
     },
     "x_coordinates": {
       "length": "10"
@@ -1803,7 +1803,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "10440000000"
+      "length": "1.044e+10"
     },
     "x_coordinates": {
       "length": "6"
@@ -1818,7 +1818,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "1183200000"
+      "length": "1.1832e+9"
     },
     "x_coordinates": {
       "length": "6"
@@ -1833,7 +1833,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "139200000000"
+      "length": "1.392e+11"
     },
     "x_coordinates": {
       "length": "6"
@@ -1848,7 +1848,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "1183200000000"
+      "length": "1.1832e+12"
     },
     "x_coordinates": {
       "length": "6"
@@ -1863,7 +1863,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "7480000000000"
+      "length": "7.48e+12"
     },
     "x_coordinates": {
       "length": "6"
@@ -1878,7 +1878,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "29900000000000000"
+      "length": "2.99e+16"
     },
     "x_coordinates": {
       "length": "6"
@@ -1893,7 +1893,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "299000000000000"
+      "length": "2.99e+14"
     },
     "x_coordinates": {
       "length": "6"
@@ -1908,7 +1908,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "18400000000000"
+      "length": "1.84e+13"
     },
     "x_coordinates": {
       "length": "0"
@@ -1923,7 +1923,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "24700000000000"
+      "length": "2.47e+13"
     },
     "x_coordinates": {
       "length": "6"
@@ -1938,7 +1938,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "9460000000000000"
+      "length": "9.46e+15"
     },
     "x_coordinates": {
       "length": "0"
@@ -1953,7 +1953,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "30900000000000000"
+      "length": "3.09e+16"
     },
     "x_coordinates": {
       "length": "0"
@@ -1968,7 +1968,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "3000",
+      "length": "3e+3",
       "mass": "1.988416e+30"
     },
     "x_coordinates": {
@@ -1993,7 +1993,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "40200000000000000"
+      "length": "4.02e+16"
     },
     "x_coordinates": {
       "length": "15"
@@ -2029,7 +2029,7 @@
       ]
     },
     "dimensions": {
-      "length": "255000000000000000000"
+      "length": "2.55e+20"
     },
     "x_coordinates": {
       "length": "15"
@@ -2050,7 +2050,7 @@
       ]
     },
     "dimensions": {
-      "length": "401000000000000000000"
+      "length": "4.01e+20"
     },
     "x_coordinates": {
       "length": "0"
@@ -2116,7 +2116,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "309000000000000000"
+      "length": "3.09e+17"
     },
     "x_coordinates": {
       "length": "0"
@@ -2131,7 +2131,7 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "757000000000000000"
+      "length": "7.57e+17"
     },
     "x_coordinates": {
       "length": "0"
@@ -2212,7 +2212,7 @@
       ]
     },
     "dimensions": {
-      "length": "12000000000"
+      "length": "1.2e+10"
     },
     "x_coordinates": {
       "length": "0"
@@ -2232,7 +2232,7 @@
       ]
     },
     "dimensions": {
-      "length": "420000"
+      "length": "4.2e+5"
     },
     "x_coordinates": {
       "length": "10"
@@ -2252,7 +2252,7 @@
       ]
     },
     "dimensions": {
-      "length": "300000000000000"
+      "length": "3e+14"
     },
     "x_coordinates": {
       "length": "0"
@@ -2312,7 +2312,7 @@
       "length": "https://en.wikipedia.org/wiki/Bohr_radius"
     },
     "dimensions": {
-      "length": "5.29e-11",
+      "length": "5.3e-11",
       "mass": "1.6738233814511998e-27"
     },
     "x_coordinates": {
@@ -2340,7 +2340,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "3.0999999999999996e-11",
+      "length": "3.1e-11",
       "mass": "6.646473677179139e-27"
     },
     "x_coordinates": {
@@ -2448,7 +2448,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "7e-11",
+      "length": "7.0e-11",
       "mass": "1.9944734756557899e-26"
     },
     "x_coordinates": {
@@ -2502,7 +2502,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "6e-11",
+      "length": "6.0e-11",
       "mass": "2.6566964563331097e-26"
     },
     "x_coordinates": {
@@ -2529,7 +2529,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "5e-11",
+      "length": "5.0e-11",
       "mass": "3.15469212309622e-26"
     },
     "x_coordinates": {
@@ -2664,7 +2664,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.1e-10",
+      "length": "1.10e-10",
       "mass": "4.6636239750056496e-26"
     },
     "x_coordinates": {
@@ -2691,7 +2691,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1e-10",
+      "length": "1.00e-10",
       "mass": "5.1433537120108596e-26"
     },
     "x_coordinates": {
@@ -2718,7 +2718,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1e-10",
+      "length": "1.00e-10",
       "mass": "5.3236882548934e-26"
     },
     "x_coordinates": {
@@ -2745,7 +2745,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1e-10",
+      "length": "1.00e-10",
       "mass": "5.8866109992505e-26"
     },
     "x_coordinates": {
@@ -2799,7 +2799,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "2.2e-10",
+      "length": "2.20e-10",
       "mass": "6.49237565158522e-26"
     },
     "x_coordinates": {
@@ -2826,7 +2826,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.8e-10",
+      "length": "1.80e-10",
       "mass": "6.65510848033742e-26"
     },
     "x_coordinates": {
@@ -2853,7 +2853,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.6e-10",
+      "length": "1.60e-10",
       "mass": "7.46511943814684e-26"
     },
     "x_coordinates": {
@@ -2880,7 +2880,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.4e-10",
+      "length": "1.40e-10",
       "mass": "7.948502361103629e-26"
     },
     "x_coordinates": {
@@ -2934,7 +2934,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.4e-10",
+      "length": "1.40e-10",
       "mass": "8.63413894265244e-26"
     },
     "x_coordinates": {
@@ -2961,7 +2961,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.4e-10",
+      "length": "1.40e-10",
       "mass": "9.12266953672282e-26"
     },
     "x_coordinates": {
@@ -2988,7 +2988,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.4e-10",
+      "length": "1.40e-10",
       "mass": "9.273280430272049e-26"
     },
     "x_coordinates": {
@@ -3123,7 +3123,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.3e-10",
+      "length": "1.30e-10",
       "mass": "1.157777655009147e-25"
     },
     "x_coordinates": {
@@ -3258,7 +3258,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "8.799999999999999e-11",
+      "length": "8.8e-11",
       "mass": "1.391498528956822e-25"
     },
     "x_coordinates": {
@@ -3312,7 +3312,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "2e-10",
+      "length": "2.00e-10",
       "mass": "1.45496433217018e-25"
     },
     "x_coordinates": {
@@ -3339,7 +3339,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.8e-10",
+      "length": "1.80e-10",
       "mass": "1.476318864596234e-25"
     },
     "x_coordinates": {
@@ -3473,7 +3473,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.3e-10",
+      "length": "1.30e-10",
       "mass": "1.6783068369372298e-25"
     },
     "x_coordinates": {
@@ -3527,7 +3527,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.4e-10",
+      "length": "1.40e-10",
       "mass": "1.7671456771233799e-25"
     },
     "x_coordinates": {
@@ -3554,7 +3554,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.6e-10",
+      "length": "1.60e-10",
       "mass": "1.79122349362243e-25"
     },
     "x_coordinates": {
@@ -3689,7 +3689,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.4e-10",
+      "length": "1.40e-10",
       "mass": "2.1188478519163997e-25"
     },
     "x_coordinates": {
@@ -3716,7 +3716,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.4e-10",
+      "length": "1.40e-10",
       "mass": "2.1072240784341e-25"
     },
     "x_coordinates": {
@@ -3771,7 +3771,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "2.6e-10",
+      "length": "2.60e-10",
       "mass": "2.20702247647499e-25"
     },
     "x_coordinates": {
@@ -4013,7 +4013,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.8e-10",
+      "length": "1.80e-10",
       "mass": "2.61119768584525e-25"
     },
     "x_coordinates": {
@@ -4337,7 +4337,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.3e-10",
+      "length": "1.30e-10",
       "mass": "3.15884347076847e-25"
     },
     "x_coordinates": {
@@ -4445,7 +4445,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.5e-10",
+      "length": "1.50e-10",
       "mass": "3.3308753183065097e-25"
     },
     "x_coordinates": {
@@ -4472,7 +4472,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.9e-10",
+      "length": "1.90e-10",
       "mass": "3.39380974901782e-25"
     },
     "x_coordinates": {
@@ -4499,7 +4499,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.8e-10",
+      "length": "1.80e-10",
       "mass": "3.4406369507607997e-25"
     },
     "x_coordinates": {
@@ -4526,7 +4526,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.6e-10",
+      "length": "1.60e-10",
       "mass": "3.47019454618722e-25"
     },
     "x_coordinates": {
@@ -4553,7 +4553,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.9e-10"
+      "length": "1.90e-10"
     },
     "x_coordinates": {
       "length": "1.5",
@@ -4605,7 +4605,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.2e-10"
+      "length": "1.20e-10"
     },
     "x_coordinates": {
       "length": "1.7",
@@ -4710,7 +4710,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.8e-10",
+      "length": "1.80e-10",
       "mass": "3.8531148554755595e-25"
     },
     "x_coordinates": {
@@ -4737,7 +4737,7 @@
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
     },
     "dimensions": {
-      "length": "1.8e-10",
+      "length": "1.80e-10",
       "mass": "3.8365094647865595e-25"
     },
     "x_coordinates": {
@@ -4847,32 +4847,6 @@
     },
     "x_coordinates": {
       "length": "0.8",
-      "mass": "0"
-    }
-  },
-  {
-    "id": "curium",
-    "displayName": {
-      "en-us": "Cm"
-    },
-    "category": {
-      "en-us": "Atoms / Elements"
-    },
-    "tags": {
-      "en-us": [
-        "atomic number 96",
-        "element 96",
-        "curium"
-      ]
-    },
-    "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
-    },
-    "dimensions": {
-      "length": "1.7599999999999999e-10"
-    },
-    "x_coordinates": {
-      "length": "0.9",
       "mass": "0"
     }
   }
