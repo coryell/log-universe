@@ -636,7 +636,9 @@ d3.json('/data.json').then(data => {
       rect = legend.insert("rect", "text")
         .attr("fill", "black")
         .attr("stroke", "#00aaff")
-        .attr("stroke-width", 1);
+        .attr("stroke-width", 1)
+        .attr("rx", 5)
+        .attr("ry", 5);
     }
 
     rect.attr("width", legendWidth).attr("height", legendHeight);
