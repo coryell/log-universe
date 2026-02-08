@@ -235,12 +235,12 @@ d3.json('/data.json').then(data => {
 
   // Define Categorical Color Scale
   const categories = [
-    "Astronomy", "Biology", "Density", "Electromagnetic", "Fundamental",
-    "Geology", "Nuclear / Atomic / Molecular", "Sound", "Technology", "Waves"
+    "Atoms / Elements", "Astronomy", "Biology", "Density", "Electromagnetic", "Fundamental / Nuclear",
+    "Geology", "Molecules", "Sound", "Technology", "Waves"
   ];
   const colors = [
-    "#FFD700", "#7CFC00", "#FF8C00", "#1E90FF", "#FF00FF",
-    "#CD853F", "#00FFFF", "#FF69B4", "#C0C0C0", "#9370DB"
+    "#00FFFF", "#FFD700", "#7CFC00", "#FF8C00", "#1E90FF", "#FF00FF",
+    "#CD853F", "#ff0000ff", "#FF69B4", "#C0C0C0", "#9370DB"
   ];
   const colorScale = d3.scaleOrdinal().domain(categories).range(colors);
 

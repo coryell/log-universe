@@ -6,7 +6,7 @@
     },
     "length": 1e-18,
     "category": {
-      "en-us": "Fundamental"
+      "en-us": "Fundamental / Nuclear"
     },
     "x": 0,
     "tags": {
@@ -23,7 +23,7 @@
     },
     "length": 8e-16,
     "category": {
-      "en-us": "Fundamental"
+      "en-us": "Fundamental / Nuclear"
     },
     "x": 0,
     "tags": {
@@ -40,7 +40,7 @@
     },
     "length": 1e-17,
     "category": {
-      "en-us": "Fundamental"
+      "en-us": "Fundamental / Nuclear"
     },
     "x": 5,
     "tags": {
@@ -57,7 +57,7 @@
     },
     "length": 1.6e-35,
     "category": {
-      "en-us": "Fundamental"
+      "en-us": "Fundamental / Nuclear"
     },
     "x": 0,
     "tags": {
@@ -73,7 +73,7 @@
     },
     "length": 1e-15,
     "category": {
-      "en-us": "Fundamental"
+      "en-us": "Fundamental / Nuclear"
     },
     "x": 5,
     "tags": {
@@ -141,7 +141,7 @@
     "displayName": {
       "en-us": "X-Ray/UV Boundary"
     },
-    "length": 1e-08,
+    "length": 1e-8,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -160,7 +160,7 @@
     "displayName": {
       "en-us": "Highest Energy Visible (Violet)"
     },
-    "length": 4e-07,
+    "length": 4e-7,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -179,7 +179,7 @@
     "displayName": {
       "en-us": "Lowest Energy Visible (Red)"
     },
-    "length": 7e-07,
+    "length": 7e-7,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -349,7 +349,7 @@
     "displayName": {
       "en-us": "Lyman Alpha"
     },
-    "length": 1.2e-07,
+    "length": 1.2e-7,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -369,7 +369,7 @@
     "displayName": {
       "en-us": "IR Wavelength of Human Body"
     },
-    "length": 9.3e-06,
+    "length": 0.0000093,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -389,7 +389,7 @@
     "displayName": {
       "en-us": "IR Wavelength of Red Hot Metal"
     },
-    "length": 4e-06,
+    "length": 0.000004,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -478,7 +478,7 @@
     "displayName": {
       "en-us": "Distance Between Particles in Best Artificial Vacuum"
     },
-    "length": 1e-05,
+    "length": 0.00001,
     "category": {
       "en-us": "Density"
     },
@@ -489,7 +489,7 @@
     "displayName": {
       "en-us": "Distance Between Air Molecules at Sea Level"
     },
-    "length": 3e-09,
+    "length": 3e-9,
     "category": {
       "en-us": "Density"
     },
@@ -522,7 +522,7 @@
     "displayName": {
       "en-us": "Distance Between Ions in Sun Corona"
     },
-    "length": 1e-06,
+    "length": 0.000001,
     "category": {
       "en-us": "Density"
     },
@@ -590,7 +590,7 @@
     },
     "length": 7e-15,
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Fundamental / Nuclear"
     },
     "x": 0
   },
@@ -601,7 +601,7 @@
     },
     "length": 7.4e-11,
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Molecules"
     },
     "x": 10
   },
@@ -610,9 +610,9 @@
     "displayName": {
       "en-us": "Largest Molecule (Titin)"
     },
-    "length": 1e-06,
+    "length": 0.000001,
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Molecules"
     },
     "x": 10
   },
@@ -621,9 +621,9 @@
     "displayName": {
       "en-us": "Glucose Molecule"
     },
-    "length": 1e-09,
+    "length": 1e-9,
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Molecules"
     },
     "x": 10
   },
@@ -634,7 +634,7 @@
     },
     "length": 2.8e-10,
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Molecules"
     },
     "x": 10
   },
@@ -643,9 +643,9 @@
     "displayName": {
       "en-us": "Amino Acid"
     },
-    "length": 1e-09,
+    "length": 1e-9,
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Molecules"
     },
     "x": 0
   },
@@ -654,7 +654,7 @@
     "displayName": {
       "en-us": "DNA Polymerase"
     },
-    "length": 7.5e-09,
+    "length": 7.5e-9,
     "category": {
       "en-us": "Biology"
     },
@@ -672,7 +672,7 @@
     "displayName": {
       "en-us": "Collagen"
     },
-    "length": 3e-07,
+    "length": 3e-7,
     "category": {
       "en-us": "Biology"
     },
@@ -707,7 +707,7 @@
     "displayName": {
       "en-us": "Chromosome During Division"
     },
-    "length": 1e-05,
+    "length": 0.00001,
     "category": {
       "en-us": "Biology"
     },
@@ -727,7 +727,7 @@
     "displayName": {
       "en-us": "Cell Membrane Thickness"
     },
-    "length": 1e-08,
+    "length": 1e-8,
     "category": {
       "en-us": "Biology"
     },
@@ -743,7 +743,7 @@
     "displayName": {
       "en-us": "Smallest Virus (AAV)"
     },
-    "length": 2e-08,
+    "length": 2e-8,
     "category": {
       "en-us": "Biology"
     },
@@ -760,7 +760,7 @@
     "displayName": {
       "en-us": "Largest Virus (Tupanvirus)"
     },
-    "length": 1.2e-06,
+    "length": 0.0000012,
     "category": {
       "en-us": "Biology"
     },
@@ -777,7 +777,7 @@
     "displayName": {
       "en-us": "Smallest Free Cell (Mycoplasma)"
     },
-    "length": 2e-07,
+    "length": 2e-7,
     "category": {
       "en-us": "Biology"
     },
@@ -799,7 +799,7 @@
     "displayName": {
       "en-us": "Smallest Human Cell (Sperm)"
     },
-    "length": 5e-06,
+    "length": 0.000005,
     "category": {
       "en-us": "Biology"
     },
@@ -821,7 +821,7 @@
     "displayName": {
       "en-us": "Human Skin Cell"
     },
-    "length": 3e-05,
+    "length": 0.00003,
     "category": {
       "en-us": "Biology"
     },
@@ -832,7 +832,7 @@
     "displayName": {
       "en-us": "Human White Blood Cell"
     },
-    "length": 1e-05,
+    "length": 0.00001,
     "category": {
       "en-us": "Biology"
     },
@@ -849,7 +849,7 @@
     "displayName": {
       "en-us": "Human Mitochondria"
     },
-    "length": 2e-06,
+    "length": 0.000002,
     "category": {
       "en-us": "Biology"
     },
@@ -866,7 +866,7 @@
     "displayName": {
       "en-us": "Smallest Organelle (Ribosome)"
     },
-    "length": 2.5e-08,
+    "length": 2.5e-8,
     "category": {
       "en-us": "Biology"
     },
@@ -882,7 +882,7 @@
     "displayName": {
       "en-us": "Largest Organelle (Nucleus)"
     },
-    "length": 1e-05,
+    "length": 0.00001,
     "category": {
       "en-us": "Biology"
     },
@@ -943,7 +943,7 @@
     "displayName": {
       "en-us": "Computer Transistor Size"
     },
-    "length": 5e-08,
+    "length": 5e-8,
     "category": {
       "en-us": "Technology"
     },
@@ -1003,7 +1003,7 @@
     "displayName": {
       "en-us": "Highest Sound Produced/Recorded"
     },
-    "length": 3.4e-07,
+    "length": 3.4e-7,
     "category": {
       "en-us": "Sound"
     },
@@ -1761,10 +1761,10 @@
       "en-us": "H"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 5.29e-11,
-    "x": 0.0,
+    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 1",
@@ -1780,7 +1780,7 @@
       "en-us": "He"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 3.0999999999999996e-11,
     "x": 3.1,
@@ -1800,10 +1800,10 @@
       "en-us": "Li"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.45e-10,
-    "x": 0.0,
+    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 3",
@@ -1819,7 +1819,7 @@
       "en-us": "Be"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.05e-10,
     "x": 0.1,
@@ -1838,7 +1838,7 @@
       "en-us": "B"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 8.5e-11,
     "x": 2.6,
@@ -1857,7 +1857,7 @@
       "en-us": "C"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 7e-11,
     "x": 2.7,
@@ -1876,7 +1876,7 @@
       "en-us": "N"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 6.5e-11,
     "x": 2.8000000000000003,
@@ -1895,7 +1895,7 @@
       "en-us": "O"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 6e-11,
     "x": 2.9000000000000004,
@@ -1914,10 +1914,10 @@
       "en-us": "F"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 5e-11,
-    "x": 3.0,
+    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 9",
@@ -1933,7 +1933,7 @@
       "en-us": "Ne"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 3.8e-11,
     "x": 3.1,
@@ -1952,10 +1952,10 @@
       "en-us": "Na"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.8e-10,
-    "x": 0.0,
+    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 11",
@@ -1971,7 +1971,7 @@
       "en-us": "Mg"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.5e-10,
     "x": 0.1,
@@ -1990,7 +1990,7 @@
       "en-us": "Al"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.25e-10,
     "x": 2.6,
@@ -2009,7 +2009,7 @@
       "en-us": "Si"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.1e-10,
     "x": 2.7,
@@ -2028,7 +2028,7 @@
       "en-us": "P"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1e-10,
     "x": 2.8000000000000003,
@@ -2047,7 +2047,7 @@
       "en-us": "S"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1e-10,
     "x": 2.9000000000000004,
@@ -2066,10 +2066,10 @@
       "en-us": "Cl"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1e-10,
-    "x": 3.0,
+    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 17",
@@ -2085,7 +2085,7 @@
       "en-us": "Ar"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 7.1e-11,
     "x": 3.1,
@@ -2104,10 +2104,10 @@
       "en-us": "K"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 2.2e-10,
-    "x": 0.0,
+    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 19",
@@ -2123,7 +2123,7 @@
       "en-us": "Ca"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.8e-10,
     "x": 0.1,
@@ -2142,7 +2142,7 @@
       "en-us": "Sc"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.6e-10,
     "x": 1.6,
@@ -2161,7 +2161,7 @@
       "en-us": "Ti"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.4e-10,
     "x": 1.7000000000000002,
@@ -2180,7 +2180,7 @@
       "en-us": "V"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 1.8,
@@ -2199,7 +2199,7 @@
       "en-us": "Cr"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.4e-10,
     "x": 1.9000000000000001,
@@ -2218,10 +2218,10 @@
       "en-us": "Mn"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.4e-10,
-    "x": 2.0,
+    "x": 2,
     "tags": {
       "en-us": [
         "atomic number 25",
@@ -2237,7 +2237,7 @@
       "en-us": "Fe"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.4e-10,
     "x": 2.1,
@@ -2256,7 +2256,7 @@
       "en-us": "Co"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 2.2,
@@ -2275,7 +2275,7 @@
       "en-us": "Ni"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 2.3000000000000003,
@@ -2294,7 +2294,7 @@
       "en-us": "Cu"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 2.4000000000000004,
@@ -2313,7 +2313,7 @@
       "en-us": "Zn"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 2.5,
@@ -2332,7 +2332,7 @@
       "en-us": "Ga"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.3e-10,
     "x": 2.6,
@@ -2351,7 +2351,7 @@
       "en-us": "Ge"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.25e-10,
     "x": 2.7,
@@ -2370,7 +2370,7 @@
       "en-us": "As"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.15e-10,
     "x": 2.8000000000000003,
@@ -2389,7 +2389,7 @@
       "en-us": "Se"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.15e-10,
     "x": 2.9000000000000004,
@@ -2408,10 +2408,10 @@
       "en-us": "Br"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.15e-10,
-    "x": 3.0,
+    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 35",
@@ -2427,7 +2427,7 @@
       "en-us": "Kr"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 8.799999999999999e-11,
     "x": 3.1,
@@ -2446,10 +2446,10 @@
       "en-us": "Rb"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 2.35e-10,
-    "x": 0.0,
+    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 37",
@@ -2465,7 +2465,7 @@
       "en-us": "Sr"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 2e-10,
     "x": 0.1,
@@ -2484,7 +2484,7 @@
       "en-us": "Y"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.8e-10,
     "x": 1.6,
@@ -2503,7 +2503,7 @@
       "en-us": "Zr"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.55e-10,
     "x": 1.7000000000000002,
@@ -2522,7 +2522,7 @@
       "en-us": "Nb"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.45e-10,
     "x": 1.8,
@@ -2541,7 +2541,7 @@
       "en-us": "Mo"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.45e-10,
     "x": 1.9000000000000001,
@@ -2560,10 +2560,10 @@
       "en-us": "Tc"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
-    "x": 2.0,
+    "x": 2,
     "tags": {
       "en-us": [
         "atomic number 43",
@@ -2579,7 +2579,7 @@
       "en-us": "Ru"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.3e-10,
     "x": 2.1,
@@ -2598,7 +2598,7 @@
       "en-us": "Rh"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 2.2,
@@ -2617,7 +2617,7 @@
       "en-us": "Pd"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.4e-10,
     "x": 2.3000000000000003,
@@ -2636,7 +2636,7 @@
       "en-us": "Ag"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.6e-10,
     "x": 2.4000000000000004,
@@ -2655,7 +2655,7 @@
       "en-us": "Cd"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.55e-10,
     "x": 2.5,
@@ -2674,7 +2674,7 @@
       "en-us": "In"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.55e-10,
     "x": 2.6,
@@ -2693,7 +2693,7 @@
       "en-us": "Sn"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.45e-10,
     "x": 2.7,
@@ -2712,7 +2712,7 @@
       "en-us": "Sb"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.45e-10,
     "x": 2.8000000000000003,
@@ -2731,7 +2731,7 @@
       "en-us": "Te"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.4e-10,
     "x": 2.9000000000000004,
@@ -2750,10 +2750,10 @@
       "en-us": "I"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.4e-10,
-    "x": 3.0,
+    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 53",
@@ -2769,7 +2769,7 @@
       "en-us": "Xe"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.08e-10,
     "x": 3.1,
@@ -2788,10 +2788,10 @@
       "en-us": "Cs"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 2.6e-10,
-    "x": 0.0,
+    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 55",
@@ -2808,7 +2808,7 @@
       "en-us": "Ba"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 2.15e-10,
     "x": 0.1,
@@ -2827,7 +2827,7 @@
       "en-us": "La"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.95e-10,
     "x": 0.2,
@@ -2846,7 +2846,7 @@
       "en-us": "Ce"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.85e-10,
     "x": 0.30000000000000004,
@@ -2865,7 +2865,7 @@
       "en-us": "Pr"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.85e-10,
     "x": 0.4,
@@ -2884,7 +2884,7 @@
       "en-us": "Nd"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.85e-10,
     "x": 0.5,
@@ -2903,7 +2903,7 @@
       "en-us": "Pm"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.85e-10,
     "x": 0.6000000000000001,
@@ -2922,7 +2922,7 @@
       "en-us": "Sm"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.85e-10,
     "x": 0.7000000000000001,
@@ -2941,7 +2941,7 @@
       "en-us": "Eu"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.85e-10,
     "x": 0.8,
@@ -2960,7 +2960,7 @@
       "en-us": "Gd"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.8e-10,
     "x": 0.9,
@@ -2979,10 +2979,10 @@
       "en-us": "Tb"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
-    "x": 1.0,
+    "x": 1,
     "tags": {
       "en-us": [
         "atomic number 65",
@@ -2998,7 +2998,7 @@
       "en-us": "Dy"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 1.1,
@@ -3017,7 +3017,7 @@
       "en-us": "Ho"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 1.2000000000000002,
@@ -3036,7 +3036,7 @@
       "en-us": "Er"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 1.3,
@@ -3055,7 +3055,7 @@
       "en-us": "Tm"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 1.4000000000000001,
@@ -3074,7 +3074,7 @@
       "en-us": "Yb"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 1.5,
@@ -3093,7 +3093,7 @@
       "en-us": "Lu"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 1.6,
@@ -3112,7 +3112,7 @@
       "en-us": "Hf"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.55e-10,
     "x": 1.7000000000000002,
@@ -3131,7 +3131,7 @@
       "en-us": "Ta"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.45e-10,
     "x": 1.8,
@@ -3150,7 +3150,7 @@
       "en-us": "W"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 1.9000000000000001,
@@ -3169,10 +3169,10 @@
       "en-us": "Re"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
-    "x": 2.0,
+    "x": 2,
     "tags": {
       "en-us": [
         "atomic number 75",
@@ -3188,7 +3188,7 @@
       "en-us": "Os"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.3e-10,
     "x": 2.1,
@@ -3207,7 +3207,7 @@
       "en-us": "Ir"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 2.2,
@@ -3226,7 +3226,7 @@
       "en-us": "Pt"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 2.3000000000000003,
@@ -3245,7 +3245,7 @@
       "en-us": "Au"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.35e-10,
     "x": 2.4000000000000004,
@@ -3264,7 +3264,7 @@
       "en-us": "Hg"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.5e-10,
     "x": 2.5,
@@ -3283,7 +3283,7 @@
       "en-us": "Tl"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.9e-10,
     "x": 2.6,
@@ -3302,7 +3302,7 @@
       "en-us": "Pb"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.8e-10,
     "x": 2.7,
@@ -3321,7 +3321,7 @@
       "en-us": "Bi"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.6e-10,
     "x": 2.8000000000000003,
@@ -3340,7 +3340,7 @@
       "en-us": "Po"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.9e-10,
     "x": 2.9000000000000004,
@@ -3359,10 +3359,10 @@
       "en-us": "At"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.27e-10,
-    "x": 3.0,
+    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 85",
@@ -3378,7 +3378,7 @@
       "en-us": "Rn"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.2e-10,
     "x": 3.1,
@@ -3397,10 +3397,10 @@
       "en-us": "Fr"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 3.48e-10,
-    "x": 0.0,
+    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 87",
@@ -3417,7 +3417,7 @@
       "en-us": "Ra"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 2.15e-10,
     "x": 0.1,
@@ -3436,7 +3436,7 @@
       "en-us": "Ac"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.95e-10,
     "x": 0.2,
@@ -3455,7 +3455,7 @@
       "en-us": "Th"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.8e-10,
     "x": 0.30000000000000004,
@@ -3474,7 +3474,7 @@
       "en-us": "Pa"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.8e-10,
     "x": 0.4,
@@ -3493,7 +3493,7 @@
       "en-us": "U"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 0.5,
@@ -3512,7 +3512,7 @@
       "en-us": "Np"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 0.6000000000000001,
@@ -3531,7 +3531,7 @@
       "en-us": "Pu"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 0.7000000000000001,
@@ -3550,7 +3550,7 @@
       "en-us": "Am"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.75e-10,
     "x": 0.8,
@@ -3569,7 +3569,7 @@
       "en-us": "Cm"
     },
     "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
+      "en-us": "Atoms / Elements"
     },
     "length": 1.7599999999999999e-10,
     "x": 0.9,
