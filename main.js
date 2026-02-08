@@ -645,7 +645,7 @@ d3.json('/data.json').then(data => {
 
     // Position
     const legendX = width - legendWidth - 20;
-    const legendY = height - legendHeight - 20;
+    const legendY = height - legendHeight - 60;
     legend.attr("transform", `translate(${legendX}, ${legendY})`);
   }
 
@@ -1063,7 +1063,7 @@ d3.json('/data.json').then(data => {
 
     // Update legend pos
     const legendX = width - legendWidth - 20;
-    const legendY = height - legendHeight - 20;
+    const legendY = height - legendHeight - 60;
     legend.attr("transform", `translate(${legendX}, ${legendY})`);
 
     // Refresh zoom
