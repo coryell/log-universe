@@ -5,14 +5,16 @@ import { getMatches, getHighlightedText, getLocalized, getSearchResultContent } 
 const LANGUAGE = "en-us";
 
 const app = document.getElementById('app');
-const width = app.clientWidth;
-const height = app.clientHeight;
+let width = app.clientWidth;
+let height = app.clientHeight;
 
 const svg = d3.select('#app')
   .append('svg')
   .attr('width', '100%')
   .attr('height', '100%')
   .attr('viewBox', [0, 0, width, height]);
+
+
 
 // Define Gradients and Masks
 const defs = svg.append("defs");
@@ -277,7 +279,15 @@ d3.json('/data.json').then(data => {
     .attr('rx', 4)
     .attr('ry', 4)
     .attr('fill', 'black')
-    .attr('opacity', 0); // Visible only when highlighted
+    .attr('opacity', 0) // Visible only when highlighted
+    .attr('x', 8) // Start near text (text is at 10)
+    .attr('y', -initialFS * 0.7) // Roughly vertically centered
+    .attr('height', initialFS * 1.5)
+    .attr('width', d => {
+      const textLen = getLocalized(d.displayName, LANGUAGE).length;
+      const charWidth = initialFS * 0.6;
+      return (textLen * charWidth + 6); // Just text width + padding
+    });
 
   // Circle
   items.append('circle')
@@ -383,27 +393,20 @@ d3.json('/data.json').then(data => {
   // Legend
   const legendPadding = 15;
   const legendItemHeight = 20;
-  const legendWidth = 260;
   const legendHeight = categories.length * legendItemHeight + legendPadding * 2;
 
-  const legendX = width - legendWidth - 20;
-  const legendY = height - legendHeight - 20;
+  // We need to calculate legendWidth based on the text
+  // Render texts first, measure, then add rect background.
 
+  // Temporary: Just create group at 0,0 for measurement
   const legend = svg.append("g")
-    .attr("class", "legend")
-    .attr("transform", `translate(${legendX}, ${legendY})`);
-
-  // Legend Box
-  legend.append("rect")
-    .attr("width", legendWidth)
-    .attr("height", legendHeight)
-    .attr("fill", "black")
-    .attr("stroke", "#00aaff")
-    .attr("stroke-width", 1);
+    .attr("class", "legend");
 
   // Legend Items
+  let maxTextWidth = 0;
+
   categories.forEach((cat, i) => {
-    legend.append("text")
+    const text = legend.append("text")
       .attr("x", legendPadding)
       .attr("y", legendPadding + i * legendItemHeight + legendItemHeight / 2)
       .attr("dy", "0.35em")
@@ -488,7 +491,25 @@ d3.json('/data.json').then(data => {
           .duration(750)
           .call(zoom.transform, transform);
       });
+
+    const bbox = text.node().getComputedTextLength();
+    if (bbox > maxTextWidth) maxTextWidth = bbox;
   });
+
+  const legendWidth = maxTextWidth + legendPadding * 2;
+
+  // Legend Box (Inserted before text)
+  legend.insert("rect", "text")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+    .attr("fill", "black")
+    .attr("stroke", "#00aaff")
+    .attr("stroke-width", 1);
+
+  // Position Legend
+  const legendX = width - legendWidth - 20;
+  const legendY = height - legendHeight - 20;
+  legend.attr("transform", `translate(${legendX}, ${legendY})`);
 
 
 
@@ -936,6 +957,52 @@ d3.json('/data.json').then(data => {
       .attr("y", bbox.y - 4)
       .attr("width", bbox.width + 8)
       .attr("height", bbox.height + 8);
+  });
+
+  // Resize Handler Logic
+  function updateLayout() {
+    // 1. Update Scales Ranges
+    yScale.range([height - 50, 50]);
+
+    const decadeHeight = Math.abs(yScale(10) - yScale(1));
+    const screenCenter = width / 2;
+    const xCenter = xScale.domain()[0]; // Approx center
+
+    // We need to maintain the aspect ratio: 1 unit x = 1 decade y
+    // xScale was: domain([xCenter, xCenter+1]) -> range([screenCenter, screenCenter + decadeHeight])
+    // We update the range to use the new screenCenter and decadeHeight
+    xScale.range([screenCenter, screenCenter + decadeHeight]);
+
+    // 2. Update Zoom Extent
+    zoom.translateExtent([[-300, -300], [width + 300, height + 300]]);
+
+    // 3. Update Mask
+    mask.select("rect")
+      .attr("width", width)
+      .attr("height", height);
+
+    // 4. Update Legend Position
+    // We need to re-calculate legendX, legendY based on new width/height
+    const legendRect = legend.select('rect');
+    const legendW = +legendRect.attr('width');
+    const legendH = +legendRect.attr('height');
+
+    const legendX = width - legendW - 20;
+    const legendY = height - legendH - 20;
+    legend.attr("transform", `translate(${legendX}, ${legendY})`);
+
+    // 5. Trigger Zoom update to re-render grid/points with new dimensions
+    const t = d3.zoomTransform(svg.node());
+    svg.call(zoom.transform, t);
+  }
+
+  window.addEventListener('resize', () => {
+    width = app.clientWidth;
+    height = app.clientHeight;
+    svg.attr('viewBox', [0, 0, width, height]);
+
+    // Update scales and zoom here
+    updateLayout();
   });
 
 });
