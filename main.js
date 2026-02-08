@@ -3,12 +3,24 @@ import './style.css';
 import { getMatches, getLocalized, getSearchResultContent } from './search.js';
 
 const LANGUAGE = "en-us";
-let currentDimension = "length";
+// State
+let currentDimensionY = "length";
+let currentDimensionX = "none"; // "none", "length", "mass"
 let selectedItem = null;
 
 const getUnit = (dim) => dim === "mass" ? "kg" : "m";
-const getDimensionValue = (d) => d.dimensions[currentDimension];
-const getXValue = (d) => d.x_coordinates[currentDimension] !== undefined ? d.x_coordinates[currentDimension] : 0;
+const getDimensionValueY = (d) => d.dimensions[currentDimensionY];
+// Helper for X value: depends on mode
+const getDimensionValueX = (d) => {
+  if (currentDimensionX === "none") {
+    // Fallback to x_coordinates for current Y dimension
+    // If x_coordinates[currentDimensionY] is missing, default to 0
+    return d.x_coordinates[currentDimensionY] !== undefined ? d.x_coordinates[currentDimensionY] : 0;
+  } else {
+    // Log plot mode
+    return d.dimensions[currentDimensionX];
+  }
+};
 
 const app = document.getElementById('app');
 let width = app.clientWidth;
@@ -83,7 +95,7 @@ d3.json('/data.json').then(data => {
 
   // Scales
   let yScale = d3.scaleLog().range([height - 50, 50]);
-  let xScale = d3.scaleLinear();
+  let xScale = d3.scaleLinear(); // Default to linear, will switch to Log if needed
 
   // Zoom Setup
   const zoom = d3.zoom()
@@ -94,7 +106,6 @@ d3.json('/data.json').then(data => {
       const domainY = yScale.domain();
       if (domainY[0] === domainY[1]) return;
 
-      // Constrain Pan
       const minX = xScale.domain()[0];
       const maxX = xScale.domain()[1];
 
@@ -117,7 +128,7 @@ d3.json('/data.json').then(data => {
 
       // Update positions using helpers
       g.selectAll('.item-group')
-        .attr('transform', d => `translate(${newXScale(getXValue(d))}, ${newYScale(getDimensionValue(d))})`);
+        .attr('transform', d => `translate(${newXScale(getDimensionValueX(d))}, ${newYScale(getDimensionValueY(d))})`);
 
       g.selectAll('.item-group circle')
         .attr('r', currentRadius);
@@ -160,7 +171,7 @@ d3.json('/data.json').then(data => {
     ]);
     const yTickValues = paddedYScale.ticks(15, "~e");
 
-    // Horizontal Grid
+    // Horizontal Grid (Y-Axis)
     gridGroup.selectAll(".horizontal-grid").data([null]).join("g")
       .attr("class", "horizontal-grid")
       .call(d3.axisRight(newYScale)
@@ -169,71 +180,115 @@ d3.json('/data.json').then(data => {
         .tickFormat(d => {
           const log10 = Math.log10(d);
           if (Number.isInteger(log10)) {
-            return `10^${log10} ${getUnit(currentDimension)}`;
+            return `10^${log10} ${getUnit(currentDimensionY)}`;
           }
           return "";
         })
       );
     gridGroup.select(".horizontal-grid .domain").remove();
 
-    // Vertical Grid
-    const decadeHeight = Math.abs(newYScale(10) - newYScale(1));
-    const mainYTicks = yTickValues.filter(d => Math.abs(Math.log10(d) - Math.round(Math.log10(d))) < 1e-6);
-    let stride = 1;
-    if (mainYTicks.length >= 2) {
-      stride = Math.abs(Math.round(Math.log10(mainYTicks[1])) - Math.round(Math.log10(mainYTicks[0])));
-    }
-
-    const xZero = newXScale.invert(0);
-    const xDist = newXScale.invert(decadeHeight) - xZero;
-    const spacing = Math.abs(xDist) * stride;
-
-    const xTicks = [];
-    const xMinPadded = newXScale.invert(-padding);
-    const xMaxPadded = newXScale.invert(width + padding);
-
-    if (spacing > 0 && isFinite(spacing)) {
-      const start = Math.ceil(xMinPadded / spacing) * spacing;
-      let current = start;
-      const safetyLimit = 1000;
-      let count = 0;
-      while (current <= xMaxPadded && count < safetyLimit) {
-        xTicks.push(current);
-        current += spacing;
-        count++;
-      }
-    }
-
+    // Vertical Grid (X-Axis)
     gridGroup.selectAll(".vertical-grid").data([null]).join("g")
       .attr("class", "vertical-grid")
-      .attr("mask", "url(#fade-mask)")
-      .call(d3.axisBottom(newXScale)
-        .tickValues(xTicks)
-        .tickFormat("")
-        .tickSize(height)
-      );
+      .attr("mask", "url(#fade-mask)");
+
+    if (currentDimensionX === "none") {
+      // Linear Grid logic (original)
+      const decadeHeight = Math.abs(newYScale(10) - newYScale(1));
+      const mainYTicks = yTickValues.filter(d => Math.abs(Math.log10(d) - Math.round(Math.log10(d))) < 1e-6);
+      let stride = 1;
+      if (mainYTicks.length >= 2) {
+        stride = Math.abs(Math.round(Math.log10(mainYTicks[1])) - Math.round(Math.log10(mainYTicks[0])));
+      }
+
+      const xZero = newXScale.invert(0);
+      const xDist = newXScale.invert(decadeHeight) - xZero;
+      const spacing = Math.abs(xDist) * stride;
+
+      const xTicks = [];
+      const xMinPadded = newXScale.invert(-padding);
+      const xMaxPadded = newXScale.invert(width + padding);
+
+      if (spacing > 0 && isFinite(spacing)) {
+        const start = Math.ceil(xMinPadded / spacing) * spacing;
+        let current = start;
+        const safetyLimit = 1000;
+        let count = 0;
+        while (current <= xMaxPadded && count < safetyLimit) {
+          xTicks.push(current);
+          current += spacing;
+          count++;
+        }
+      }
+
+      gridGroup.select(".vertical-grid")
+        .call(d3.axisBottom(newXScale)
+          .tickValues(xTicks)
+          .tickFormat("")
+          .tickSize(height)
+        );
+
+      // Styles for linear grid
+      gridGroup.selectAll(".vertical-grid .tick line")
+        .attr("stroke", "#00aaff")
+        .attr("stroke-opacity", 0.4)
+        .attr("stroke-dasharray", "2,2");
+      gridGroup.selectAll(".vertical-grid .tick text").remove();
+
+    } else {
+      // Log Grid logic (similar to Y axis but vertical)
+      const xStart = newXScale.invert(-padding);
+      const xEnd = newXScale.invert(width + padding);
+      const paddedXScale = newXScale.copy().domain([
+        d3.min([xStart, xEnd]),
+        d3.max([xStart, xEnd])
+      ]);
+      const xTickValues = paddedXScale.ticks(15, "~e");
+
+      gridGroup.select(".vertical-grid")
+        .call(d3.axisBottom(newXScale)
+          .tickValues(xTickValues)
+          .tickSize(height) // Extends downwards, which is what we want for full grid
+          .tickFormat(d => {
+            const log10 = Math.log10(d);
+            if (Number.isInteger(log10)) {
+              return `10^${log10} ${getUnit(currentDimensionX)}`;
+            }
+            return "";
+          })
+        );
+
+      // Styles for Log Grid
+      gridGroup.selectAll(".vertical-grid .tick line")
+        .attr("stroke", "#00aaff")
+        .attr("stroke-dasharray", "2,2")
+        .attr("stroke-opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 0.4 : 0.25);
+
+      // Position labels
+      gridGroup.selectAll(".vertical-grid .tick text")
+        .attr("y", height - 20) // Position at bottom
+        .attr("dy", 0)
+        .attr("fill", "#00aaff")
+        .style("font-family", "monospace")
+        .style("font-size", "12px")
+        .attr("opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 1.0 : 0); // Hide minor labels too?
+    }
+
     gridGroup.select(".vertical-grid .domain").remove();
 
-    // Styles
+    // Horizontal Grid Styles
     gridGroup.selectAll(".horizontal-grid .tick line")
       .attr("stroke", "#00aaff")
       .attr("stroke-dasharray", "2,2")
-      .attr("stroke-opacity", d => Number.isInteger(Math.log10(d)) ? 0.4 : 0.25);
+      .attr("stroke-opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 0.4 : 0.25);
 
     gridGroup.selectAll(".horizontal-grid .tick text")
       .attr("x", 10)
       .attr("dy", -4)
       .attr("fill", "#00aaff")
-      .attr("opacity", 1.0)
+      .attr("opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 1.0 : 0) // Consistent label hiding?
       .style("font-family", "monospace")
       .style("font-size", "12px");
-
-    gridGroup.selectAll(".vertical-grid .tick line")
-      .attr("stroke", "#00aaff")
-      .attr("stroke-opacity", 0.4)
-      .attr("stroke-dasharray", "2,2");
-
-    gridGroup.selectAll(".vertical-grid .tick text").remove();
   };
 
   // Helper for highlighting
@@ -246,34 +301,55 @@ d3.json('/data.json').then(data => {
     g.selectAll('.item-group').classed("highlighted", false);
   }
 
-  const updateDimension = (dim) => {
-    currentDimension = dim;
+  // Unified update function
+  const updatePlot = () => {
     // Filter data
-    const filteredData = data.filter(d => d.dimensions[dim] !== undefined);
+    let filteredData = [];
+    if (currentDimensionX === "none") {
+      // Original behavior: Show items that have the Y dimension
+      filteredData = data.filter(d => d.dimensions[currentDimensionY] !== undefined);
+    } else {
+      // 2D behavior: Show items that have BOTH dimensions
+      filteredData = data.filter(d =>
+        d.dimensions[currentDimensionY] !== undefined &&
+        d.dimensions[currentDimensionX] !== undefined
+      );
+    }
 
     // Clear if no data
     if (filteredData.length === 0) {
       g.selectAll('.item-group').remove();
-      // Reset scales to default to avoid crash?
+      updateLegend([]);
       return;
     }
 
-    const minDim = d3.min(filteredData, getDimensionValue);
-    const maxDim = d3.max(filteredData, getDimensionValue);
-    yScale.domain([minDim, maxDim]);
+    // Y Scale Update
+    const minDimY = d3.min(filteredData, getDimensionValueY);
+    const maxDimY = d3.max(filteredData, getDimensionValueY);
+    yScale.domain([minDimY, maxDimY]);
 
-    const minX = d3.min(filteredData, getXValue);
-    const maxX = d3.max(filteredData, getXValue);
+    // X Scale Update
+    if (currentDimensionX === "none") {
+      xScale = d3.scaleLinear(); // Reset to linear
+      const minX = d3.min(filteredData, getDimensionValueX);
+      const maxX = d3.max(filteredData, getDimensionValueX);
 
-    // Center logic
-    const xCenter = (minX + maxX) / 2;
-    // Calculate initial scale range based on new yScale
-    // We want 1 unit X = 1 decade Y in visual pixels
-    const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
+      // Center logic for 1D
+      const xCenter = (minX + maxX) / 2;
+      const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
+      const screenCenter = width / 2;
+      xScale.domain([xCenter, xCenter + 1])
+        .range([screenCenter, screenCenter + initialDecadeHeight]);
+    } else {
+      xScale = d3.scaleLog(); // Switch to Log
+      const minDimX = d3.min(filteredData, getDimensionValueX);
+      const maxDimX = d3.max(filteredData, getDimensionValueX);
+      xScale.domain([minDimX, maxDimX]);
 
-    const screenCenter = width / 2;
-    xScale.domain([xCenter, xCenter + 1])
-      .range([screenCenter, screenCenter + initialDecadeHeight]);
+      // Map domain to range - maintain aspect ratio?
+      // Let's just fit width for now
+      xScale.range([paddingLeft, width - 50]); // Add padding
+    }
 
     // Data Join
     const items = g.selectAll('.item-group')
@@ -309,26 +385,35 @@ d3.json('/data.json').then(data => {
       );
 
     // Initial positioning via zoom reset
-
     if (selectedItem && filteredData.find(d => d.id === selectedItem.id)) {
-      // If selected item exists in new view, center on it
       selectResult(selectedItem);
     } else {
-      const initialTransform = d3.zoomIdentity.translate(-width * 0.05, 0);
-      svg.transition().duration(750)
-        .call(zoom.transform, initialTransform);
-
       // If selection is no longer valid, hide infobox
       if (selectedItem) {
         hideInfobox();
+      }
+
+      // Default Zoom
+      if (currentDimensionX === "none") {
+        const initialTransform = d3.zoomIdentity.translate(-width * 0.05, 0);
+        svg.transition().duration(750).call(zoom.transform, initialTransform);
+      } else {
+        // For 2D, maybe just fit?
+        svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
       }
     }
 
     updateLegend(filteredData);
   };
 
-  d3.select('#dimension-select').on('change', function () {
-    updateDimension(this.value);
+  d3.select('#dimension-select-y').on('change', function () {
+    currentDimensionY = this.value;
+    updatePlot();
+  });
+
+  d3.select('#dimension-select-x').on('change', function () {
+    currentDimensionX = this.value; // "none" or dim
+    updatePlot();
   });
 
   d3.select('#recenter-btn').on('click', () => {
@@ -370,9 +455,6 @@ d3.json('/data.json').then(data => {
       .attr("y", (d, i) => legendPadding + i * legendItemHeight + legendItemHeight / 2)
       .text(d => d);
 
-    // Re-attach listeners to ensure they use current scope correctly? 
-    // Or just attach to enter.
-
     textEnter.on("mouseover", function (event, cat) {
       g.selectAll(".item-group")
         .transition().duration(200)
@@ -386,11 +468,18 @@ d3.json('/data.json').then(data => {
         g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
       })
       .on("click", function (event, cat) {
-        const categoryData = data.filter(item => getLocalized(item.category, LANGUAGE) === cat && item.dimensions[currentDimension] !== undefined);
+        // Needs update for 2D filtering
+        let categoryData = [];
+        if (currentDimensionX === "none") {
+          categoryData = data.filter(item => getLocalized(item.category, LANGUAGE) === cat && item.dimensions[currentDimensionY] !== undefined);
+        } else {
+          categoryData = data.filter(item => getLocalized(item.category, LANGUAGE) === cat && item.dimensions[currentDimensionY] !== undefined && item.dimensions[currentDimensionX] !== undefined);
+        }
+
         if (categoryData.length === 0) return;
 
-        const xValues = categoryData.map(d => xScale(getXValue(d)));
-        const yValues = categoryData.map(d => yScale(getDimensionValue(d)));
+        const xValues = categoryData.map(d => xScale(getDimensionValueX(d)));
+        const yValues = categoryData.map(d => yScale(getDimensionValueY(d)));
 
         const minX = d3.min(xValues);
         const maxX = d3.max(xValues);
@@ -443,7 +532,7 @@ d3.json('/data.json').then(data => {
     legend.attr("transform", `translate(${legendX}, ${legendY})`);
   }
 
-  updateDimension('length');
+  updatePlot();
 
 
   // Search Implementation
@@ -482,7 +571,9 @@ d3.json('/data.json').then(data => {
   }
 
   function selectResult(result) {
-    if (result.dimensions[currentDimension] === undefined) return;
+    // Check if result is valid in current plot mode
+    if (result.dimensions[currentDimensionY] === undefined) return;
+    if (currentDimensionX !== "none" && result.dimensions[currentDimensionX] === undefined) return;
 
     searchInput.value = getLocalized(result.displayName, LANGUAGE);
     searchResults.style.display = 'none';
@@ -493,23 +584,31 @@ d3.json('/data.json').then(data => {
     const matchItem = data.find(d => d.id === result.id);
     if (!matchItem) return;
 
-    const val = getDimensionValue(matchItem);
-    const domain = yScale.domain();
-    const totalDecades = Math.log10(domain[1]) - Math.log10(domain[0]);
+    const valY = getDimensionValueY(matchItem);
+    const domainY = yScale.domain();
+    const totalDecades = Math.log10(domainY[1]) - Math.log10(domainY[0]);
     const availableHeight = height - 100;
 
     let targetScale = (height * totalDecades) / (3 * availableHeight);
 
     // Dynamic Zoom Constraint based on neighbors
-    const filteredData = data.filter(d => d.dimensions[currentDimension] !== undefined);
-    const neighbors = filteredData.filter(d => Math.abs(getDimensionValue(d) - val) < val * 2);
+    // Filter matching current visibility rules
+    let filteredData = [];
+    if (currentDimensionX === "none") {
+      filteredData = data.filter(d => d.dimensions[currentDimensionY] !== undefined);
+    } else {
+      filteredData = data.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
+    }
+
+    // Just use simplified neighbor check logic
+    const neighbors = filteredData.filter(d => Math.abs(getDimensionValueY(d) - valY) < valY * 2);
 
     let minDiff = Infinity;
-    const y1 = yScale(getDimensionValue(matchItem));
+    const y1 = yScale(getDimensionValueY(matchItem));
 
     neighbors.forEach(p => {
       if (p.id === matchItem.id) return;
-      const y2 = yScale(getDimensionValue(p));
+      const y2 = yScale(getDimensionValueY(p));
       const diff = Math.abs(y1 - y2);
       if (diff < minDiff) minDiff = diff;
     });
@@ -522,8 +621,8 @@ d3.json('/data.json').then(data => {
 
     targetScale = Math.max(1, Math.min(targetScale, 1000));
 
-    const x = xScale(getXValue(matchItem));
-    const y = yScale(getDimensionValue(matchItem));
+    const x = xScale(getDimensionValueX(matchItem));
+    const y = yScale(getDimensionValueY(matchItem));
 
     const targetTransform = d3.zoomIdentity
       .translate(width / 2, height / 2)
@@ -551,8 +650,15 @@ d3.json('/data.json').then(data => {
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value;
     const matches = getMatches(data, query, LANGUAGE);
-    // Filter matching results based on current dimension existence
-    const filtered = matches.filter(d => d.dimensions[currentDimension] !== undefined);
+
+    // Filter matches
+    let filtered = [];
+    if (currentDimensionX === "none") {
+      filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined);
+    } else {
+      filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
+    }
+
     renderResults(filtered, query);
   });
 
@@ -560,7 +666,12 @@ d3.json('/data.json').then(data => {
     const query = searchInput.value;
     if (query) {
       const matches = getMatches(data, query, LANGUAGE);
-      const filtered = matches.filter(d => d.dimensions[currentDimension] !== undefined);
+      let filtered = [];
+      if (currentDimensionX === "none") {
+        filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined);
+      } else {
+        filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
+      }
       renderResults(filtered, query);
     }
     searchResults.scrollTop = 0;
@@ -582,14 +693,24 @@ d3.json('/data.json').then(data => {
       if (selectedIndex >= 0) {
         const query = searchInput.value;
         const matches = getMatches(data, query, LANGUAGE);
-        const filtered = matches.filter(d => d.dimensions[currentDimension] !== undefined);
+        let filtered = [];
+        if (currentDimensionX === "none") {
+          filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined);
+        } else {
+          filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
+        }
         if (filtered[selectedIndex]) {
           selectResult(filtered[selectedIndex]);
         }
       } else if (items.length > 0) {
         const query = searchInput.value;
         const matches = getMatches(data, query, LANGUAGE);
-        const filtered = matches.filter(d => d.dimensions[currentDimension] !== undefined);
+        let filtered = [];
+        if (currentDimensionX === "none") {
+          filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined);
+        } else {
+          filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
+        }
         if (filtered[0]) {
           selectResult(filtered[0]);
         }
@@ -637,56 +758,52 @@ d3.json('/data.json').then(data => {
       tagsContent = `<div class="infobox-row"><span class="infobox-label">Tags:</span>${d.tags[LANGUAGE].join(", ")}</div>`;
     }
 
-    let lengthContent = "";
-    let lengthTextForCopy = "";
-    const val = getDimensionValue(d);
+    // Build dimensions content
+    let dimsContent = "";
 
-    if (val !== undefined) {
-      const unit = getUnit(currentDimension);
-      const label = currentDimension.charAt(0).toUpperCase() + currentDimension.slice(1);
+    const formatWithSigFigs = (num) => {
+      let n = num;
+      if (n === 0) return "0";
+      if (Number.isInteger(n) && !n.toString().includes('e')) {
+        const s = Math.abs(n).toString();
+        const trimmed = s.replace(/0+$/, '');
+        const sigFigs = trimmed.length;
+        return n.toExponential(Math.max(0, sigFigs - 1));
+      }
+      return n.toExponential(2);
+    };
 
-      const formatWithSigFigs = (num) => {
-        let n = num;
-        if (n === 0) return "0";
-        if (Number.isInteger(n) && !n.toString().includes('e')) {
-          const s = Math.abs(n).toString();
-          const trimmed = s.replace(/0+$/, '');
-          const sigFigs = trimmed.length;
-          return n.toExponential(Math.max(0, sigFigs - 1));
-        }
-        return n.toExponential(2);
-      };
+    const addDimRow = (dim) => {
+      const val = d.dimensions[dim];
+      if (val !== undefined) {
+        const unit = getUnit(dim);
+        const label = dim.charAt(0).toUpperCase() + dim.slice(1);
+        const exp = formatWithSigFigs(val);
+        const [mantissa, exponent] = exp.split('e');
+        const expVal = parseInt(exponent, 10);
+        const txt = `${mantissa} × 10^${expVal} ${unit}`;
+        return `<div class="infobox-row"><span class="infobox-label">${label}:</span>${txt}</div>`;
+      }
+      return "";
+    };
 
-      const exp = formatWithSigFigs(val);
-      const [mantissa, exponent] = exp.split('e');
-      const expVal = parseInt(exponent, 10);
-      lengthTextForCopy = `${mantissa} × 10^${expVal} ${unit}`;
-      lengthContent = `<div class="infobox-row"><span class="infobox-label">${label}:</span>${lengthTextForCopy}<button class="copy-btn">Copy</button></div>`;
+    // Always show Y dimension
+    dimsContent += addDimRow(currentDimensionY);
+    // Show X dimension if selected
+    if (currentDimensionX !== "none") {
+      dimsContent += addDimRow(currentDimensionX);
     }
+
 
     const categoryColor = colorScale(localizedCategory);
 
     infobox.html(`
       <div class="infobox-title">${localizedDisplayName}</div>
-      ${lengthContent}
+      ${dimsContent}
       <div class="infobox-row"><span class="infobox-label">Category:</span><span style="color: ${categoryColor}">${localizedCategory}</span></div>
       ${tagsContent}
     `)
       .style("display", "block");
-
-    if (lengthTextForCopy) {
-      infobox.select(".copy-btn").on("click", function (event) {
-        event.stopPropagation();
-        navigator.clipboard.writeText(lengthTextForCopy).then(() => {
-          const btn = d3.select(this);
-          const originalText = btn.text();
-          btn.text("Copied!");
-          setTimeout(() => btn.text(originalText), 2000);
-        }).catch(err => {
-          console.error('Failed to copy text: ', err);
-        });
-      });
-    }
   }
 
   function hideInfobox() {
@@ -707,8 +824,16 @@ d3.json('/data.json').then(data => {
     .style("pointer-events", "none")
     .style("display", "none");
 
-  const rulerLine = rulerGroup.append("line")
+  // Vertical line (tracks X position)
+  const rulerLineX = rulerGroup.append("line")
     .attr("x1", 0).attr("x2", width).attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
+
+  // Horizontal line (tracks Y position) -> only need if we want crosshair.
+  // Original only had horizontal line (tracking Y).
+  // "2D Crosshair" means horizontal AND vertical lines.
+
+  const rulerLineY = rulerGroup.append("line") // This will be the vertical line tracking X
+    .attr("y1", 0).attr("y2", height).attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
   const rulerLabelBackground = rulerGroup.append("rect")
     .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
@@ -720,17 +845,40 @@ d3.json('/data.json').then(data => {
     rulerGroup.style("display", null);
     const t = d3.zoomTransform(svg.node());
     const [mouseX, mouseY] = d3.pointer(event);
-    rulerLine.attr("y1", mouseY).attr("y2", mouseY);
+
+    // Update Lines
+    rulerLineX.attr("y1", mouseY).attr("y2", mouseY); // Horizontal line at Mouse Y
+
+    if (currentDimensionX !== "none") {
+      rulerLineY.style("display", null);
+      rulerLineY.attr("x1", mouseX).attr("x2", mouseX); // Vertical line at Mouse X
+    } else {
+      rulerLineY.style("display", "none");
+    }
 
     const newYScale = t.rescaleY(yScale);
-    const value = newYScale.invert(mouseY);
+    const valY = newYScale.invert(mouseY);
 
-    const exp = value.toExponential(2);
-    const [mantissa, exponent] = exp.split('e');
-    const expVal = parseInt(exponent, 10);
-    const formattedValue = `${mantissa} × 10^${expVal} ${getUnit(currentDimension)}`;
+    // Format Y
+    const formatVal = (v, unit) => {
+      const exp = v.toExponential(2);
+      const [mantissa, exponent] = exp.split('e');
+      const expVal = parseInt(exponent, 10);
+      return `${mantissa} × 10^${expVal} ${unit}`;
+    };
 
-    rulerLabel.attr("x", 10).attr("y", mouseY - 10).text(formattedValue);
+    let labelText = "";
+    if (currentDimensionX !== "none") {
+      const newXScale = t.rescaleX(xScale);
+      const valX = newXScale.invert(mouseX);
+      const txtY = formatVal(valY, getUnit(currentDimensionY));
+      const txtX = formatVal(valX, getUnit(currentDimensionX));
+      labelText = `Y: ${txtY}, X: ${txtX}`;
+    } else {
+      labelText = formatVal(valY, getUnit(currentDimensionY));
+    }
+
+    rulerLabel.attr("x", mouseX + 15).attr("y", mouseY - 15).text(labelText);
 
     const bbox = rulerLabel.node().getBBox();
     rulerLabelBackground.attr("x", bbox.x - 4).attr("y", bbox.y - 4).attr("width", bbox.width + 8).attr("height", bbox.height + 8);
@@ -750,11 +898,14 @@ d3.json('/data.json').then(data => {
 
     // Update ranges
     yScale.range([height - 50, 50]);
-    // Re-calc x-range based on new Y dec
-    const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
-    const screenCenter = width / 2;
-    const xCenter = (xScale.domain()[0] + xScale.domain()[1]) / 2; // Keep center?
-    xScale.range([screenCenter, screenCenter + initialDecadeHeight]);
+    if (currentDimensionX === "none") {
+      const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
+      const screenCenter = width / 2;
+      const xCenter = (xScale.domain()[0] + xScale.domain()[1]) / 2;
+      xScale.range([screenCenter, screenCenter + initialDecadeHeight]);
+    } else {
+      xScale.range([paddingLeft, width - 50]);
+    }
 
     // Update legend pos
     const legendX = width - legendWidth - 20;

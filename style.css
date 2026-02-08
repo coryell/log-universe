@@ -168,10 +168,12 @@ header {
 /* Dimension Select Styling */
 .select-container {
   margin-right: 15px;
-  display: inline-block;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
 }
 
-#dimension-select {
+.select-container select {
   padding: 8px 12px;
   background-color: black;
   border: 1px solid #00aaff;
@@ -192,8 +194,15 @@ header {
   /* Space for arrow */
 }
 
-#dimension-select:hover {
+.select-container select:hover {
   background-color: rgba(0, 170, 255, 0.1);
+}
+
+.select-container label {
+  color: #00aaff;
+  font-family: monospace;
+  font-size: 16px;
+  margin-right: 5px;
 }
 
 /* SVG Container modification (handled in main.js but CSS can ensure flex growth) */
