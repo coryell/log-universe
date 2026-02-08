@@ -37,6 +37,8 @@ const defs = svg.append("defs");
 
 const paddingLeft = 80;
 const fadeEnd = 160;
+const fadeBottomHeight = 100;
+const paddingBottom = 50;
 
 const gradient = defs.append("linearGradient")
   .attr("id", "fade-gradient")
@@ -54,20 +56,94 @@ gradient.append("stop")
   .attr("offset", "1")
   .attr("stop-color", "white");
 
-const mask = defs.append("mask")
-  .attr("id", "fade-mask");
+const verticalGradient = defs.append("linearGradient")
+  .attr("id", "fade-gradient-vertical")
+  .attr("gradientUnits", "userSpaceOnUse")
+  .attr("x1", 0)
+  .attr("x2", 0)
+  .attr("y1", height)
+  .attr("y2", height - fadeBottomHeight);
 
-mask.append("rect")
-  .attr("width", width)
-  .attr("height", height)
-  .attr("fill", "url(#fade-gradient)");
+verticalGradient.append("stop")
+  .attr("offset", 0)
+  .attr("stop-color", "black");
+
+verticalGradient.append("stop")
+  .attr("offset", paddingBottom / fadeBottomHeight)
+  .attr("stop-color", "black");
+
+verticalGradient.append("stop")
+  .attr("offset", "1")
+  .attr("stop-color", "white");
+
+const maskLeft = defs.append("mask")
+  .attr("id", "fade-mask-left");
+
+const maskBottom = defs.append("mask")
+  .attr("id", "fade-mask-bottom");
+
+function updateMask() {
+  maskLeft.selectAll("rect").remove();
+  maskBottom.selectAll("rect").remove();
+
+  // Left Mask: [0, paddingLeft] is black, [paddingLeft, fadeEnd] fades to white, [fadeEnd, width] is white
+  maskLeft.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", fadeEnd)
+    .attr("height", height)
+    .attr("fill", "url(#fade-gradient)");
+
+  maskLeft.append("rect")
+    .attr("x", fadeEnd)
+    .attr("y", 0)
+    .attr("width", width - fadeEnd)
+    .attr("height", height)
+    .attr("fill", "white");
+
+  // Bottom Mask: only active in 2D
+  if (currentDimensionX !== "none") {
+    svg.select("#fade-gradient-vertical")
+      .attr("y1", height)
+      .attr("y2", height - fadeBottomHeight);
+
+    maskBottom.append("rect")
+      .attr("x", 0)
+      .attr("y", height - fadeBottomHeight)
+      .attr("width", width)
+      .attr("height", fadeBottomHeight)
+      .attr("fill", "url(#fade-gradient-vertical)");
+
+    maskBottom.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", width)
+      .attr("height", height - fadeBottomHeight)
+      .attr("fill", "white");
+  } else {
+    // Opaque
+    maskBottom.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", width)
+      .attr("height", height)
+      .attr("fill", "white");
+  }
+}
+
+updateMask();
 
 const gridGroup = svg.append("g")
   .attr("class", "grid");
 
-const g = svg.append('g')
+// Nested Groups for Multiplicative Masking
+const dataLayerOuter = svg.append('g')
+  .attr("class", "data-layer-outer")
+  .attr("mask", "url(#fade-mask-left)");
+
+const g = dataLayerOuter.append('g')
   .attr("class", "data-layer")
-  .attr("mask", "url(#fade-mask)");
+  .attr("mask", "url(#fade-mask-bottom)");
 
 d3.json('/data.json').then(data => {
   // Data Processing
@@ -189,8 +265,7 @@ d3.json('/data.json').then(data => {
 
     // Vertical Grid (X-Axis)
     gridGroup.selectAll(".vertical-grid").data([null]).join("g")
-      .attr("class", "vertical-grid")
-      .attr("mask", "url(#fade-mask)");
+      .attr("class", "vertical-grid");
 
     if (currentDimensionX === "none") {
       // Linear Grid logic (original)
@@ -348,7 +423,7 @@ d3.json('/data.json').then(data => {
 
       // Map domain to range - maintain aspect ratio?
       // Let's just fit width for now
-      xScale.range([paddingLeft, width - 50]); // Add padding
+      xScale.range([fadeEnd, width - 50]); // Use fadeEnd to avoid opacity fade
     }
 
     // Data Join
@@ -404,6 +479,7 @@ d3.json('/data.json').then(data => {
     }
 
     updateLegend(filteredData);
+    updateMask();
   };
 
   d3.select('#dimension-select-y').on('change', function () {
@@ -417,7 +493,11 @@ d3.json('/data.json').then(data => {
   });
 
   d3.select('#recenter-btn').on('click', () => {
-    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
+    if (currentDimensionX === "none") {
+      svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
+    } else {
+      svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+    }
   });
 
   // Legend
@@ -894,7 +974,6 @@ d3.json('/data.json').then(data => {
     width = app.clientWidth;
     height = app.clientHeight;
     svg.attr('viewBox', [0, 0, width, height]);
-    mask.select("rect").attr("width", width).attr("height", height);
 
     // Update ranges
     yScale.range([height - 50, 50]);
@@ -904,8 +983,10 @@ d3.json('/data.json').then(data => {
       const xCenter = (xScale.domain()[0] + xScale.domain()[1]) / 2;
       xScale.range([screenCenter, screenCenter + initialDecadeHeight]);
     } else {
-      xScale.range([paddingLeft, width - 50]);
+      xScale.range([fadeEnd, width - 50]);
     }
+
+    updateMask();
 
     // Update legend pos
     const legendX = width - legendWidth - 20;
