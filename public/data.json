@@ -584,33 +584,11 @@
     "x": 30
   },
   {
-    "id": "smallest_atomic_radius_he",
-    "displayName": {
-      "en-us": "Smallest Atomic Radius (He)"
-    },
-    "length": 3.1e-11,
-    "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
-    },
-    "x": 0
-  },
-  {
     "id": "largest_nuclear_radius_pb_208",
     "displayName": {
       "en-us": "Largest Nuclear Radius (Pb-208)"
     },
     "length": 7e-15,
-    "category": {
-      "en-us": "Nuclear / Atomic / Molecular"
-    },
-    "x": 0
-  },
-  {
-    "id": "largest_atomic_radius_cs",
-    "displayName": {
-      "en-us": "Largest Atomic Radius (Cs)"
-    },
-    "length": 2.7e-10,
     "category": {
       "en-us": "Nuclear / Atomic / Molecular"
     },
@@ -1776,5 +1754,1832 @@
       "en-us": "Astronomy"
     },
     "x": 30
+  },
+  {
+    "id": "hydrogen",
+    "displayName": {
+      "en-us": "H"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 5.29e-11,
+    "x": 0.0,
+    "tags": {
+      "en-us": [
+        "atomic number 1",
+        "element 1",
+        "hydrogen"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Bohr_radius"
+  },
+  {
+    "id": "helium",
+    "displayName": {
+      "en-us": "He"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 3.0999999999999996e-11,
+    "x": 3.1,
+    "tags": {
+      "en-us": [
+        "atomic number 2",
+        "element 2",
+        "helium",
+        "smallest atom"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "lithium",
+    "displayName": {
+      "en-us": "Li"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.45e-10,
+    "x": 0.0,
+    "tags": {
+      "en-us": [
+        "atomic number 3",
+        "element 3",
+        "lithium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "beryllium",
+    "displayName": {
+      "en-us": "Be"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.05e-10,
+    "x": 0.1,
+    "tags": {
+      "en-us": [
+        "atomic number 4",
+        "element 4",
+        "beryllium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "boron",
+    "displayName": {
+      "en-us": "B"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 8.5e-11,
+    "x": 2.6,
+    "tags": {
+      "en-us": [
+        "atomic number 5",
+        "element 5",
+        "boron"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "carbon",
+    "displayName": {
+      "en-us": "C"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 7e-11,
+    "x": 2.7,
+    "tags": {
+      "en-us": [
+        "atomic number 6",
+        "element 6",
+        "carbon"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "nitrogen",
+    "displayName": {
+      "en-us": "N"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 6.5e-11,
+    "x": 2.8000000000000003,
+    "tags": {
+      "en-us": [
+        "atomic number 7",
+        "element 7",
+        "nitrogen"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "oxygen",
+    "displayName": {
+      "en-us": "O"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 6e-11,
+    "x": 2.9000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 8",
+        "element 8",
+        "oxygen"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "fluorine",
+    "displayName": {
+      "en-us": "F"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 5e-11,
+    "x": 3.0,
+    "tags": {
+      "en-us": [
+        "atomic number 9",
+        "element 9",
+        "fluorine"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "neon",
+    "displayName": {
+      "en-us": "Ne"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 3.8e-11,
+    "x": 3.1,
+    "tags": {
+      "en-us": [
+        "atomic number 10",
+        "element 10",
+        "neon"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "sodium",
+    "displayName": {
+      "en-us": "Na"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.8e-10,
+    "x": 0.0,
+    "tags": {
+      "en-us": [
+        "atomic number 11",
+        "element 11",
+        "sodium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "magnesium",
+    "displayName": {
+      "en-us": "Mg"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.5e-10,
+    "x": 0.1,
+    "tags": {
+      "en-us": [
+        "atomic number 12",
+        "element 12",
+        "magnesium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "aluminium",
+    "displayName": {
+      "en-us": "Al"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.25e-10,
+    "x": 2.6,
+    "tags": {
+      "en-us": [
+        "atomic number 13",
+        "element 13",
+        "aluminium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "silicon",
+    "displayName": {
+      "en-us": "Si"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.1e-10,
+    "x": 2.7,
+    "tags": {
+      "en-us": [
+        "atomic number 14",
+        "element 14",
+        "silicon"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "phosphorus",
+    "displayName": {
+      "en-us": "P"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1e-10,
+    "x": 2.8000000000000003,
+    "tags": {
+      "en-us": [
+        "atomic number 15",
+        "element 15",
+        "phosphorus"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "sulfur",
+    "displayName": {
+      "en-us": "S"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1e-10,
+    "x": 2.9000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 16",
+        "element 16",
+        "sulfur"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "chlorine",
+    "displayName": {
+      "en-us": "Cl"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1e-10,
+    "x": 3.0,
+    "tags": {
+      "en-us": [
+        "atomic number 17",
+        "element 17",
+        "chlorine"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "argon",
+    "displayName": {
+      "en-us": "Ar"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 7.1e-11,
+    "x": 3.1,
+    "tags": {
+      "en-us": [
+        "atomic number 18",
+        "element 18",
+        "argon"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "potassium",
+    "displayName": {
+      "en-us": "K"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 2.2e-10,
+    "x": 0.0,
+    "tags": {
+      "en-us": [
+        "atomic number 19",
+        "element 19",
+        "potassium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "calcium",
+    "displayName": {
+      "en-us": "Ca"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.8e-10,
+    "x": 0.1,
+    "tags": {
+      "en-us": [
+        "atomic number 20",
+        "element 20",
+        "calcium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "scandium",
+    "displayName": {
+      "en-us": "Sc"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.6e-10,
+    "x": 1.6,
+    "tags": {
+      "en-us": [
+        "atomic number 21",
+        "element 21",
+        "scandium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "titanium",
+    "displayName": {
+      "en-us": "Ti"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.4e-10,
+    "x": 1.7000000000000002,
+    "tags": {
+      "en-us": [
+        "atomic number 22",
+        "element 22",
+        "titanium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "vanadium",
+    "displayName": {
+      "en-us": "V"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 1.8,
+    "tags": {
+      "en-us": [
+        "atomic number 23",
+        "element 23",
+        "vanadium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "chromium",
+    "displayName": {
+      "en-us": "Cr"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.4e-10,
+    "x": 1.9000000000000001,
+    "tags": {
+      "en-us": [
+        "atomic number 24",
+        "element 24",
+        "chromium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "manganese",
+    "displayName": {
+      "en-us": "Mn"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.4e-10,
+    "x": 2.0,
+    "tags": {
+      "en-us": [
+        "atomic number 25",
+        "element 25",
+        "manganese"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "iron",
+    "displayName": {
+      "en-us": "Fe"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.4e-10,
+    "x": 2.1,
+    "tags": {
+      "en-us": [
+        "atomic number 26",
+        "element 26",
+        "iron"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "cobalt",
+    "displayName": {
+      "en-us": "Co"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.2,
+    "tags": {
+      "en-us": [
+        "atomic number 27",
+        "element 27",
+        "cobalt"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "nickel",
+    "displayName": {
+      "en-us": "Ni"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.3000000000000003,
+    "tags": {
+      "en-us": [
+        "atomic number 28",
+        "element 28",
+        "nickel"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "copper",
+    "displayName": {
+      "en-us": "Cu"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.4000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 29",
+        "element 29",
+        "copper"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "zinc",
+    "displayName": {
+      "en-us": "Zn"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.5,
+    "tags": {
+      "en-us": [
+        "atomic number 30",
+        "element 30",
+        "zinc"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "gallium",
+    "displayName": {
+      "en-us": "Ga"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.3e-10,
+    "x": 2.6,
+    "tags": {
+      "en-us": [
+        "atomic number 31",
+        "element 31",
+        "gallium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "germanium",
+    "displayName": {
+      "en-us": "Ge"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.25e-10,
+    "x": 2.7,
+    "tags": {
+      "en-us": [
+        "atomic number 32",
+        "element 32",
+        "germanium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "arsenic",
+    "displayName": {
+      "en-us": "As"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.15e-10,
+    "x": 2.8000000000000003,
+    "tags": {
+      "en-us": [
+        "atomic number 33",
+        "element 33",
+        "arsenic"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "selenium",
+    "displayName": {
+      "en-us": "Se"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.15e-10,
+    "x": 2.9000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 34",
+        "element 34",
+        "selenium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "bromine",
+    "displayName": {
+      "en-us": "Br"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.15e-10,
+    "x": 3.0,
+    "tags": {
+      "en-us": [
+        "atomic number 35",
+        "element 35",
+        "bromine"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "krypton",
+    "displayName": {
+      "en-us": "Kr"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 8.799999999999999e-11,
+    "x": 3.1,
+    "tags": {
+      "en-us": [
+        "atomic number 36",
+        "element 36",
+        "krypton"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "rubidium",
+    "displayName": {
+      "en-us": "Rb"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 2.35e-10,
+    "x": 0.0,
+    "tags": {
+      "en-us": [
+        "atomic number 37",
+        "element 37",
+        "rubidium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "strontium",
+    "displayName": {
+      "en-us": "Sr"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 2e-10,
+    "x": 0.1,
+    "tags": {
+      "en-us": [
+        "atomic number 38",
+        "element 38",
+        "strontium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "yttrium",
+    "displayName": {
+      "en-us": "Y"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.8e-10,
+    "x": 1.6,
+    "tags": {
+      "en-us": [
+        "atomic number 39",
+        "element 39",
+        "yttrium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "zirconium",
+    "displayName": {
+      "en-us": "Zr"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.55e-10,
+    "x": 1.7000000000000002,
+    "tags": {
+      "en-us": [
+        "atomic number 40",
+        "element 40",
+        "zirconium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "niobium",
+    "displayName": {
+      "en-us": "Nb"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.45e-10,
+    "x": 1.8,
+    "tags": {
+      "en-us": [
+        "atomic number 41",
+        "element 41",
+        "niobium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "molybdenum",
+    "displayName": {
+      "en-us": "Mo"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.45e-10,
+    "x": 1.9000000000000001,
+    "tags": {
+      "en-us": [
+        "atomic number 42",
+        "element 42",
+        "molybdenum"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "technetium",
+    "displayName": {
+      "en-us": "Tc"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.0,
+    "tags": {
+      "en-us": [
+        "atomic number 43",
+        "element 43",
+        "technetium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "ruthenium",
+    "displayName": {
+      "en-us": "Ru"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.3e-10,
+    "x": 2.1,
+    "tags": {
+      "en-us": [
+        "atomic number 44",
+        "element 44",
+        "ruthenium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "rhodium",
+    "displayName": {
+      "en-us": "Rh"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.2,
+    "tags": {
+      "en-us": [
+        "atomic number 45",
+        "element 45",
+        "rhodium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "palladium",
+    "displayName": {
+      "en-us": "Pd"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.4e-10,
+    "x": 2.3000000000000003,
+    "tags": {
+      "en-us": [
+        "atomic number 46",
+        "element 46",
+        "palladium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "silver",
+    "displayName": {
+      "en-us": "Ag"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.6e-10,
+    "x": 2.4000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 47",
+        "element 47",
+        "silver"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "cadmium",
+    "displayName": {
+      "en-us": "Cd"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.55e-10,
+    "x": 2.5,
+    "tags": {
+      "en-us": [
+        "atomic number 48",
+        "element 48",
+        "cadmium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "indium",
+    "displayName": {
+      "en-us": "In"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.55e-10,
+    "x": 2.6,
+    "tags": {
+      "en-us": [
+        "atomic number 49",
+        "element 49",
+        "indium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "tin",
+    "displayName": {
+      "en-us": "Sn"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.45e-10,
+    "x": 2.7,
+    "tags": {
+      "en-us": [
+        "atomic number 50",
+        "element 50",
+        "tin"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "antimony",
+    "displayName": {
+      "en-us": "Sb"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.45e-10,
+    "x": 2.8000000000000003,
+    "tags": {
+      "en-us": [
+        "atomic number 51",
+        "element 51",
+        "antimony"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "tellurium",
+    "displayName": {
+      "en-us": "Te"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.4e-10,
+    "x": 2.9000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 52",
+        "element 52",
+        "tellurium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "iodine",
+    "displayName": {
+      "en-us": "I"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.4e-10,
+    "x": 3.0,
+    "tags": {
+      "en-us": [
+        "atomic number 53",
+        "element 53",
+        "iodine"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "xenon",
+    "displayName": {
+      "en-us": "Xe"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.08e-10,
+    "x": 3.1,
+    "tags": {
+      "en-us": [
+        "atomic number 54",
+        "element 54",
+        "xenon"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "caesium",
+    "displayName": {
+      "en-us": "Cs"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 2.6e-10,
+    "x": 0.0,
+    "tags": {
+      "en-us": [
+        "atomic number 55",
+        "element 55",
+        "caesium",
+        "largest stable atom"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "barium",
+    "displayName": {
+      "en-us": "Ba"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 2.15e-10,
+    "x": 0.1,
+    "tags": {
+      "en-us": [
+        "atomic number 56",
+        "element 56",
+        "barium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "lanthanum",
+    "displayName": {
+      "en-us": "La"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.95e-10,
+    "x": 0.2,
+    "tags": {
+      "en-us": [
+        "atomic number 57",
+        "element 57",
+        "lanthanum"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "cerium",
+    "displayName": {
+      "en-us": "Ce"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.85e-10,
+    "x": 0.30000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 58",
+        "element 58",
+        "cerium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "praseodymium",
+    "displayName": {
+      "en-us": "Pr"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.85e-10,
+    "x": 0.4,
+    "tags": {
+      "en-us": [
+        "atomic number 59",
+        "element 59",
+        "praseodymium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "neodymium",
+    "displayName": {
+      "en-us": "Nd"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.85e-10,
+    "x": 0.5,
+    "tags": {
+      "en-us": [
+        "atomic number 60",
+        "element 60",
+        "neodymium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "promethium",
+    "displayName": {
+      "en-us": "Pm"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.85e-10,
+    "x": 0.6000000000000001,
+    "tags": {
+      "en-us": [
+        "atomic number 61",
+        "element 61",
+        "promethium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "samarium",
+    "displayName": {
+      "en-us": "Sm"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.85e-10,
+    "x": 0.7000000000000001,
+    "tags": {
+      "en-us": [
+        "atomic number 62",
+        "element 62",
+        "samarium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "europium",
+    "displayName": {
+      "en-us": "Eu"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.85e-10,
+    "x": 0.8,
+    "tags": {
+      "en-us": [
+        "atomic number 63",
+        "element 63",
+        "europium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "gadolinium",
+    "displayName": {
+      "en-us": "Gd"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.8e-10,
+    "x": 0.9,
+    "tags": {
+      "en-us": [
+        "atomic number 64",
+        "element 64",
+        "gadolinium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "terbium",
+    "displayName": {
+      "en-us": "Tb"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 1.0,
+    "tags": {
+      "en-us": [
+        "atomic number 65",
+        "element 65",
+        "terbium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "dysprosium",
+    "displayName": {
+      "en-us": "Dy"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 1.1,
+    "tags": {
+      "en-us": [
+        "atomic number 66",
+        "element 66",
+        "dysprosium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "holmium",
+    "displayName": {
+      "en-us": "Ho"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 1.2000000000000002,
+    "tags": {
+      "en-us": [
+        "atomic number 67",
+        "element 67",
+        "holmium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "erbium",
+    "displayName": {
+      "en-us": "Er"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 1.3,
+    "tags": {
+      "en-us": [
+        "atomic number 68",
+        "element 68",
+        "erbium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "thulium",
+    "displayName": {
+      "en-us": "Tm"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 1.4000000000000001,
+    "tags": {
+      "en-us": [
+        "atomic number 69",
+        "element 69",
+        "thulium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "ytterbium",
+    "displayName": {
+      "en-us": "Yb"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 1.5,
+    "tags": {
+      "en-us": [
+        "atomic number 70",
+        "element 70",
+        "ytterbium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "lutetium",
+    "displayName": {
+      "en-us": "Lu"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 1.6,
+    "tags": {
+      "en-us": [
+        "atomic number 71",
+        "element 71",
+        "lutetium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "hafnium",
+    "displayName": {
+      "en-us": "Hf"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.55e-10,
+    "x": 1.7000000000000002,
+    "tags": {
+      "en-us": [
+        "atomic number 72",
+        "element 72",
+        "hafnium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "tantalum",
+    "displayName": {
+      "en-us": "Ta"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.45e-10,
+    "x": 1.8,
+    "tags": {
+      "en-us": [
+        "atomic number 73",
+        "element 73",
+        "tantalum"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "tungsten",
+    "displayName": {
+      "en-us": "W"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 1.9000000000000001,
+    "tags": {
+      "en-us": [
+        "atomic number 74",
+        "element 74",
+        "tungsten"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "rhenium",
+    "displayName": {
+      "en-us": "Re"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.0,
+    "tags": {
+      "en-us": [
+        "atomic number 75",
+        "element 75",
+        "rhenium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "osmium",
+    "displayName": {
+      "en-us": "Os"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.3e-10,
+    "x": 2.1,
+    "tags": {
+      "en-us": [
+        "atomic number 76",
+        "element 76",
+        "osmium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "iridium",
+    "displayName": {
+      "en-us": "Ir"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.2,
+    "tags": {
+      "en-us": [
+        "atomic number 77",
+        "element 77",
+        "iridium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "platinum",
+    "displayName": {
+      "en-us": "Pt"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.3000000000000003,
+    "tags": {
+      "en-us": [
+        "atomic number 78",
+        "element 78",
+        "platinum"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "gold",
+    "displayName": {
+      "en-us": "Au"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.35e-10,
+    "x": 2.4000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 79",
+        "element 79",
+        "gold"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "mercury",
+    "displayName": {
+      "en-us": "Hg"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.5e-10,
+    "x": 2.5,
+    "tags": {
+      "en-us": [
+        "atomic number 80",
+        "element 80",
+        "mercury"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "thallium",
+    "displayName": {
+      "en-us": "Tl"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.9e-10,
+    "x": 2.6,
+    "tags": {
+      "en-us": [
+        "atomic number 81",
+        "element 81",
+        "thallium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "lead",
+    "displayName": {
+      "en-us": "Pb"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.8e-10,
+    "x": 2.7,
+    "tags": {
+      "en-us": [
+        "atomic number 82",
+        "element 82",
+        "lead"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "bismuth",
+    "displayName": {
+      "en-us": "Bi"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.6e-10,
+    "x": 2.8000000000000003,
+    "tags": {
+      "en-us": [
+        "atomic number 83",
+        "element 83",
+        "bismuth"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "polonium",
+    "displayName": {
+      "en-us": "Po"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.9e-10,
+    "x": 2.9000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 84",
+        "element 84",
+        "polonium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "astatine",
+    "displayName": {
+      "en-us": "At"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.27e-10,
+    "x": 3.0,
+    "tags": {
+      "en-us": [
+        "atomic number 85",
+        "element 85",
+        "astatine"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "radon",
+    "displayName": {
+      "en-us": "Rn"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.2e-10,
+    "x": 3.1,
+    "tags": {
+      "en-us": [
+        "atomic number 86",
+        "element 86",
+        "radon"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "francium",
+    "displayName": {
+      "en-us": "Fr"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 3.48e-10,
+    "x": 0.0,
+    "tags": {
+      "en-us": [
+        "atomic number 87",
+        "element 87",
+        "francium",
+        "largest atom"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "radium",
+    "displayName": {
+      "en-us": "Ra"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 2.15e-10,
+    "x": 0.1,
+    "tags": {
+      "en-us": [
+        "atomic number 88",
+        "element 88",
+        "radium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "actinium",
+    "displayName": {
+      "en-us": "Ac"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.95e-10,
+    "x": 0.2,
+    "tags": {
+      "en-us": [
+        "atomic number 89",
+        "element 89",
+        "actinium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "thorium",
+    "displayName": {
+      "en-us": "Th"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.8e-10,
+    "x": 0.30000000000000004,
+    "tags": {
+      "en-us": [
+        "atomic number 90",
+        "element 90",
+        "thorium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "protactinium",
+    "displayName": {
+      "en-us": "Pa"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.8e-10,
+    "x": 0.4,
+    "tags": {
+      "en-us": [
+        "atomic number 91",
+        "element 91",
+        "protactinium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "uranium",
+    "displayName": {
+      "en-us": "U"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 0.5,
+    "tags": {
+      "en-us": [
+        "atomic number 92",
+        "element 92",
+        "uranium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "neptunium",
+    "displayName": {
+      "en-us": "Np"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 0.6000000000000001,
+    "tags": {
+      "en-us": [
+        "atomic number 93",
+        "element 93",
+        "neptunium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "plutonium",
+    "displayName": {
+      "en-us": "Pu"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 0.7000000000000001,
+    "tags": {
+      "en-us": [
+        "atomic number 94",
+        "element 94",
+        "plutonium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "americium",
+    "displayName": {
+      "en-us": "Am"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.75e-10,
+    "x": 0.8,
+    "tags": {
+      "en-us": [
+        "atomic number 95",
+        "element 95",
+        "americium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+  },
+  {
+    "id": "curium",
+    "displayName": {
+      "en-us": "Cm"
+    },
+    "category": {
+      "en-us": "Nuclear / Atomic / Molecular"
+    },
+    "length": 1.7599999999999999e-10,
+    "x": 0.9,
+    "tags": {
+      "en-us": [
+        "atomic number 96",
+        "element 96",
+        "curium"
+      ]
+    },
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
   }
 ]
