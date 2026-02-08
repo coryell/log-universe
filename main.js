@@ -18,9 +18,7 @@ const getDimensionValueY = (d) => d.dimensions[currentDimensionY];
 // Helper for X value: depends on mode
 const getDimensionValueX = (d) => {
   if (currentDimensionX === "none") {
-    // Fallback to x_coordinates for current Y dimension
-    // If x_coordinates[currentDimensionY] is missing, default to 0
-    return d.x_coordinates[currentDimensionY] !== undefined ? d.x_coordinates[currentDimensionY] : 0;
+    return d.x_coordinates[currentDimensionY];
   } else {
     // Log plot mode
     return d.dimensions[currentDimensionX];
@@ -160,8 +158,8 @@ d3.json('/data.json').then(data => {
     for (const key in d.x_coordinates) d.x_coordinates[key] = +d.x_coordinates[key];
 
     // Fallbacks
-    if (d.x_coordinates.length === undefined) d.x_coordinates.length = 0;
-    if (d.x_coordinates.mass === undefined) d.x_coordinates.mass = 0;
+    // if (d.x_coordinates.length === undefined) d.x_coordinates.length = 0;
+    // if (d.x_coordinates.mass === undefined) d.x_coordinates.mass = 0;
   });
 
   const categories = [
@@ -402,8 +400,8 @@ d3.json('/data.json').then(data => {
     // Filter data
     let filteredData = [];
     if (currentDimensionX === "none") {
-      // Original behavior: Show items that have the Y dimension
-      filteredData = data.filter(d => d.dimensions[currentDimensionY] !== undefined);
+      // Show items that have the Y dimension AND valid x_coordinates for that dimension
+      filteredData = data.filter(d => d.dimensions[currentDimensionY] !== undefined && d.x_coordinates[currentDimensionY] !== undefined);
     } else {
       // 2D behavior: Show items that have BOTH dimensions
       filteredData = data.filter(d =>
@@ -420,8 +418,20 @@ d3.json('/data.json').then(data => {
     }
 
     // Y Scale Update
-    const minDimY = d3.min(filteredData, getDimensionValueY);
-    const maxDimY = d3.max(filteredData, getDimensionValueY);
+    let minDimY = d3.min(filteredData, getDimensionValueY);
+    let maxDimY = d3.max(filteredData, getDimensionValueY);
+
+    if (minDimY === maxDimY) {
+      if (minDimY <= 0) {
+        // Log scale cannot handle <= 0, should fallback or error, but let's just nudge
+        minDimY = 0.1;
+        maxDimY = 10;
+      } else {
+        // Create a decade range around the single point
+        minDimY = minDimY / 10;
+        maxDimY = maxDimY * 10;
+      }
+    }
     yScale.domain([minDimY, maxDimY]);
 
     if (currentDimensionX !== "none") {
