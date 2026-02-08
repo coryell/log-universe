@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Poster Data Editor</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            background: #f0f0f0;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+            z-index: 100;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            position: sticky;
+            top: 60px;
+            z-index: 10;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 4px;
+            border: 1px solid transparent;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+            background: #e8f0fe;
+        }
+
+        .id-col {
+            width: 150px;
+            font-family: monospace;
+            color: #555;
+        }
+
+        .dim-col {
+            width: 100px;
+            font-family: monospace;
+        }
+
+        .tag-col {
+            width: 200px;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        .toast.error {
+            background: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="controls">
+        <button id="saveBtn">Save Changes (Cmd+S)</button>
+        <span id="status" style="margin-left: 10px; color: #666;"></span>
+    </div>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th class="id-col">ID</th>
+                <th>Display Name (en-us)</th>
+                <th>Category</th>
+                <th class="dim-col">Dim: Length</th>
+                <th class="dim-col">Dim: Mass</th>
+                <th>Tags (comma sep)</th>
+                <th class="dim-col">X: Length</th>
+                <th class="dim-col">X: Mass</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be injected here -->
+        </tbody>
+    </table>
+
+    <div id="toast" class="toast">Saved successfully!</div>
+
+    <script>
+        let tableData = [];
+
+        async function loadData() {
+            try {
+                const response = await fetch('/data');
+                tableData = await response.json();
+                renderTable();
+            } catch (err) {
+                console.error("Failed to load data", err);
+                showToast("Failed to load data", true);
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.querySelector('#dataTable tbody');
+            tbody.innerHTML = '';
+
+            tableData.forEach((row, index) => {
+                const tr = document.createElement('tr');
+
+                // Helper to safely get nested values
+                const getVal = (obj, path, defaultVal = '') => {
+                    const val = path.split('.').reduce((o, k) => (o || {})[k], obj);
+                    return val !== undefined ? val : defaultVal;
+                };
+
+                // Helper to format tags array to string
+                const tagsToString = (tags) => (tags || []).join(', ');
+
+                tr.innerHTML = `
+                    <td class="id-col"><input type="text" value="${row.id}" onchange="updateData(${index}, 'id', this.value)"></td>
+                    <td><input type="text" value="${getVal(row, 'displayName.en-us')}" onchange="updateData(${index}, 'displayName.en-us', this.value)"></td>
+                    <td><input type="text" value="${getVal(row, 'category.en-us')}" onchange="updateData(${index}, 'category.en-us', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.length')}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.mass')}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
+                    <td><input type="text" value="${tagsToString(getVal(row, 'tags.en-us', []))}" onchange="updateTags(${index}, 'tags.en-us', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.length')}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.mass')}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Deep set helper
+        function setVal(obj, path, value) {
+            const keys = path.split('.');
+            let current = obj;
+            for (let i = 0; i < keys.length - 1; i++) {
+                if (!current[keys[i]]) current[keys[i]] = {};
+                current = current[keys[i]];
+            }
+            current[keys[keys.length - 1]] = value;
+        }
+
+        // Deep delete helper
+        function deleteVal(obj, path) {
+            const keys = path.split('.');
+            let current = obj;
+            for (let i = 0; i < keys.length - 1; i++) {
+                if (!current[keys[i]]) return; // Path doesn't exist
+                current = current[keys[i]];
+            }
+            delete current[keys[keys.length - 1]];
+        }
+
+        window.updateData = function (index, path, value) {
+            if (value.trim() === '') {
+                deleteVal(tableData[index], path);
+            } else {
+                setVal(tableData[index], path, value);
+            }
+        };
+
+        window.updateX = function (index, path, value) {
+            if (value.trim() === '') {
+                deleteVal(tableData[index], path);
+            } else {
+                setVal(tableData[index], path, Number(value));
+            }
+        };
+
+        window.updateTags = function (index, path, value) {
+            if (value.trim() === '') {
+                deleteVal(tableData[index], path);
+            } else {
+                const tags = value.split(',').map(t => t.trim()).filter(t => t);
+                setVal(tableData[index], path, tags);
+            }
+        };
+
+        async function saveData() {
+            // Trigger change event on focused input by blurring it
+            if (document.activeElement && document.activeElement.tagName === 'INPUT') {
+                document.activeElement.blur();
+            }
+
+            // Small delay to allow change event to propagate if needed (though synch dispatch should work)
+            await new Promise(r => setTimeout(r, 50));
+
+            const btn = document.getElementById('saveBtn');
+            const originalText = btn.innerText;
+            btn.innerText = "Saving...";
+
+            try {
+                // Determine format based on structure (handled by server_editor.js logic or we send JSON)
+                // We send the array of objects back.
+                // NOTE: 'dimensions' values are STRINGS in our tableData, which is consistent with the migration.
+                // 'x_coordinates' are NUMBERS (coerced in updateX).
+
+                const response = await fetch('/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(tableData, null, 2)
+                });
+
+                if (response.ok) {
+                    showToast("Saved successfully!");
+                } else {
+                    showToast("Error saving data", true);
+                }
+            } catch (err) {
+                console.error(err);
+                showToast("Error saving data", true);
+            } finally {
+                btn.innerText = originalText;
+            }
+        }
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.className = 'toast show' + (isError ? ' error' : '');
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, 3000);
+        }
+
+        // Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+                e.preventDefault();
+                saveData();
+            }
+        });
+
+        document.getElementById('saveBtn').addEventListener('click', saveData);
+
+        // Init
+        loadData();
+
+    </script>
+</body>
+
+</html>
