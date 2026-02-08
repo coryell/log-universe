@@ -7,6 +7,7 @@ const LANGUAGE = "en-us";
 let currentDimensionY = "length";
 let currentDimensionX = "none"; // "none", "length", "mass"
 let selectedItem = null;
+let lastMousePos = null;
 
 const getUnit = (dim) => dim === "mass" ? "kg" : "m";
 const getDimensionValueY = (d) => d.dimensions[currentDimensionY];
@@ -230,6 +231,12 @@ d3.json('/data.json').then(data => {
           const textLen = getLocalized(d.displayName, LANGUAGE).length;
           return (currentRadius + 20 + textLen * currentFS * 0.6);
         });
+
+      if (event.sourceEvent) {
+        updateRuler(event.sourceEvent);
+      } else if (lastMousePos) {
+        updateRuler();
+      }
     });
 
   svg.call(zoom);
@@ -921,10 +928,15 @@ d3.json('/data.json').then(data => {
   const rulerLabel = rulerGroup.append("text")
     .attr("fill", "white").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
 
-  svg.on("mousemove", (event) => {
+  function updateRuler(event) {
+    if (event) {
+      lastMousePos = d3.pointer(event, svg.node());
+    }
+    if (!lastMousePos) return;
+
     rulerGroup.style("display", null);
     const t = d3.zoomTransform(svg.node());
-    const [mouseX, mouseY] = d3.pointer(event);
+    const [mouseX, mouseY] = lastMousePos;
 
     // Update Lines
     rulerLineX.attr("y1", mouseY).attr("y2", mouseY); // Horizontal line at Mouse Y
@@ -962,6 +974,10 @@ d3.json('/data.json').then(data => {
 
     const bbox = rulerLabel.node().getBBox();
     rulerLabelBackground.attr("x", bbox.x - 4).attr("y", bbox.y - 4).attr("width", bbox.width + 8).attr("height", bbox.height + 8);
+  }
+
+  svg.on("mousemove", (event) => {
+    updateRuler(event);
   });
 
   svg.on("mouseleave", () => {
