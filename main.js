@@ -1,8 +1,14 @@
 import * as d3 from 'd3';
 import './style.css';
-import { getMatches, getHighlightedText, getLocalized, getSearchResultContent } from './search.js';
+import { getMatches, getLocalized, getSearchResultContent } from './search.js';
 
 const LANGUAGE = "en-us";
+let currentDimension = "length";
+let selectedItem = null;
+
+const getUnit = (dim) => dim === "mass" ? "kg" : "m";
+const getDimensionValue = (d) => d.dimensions[currentDimension];
+const getXValue = (d) => d.x_coordinates[currentDimension] !== undefined ? d.x_coordinates[currentDimension] : 0;
 
 const app = document.getElementById('app');
 let width = app.clientWidth;
@@ -14,8 +20,6 @@ const svg = d3.select('#app')
   .attr('height', '100%')
   .attr('viewBox', [0, 0, width, height]);
 
-
-
 // Define Gradients and Masks
 const defs = svg.append("defs");
 
@@ -24,20 +28,18 @@ const fadeEnd = 160;
 
 const gradient = defs.append("linearGradient")
   .attr("id", "fade-gradient")
-  .attr("gradientUnits", "userSpaceOnUse") // Anchors to screen coordinates
+  .attr("gradientUnits", "userSpaceOnUse")
   .attr("x1", 0)
-  .attr("x2", fadeEnd) // Gradient ends at 160px
+  .attr("x2", fadeEnd)
   .attr("y1", 0)
   .attr("y2", 0);
 
-// Stop 1: Fully transparent (Black in mask = hidden) up to 40px
 gradient.append("stop")
-  .attr("offset", paddingLeft / fadeEnd) // approx 33%
+  .attr("offset", paddingLeft / fadeEnd)
   .attr("stop-color", "black");
 
-// Stop 2: Transition to visible (White in mask = visible) at 120px
 gradient.append("stop")
-  .attr("offset", "1") // 100% of x2 (120px)
+  .attr("offset", "1")
   .attr("stop-color", "white");
 
 const mask = defs.append("mask")
@@ -48,197 +50,27 @@ mask.append("rect")
   .attr("height", height)
   .attr("fill", "url(#fade-gradient)");
 
-// Create a separate group for the grid so it doesn't pan horizontally
-// We want it to be behind the points, so append it first, or use insert before 'g' if 'g' existed.
-// Since 'g' is not created yet, we can just append.
 const gridGroup = svg.append("g")
   .attr("class", "grid");
 
-// Group for the visualization content that will be transformed (zoomed/panned)
-// Group for the visualization content that will be transformed (zoomed/panned)
 const g = svg.append('g')
   .attr("class", "data-layer")
   .attr("mask", "url(#fade-mask)");
 
 d3.json('/data.json').then(data => {
-  // Convert lengths to numbers just in case
+  // Data Processing
   data.forEach(d => {
-    d.dimensions.length = +d.dimensions.length;
-    if (d.x_coordinates) {
-      d.x_coordinates.length = +d.x_coordinates.length;
-    }
+    if (!d.dimensions) d.dimensions = {};
+    for (const key in d.dimensions) d.dimensions[key] = +d.dimensions[key];
+
+    if (!d.x_coordinates) d.x_coordinates = {};
+    for (const key in d.x_coordinates) d.x_coordinates[key] = +d.x_coordinates[key];
+
+    // Fallbacks
+    if (d.x_coordinates.length === undefined) d.x_coordinates.length = 0;
+    if (d.x_coordinates.mass === undefined) d.x_coordinates.mass = 0;
   });
 
-  // Calculate domain extent
-  const minLength = d3.min(data, d => d.dimensions.length);
-  const maxLength = d3.max(data, d => d.dimensions.length);
-
-  // Calculate X extent
-  const minX = d3.min(data, d => d.x_coordinates.length) || 0;
-  const maxX = d3.max(data, d => d.x_coordinates.length) || 1;
-
-  // Setup Log Scale
-  const yScale = d3.scaleLog()
-    .domain([minLength, maxLength])
-    .range([height - 50, 50]); // Add some padding
-
-  // Dynamic X scale based on columns
-  // Dynamic X scale to match Y scale aspect ratio (1 unit x = 1 decade y)
-  // We want the visual distance of 1 unit in X to equal the visual height of 1 decade in Y
-  const decadeHeight = Math.abs(yScale(10) - yScale(1));
-
-  // Center the data horizontally on the screen
-  const xCenter = (minX + maxX) / 2;
-  const screenCenter = width / 2;
-
-  const xScale = d3.scaleLinear()
-    // Map [xCenter] to [screenCenter], and [xCenter + 1] to [screenCenter + decadeHeight]
-    .domain([xCenter, xCenter + 1])
-    .range([screenCenter, screenCenter + decadeHeight]);
-
-  // Function to update the grid
-  const updateGrid = (transform) => {
-    // Rescale ONLY the Y scale
-    const newYScale = transform.rescaleY(yScale);
-    // Rescale ONLY the X scale
-    const newXScale = transform.rescaleX(xScale);
-
-    const padding = 200; // Pixels to render off-screen
-
-    // --- Horizontal Grid (Y-Axis Log Scale) ---
-    // Generate ticks for a padded area so they don't disappear at the edge
-    // Get values corresponding to screen edges + padding
-    const yStart = newYScale.invert(height + padding);
-    const yEnd = newYScale.invert(-padding);
-    // Create a temporary scale for tick generation
-    const paddedYScale = newYScale.copy().domain([
-      d3.min([yStart, yEnd]),
-      d3.max([yStart, yEnd])
-    ]);
-
-    // Use standard D3 log ticks on the padded scale
-    // Increase count slightly to account for larger area
-    const yTickValues = paddedYScale.ticks(15, "~e");
-
-    // Determine the "stride" (how many decades between major ticks)
-    // We filter for integer powers of 10 to find the "main" grid lines
-    const mainYTicks = yTickValues.filter(d => {
-      const log = Math.log10(d);
-      return Math.abs(log - Math.round(log)) < 1e-6; // Integer check with epsilon
-    });
-
-    let stride = 1;
-    if (mainYTicks.length >= 2) {
-      const log1 = Math.log10(mainYTicks[0]);
-      const log2 = Math.log10(mainYTicks[1]);
-      stride = Math.abs(Math.round(log2) - Math.round(log1));
-    }
-    // If we have 0 or 1 tick, we can't determine stride, default to 1 or keep previous? 
-    // Default 1 is safe.
-
-    gridGroup.selectAll(".horizontal-grid").data([null]).join("g")
-      .attr("class", "horizontal-grid")
-      .call(d3.axisRight(newYScale)
-        .tickValues(yTickValues) // Explicitly use the generated values
-        .tickSize(width) // Extends ticks across the screen
-        .tickFormat(d => {
-          const log10 = Math.log10(d);
-          // Only label integer powers of 10 to keep it clean, 
-          // but draw lines for all ticks d3 generates.
-          if (Number.isInteger(log10)) {
-            return `10^${log10} m`;
-          }
-          return "";
-        })
-      );
-
-    gridGroup.select(".horizontal-grid .domain").remove();
-
-    // --- Vertical Grid (X-Axis Linear Scale) ---
-    // Calculate the pixel height of ONE decade (regardless of stride)
-    const decadeHeight = Math.abs(newYScale(10) - newYScale(1));
-
-    // Calculate how many X-units correspond to ONE decade's pixel height
-    const xZero = newXScale.invert(0);
-    const xDist = newXScale.invert(decadeHeight) - xZero;
-
-    // The final spacing is the base unit width * the stride
-    const spacing = Math.abs(xDist) * stride;
-
-    // Generate ticks based on this spacing, anchored at 0
-    const xTicks = [];
-
-    // Start from the first multiple of spacing >= xMin (padded)
-    // Get padded bounds
-    const xMinPadded = newXScale.invert(-padding);
-    const xMaxPadded = newXScale.invert(width + padding);
-
-    // Handle potential division by zero or infinite spacing
-    if (spacing > 0 && isFinite(spacing)) {
-      // Ensure we start aligned to the grid, even if xMinPadded is far off
-      const start = Math.ceil(xMinPadded / spacing) * spacing;
-      // Loop until xMaxPadded
-      // Safety cap: don't let it run infinite if logic fails
-      let current = start;
-      const safetyLimit = 1000;
-      let count = 0;
-      // Simple direction check: xMaxPadded > xMinPadded usually, but scale could be inverted?
-      // Linear scale usually [0, width]. Invert(0) < invert(width).
-      // So current should increase.
-      while (current <= xMaxPadded && count < safetyLimit) {
-        xTicks.push(current);
-        current += spacing;
-        count++;
-      }
-    }
-
-    gridGroup.selectAll(".vertical-grid").data([null]).join("g")
-      .attr("class", "vertical-grid")
-      .attr("mask", "url(#fade-mask)") // Apply fade mask to vertical lines
-      .call(d3.axisBottom(newXScale)
-        .tickValues(xTicks)
-        .tickFormat("") // No labels requested
-        .tickSize(height)
-      );
-
-    // Apply styles (must be done after every call() as D3 resets them)
-    // Horizontal Styles
-    gridGroup.selectAll(".horizontal-grid .tick line")
-      .attr("stroke", "#00aaff")
-      .attr("stroke-dasharray", "2,2")
-      .attr("stroke-opacity", d => {
-        const log10 = Math.log10(d);
-        // Major lines (integer powers of 10) are more opaque
-        return Number.isInteger(log10) ? 0.4 : 0.25;
-      });
-
-    gridGroup.selectAll(".horizontal-grid .tick text")
-      .attr("x", 10)
-      .attr("dy", -4)
-      .attr("fill", "#00aaff")
-      .attr("opacity", 1.0) // Match point labels (assumed 1.0)
-      .style("font-family", "monospace")
-      .style("font-size", "12px"); // Explicitly match point label size if needed
-
-    gridGroup.select(".horizontal-grid .domain").remove();
-
-    // Vertical Styles
-    gridGroup.selectAll(".vertical-grid .tick line")
-      .attr("stroke", "#00aaff")
-      .attr("stroke-opacity", 0.4) // Increased from 0.2
-      .attr("stroke-dasharray", "2,2");
-
-    gridGroup.selectAll(".vertical-grid .tick text")
-      .attr("y", height - 20) // Position labels at bottom
-      .attr("dx", 5)
-      .attr("fill", "#00aaff")
-      .attr("opacity", 0.5)
-      .style("font-family", "monospace");
-
-    gridGroup.select(".vertical-grid .domain").remove();
-  };
-
-  // Define Categorical Color Scale
   const categories = [
     "Atoms / Elements", "Astronomy", "Biology", "Density", "Electromagnetic", "Fundamental / Nuclear",
     "Geology", "Molecules", "Sound", "Technology", "Waves"
@@ -249,174 +81,279 @@ d3.json('/data.json').then(data => {
   ];
   const colorScale = d3.scaleOrdinal().domain(categories).range(colors);
 
-  // Initial Transform (shifted left by 5% for balance)
-  const initialTransform = d3.zoomIdentity.translate(-width * 0.05, 0);
+  // Scales
+  let yScale = d3.scaleLog().range([height - 50, 50]);
+  let xScale = d3.scaleLinear();
 
-  // Initial draw with shifted transform
-  updateGrid(initialTransform);
-
-  // Calculate initial font size based on axes (height of one decade)
-  const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
-  const initialFS = Math.min(12, initialDecadeHeight);
-
-  // Draw Points (radius proportional to font size)
-  // Draw Points and Labels using Groups
-  const initialRadius = initialFS / 2.4;
-
-  const items = g.selectAll('.item-group')
-    .data(data)
-    .join('g')
-    .attr('class', 'item-group')
-    // Apply initial transform to positions
-    .attr('transform', d => {
-      const t = initialTransform;
-      const newX = t.rescaleX(xScale)(d.x_coordinates.length);
-      const newY = t.rescaleY(yScale)(d.dimensions.length);
-      return `translate(${newX}, ${newY})`;
-    });
-
-  // Hit Area (Transparent Rect)
-  items.append('rect')
-    .attr('class', 'hit-area')
-    .attr('x', -initialRadius - 5)
-    .attr('y', -initialFS)
-    .attr('width', 100) // Generous width to cover gap and part of label
-    .attr('height', initialFS * 2)
-    .attr('fill', 'transparent')
-    .style('cursor', 'pointer');
-
-  // Visual Background for Selection (Hidden by default)
-  items.append('rect')
-    .attr('class', 'label-bg')
-    .attr('rx', 4)
-    .attr('ry', 4)
-    .attr('fill', 'black')
-    .attr('opacity', 0) // Visible only when highlighted
-    .attr('x', 8) // Start near text (text is at 10)
-    .attr('y', -initialFS * 0.7) // Roughly vertically centered
-    .attr('height', initialFS * 1.5)
-    .attr('width', d => {
-      const textLen = getLocalized(d.displayName, LANGUAGE).length;
-      const charWidth = initialFS * 0.6;
-      return (textLen * charWidth + 6); // Just text width + padding
-    });
-
-  // Circle
-  items.append('circle')
-    .attr('cx', 0)
-    .attr('cy', 0)
-    .attr('r', initialRadius)
-    .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE))); // i18n update
-
-  // Label
-  items.append('text')
-    .attr('class', 'label')
-    .attr('x', 10)
-    .attr('y', 0)
-    .attr('dy', '.35em')
-    .text(d => getLocalized(d.displayName, LANGUAGE)) // i18n update
-    .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE))) // i18n update
-    .style('font-family', 'monospace')
-    .style('font-size', `${initialFS}px`);
-
-  // Zoom Behavior
-  const buffer = 300; // Visual buffer in pixels to allow labels to clear the edge/fade
+  // Zoom Setup
   const zoom = d3.zoom()
-    .scaleExtent([1, 1000000]) // Prevent zooming out past initial view, allow massive zoom in
-    .translateExtent([[-300, -300], [width + 300, height + 300]]) // Initial constraint
+    .scaleExtent([1, 1000000])
     .on('zoom', (event) => {
       const t = event.transform;
 
-      // Percentage-based Pan Limits Logic:
-      // We want to ensure that the data bounds [x0, x1] never move too far off screen.
-      // Constraint: t.applyX(x0) <= a * width  AND  t.applyX(x1) >= (1-a) * width
-      // This is achieved by setting translateExtent boundaries extX0 and extX1.
-      const a = 0.5; // Allow data to shift up to 80% across the screen
+      const domainY = yScale.domain();
+      if (domainY[0] === domainY[1]) return;
+
+      // Constrain Pan
+      const minX = xScale.domain()[0];
+      const maxX = xScale.domain()[1];
+
+      const a = 0.5;
       const extX0 = xScale(minX) - (a * width) / t.k;
       const extX1 = xScale(maxX) + (a * width) / t.k;
-      const extY0 = yScale(maxLength) - (a * height) / t.k; // Use maxLength for top of screen
-      const extY1 = yScale(minLength) + (a * height) / t.k; // Use minLength for bottom of screen
+      const extY0 = yScale(domainY[1]) - (a * height) / t.k;
+      const extY1 = yScale(domainY[0]) + (a * height) / t.k;
 
-      zoom.translateExtent([
-        [extX0, extY0],
-        [extX1, extY1]
-      ]);
+      zoom.translateExtent([[extX0, extY0], [extX1, extY1]]);
 
-      // Update grid with new transform
       updateGrid(t);
 
-      // Semantic Zoom: Rescale scales based on transform
-      // We rescale X to handle horizontal panning/zooming
       const newXScale = t.rescaleX(xScale);
-      // Rescale Y to handle vertical panning/zooming
       const newYScale = t.rescaleY(yScale);
 
-      // Axes-Relative Label Scaling Logic
       const currentDecadeHeight = Math.abs(newYScale(10) - newYScale(1));
       const currentFS = Math.min(12, currentDecadeHeight);
       const currentRadius = currentFS / 2.4;
 
-      // Update Group Positions
+      // Update positions using helpers
       g.selectAll('.item-group')
-        .attr('transform', d => `translate(${newXScale(d.x_coordinates.length)}, ${newYScale(d.dimensions.length)})`);
+        .attr('transform', d => `translate(${newXScale(getXValue(d))}, ${newYScale(getDimensionValue(d))})`);
 
-      // Update Sizes (Semantic Zoom)
       g.selectAll('.item-group circle')
         .attr('r', currentRadius);
 
       g.selectAll('.item-group text.label')
         .style('font-size', `${currentFS}px`);
 
-      // Update Background Rect Size
-      // Estimate width based on char count (monospace is approx 0.6em wide)
-      // width = (radius + gap + char_count * 0.6em * fs) + padding
       g.selectAll('.item-group rect.label-bg')
-        .attr('x', 8) // Start near text (text is at 10)
-        .attr('y', -currentFS * 0.7) // Roughly vertically centered
+        .attr('x', 8)
+        .attr('y', -currentFS * 0.7)
         .attr('height', currentFS * 1.5)
         .attr('width', d => {
           const textLen = getLocalized(d.displayName, LANGUAGE).length;
           const charWidth = currentFS * 0.6;
-          return (textLen * charWidth + 6); // Just text width + padding
+          return (textLen * charWidth + 6);
         });
 
-      // Update Hit Area Size
       g.selectAll('.item-group rect.hit-area')
         .attr('x', -currentRadius - 5)
         .attr('y', -currentFS)
         .attr('height', currentFS * 2)
         .attr('width', d => {
-          // similar calculation but slightly larger
           const textLen = getLocalized(d.displayName, LANGUAGE).length;
           return (currentRadius + 20 + textLen * currentFS * 0.6);
         });
     });
 
-  svg.call(zoom).call(zoom.transform, initialTransform);
+  svg.call(zoom);
 
-  // Recenter logic
+  const updateGrid = (transform) => {
+    const newYScale = transform.rescaleY(yScale);
+    const newXScale = transform.rescaleX(xScale);
+    const padding = 200;
+
+    const yStart = newYScale.invert(height + padding);
+    const yEnd = newYScale.invert(-padding);
+    const paddedYScale = newYScale.copy().domain([
+      d3.min([yStart, yEnd]),
+      d3.max([yStart, yEnd])
+    ]);
+    const yTickValues = paddedYScale.ticks(15, "~e");
+
+    // Horizontal Grid
+    gridGroup.selectAll(".horizontal-grid").data([null]).join("g")
+      .attr("class", "horizontal-grid")
+      .call(d3.axisRight(newYScale)
+        .tickValues(yTickValues)
+        .tickSize(width)
+        .tickFormat(d => {
+          const log10 = Math.log10(d);
+          if (Number.isInteger(log10)) {
+            return `10^${log10} ${getUnit(currentDimension)}`;
+          }
+          return "";
+        })
+      );
+    gridGroup.select(".horizontal-grid .domain").remove();
+
+    // Vertical Grid
+    const decadeHeight = Math.abs(newYScale(10) - newYScale(1));
+    const mainYTicks = yTickValues.filter(d => Math.abs(Math.log10(d) - Math.round(Math.log10(d))) < 1e-6);
+    let stride = 1;
+    if (mainYTicks.length >= 2) {
+      stride = Math.abs(Math.round(Math.log10(mainYTicks[1])) - Math.round(Math.log10(mainYTicks[0])));
+    }
+
+    const xZero = newXScale.invert(0);
+    const xDist = newXScale.invert(decadeHeight) - xZero;
+    const spacing = Math.abs(xDist) * stride;
+
+    const xTicks = [];
+    const xMinPadded = newXScale.invert(-padding);
+    const xMaxPadded = newXScale.invert(width + padding);
+
+    if (spacing > 0 && isFinite(spacing)) {
+      const start = Math.ceil(xMinPadded / spacing) * spacing;
+      let current = start;
+      const safetyLimit = 1000;
+      let count = 0;
+      while (current <= xMaxPadded && count < safetyLimit) {
+        xTicks.push(current);
+        current += spacing;
+        count++;
+      }
+    }
+
+    gridGroup.selectAll(".vertical-grid").data([null]).join("g")
+      .attr("class", "vertical-grid")
+      .attr("mask", "url(#fade-mask)")
+      .call(d3.axisBottom(newXScale)
+        .tickValues(xTicks)
+        .tickFormat("")
+        .tickSize(height)
+      );
+    gridGroup.select(".vertical-grid .domain").remove();
+
+    // Styles
+    gridGroup.selectAll(".horizontal-grid .tick line")
+      .attr("stroke", "#00aaff")
+      .attr("stroke-dasharray", "2,2")
+      .attr("stroke-opacity", d => Number.isInteger(Math.log10(d)) ? 0.4 : 0.25);
+
+    gridGroup.selectAll(".horizontal-grid .tick text")
+      .attr("x", 10)
+      .attr("dy", -4)
+      .attr("fill", "#00aaff")
+      .attr("opacity", 1.0)
+      .style("font-family", "monospace")
+      .style("font-size", "12px");
+
+    gridGroup.selectAll(".vertical-grid .tick line")
+      .attr("stroke", "#00aaff")
+      .attr("stroke-opacity", 0.4)
+      .attr("stroke-dasharray", "2,2");
+
+    gridGroup.selectAll(".vertical-grid .tick text").remove();
+  };
+
+  // Helper for highlighting
+  function highlightItem(d) {
+    g.selectAll('.item-group').classed("highlighted", false);
+    g.selectAll('.item-group').filter(item => item.id === d.id).classed("highlighted", true).raise();
+  }
+
+  function unhighlightItems() {
+    g.selectAll('.item-group').classed("highlighted", false);
+  }
+
+  const updateDimension = (dim) => {
+    currentDimension = dim;
+    // Filter data
+    const filteredData = data.filter(d => d.dimensions[dim] !== undefined);
+
+    // Clear if no data
+    if (filteredData.length === 0) {
+      g.selectAll('.item-group').remove();
+      // Reset scales to default to avoid crash?
+      return;
+    }
+
+    const minDim = d3.min(filteredData, getDimensionValue);
+    const maxDim = d3.max(filteredData, getDimensionValue);
+    yScale.domain([minDim, maxDim]);
+
+    const minX = d3.min(filteredData, getXValue);
+    const maxX = d3.max(filteredData, getXValue);
+
+    // Center logic
+    const xCenter = (minX + maxX) / 2;
+    // Calculate initial scale range based on new yScale
+    // We want 1 unit X = 1 decade Y in visual pixels
+    const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
+
+    const screenCenter = width / 2;
+    xScale.domain([xCenter, xCenter + 1])
+      .range([screenCenter, screenCenter + initialDecadeHeight]);
+
+    // Data Join
+    const items = g.selectAll('.item-group')
+      .data(filteredData, d => d.id)
+      .join(
+        enter => {
+          const grp = enter.append('g').attr('class', 'item-group');
+          grp.append('rect').attr('class', 'hit-area')
+            .attr('fill', 'transparent').style('cursor', 'pointer');
+          grp.append('rect').attr('class', 'label-bg')
+            .attr('rx', 4).attr('ry', 4).attr('fill', 'black').attr('opacity', 0);
+          grp.append('circle').attr('cx', 0).attr('cy', 0)
+            .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE)));
+          grp.append('text').attr('class', 'label')
+            .attr('x', 10).attr('y', 0).attr('dy', '.35em')
+            .text(d => getLocalized(d.displayName, LANGUAGE))
+            .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE)))
+            .style('font-family', 'monospace');
+
+          // Attach listeners
+          grp.on("click", (event, d) => {
+            showInfobox(d);
+            event.stopPropagation();
+          })
+            .on("dblclick", (event, d) => {
+              selectResult(d);
+              event.stopPropagation();
+            });
+          return grp;
+        },
+        update => update,
+        exit => exit.remove()
+      );
+
+    // Initial positioning via zoom reset
+    // This will trigger zoom event which positions everything
+    // Only reset zoom if we don't have a selection we want to maintain context for?
+    // Actually, if we switch dimensions, the scales change completely.
+    // The previous zoom transform is invalid for the new scale anyway.
+    // But if we have a selected item, we might want to center on IT instead of global reset.
+
+    if (selectedItem && filteredData.find(d => d.id === selectedItem.id)) {
+      // If selected item exists in new view, center on it
+      // We need to re-find it in the new data to be safe, or just use selectedItem
+      // But we need to wait for the transition? Or just call selectResult logic?
+      // selectResult does a transition.
+      // We should probably just call selectResult(selectedItem) AFTER this function done?
+      // But we are inside updateDimension.
+
+      // Let's NOT call the global zoom reset if we have a selection.
+      selectResult(selectedItem);
+    } else {
+      const initialTransform = d3.zoomIdentity.translate(-width * 0.05, 0);
+      svg.transition().duration(750)
+        .call(zoom.transform, initialTransform);
+
+      // If selection is no longer valid, hide infobox
+      if (selectedItem) {
+        hideInfobox();
+      }
+    }
+  };
+
+  updateDimension('length');
+
+  d3.select('#dimension-select').on('change', function () {
+    updateDimension(this.value);
+  });
+
   d3.select('#recenter-btn').on('click', () => {
-    svg.transition()
-      .duration(750)
-      .ease(d3.easeCubicInOut)
-      .call(zoom.transform, initialTransform);
+    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
   });
 
   // Legend
   const legendPadding = 15;
   const legendItemHeight = 20;
   const legendHeight = categories.length * legendItemHeight + legendPadding * 2;
+  const legend = svg.append("g").attr("class", "legend");
 
-  // We need to calculate legendWidth based on the text
-  // Render texts first, measure, then add rect background.
-
-  // Temporary: Just create group at 0,0 for measurement
-  const legend = svg.append("g")
-    .attr("class", "legend");
-
-  // Legend Items
   let maxTextWidth = 0;
-
   categories.forEach((cat, i) => {
     const text = legend.append("text")
       .attr("x", legendPadding)
@@ -428,31 +365,23 @@ d3.json('/data.json').then(data => {
       .style("font-size", "12px")
       .style("cursor", "pointer")
       .on("mouseover", function () {
-        // Dim all groups that don't match
         g.selectAll(".item-group")
           .transition().duration(200)
           .attr("opacity", d => getLocalized(d.category, LANGUAGE) === cat ? 1 : 0.2);
-
-        // Bring matching groups to front
         g.selectAll(".item-group").filter(d => getLocalized(d.category, LANGUAGE) === cat).raise();
       })
       .on("mouseout", function () {
-        // Restore opacity
         g.selectAll(".item-group")
           .transition().duration(200)
           .attr("opacity", 1);
-
-        // Restore sort order
         g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
       })
       .on("click", function (event, d) {
-        // Filter data for this category
-        const categoryData = data.filter(item => getLocalized(item.category, LANGUAGE) === cat); // i18n update
+        const categoryData = data.filter(item => getLocalized(item.category, LANGUAGE) === cat && item.dimensions[currentDimension] !== undefined);
         if (categoryData.length === 0) return;
 
-        // Calculate raw bounding box in default screen coordinates
-        const xValues = categoryData.map(d => xScale(d.x_coordinates.length));
-        const yValues = categoryData.map(d => yScale(d.dimensions.length));
+        const xValues = categoryData.map(d => xScale(getXValue(d)));
+        const yValues = categoryData.map(d => yScale(getDimensionValue(d)));
 
         const minX = d3.min(xValues);
         const maxX = d3.max(xValues);
@@ -462,8 +391,6 @@ d3.json('/data.json').then(data => {
         const boundsWidth = maxX - minX;
         const boundsHeight = maxY - minY;
 
-        // Desired screen padding (pixels)
-        // asymmetric padding to allow space for labels on the right
         const padLeft = 180;
         const padRight = 460;
         const padTop = 60;
@@ -472,21 +399,15 @@ d3.json('/data.json').then(data => {
         const availWidth = width - padLeft - padRight;
         const availHeight = height - padTop - padBottom;
 
-        // Calculate scale to fit content into available screen space
-        // Handle case where boundsWidth/Height is 0 (single point) by defaulting to a max scale
         let scaleX = boundsWidth > 0 ? availWidth / boundsWidth : 10000;
         let scaleY = boundsHeight > 0 ? availHeight / boundsHeight : 10000;
 
         let scale = Math.min(scaleX, scaleY);
-
-        // Clamp scale
         scale = Math.min(Math.max(scale, 1), 10000);
 
-        // Center of the data
         const cx = (minX + maxX) / 2;
         const cy = (minY + maxY) / 2;
 
-        // Center of the available screen area
         const screenCX = padLeft + availWidth / 2;
         const screenCY = padTop + availHeight / 2;
 
@@ -509,8 +430,6 @@ d3.json('/data.json').then(data => {
   });
 
   const legendWidth = maxTextWidth + legendPadding * 2;
-
-  // Legend Box (Inserted before text)
   legend.insert("rect", "text")
     .attr("width", legendWidth)
     .attr("height", legendHeight)
@@ -518,11 +437,9 @@ d3.json('/data.json').then(data => {
     .attr("stroke", "#00aaff")
     .attr("stroke-width", 1);
 
-  // Position Legend
   const legendX = width - legendWidth - 20;
   const legendY = height - legendHeight - 20;
   legend.attr("transform", `translate(${legendX}, ${legendY})`);
-
 
 
   // Search Implementation
@@ -530,7 +447,6 @@ d3.json('/data.json').then(data => {
   const searchResults = document.getElementById('search-results');
   let selectedIndex = -1;
 
-  // Render Dropdown
   function renderResults(matches, query) {
     searchResults.innerHTML = '';
     selectedIndex = -1;
@@ -544,7 +460,7 @@ d3.json('/data.json').then(data => {
       const div = document.createElement('div');
       div.className = 'search-result-item';
 
-      div.innerHTML = getSearchResultContent(d, query, LANGUAGE); // Updated to handle tags
+      div.innerHTML = getSearchResultContent(d, query, LANGUAGE);
 
       div.addEventListener('click', () => {
         selectResult(d);
@@ -561,94 +477,50 @@ d3.json('/data.json').then(data => {
     searchResults.style.display = 'block';
   }
 
-  // Helper functions for highlighting
-  // Helper functions for highlighting
-  function highlightItem(d) {
-    // Reset Z-order for all items first
-    items.sort((a, b) => data.indexOf(a) - data.indexOf(b));
-
-    // Highlight new item
-    items.classed("highlighted", false); // Reset others
-    items.filter(item => item.id === d.id).classed("highlighted", true);
-
-    // Bring new item to front
-    items.filter(item => item.id === d.id).raise();
-  }
-
-  function unhighlightItems() {
-    items.classed("highlighted", false);
-    // Restore z-order
-    items.sort((a, b) => data.indexOf(a) - data.indexOf(b));
-  }
-
-  // Select Result & Zoom
   function selectResult(result) {
-    searchInput.value = getLocalized(result.displayName, LANGUAGE); // i18n update
+    if (result.dimensions[currentDimension] === undefined) return;
+
+    searchInput.value = getLocalized(result.displayName, LANGUAGE);
     searchResults.style.display = 'none';
 
-    // Highlight immediately
     highlightItem(result);
-
-    // Show Infobox immediately
     showInfobox(result);
 
-    // Use zoom to center and scale on the item
-    // We want to center (d.x, d.dimensions.length)
-    const t = d3.zoomTransform(svg.node());
+    const matchItem = data.find(d => d.id === result.id);
+    if (!matchItem) return;
 
-    // Target scale (zoom into the item level)
-    // We want the item to be prominent.
-    // Let's find the closest items in Y to determine a good zoom level?
-    // Or just fixed high zoom? Let's try to frame it with some context.
-
-    // Find neighbors in log scale
-    const item = data.find(d => d.id === result.id);
-    if (!item) return;
-
-    const neighbors = data.filter(d => Math.abs(d.dimensions.length - item.dimensions.length) < item.dimensions.length * 2);
-
-    // Calculate scale to show roughly 3 decades vertically
+    const val = getDimensionValue(matchItem);
     const domain = yScale.domain();
     const totalDecades = Math.log10(domain[1]) - Math.log10(domain[0]);
-    const availableHeight = height - 100; // From yScale range [height - 50, 50]
+    const availableHeight = height - 100;
 
-    // We want 3 decades to fill the screen height
-    // k = (height * totalDecades) / (3 * availableHeight)
     let targetScale = (height * totalDecades) / (3 * availableHeight);
 
-    // Dynamic Zoom Constraint: Keep nearest neighbor visible
-    // 1. Calculate distance to nearest neighbor in base screen coordinates (transform k=1)
-    let minDiff = Infinity;
-    const x1 = xScale(item.x_coordinates.length);
-    const y1 = yScale(item.dimensions.length);
+    // Dynamic Zoom Constraint based on neighbors
+    const filteredData = data.filter(d => d.dimensions[currentDimension] !== undefined);
+    const neighbors = filteredData.filter(d => Math.abs(getDimensionValue(d) - val) < val * 2);
 
-    let minX = x1, maxX = x1, minY = y1, maxY = y1;
+    let minDiff = Infinity;
+    const y1 = yScale(getDimensionValue(matchItem));
 
     neighbors.forEach(p => {
-      const x2 = xScale(p.x_coordinates.length);
-      const y2 = yScale(p.dimensions.length);
-      minX = Math.min(minX, x2);
-      maxX = Math.max(maxX, x2);
-      minY = Math.min(minY, y2);
-      maxY = Math.max(maxY, y2);
+      if (p.id === matchItem.id) return;
+      const y2 = yScale(getDimensionValue(p));
+      const diff = Math.abs(y1 - y2);
+      if (diff < minDiff) minDiff = diff;
     });
 
     if (minDiff !== Infinity) {
-      // 2. We want the nearest neighbor to be ON SCREEN.
-      // Use min(width, height) / 2.2 to give some padding.
       const safeRadius = Math.min(width, height) / 2.2;
       const maxScaleForNeighbor = safeRadius / minDiff;
-
       targetScale = Math.min(targetScale, maxScaleForNeighbor);
     }
 
-    // Clamp scale reasonably
     targetScale = Math.max(1, Math.min(targetScale, 1000));
-    // Center on item
-    const x = xScale(item.x_coordinates.length);
-    const y = yScale(item.dimensions.length);
 
-    // transform = translate(center - point * k)
+    const x = xScale(getXValue(matchItem));
+    const y = yScale(getDimensionValue(matchItem));
+
     const targetTransform = d3.zoomIdentity
       .translate(width / 2, height / 2)
       .scale(targetScale)
@@ -657,10 +529,9 @@ d3.json('/data.json').then(data => {
     svg.transition()
       .duration(750)
       .call(zoom.transform, targetTransform)
-      .on("end", () => highlightItem(item));
+      .on("end", () => highlightItem(matchItem));
   }
 
-  // Keyboard Navigation
   function updateSelection() {
     const items = searchResults.querySelectorAll('.search-result-item');
     items.forEach((item, index) => {
@@ -676,16 +547,18 @@ d3.json('/data.json').then(data => {
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value;
     const matches = getMatches(data, query, LANGUAGE);
-    renderResults(matches, query);
+    // Filter matching results based on current dimension existence
+    const filtered = matches.filter(d => d.dimensions[currentDimension] !== undefined);
+    renderResults(filtered, query);
   });
 
   searchInput.addEventListener('focus', () => {
     const query = searchInput.value;
     if (query) {
       const matches = getMatches(data, query, LANGUAGE);
-      renderResults(matches, query);
+      const filtered = matches.filter(d => d.dimensions[currentDimension] !== undefined);
+      renderResults(filtered, query);
     }
-    // ensure the list starts at the top
     searchResults.scrollTop = 0;
   });
 
@@ -703,20 +576,18 @@ d3.json('/data.json').then(data => {
       e.preventDefault();
     } else if (e.key === 'Enter') {
       if (selectedIndex >= 0) {
-        // Select highlighted
-        // Re-run match to get data object properly (or store it on DOM element)
-        // Simpler: use the data from the index of matches
         const query = searchInput.value;
         const matches = getMatches(data, query, LANGUAGE);
-        if (matches[selectedIndex]) {
-          selectResult(matches[selectedIndex]);
+        const filtered = matches.filter(d => d.dimensions[currentDimension] !== undefined);
+        if (filtered[selectedIndex]) {
+          selectResult(filtered[selectedIndex]);
         }
       } else if (items.length > 0) {
-        // Default to first item if none selected
         const query = searchInput.value;
         const matches = getMatches(data, query, LANGUAGE);
-        if (matches[0]) {
-          selectResult(matches[0]);
+        const filtered = matches.filter(d => d.dimensions[currentDimension] !== undefined);
+        if (filtered[0]) {
+          selectResult(filtered[0]);
         }
       }
       e.preventDefault();
@@ -725,34 +596,23 @@ d3.json('/data.json').then(data => {
     }
   });
 
-  // Hide dropdown on clicking outside
   document.addEventListener('click', (e) => {
     if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
       searchResults.style.display = 'none';
     }
   });
 
-  // Global keydown listener to auto-focus search
   document.addEventListener('keydown', (e) => {
-    // Ignore if search input is already focused
     if (document.activeElement === searchInput) return;
-
-    // Ignore if holding modifier keys (Ctrl, Meta, Alt)
     if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-    // Clear search on Delete or Backspace
     if (e.key === 'Delete' || e.key === 'Backspace') {
       searchInput.value = '';
-      renderResults([], ''); // Clear results manually
+      renderResults([], '');
       searchInput.focus();
       return;
     }
-
-    // Ignore if key is not a single printable character
-    // This avoids focusing on Arrow keys, Escape, Enter, etc. unless they produce input
     if (e.key.length === 1) {
       searchInput.focus();
-      // Allow default action so the character is typed into the input
     }
   });
 
@@ -763,58 +623,41 @@ d3.json('/data.json').then(data => {
     .style("display", "none");
 
   function showInfobox(d) {
-    // Highlight the item
+    selectedItem = d;
     highlightItem(d);
 
-    const localizedDisplayName = getLocalized(d.displayName, LANGUAGE); // i18n update
-    const localizedCategory = getLocalized(d.category, LANGUAGE); // i18n update
+    const localizedDisplayName = getLocalized(d.displayName, LANGUAGE);
+    const localizedCategory = getLocalized(d.category, LANGUAGE);
     let tagsContent = "";
     if (d.tags && d.tags[LANGUAGE]) {
       tagsContent = `<div class="infobox-row"><span class="infobox-label">Tags:</span>${d.tags[LANGUAGE].join(", ")}</div>`;
     }
 
-    // specific format: [i.j x 10^k] m
     let lengthContent = "";
     let lengthTextForCopy = "";
-    if (d.dimensions?.length !== undefined && d.dimensions?.length !== null) {
-      // Calculate significant figures from the source string in data.json if possible
-      // But here we have d.length as a number. In JS, 640 is just 640.
-      // The user says: "for integer values like 640, assume the number of sig figs is the number of digits before the trailing zeros"
-      // So 640 -> 2 sig figs (6, 4). 600 -> 1 sig fig (6). 641 -> 3 sig figs.
-      // For floating points like 1.2e5, it's harder to know from the number alone.
-      // Helper to count sig figs from a number:
+    const val = getDimensionValue(d);
+
+    if (val !== undefined) {
+      const unit = getUnit(currentDimension);
+      const label = currentDimension.charAt(0).toUpperCase() + currentDimension.slice(1);
 
       const formatWithSigFigs = (num) => {
         let n = num;
         if (n === 0) return "0";
-
-        // Handle integers specifically for the trailing zero rule
         if (Number.isInteger(n) && !n.toString().includes('e')) {
           const s = Math.abs(n).toString();
-          // Count digits excluding trailing zeros
           const trimmed = s.replace(/0+$/, '');
           const sigFigs = trimmed.length;
-
-          // If we have 640, sigFigs is 2. 
-          // Scientific notation: 6.4 x 10^2
-          // Formula: n.toExponential(sigFigs - 1)
           return n.toExponential(Math.max(0, sigFigs - 1));
         }
-
-        // For non-integers or very large numbers already in scientific notation (which JS handles automatically for >1e21)
-        // We will fallback to 3 sig figs (2 decimal places) as a default if we can't infer otherwise, 
-        // OR try to infer from string if we had it. Since we don't store the original string, 
-        // we'll try a heuristic or just stick to the requested integer rule + standard for others.
-        // User only specified the rule for integers. Let's stick to 2 decimal places (3 sig figs) for others for consistency with previous,
-        // unless they look like simple integers.
         return n.toExponential(2);
       };
 
-      const exp = formatWithSigFigs(d.dimensions.length);
+      const exp = formatWithSigFigs(val);
       const [mantissa, exponent] = exp.split('e');
       const expVal = parseInt(exponent, 10);
-      lengthTextForCopy = `${mantissa} × 10^${expVal} m`;
-      lengthContent = `<div class="infobox-row"><span class="infobox-label">Length:</span>${lengthTextForCopy}<button class="copy-btn">Copy</button></div>`;
+      lengthTextForCopy = `${mantissa} × 10^${expVal} ${unit}`;
+      lengthContent = `<div class="infobox-row"><span class="infobox-label">${label}:</span>${lengthTextForCopy}<button class="copy-btn">Copy</button></div>`;
     }
 
     const categoryColor = colorScale(localizedCategory);
@@ -827,7 +670,6 @@ d3.json('/data.json').then(data => {
     `)
       .style("display", "block");
 
-    // Attach copy event listener
     if (lengthTextForCopy) {
       infobox.select(".copy-btn").on("click", function (event) {
         event.stopPropagation();
@@ -841,196 +683,89 @@ d3.json('/data.json').then(data => {
         });
       });
     }
-    // Positioning is handled by CSS (bottom-left)
   }
 
   function hideInfobox() {
     infobox.style("display", "none");
-    unhighlightItems(); // Remove highlight
+    unhighlightItems();
+    selectedItem = null;
   }
-
-  // Event Listeners for Infobox
-  // Attach to the entire group
-  g.selectAll(".item-group")
-    .on("click", (event, d) => {
-      showInfobox(d);
-      event.stopPropagation(); // Prevent SVG click from hiding it
-    })
-    .on("dblclick", (event, d) => {
-      selectResult(d);
-      event.stopPropagation(); // Stop zoom behavior if any, though selectResult triggers its own zoom
-    });
-
-  // Hide on background click
 
   // Hide on background click
   svg.on("click", () => {
     hideInfobox();
   });
 
-  // Modify Search Selection to show Infobox
 
+  // Cursor Ruler
   const rulerGroup = svg.append("g")
     .attr("class", "cursor-ruler")
-    .style("pointer-events", "none") // Let mouse events pass through
+    .style("pointer-events", "none")
     .style("display", "none");
 
   const rulerLine = rulerGroup.append("line")
-    .attr("x1", 0)
-    .attr("x2", width)
-    .attr("stroke", "red")
-    .attr("stroke-width", 1)
-    .attr("stroke-dasharray", "4,2");
+    .attr("x1", 0).attr("x2", width).attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
   const rulerLabelBackground = rulerGroup.append("rect")
-    .attr("fill", "black")
-    .attr("rx", 4)
-    .attr("ry", 4)
-    .attr("opacity", 0.7);
+    .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
 
   const rulerLabel = rulerGroup.append("text")
-    .attr("fill", "white")
-    .style("font-family", "monospace")
-    .style("font-size", "12px")
-    .attr("dy", "0.35em")
-    .attr("text-anchor", "start");
-
-  // Track the current transform to correctly invert Y
-  let currentTransform = d3.zoomIdentity;
-
-  // We need to listen on the SVG (or a transparent rect covering it)
-  // The 'zoom' behavior on svg consumes events, so we hook into it or append a listener
-  // Since 'zoom' is on svg, standard mousemove might be blocked or consumed?
-  // Actually d3.zoom doesn't stop propagation of mousemove by default unless it's dragging.
+    .attr("fill", "white").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
 
   svg.on("mousemove", (event) => {
-    // Show ruler
     rulerGroup.style("display", null);
-
+    const t = d3.zoomTransform(svg.node());
     const [mouseX, mouseY] = d3.pointer(event);
+    rulerLine.attr("y1", mouseY).attr("y2", mouseY);
 
-    // Update Line Position
-    rulerLine
-      .attr("y1", mouseY)
-      .attr("y2", mouseY);
-
-    // Calculate Value
-    // We need the Rescaled Y Scale to invert correctly
-    const newYScale = currentTransform.rescaleY(yScale);
+    const newYScale = t.rescaleY(yScale);
     const value = newYScale.invert(mouseY);
 
-    // Format Value (Scientific Notation)
-    const formattedValue = value.toExponential(2) + " m";
+    const exp = value.toExponential(2);
+    const [mantissa, exponent] = exp.split('e');
+    const expVal = parseInt(exponent, 10);
+    const formattedValue = `${mantissa} × 10^${expVal} ${getUnit(currentDimension)}`;
 
-    // Update Label
-    rulerLabel
-      .attr("x", 10) // Left aligned
-      .attr("y", mouseY - 10)
-      .text(formattedValue);
+    rulerLabel.attr("x", 10).attr("y", mouseY - 10).text(formattedValue);
 
-    // Update Label Background
     const bbox = rulerLabel.node().getBBox();
-    rulerLabelBackground
-      .attr("x", bbox.x - 4)
-      .attr("y", bbox.y - 4)
-      .attr("width", bbox.width + 8)
-      .attr("height", bbox.height + 8);
+    rulerLabelBackground.attr("x", bbox.x - 4).attr("y", bbox.y - 4).attr("width", bbox.width + 8).attr("height", bbox.height + 8);
   });
 
   svg.on("mouseleave", () => {
     rulerGroup.style("display", "none");
   });
 
-  // Hook into existing zoom listener to update currentTransform
-  // We need to modify the existing zoom handler to update our variable
-  // BUT we can't easily modify the existing function closure.
-  // Instead, we can inspect d3.zoomTransform(svg.node()) inside mousemove.
-  // That is cleaner than modifying the zoom handler.
 
-  // RE-UPDATE mousemove to use d3.zoomTransform 
-  svg.on("mousemove", (event) => {
-    rulerGroup.style("display", null);
-
-    // Get current transform directly from DOM
-    const t = d3.zoomTransform(svg.node());
-
-    const [mouseX, mouseY] = d3.pointer(event);
-
-    // Update Line Position
-    rulerLine
-      .attr("y1", mouseY)
-      .attr("y2", mouseY);
-
-    // Calculate Value
-    const newYScale = t.rescaleY(yScale);
-    const value = newYScale.invert(mouseY);
-
-    // Format Value
-    const exp = value.toExponential(2);
-    const [mantissa, exponent] = exp.split('e');
-    // Remove '+' sign from exponent if present (parseInt does this, but to be clean)
-    const expVal = parseInt(exponent, 10);
-    const formattedValue = `${mantissa} × 10^${expVal} m`;
-
-    // Update Label
-    rulerLabel
-      .attr("x", 10)
-      .attr("y", mouseY - 10)
-      .text(formattedValue);
-
-    // Update Label Background
-    const bbox = rulerLabel.node().getBBox();
-    rulerLabelBackground
-      .attr("x", bbox.x - 4)
-      .attr("y", bbox.y - 4)
-      .attr("width", bbox.width + 8)
-      .attr("height", bbox.height + 8);
-  });
-
-  // Resize Handler Logic
-  function updateLayout() {
-    // 1. Update Scales Ranges
-    yScale.range([height - 50, 50]);
-
-    const decadeHeight = Math.abs(yScale(10) - yScale(1));
-    const screenCenter = width / 2;
-    const xCenter = xScale.domain()[0]; // Approx center
-
-    // We need to maintain the aspect ratio: 1 unit x = 1 decade y
-    // xScale was: domain([xCenter, xCenter+1]) -> range([screenCenter, screenCenter + decadeHeight])
-    // We update the range to use the new screenCenter and decadeHeight
-    xScale.range([screenCenter, screenCenter + decadeHeight]);
-
-    // 2. Update Zoom Extent
-    zoom.translateExtent([[-300, -300], [width + 300, height + 300]]);
-
-    // 3. Update Mask
-    mask.select("rect")
-      .attr("width", width)
-      .attr("height", height);
-
-    // 4. Update Legend Position
-    // We need to re-calculate legendX, legendY based on new width/height
-    const legendRect = legend.select('rect');
-    const legendW = +legendRect.attr('width');
-    const legendH = +legendRect.attr('height');
-
-    const legendX = width - legendW - 20;
-    const legendY = height - legendH - 20;
-    legend.attr("transform", `translate(${legendX}, ${legendY})`);
-
-    // 5. Trigger Zoom update to re-render grid/points with new dimensions
-    const t = d3.zoomTransform(svg.node());
-    svg.call(zoom.transform, t);
-  }
-
+  // Resize Handler
   window.addEventListener('resize', () => {
     width = app.clientWidth;
     height = app.clientHeight;
     svg.attr('viewBox', [0, 0, width, height]);
+    mask.select("rect").attr("width", width).attr("height", height);
 
-    // Update scales and zoom here
-    updateLayout();
+    // We can call updateDimension to reflow?
+    // But maintaining Zoom state would be better.
+    // For now, simple re-init or layout update.
+    // The previous updateLayout function was complex.
+    // Calling updateDimension resets zoom.
+
+    // Update ranges
+    yScale.range([height - 50, 50]);
+    // Re-calc x-range based on new Y dec
+    const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
+    const screenCenter = width / 2;
+    const xCenter = (xScale.domain()[0] + xScale.domain()[1]) / 2; // Keep center?
+    xScale.range([screenCenter, screenCenter + initialDecadeHeight]);
+
+    // Update legend pos
+    const legendX = width - legendWidth - 20;
+    const legendY = height - legendHeight - 20;
+    legend.attr("transform", `translate(${legendX}, ${legendY})`);
+
+    // Refresh zoom
+    const t = d3.zoomTransform(svg.node());
+    svg.call(zoom.transform, t);
   });
 
 });
