@@ -219,7 +219,9 @@
                 <th id="header-displayName">Display Name</th>
                 <th id="header-category">Category</th>
                 <th class="dim-col">Dim: Length (m)</th>
+                <th class="dim-col">Src: Length</th>
                 <th class="dim-col">Dim: Mass (kg)</th>
+                <th class="dim-col">Src: Mass</th>
                 <th id="header-tags">Tags</th>
                 <th class="dim-col">X: Length (decades)</th>
                 <th class="dim-col">X: Mass (decades)</th>
@@ -286,7 +288,9 @@
                     <td><input type="text" value="${getVal(row, `displayName.${lang}`)}" onchange="updateData(${index}, 'displayName.${lang}', this.value)"></td>
                     <td><input type="text" value="${getVal(row, `category.${lang}`)}" onchange="updateData(${index}, 'category.${lang}', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.length')}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'sources.length')}" onchange="updateData(${index}, 'sources.length', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.mass')}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'sources.mass')}" onchange="updateData(${index}, 'sources.mass', this.value)"></td>
                     <td><input type="text" value="${tagsToString(getVal(row, `tags.${lang}`, []))}" onchange="updateTags(${index}, 'tags.${lang}', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.length')}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.mass')}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
@@ -534,6 +538,13 @@
                         if (cleanRow.dimensions.length === "") delete cleanRow.dimensions.length;
                         if (cleanRow.dimensions.mass === "") delete cleanRow.dimensions.mass;
                         if (Object.keys(cleanRow.dimensions).length === 0) delete cleanRow.dimensions;
+                    }
+
+                    // Clean sources
+                    if (cleanRow.sources) {
+                        if (cleanRow.sources.length === "") delete cleanRow.sources.length;
+                        if (cleanRow.sources.mass === "") delete cleanRow.sources.mass;
+                        if (Object.keys(cleanRow.sources).length === 0) delete cleanRow.sources;
                     }
 
                     return cleanRow;
