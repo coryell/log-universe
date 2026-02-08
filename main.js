@@ -64,6 +64,9 @@ d3.json('/data.json').then(data => {
   // Convert lengths to numbers just in case
   data.forEach(d => {
     d.dimensions.length = +d.dimensions.length;
+    if (d.x_coordinates) {
+      d.x_coordinates.length = +d.x_coordinates.length;
+    }
   });
 
   // Calculate domain extent
@@ -71,8 +74,8 @@ d3.json('/data.json').then(data => {
   const maxLength = d3.max(data, d => d.dimensions.length);
 
   // Calculate X extent
-  const minX = d3.min(data, d => d.x) || 0;
-  const maxX = d3.max(data, d => d.x) || 1;
+  const minX = d3.min(data, d => d.x_coordinates.length) || 0;
+  const maxX = d3.max(data, d => d.x_coordinates.length) || 1;
 
   // Setup Log Scale
   const yScale = d3.scaleLog()
@@ -267,7 +270,7 @@ d3.json('/data.json').then(data => {
     // Apply initial transform to positions
     .attr('transform', d => {
       const t = initialTransform;
-      const newX = t.rescaleX(xScale)(d.x);
+      const newX = t.rescaleX(xScale)(d.x_coordinates.length);
       const newY = t.rescaleY(yScale)(d.dimensions.length);
       return `translate(${newX}, ${newY})`;
     });
@@ -355,7 +358,7 @@ d3.json('/data.json').then(data => {
 
       // Update Group Positions
       g.selectAll('.item-group')
-        .attr('transform', d => `translate(${newXScale(d.x)}, ${newYScale(d.dimensions.length)})`);
+        .attr('transform', d => `translate(${newXScale(d.x_coordinates.length)}, ${newYScale(d.dimensions.length)})`);
 
       // Update Sizes (Semantic Zoom)
       g.selectAll('.item-group circle')
@@ -448,7 +451,7 @@ d3.json('/data.json').then(data => {
         if (categoryData.length === 0) return;
 
         // Calculate raw bounding box in default screen coordinates
-        const xValues = categoryData.map(d => xScale(d.x));
+        const xValues = categoryData.map(d => xScale(d.x_coordinates.length));
         const yValues = categoryData.map(d => yScale(d.dimensions.length));
 
         const minX = d3.min(xValues);
@@ -616,13 +619,13 @@ d3.json('/data.json').then(data => {
     // Dynamic Zoom Constraint: Keep nearest neighbor visible
     // 1. Calculate distance to nearest neighbor in base screen coordinates (transform k=1)
     let minDiff = Infinity;
-    const x1 = xScale(item.x);
+    const x1 = xScale(item.x_coordinates.length);
     const y1 = yScale(item.dimensions.length);
 
     let minX = x1, maxX = x1, minY = y1, maxY = y1;
 
     neighbors.forEach(p => {
-      const x2 = xScale(p.x);
+      const x2 = xScale(p.x_coordinates.length);
       const y2 = yScale(p.dimensions.length);
       minX = Math.min(minX, x2);
       maxX = Math.max(maxX, x2);
@@ -642,7 +645,7 @@ d3.json('/data.json').then(data => {
     // Clamp scale reasonably
     targetScale = Math.max(1, Math.min(targetScale, 1000));
     // Center on item
-    const x = xScale(item.x);
+    const x = xScale(item.x_coordinates.length);
     const y = yScale(item.dimensions.length);
 
     // transform = translate(center - point * k)

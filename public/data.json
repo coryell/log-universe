@@ -7,7 +7,6 @@
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "subatomic",
@@ -16,6 +15,9 @@
     },
     "dimensions": {
       "length": 1e-18
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -26,7 +28,6 @@
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "nucleon",
@@ -35,6 +36,9 @@
     },
     "dimensions": {
       "length": 8e-16
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -45,7 +49,6 @@
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
-    "x": 5,
     "tags": {
       "en-us": [
         "weak nuclear force",
@@ -54,6 +57,9 @@
     },
     "dimensions": {
       "length": 1e-17
+    },
+    "x_coordinates": {
+      "length": 5
     }
   },
   {
@@ -64,7 +70,6 @@
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "quantum"
@@ -72,6 +77,9 @@
     },
     "dimensions": {
       "length": 1.6e-35
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -82,7 +90,6 @@
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
-    "x": 5,
     "tags": {
       "en-us": [
         "strong nuclear force",
@@ -91,6 +98,9 @@
     },
     "dimensions": {
       "length": 1e-15
+    },
+    "x_coordinates": {
+      "length": 5
     }
   },
   {
@@ -101,7 +111,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "gamma ray",
@@ -111,6 +120,9 @@
     },
     "dimensions": {
       "length": 9e-22
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -121,7 +133,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "light",
@@ -131,6 +142,9 @@
     },
     "dimensions": {
       "length": 8.2e-13
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -141,7 +155,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "light",
@@ -150,6 +163,9 @@
     },
     "dimensions": {
       "length": 5e-12
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -160,7 +176,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "light",
@@ -171,6 +186,9 @@
     },
     "dimensions": {
       "length": 1e-8
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -181,7 +199,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "color",
@@ -192,6 +209,9 @@
     },
     "dimensions": {
       "length": 4e-7
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -202,7 +222,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "color",
@@ -213,6 +232,9 @@
     },
     "dimensions": {
       "length": 7e-7
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -223,7 +245,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "heat",
@@ -235,6 +256,9 @@
     },
     "dimensions": {
       "length": 0.001
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -245,7 +269,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "communication",
@@ -256,6 +279,9 @@
     },
     "dimensions": {
       "length": 1
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -266,7 +292,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "communication",
@@ -277,6 +302,9 @@
     },
     "dimensions": {
       "length": 10
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -287,7 +315,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "communication",
@@ -298,6 +325,9 @@
     },
     "dimensions": {
       "length": 1000
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -308,7 +338,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "big bang",
@@ -320,6 +349,9 @@
     },
     "dimensions": {
       "length": 0.0016
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -330,7 +362,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "light",
@@ -340,6 +371,9 @@
     },
     "dimensions": {
       "length": 300000
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -350,7 +384,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "light",
@@ -360,6 +393,9 @@
     },
     "dimensions": {
       "length": 33000
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -370,7 +406,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "light",
@@ -380,6 +415,9 @@
     },
     "dimensions": {
       "length": 30
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -390,7 +428,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "hydrogen",
@@ -402,6 +439,9 @@
     },
     "dimensions": {
       "length": 1.2e-7
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -412,7 +452,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "heat",
@@ -424,6 +463,9 @@
     },
     "dimensions": {
       "length": 0.0000093
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -434,7 +476,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "heat",
@@ -446,6 +487,9 @@
     },
     "dimensions": {
       "length": 0.000004
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -456,7 +500,6 @@
     "category": {
       "en-us": "Electromagnetic"
     },
-    "x": 20,
     "tags": {
       "en-us": [
         "light",
@@ -466,6 +509,9 @@
     },
     "dimensions": {
       "length": 0.21
+    },
+    "x_coordinates": {
+      "length": 20
     }
   },
   {
@@ -476,7 +522,6 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "tags": {
       "en-us": [
         "interplanetary medium",
@@ -485,6 +530,9 @@
     },
     "dimensions": {
       "length": 0.005
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -495,7 +543,6 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "tags": {
       "en-us": [
         "interstellar medium",
@@ -504,6 +551,9 @@
     },
     "dimensions": {
       "length": 0.1
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -514,7 +564,6 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "tags": {
       "en-us": [
         "intergalactic medium",
@@ -523,6 +572,9 @@
     },
     "dimensions": {
       "length": 1
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -533,9 +585,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 0.00001
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -546,9 +600,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 3e-9
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -559,9 +615,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 2e-10
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -572,9 +630,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 3.5e-11
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -585,9 +645,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 0.000001
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -598,9 +660,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 60,
     "dimensions": {
       "length": 3.1e-10
+    },
+    "x_coordinates": {
+      "length": 60
     }
   },
   {
@@ -611,9 +675,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 1.5e-15
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -624,9 +690,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 3e-12
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -637,9 +705,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 47000000000000000
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -650,9 +720,11 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 40,
     "dimensions": {
       "length": 2.2e+22
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -663,9 +735,11 @@
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
-    "x": 0,
     "dimensions": {
       "length": 7e-15
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -676,9 +750,11 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 6,
     "dimensions": {
       "length": 7.4e-11
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -689,9 +765,11 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 6,
     "dimensions": {
       "length": 0.000001
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -702,9 +780,11 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 6,
     "dimensions": {
       "length": 1e-9
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -715,9 +795,11 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 6,
     "dimensions": {
       "length": 2.8e-10
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -728,9 +810,11 @@
     "category": {
       "en-us": "Molecules"
     },
-    "x": 0,
     "dimensions": {
       "length": 1e-9
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -741,7 +825,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "enzyme",
@@ -751,6 +834,9 @@
     },
     "dimensions": {
       "length": 7.5e-9
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -761,7 +847,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6,
     "tags": {
       "en-us": [
         "protein",
@@ -770,6 +855,9 @@
     },
     "dimensions": {
       "length": 3e-7
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -780,7 +868,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6,
     "tags": {
       "en-us": [
         "deoxyribonucleic acid",
@@ -790,6 +877,9 @@
     },
     "dimensions": {
       "length": 0.1
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -800,7 +890,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 12,
     "tags": {
       "en-us": [
         "chromatid",
@@ -812,6 +901,9 @@
     },
     "dimensions": {
       "length": 0.00001
+    },
+    "x_coordinates": {
+      "length": 12
     }
   },
   {
@@ -822,7 +914,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6,
     "tags": {
       "en-us": [
         "phospholipid bilayer"
@@ -830,6 +921,9 @@
     },
     "dimensions": {
       "length": 1e-8
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -840,7 +934,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "microbe",
@@ -849,6 +942,9 @@
     },
     "dimensions": {
       "length": 2e-8
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -859,7 +955,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "microbe",
@@ -868,6 +963,9 @@
     },
     "dimensions": {
       "length": 0.0000012
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -878,9 +976,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "dimensions": {
       "length": 2e-7
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -891,9 +991,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "dimensions": {
       "length": 0.15
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -904,9 +1006,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "dimensions": {
       "length": 0.000005
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -917,9 +1021,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "dimensions": {
       "length": 0.0001
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -930,9 +1036,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "dimensions": {
       "length": 0.00003
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -943,7 +1051,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "immune",
@@ -952,6 +1059,9 @@
     },
     "dimensions": {
       "length": 0.00001
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -962,7 +1072,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6,
     "tags": {
       "en-us": [
         "mitochondrion",
@@ -971,6 +1080,9 @@
     },
     "dimensions": {
       "length": 0.000002
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -981,7 +1093,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6,
     "tags": {
       "en-us": [
         "cell"
@@ -989,6 +1100,9 @@
     },
     "dimensions": {
       "length": 2.5e-8
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -999,7 +1113,6 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6,
     "tags": {
       "en-us": [
         "cell",
@@ -1008,6 +1121,9 @@
     },
     "dimensions": {
       "length": 0.00001
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1018,9 +1134,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "dimensions": {
       "length": 1
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1031,9 +1149,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "dimensions": {
       "length": 30
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1044,9 +1164,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 0,
     "dimensions": {
       "length": 0.001
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1057,9 +1179,11 @@
     "category": {
       "en-us": "Biology"
     },
-    "x": 6,
     "dimensions": {
       "length": 0.0001
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1070,7 +1194,6 @@
     "category": {
       "en-us": "Technology"
     },
-    "x": 40,
     "tags": {
       "en-us": [
         "electronics"
@@ -1078,6 +1201,9 @@
     },
     "dimensions": {
       "length": 5e-8
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -1088,9 +1214,11 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 60,
     "dimensions": {
       "length": 0.17
+    },
+    "x_coordinates": {
+      "length": 60
     }
   },
   {
@@ -1101,9 +1229,11 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 60,
     "dimensions": {
       "length": 17
+    },
+    "x_coordinates": {
+      "length": 60
     }
   },
   {
@@ -1114,9 +1244,11 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 60,
     "dimensions": {
       "length": 7000
+    },
+    "x_coordinates": {
+      "length": 60
     }
   },
   {
@@ -1127,9 +1259,11 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 60,
     "dimensions": {
       "length": 0.011
+    },
+    "x_coordinates": {
+      "length": 60
     }
   },
   {
@@ -1140,9 +1274,11 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 60,
     "dimensions": {
       "length": 3.4e-7
+    },
+    "x_coordinates": {
+      "length": 60
     }
   },
   {
@@ -1153,8 +1289,10 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40,
     "dimensions": {
+      "length": 40
+    },
+    "x_coordinates": {
       "length": 40
     }
   },
@@ -1166,9 +1304,11 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40,
     "dimensions": {
       "length": 250
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -1179,9 +1319,11 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40,
     "dimensions": {
       "length": 100
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -1192,9 +1334,11 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40,
     "dimensions": {
       "length": 150000
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -1205,9 +1349,11 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40,
     "dimensions": {
       "length": 1000000
+    },
+    "x_coordinates": {
+      "length": 40
     }
   },
   {
@@ -1218,7 +1364,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "terra",
@@ -1227,6 +1372,9 @@
     },
     "dimensions": {
       "length": 6378000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1237,7 +1385,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "satellite",
@@ -1247,6 +1394,9 @@
     },
     "dimensions": {
       "length": 1740000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1257,9 +1407,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 380000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1270,7 +1422,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "Sol",
@@ -1279,6 +1430,9 @@
     },
     "dimensions": {
       "length": 696000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1289,9 +1443,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 150000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1302,9 +1458,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 58000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1315,7 +1473,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "gas giant",
@@ -1324,6 +1481,9 @@
     },
     "dimensions": {
       "length": 778000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1334,7 +1494,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "gas giant",
@@ -1343,6 +1502,9 @@
     },
     "dimensions": {
       "length": 1400000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1353,7 +1515,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "dwarf planet"
@@ -1361,6 +1522,9 @@
     },
     "dimensions": {
       "length": 6000000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1371,9 +1535,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 60000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1384,9 +1550,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 140000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1397,9 +1565,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 58000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1410,9 +1580,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 100
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1423,9 +1595,11 @@
     "category": {
       "en-us": "Geology"
     },
-    "x": 6,
     "dimensions": {
       "length": 1220000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1436,9 +1610,11 @@
     "category": {
       "en-us": "Geology"
     },
-    "x": 6,
     "dimensions": {
       "length": 3480000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1449,9 +1625,11 @@
     "category": {
       "en-us": "Geology"
     },
-    "x": 12,
     "dimensions": {
       "length": 2900000
+    },
+    "x_coordinates": {
+      "length": 12
     }
   },
   {
@@ -1462,9 +1640,11 @@
     "category": {
       "en-us": "Geology"
     },
-    "x": 6,
     "dimensions": {
       "length": 40000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1475,9 +1655,11 @@
     "category": {
       "en-us": "Geology"
     },
-    "x": 6,
     "dimensions": {
       "length": 5000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1488,9 +1670,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 470000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1501,9 +1685,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 10,
     "dimensions": {
       "length": 2
+    },
+    "x_coordinates": {
+      "length": 10
     }
   },
   {
@@ -1514,9 +1700,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15,
     "dimensions": {
       "length": 4000
+    },
+    "x_coordinates": {
+      "length": 15
     }
   },
   {
@@ -1527,9 +1715,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15,
     "dimensions": {
       "length": 10000
+    },
+    "x_coordinates": {
+      "length": 15
     }
   },
   {
@@ -1540,9 +1730,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 19,
     "dimensions": {
       "length": 1600000
+    },
+    "x_coordinates": {
+      "length": 19
     }
   },
   {
@@ -1553,9 +1745,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 19,
     "dimensions": {
       "length": 46000000
+    },
+    "x_coordinates": {
+      "length": 19
     }
   },
   {
@@ -1566,9 +1760,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 19,
     "dimensions": {
       "length": 118000000
+    },
+    "x_coordinates": {
+      "length": 19
     }
   },
   {
@@ -1579,9 +1775,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 10,
     "dimensions": {
       "length": 69600000
+    },
+    "x_coordinates": {
+      "length": 10
     }
   },
   {
@@ -1592,9 +1790,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 10440000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1605,9 +1805,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 1183200000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1618,9 +1820,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 139200000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1631,9 +1835,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 1183200000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1644,9 +1850,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 7480000000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1657,9 +1865,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 29900000000000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1670,9 +1880,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 299000000000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1683,9 +1895,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 18400000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1696,9 +1910,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6,
     "dimensions": {
       "length": 24700000000000
+    },
+    "x_coordinates": {
+      "length": 6
     }
   },
   {
@@ -1709,9 +1925,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 9460000000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1722,9 +1940,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 30900000000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1735,9 +1955,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 3000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1748,9 +1970,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15,
     "dimensions": {
       "length": 40200000000000000
+    },
+    "x_coordinates": {
+      "length": 15
     }
   },
   {
@@ -1761,9 +1985,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15,
     "dimensions": {
       "length": 1.36e+26
+    },
+    "x_coordinates": {
+      "length": 15
     }
   },
   {
@@ -1774,7 +2000,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15,
     "tags": {
       "en-us": [
         "black hole",
@@ -1783,6 +2008,9 @@
     },
     "dimensions": {
       "length": 255000000000000000000
+    },
+    "x_coordinates": {
+      "length": 15
     }
   },
   {
@@ -1793,7 +2021,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "galaxy",
@@ -1802,6 +2029,9 @@
     },
     "dimensions": {
       "length": 401000000000000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1812,9 +2042,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 1.7e+21
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1825,7 +2057,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15,
     "tags": {
       "en-us": [
         "neighbor",
@@ -1834,6 +2065,9 @@
     },
     "dimensions": {
       "length": 2.36e+22
+    },
+    "x_coordinates": {
+      "length": 15
     }
   },
   {
@@ -1844,9 +2078,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 8.33e+21
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1857,9 +2093,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 309000000000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1870,9 +2108,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 757000000000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1883,9 +2123,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 1.54e+26
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1896,9 +2138,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 4.73e+22
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1909,9 +2153,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 4.94e+23
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1922,9 +2168,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "dimensions": {
       "length": 1.85e+24
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1935,7 +2183,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "black hole",
@@ -1944,6 +2191,9 @@
     },
     "dimensions": {
       "length": 12000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1954,7 +2204,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 10,
     "tags": {
       "en-us": [
         "black hole"
@@ -1962,6 +2211,9 @@
     },
     "dimensions": {
       "length": 420000
+    },
+    "x_coordinates": {
+      "length": 10
     }
   },
   {
@@ -1972,7 +2224,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "supermassive black hole"
@@ -1980,6 +2231,9 @@
     },
     "dimensions": {
       "length": 300000000000000
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -1990,7 +2244,6 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15,
     "tags": {
       "en-us": [
         "galaxy"
@@ -1998,6 +2251,9 @@
     },
     "dimensions": {
       "length": 4.63e+21
+    },
+    "x_coordinates": {
+      "length": 15
     }
   },
   {
@@ -2008,9 +2264,11 @@
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 30,
     "dimensions": {
       "length": 9.26e+25
+    },
+    "x_coordinates": {
+      "length": 30
     }
   },
   {
@@ -2021,7 +2279,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 1",
@@ -2032,6 +2289,9 @@
     "source": "https://en.wikipedia.org/wiki/Bohr_radius",
     "dimensions": {
       "length": 5.29e-11
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -2042,7 +2302,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3.1,
     "tags": {
       "en-us": [
         "atomic number 2",
@@ -2054,6 +2313,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 3.0999999999999996e-11
+    },
+    "x_coordinates": {
+      "length": 3.1
     }
   },
   {
@@ -2064,7 +2326,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 3",
@@ -2075,6 +2336,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.45e-10
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -2085,7 +2349,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.1,
     "tags": {
       "en-us": [
         "atomic number 4",
@@ -2096,6 +2359,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.05e-10
+    },
+    "x_coordinates": {
+      "length": 0.1
     }
   },
   {
@@ -2106,7 +2372,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.6,
     "tags": {
       "en-us": [
         "atomic number 5",
@@ -2117,6 +2382,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 8.5e-11
+    },
+    "x_coordinates": {
+      "length": 2.6
     }
   },
   {
@@ -2127,7 +2395,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.7,
     "tags": {
       "en-us": [
         "atomic number 6",
@@ -2138,6 +2405,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 7e-11
+    },
+    "x_coordinates": {
+      "length": 2.7
     }
   },
   {
@@ -2148,7 +2418,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.8000000000000003,
     "tags": {
       "en-us": [
         "atomic number 7",
@@ -2159,6 +2428,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 6.5e-11
+    },
+    "x_coordinates": {
+      "length": 2.8000000000000003
     }
   },
   {
@@ -2169,7 +2441,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.9000000000000004,
     "tags": {
       "en-us": [
         "atomic number 8",
@@ -2180,6 +2451,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 6e-11
+    },
+    "x_coordinates": {
+      "length": 2.9000000000000004
     }
   },
   {
@@ -2190,7 +2464,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 9",
@@ -2201,6 +2474,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 5e-11
+    },
+    "x_coordinates": {
+      "length": 3
     }
   },
   {
@@ -2211,7 +2487,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3.1,
     "tags": {
       "en-us": [
         "atomic number 10",
@@ -2222,6 +2497,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 3.8e-11
+    },
+    "x_coordinates": {
+      "length": 3.1
     }
   },
   {
@@ -2232,7 +2510,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 11",
@@ -2243,6 +2520,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.8e-10
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -2253,7 +2533,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.1,
     "tags": {
       "en-us": [
         "atomic number 12",
@@ -2264,6 +2543,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.5e-10
+    },
+    "x_coordinates": {
+      "length": 0.1
     }
   },
   {
@@ -2274,7 +2556,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.6,
     "tags": {
       "en-us": [
         "atomic number 13",
@@ -2285,6 +2566,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.25e-10
+    },
+    "x_coordinates": {
+      "length": 2.6
     }
   },
   {
@@ -2295,7 +2579,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.7,
     "tags": {
       "en-us": [
         "atomic number 14",
@@ -2306,6 +2589,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.1e-10
+    },
+    "x_coordinates": {
+      "length": 2.7
     }
   },
   {
@@ -2316,7 +2602,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.8000000000000003,
     "tags": {
       "en-us": [
         "atomic number 15",
@@ -2327,6 +2612,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1e-10
+    },
+    "x_coordinates": {
+      "length": 2.8000000000000003
     }
   },
   {
@@ -2337,7 +2625,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.9000000000000004,
     "tags": {
       "en-us": [
         "atomic number 16",
@@ -2348,6 +2635,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1e-10
+    },
+    "x_coordinates": {
+      "length": 2.9000000000000004
     }
   },
   {
@@ -2358,7 +2648,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 17",
@@ -2369,6 +2658,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1e-10
+    },
+    "x_coordinates": {
+      "length": 3
     }
   },
   {
@@ -2379,7 +2671,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3.1,
     "tags": {
       "en-us": [
         "atomic number 18",
@@ -2390,6 +2681,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 7.1e-11
+    },
+    "x_coordinates": {
+      "length": 3.1
     }
   },
   {
@@ -2400,7 +2694,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 19",
@@ -2411,6 +2704,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 2.2e-10
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -2421,7 +2717,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.1,
     "tags": {
       "en-us": [
         "atomic number 20",
@@ -2432,6 +2727,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.8e-10
+    },
+    "x_coordinates": {
+      "length": 0.1
     }
   },
   {
@@ -2442,7 +2740,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.6,
     "tags": {
       "en-us": [
         "atomic number 21",
@@ -2453,6 +2750,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.6e-10
+    },
+    "x_coordinates": {
+      "length": 1.6
     }
   },
   {
@@ -2463,7 +2763,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.7000000000000002,
     "tags": {
       "en-us": [
         "atomic number 22",
@@ -2474,6 +2773,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.4e-10
+    },
+    "x_coordinates": {
+      "length": 1.7000000000000002
     }
   },
   {
@@ -2484,7 +2786,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.8,
     "tags": {
       "en-us": [
         "atomic number 23",
@@ -2495,6 +2796,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 1.8
     }
   },
   {
@@ -2505,7 +2809,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.9000000000000001,
     "tags": {
       "en-us": [
         "atomic number 24",
@@ -2516,6 +2819,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.4e-10
+    },
+    "x_coordinates": {
+      "length": 1.9000000000000001
     }
   },
   {
@@ -2526,7 +2832,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2,
     "tags": {
       "en-us": [
         "atomic number 25",
@@ -2537,6 +2842,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.4e-10
+    },
+    "x_coordinates": {
+      "length": 2
     }
   },
   {
@@ -2547,7 +2855,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.1,
     "tags": {
       "en-us": [
         "atomic number 26",
@@ -2558,6 +2865,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.4e-10
+    },
+    "x_coordinates": {
+      "length": 2.1
     }
   },
   {
@@ -2568,7 +2878,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.2,
     "tags": {
       "en-us": [
         "atomic number 27",
@@ -2579,6 +2888,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2.2
     }
   },
   {
@@ -2589,7 +2901,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.3000000000000003,
     "tags": {
       "en-us": [
         "atomic number 28",
@@ -2600,6 +2911,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2.3000000000000003
     }
   },
   {
@@ -2610,7 +2924,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.4000000000000004,
     "tags": {
       "en-us": [
         "atomic number 29",
@@ -2621,6 +2934,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2.4000000000000004
     }
   },
   {
@@ -2631,7 +2947,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.5,
     "tags": {
       "en-us": [
         "atomic number 30",
@@ -2642,6 +2957,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2.5
     }
   },
   {
@@ -2652,7 +2970,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.6,
     "tags": {
       "en-us": [
         "atomic number 31",
@@ -2663,6 +2980,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.3e-10
+    },
+    "x_coordinates": {
+      "length": 2.6
     }
   },
   {
@@ -2673,7 +2993,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.7,
     "tags": {
       "en-us": [
         "atomic number 32",
@@ -2684,6 +3003,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.25e-10
+    },
+    "x_coordinates": {
+      "length": 2.7
     }
   },
   {
@@ -2694,7 +3016,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.8000000000000003,
     "tags": {
       "en-us": [
         "atomic number 33",
@@ -2705,6 +3026,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.15e-10
+    },
+    "x_coordinates": {
+      "length": 2.8000000000000003
     }
   },
   {
@@ -2715,7 +3039,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.9000000000000004,
     "tags": {
       "en-us": [
         "atomic number 34",
@@ -2726,6 +3049,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.15e-10
+    },
+    "x_coordinates": {
+      "length": 2.9000000000000004
     }
   },
   {
@@ -2736,7 +3062,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 35",
@@ -2747,6 +3072,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.15e-10
+    },
+    "x_coordinates": {
+      "length": 3
     }
   },
   {
@@ -2757,7 +3085,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3.1,
     "tags": {
       "en-us": [
         "atomic number 36",
@@ -2768,6 +3095,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 8.799999999999999e-11
+    },
+    "x_coordinates": {
+      "length": 3.1
     }
   },
   {
@@ -2778,7 +3108,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 37",
@@ -2789,6 +3118,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 2.35e-10
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -2799,7 +3131,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.1,
     "tags": {
       "en-us": [
         "atomic number 38",
@@ -2810,6 +3141,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 2e-10
+    },
+    "x_coordinates": {
+      "length": 0.1
     }
   },
   {
@@ -2820,7 +3154,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.6,
     "tags": {
       "en-us": [
         "atomic number 39",
@@ -2831,6 +3164,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.8e-10
+    },
+    "x_coordinates": {
+      "length": 1.6
     }
   },
   {
@@ -2841,7 +3177,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.7000000000000002,
     "tags": {
       "en-us": [
         "atomic number 40",
@@ -2852,6 +3187,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.55e-10
+    },
+    "x_coordinates": {
+      "length": 1.7000000000000002
     }
   },
   {
@@ -2862,7 +3200,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.8,
     "tags": {
       "en-us": [
         "atomic number 41",
@@ -2873,6 +3210,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.45e-10
+    },
+    "x_coordinates": {
+      "length": 1.8
     }
   },
   {
@@ -2883,7 +3223,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.9000000000000001,
     "tags": {
       "en-us": [
         "atomic number 42",
@@ -2894,6 +3233,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.45e-10
+    },
+    "x_coordinates": {
+      "length": 1.9000000000000001
     }
   },
   {
@@ -2904,7 +3246,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2,
     "tags": {
       "en-us": [
         "atomic number 43",
@@ -2915,6 +3256,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2
     }
   },
   {
@@ -2925,7 +3269,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.1,
     "tags": {
       "en-us": [
         "atomic number 44",
@@ -2936,6 +3279,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.3e-10
+    },
+    "x_coordinates": {
+      "length": 2.1
     }
   },
   {
@@ -2946,7 +3292,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.2,
     "tags": {
       "en-us": [
         "atomic number 45",
@@ -2957,6 +3302,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2.2
     }
   },
   {
@@ -2967,7 +3315,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.3000000000000003,
     "tags": {
       "en-us": [
         "atomic number 46",
@@ -2978,6 +3325,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.4e-10
+    },
+    "x_coordinates": {
+      "length": 2.3000000000000003
     }
   },
   {
@@ -2988,7 +3338,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.4000000000000004,
     "tags": {
       "en-us": [
         "atomic number 47",
@@ -2999,6 +3348,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.6e-10
+    },
+    "x_coordinates": {
+      "length": 2.4000000000000004
     }
   },
   {
@@ -3009,7 +3361,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.5,
     "tags": {
       "en-us": [
         "atomic number 48",
@@ -3020,6 +3371,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.55e-10
+    },
+    "x_coordinates": {
+      "length": 2.5
     }
   },
   {
@@ -3030,7 +3384,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.6,
     "tags": {
       "en-us": [
         "atomic number 49",
@@ -3041,6 +3394,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.55e-10
+    },
+    "x_coordinates": {
+      "length": 2.6
     }
   },
   {
@@ -3051,7 +3407,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.7,
     "tags": {
       "en-us": [
         "atomic number 50",
@@ -3062,6 +3417,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.45e-10
+    },
+    "x_coordinates": {
+      "length": 2.7
     }
   },
   {
@@ -3072,7 +3430,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.8000000000000003,
     "tags": {
       "en-us": [
         "atomic number 51",
@@ -3083,6 +3440,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.45e-10
+    },
+    "x_coordinates": {
+      "length": 2.8000000000000003
     }
   },
   {
@@ -3093,7 +3453,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.9000000000000004,
     "tags": {
       "en-us": [
         "atomic number 52",
@@ -3104,6 +3463,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.4e-10
+    },
+    "x_coordinates": {
+      "length": 2.9000000000000004
     }
   },
   {
@@ -3114,7 +3476,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 53",
@@ -3125,6 +3486,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.4e-10
+    },
+    "x_coordinates": {
+      "length": 3
     }
   },
   {
@@ -3135,7 +3499,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3.1,
     "tags": {
       "en-us": [
         "atomic number 54",
@@ -3146,6 +3509,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.08e-10
+    },
+    "x_coordinates": {
+      "length": 3.1
     }
   },
   {
@@ -3156,7 +3522,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 55",
@@ -3168,6 +3533,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 2.6e-10
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -3178,7 +3546,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.1,
     "tags": {
       "en-us": [
         "atomic number 56",
@@ -3189,6 +3556,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 2.15e-10
+    },
+    "x_coordinates": {
+      "length": 0.1
     }
   },
   {
@@ -3199,7 +3569,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.2,
     "tags": {
       "en-us": [
         "atomic number 57",
@@ -3210,6 +3579,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.95e-10
+    },
+    "x_coordinates": {
+      "length": 0.2
     }
   },
   {
@@ -3220,7 +3592,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.30000000000000004,
     "tags": {
       "en-us": [
         "atomic number 58",
@@ -3231,6 +3602,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.85e-10
+    },
+    "x_coordinates": {
+      "length": 0.30000000000000004
     }
   },
   {
@@ -3241,7 +3615,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.4,
     "tags": {
       "en-us": [
         "atomic number 59",
@@ -3252,6 +3625,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.85e-10
+    },
+    "x_coordinates": {
+      "length": 0.4
     }
   },
   {
@@ -3262,7 +3638,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.5,
     "tags": {
       "en-us": [
         "atomic number 60",
@@ -3273,6 +3648,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.85e-10
+    },
+    "x_coordinates": {
+      "length": 0.5
     }
   },
   {
@@ -3283,7 +3661,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.6000000000000001,
     "tags": {
       "en-us": [
         "atomic number 61",
@@ -3294,6 +3671,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.85e-10
+    },
+    "x_coordinates": {
+      "length": 0.6000000000000001
     }
   },
   {
@@ -3304,7 +3684,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.7000000000000001,
     "tags": {
       "en-us": [
         "atomic number 62",
@@ -3315,6 +3694,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.85e-10
+    },
+    "x_coordinates": {
+      "length": 0.7000000000000001
     }
   },
   {
@@ -3325,7 +3707,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.8,
     "tags": {
       "en-us": [
         "atomic number 63",
@@ -3336,6 +3717,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.85e-10
+    },
+    "x_coordinates": {
+      "length": 0.8
     }
   },
   {
@@ -3346,7 +3730,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.9,
     "tags": {
       "en-us": [
         "atomic number 64",
@@ -3357,6 +3740,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.8e-10
+    },
+    "x_coordinates": {
+      "length": 0.9
     }
   },
   {
@@ -3367,7 +3753,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1,
     "tags": {
       "en-us": [
         "atomic number 65",
@@ -3378,6 +3763,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 1
     }
   },
   {
@@ -3388,7 +3776,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.1,
     "tags": {
       "en-us": [
         "atomic number 66",
@@ -3399,6 +3786,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 1.1
     }
   },
   {
@@ -3409,7 +3799,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.2000000000000002,
     "tags": {
       "en-us": [
         "atomic number 67",
@@ -3420,6 +3809,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 1.2000000000000002
     }
   },
   {
@@ -3430,7 +3822,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.3,
     "tags": {
       "en-us": [
         "atomic number 68",
@@ -3441,6 +3832,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 1.3
     }
   },
   {
@@ -3451,7 +3845,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.4000000000000001,
     "tags": {
       "en-us": [
         "atomic number 69",
@@ -3462,6 +3855,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 1.4000000000000001
     }
   },
   {
@@ -3472,7 +3868,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.5,
     "tags": {
       "en-us": [
         "atomic number 70",
@@ -3483,6 +3878,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 1.5
     }
   },
   {
@@ -3493,7 +3891,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.6,
     "tags": {
       "en-us": [
         "atomic number 71",
@@ -3504,6 +3901,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 1.6
     }
   },
   {
@@ -3514,7 +3914,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.7000000000000002,
     "tags": {
       "en-us": [
         "atomic number 72",
@@ -3525,6 +3924,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.55e-10
+    },
+    "x_coordinates": {
+      "length": 1.7000000000000002
     }
   },
   {
@@ -3535,7 +3937,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.8,
     "tags": {
       "en-us": [
         "atomic number 73",
@@ -3546,6 +3947,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.45e-10
+    },
+    "x_coordinates": {
+      "length": 1.8
     }
   },
   {
@@ -3556,7 +3960,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 1.9000000000000001,
     "tags": {
       "en-us": [
         "atomic number 74",
@@ -3567,6 +3970,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 1.9000000000000001
     }
   },
   {
@@ -3577,7 +3983,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2,
     "tags": {
       "en-us": [
         "atomic number 75",
@@ -3588,6 +3993,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2
     }
   },
   {
@@ -3598,7 +4006,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.1,
     "tags": {
       "en-us": [
         "atomic number 76",
@@ -3609,6 +4016,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.3e-10
+    },
+    "x_coordinates": {
+      "length": 2.1
     }
   },
   {
@@ -3619,7 +4029,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.2,
     "tags": {
       "en-us": [
         "atomic number 77",
@@ -3630,6 +4039,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2.2
     }
   },
   {
@@ -3640,7 +4052,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.3000000000000003,
     "tags": {
       "en-us": [
         "atomic number 78",
@@ -3651,6 +4062,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2.3000000000000003
     }
   },
   {
@@ -3661,7 +4075,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.4000000000000004,
     "tags": {
       "en-us": [
         "atomic number 79",
@@ -3672,6 +4085,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.35e-10
+    },
+    "x_coordinates": {
+      "length": 2.4000000000000004
     }
   },
   {
@@ -3682,7 +4098,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.5,
     "tags": {
       "en-us": [
         "atomic number 80",
@@ -3693,6 +4108,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.5e-10
+    },
+    "x_coordinates": {
+      "length": 2.5
     }
   },
   {
@@ -3703,7 +4121,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.6,
     "tags": {
       "en-us": [
         "atomic number 81",
@@ -3714,6 +4131,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.9e-10
+    },
+    "x_coordinates": {
+      "length": 2.6
     }
   },
   {
@@ -3724,7 +4144,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.7,
     "tags": {
       "en-us": [
         "atomic number 82",
@@ -3735,6 +4154,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.8e-10
+    },
+    "x_coordinates": {
+      "length": 2.7
     }
   },
   {
@@ -3745,7 +4167,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.8000000000000003,
     "tags": {
       "en-us": [
         "atomic number 83",
@@ -3756,6 +4177,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.6e-10
+    },
+    "x_coordinates": {
+      "length": 2.8000000000000003
     }
   },
   {
@@ -3766,7 +4190,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 2.9000000000000004,
     "tags": {
       "en-us": [
         "atomic number 84",
@@ -3777,6 +4200,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.9e-10
+    },
+    "x_coordinates": {
+      "length": 2.9000000000000004
     }
   },
   {
@@ -3787,7 +4213,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3,
     "tags": {
       "en-us": [
         "atomic number 85",
@@ -3798,6 +4223,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.27e-10
+    },
+    "x_coordinates": {
+      "length": 3
     }
   },
   {
@@ -3808,7 +4236,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 3.1,
     "tags": {
       "en-us": [
         "atomic number 86",
@@ -3819,6 +4246,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.2e-10
+    },
+    "x_coordinates": {
+      "length": 3.1
     }
   },
   {
@@ -3829,7 +4259,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0,
     "tags": {
       "en-us": [
         "atomic number 87",
@@ -3841,6 +4270,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 3.48e-10
+    },
+    "x_coordinates": {
+      "length": 0
     }
   },
   {
@@ -3851,7 +4283,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.1,
     "tags": {
       "en-us": [
         "atomic number 88",
@@ -3862,6 +4293,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 2.15e-10
+    },
+    "x_coordinates": {
+      "length": 0.1
     }
   },
   {
@@ -3872,7 +4306,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.2,
     "tags": {
       "en-us": [
         "atomic number 89",
@@ -3883,6 +4316,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.95e-10
+    },
+    "x_coordinates": {
+      "length": 0.2
     }
   },
   {
@@ -3893,7 +4329,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.30000000000000004,
     "tags": {
       "en-us": [
         "atomic number 90",
@@ -3904,6 +4339,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.8e-10
+    },
+    "x_coordinates": {
+      "length": 0.30000000000000004
     }
   },
   {
@@ -3914,7 +4352,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.4,
     "tags": {
       "en-us": [
         "atomic number 91",
@@ -3925,6 +4362,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.8e-10
+    },
+    "x_coordinates": {
+      "length": 0.4
     }
   },
   {
@@ -3935,7 +4375,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.5,
     "tags": {
       "en-us": [
         "atomic number 92",
@@ -3946,6 +4385,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 0.5
     }
   },
   {
@@ -3956,7 +4398,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.6000000000000001,
     "tags": {
       "en-us": [
         "atomic number 93",
@@ -3967,6 +4408,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 0.6000000000000001
     }
   },
   {
@@ -3977,7 +4421,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.7000000000000001,
     "tags": {
       "en-us": [
         "atomic number 94",
@@ -3988,6 +4431,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 0.7000000000000001
     }
   },
   {
@@ -3998,7 +4444,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.8,
     "tags": {
       "en-us": [
         "atomic number 95",
@@ -4009,6 +4454,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.75e-10
+    },
+    "x_coordinates": {
+      "length": 0.8
     }
   },
   {
@@ -4019,7 +4467,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "x": 0.9,
     "tags": {
       "en-us": [
         "atomic number 96",
@@ -4030,6 +4477,9 @@
     "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
     "dimensions": {
       "length": 1.7599999999999999e-10
+    },
+    "x_coordinates": {
+      "length": 0.9
     }
   }
 ]
