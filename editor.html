@@ -480,9 +480,9 @@
                 id: "",
                 displayName: { "en-us": "" },
                 category: { "en-us": "" },
-                dimensions: { length: "", mass: "" },
+                dimensions: {},
                 tags: { "en-us": [] },
-                x_coordinates: { length: "", mass: "" }
+                x_coordinates: {}
             };
 
             tableData.splice(hoverIndex, 0, newRow);
@@ -518,10 +518,31 @@
                 // NOTE: 'dimensions' values are STRINGS in our tableData, which is consistent with the migration.
                 // 'x_coordinates' are NUMBERS (coerced in updateX).
 
+                // Clean up data before saving
+                const dataToSave = tableData.map(row => {
+                    const cleanRow = { ...row };
+
+                    // Clean x_coordinates
+                    if (cleanRow.x_coordinates) {
+                        if (cleanRow.x_coordinates.length === "") delete cleanRow.x_coordinates.length;
+                        if (cleanRow.x_coordinates.mass === "") delete cleanRow.x_coordinates.mass;
+                        if (Object.keys(cleanRow.x_coordinates).length === 0) delete cleanRow.x_coordinates;
+                    }
+
+                    // Clean dimensions
+                    if (cleanRow.dimensions) {
+                        if (cleanRow.dimensions.length === "") delete cleanRow.dimensions.length;
+                        if (cleanRow.dimensions.mass === "") delete cleanRow.dimensions.mass;
+                        if (Object.keys(cleanRow.dimensions).length === 0) delete cleanRow.dimensions;
+                    }
+
+                    return cleanRow;
+                });
+
                 const response = await fetch('/save', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(tableData, null, 2)
+                    body: JSON.stringify(dataToSave, null, 2)
                 });
 
                 if (response.ok) {
