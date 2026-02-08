@@ -8,6 +8,10 @@ let currentDimensionY = "length";
 let currentDimensionX = "none"; // "none", "length", "mass"
 let selectedItem = null;
 let lastMousePos = null;
+let paddingRight = 50;
+let isInitialLoad = true;
+let prevDimensionX = "none";
+let prevDimensionY = "length";
 
 const getUnit = (dim) => dim === "mass" ? "kg" : "m";
 const getDimensionValueY = (d) => d.dimensions[currentDimensionY];
@@ -409,6 +413,12 @@ d3.json('/data.json').then(data => {
     const maxDimY = d3.max(filteredData, getDimensionValueY);
     yScale.domain([minDimY, maxDimY]);
 
+    if (currentDimensionX !== "none") {
+      yScale.range([height - fadeBottomHeight, 50]);
+    } else {
+      yScale.range([height - 50, 50]);
+    }
+
     // X Scale Update
     if (currentDimensionX === "none") {
       xScale = d3.scaleLinear(); // Reset to linear
@@ -431,9 +441,12 @@ d3.json('/data.json').then(data => {
       const maxDimX = d3.max(filteredData, getDimensionValueX);
       xScale.domain([minDimX, maxDimX]);
 
-      // Map domain to range - maintain aspect ratio?
-      // Let's just fit width for now
-      xScale.range([fadeEnd, width - 50]); // Use fadeEnd to avoid opacity fade
+      // Dynamic padding based on label length
+      const maxCharCount = d3.max(filteredData, d => getLocalized(d.displayName, LANGUAGE).length);
+      paddingRight = Math.max(100, maxCharCount * 12 * 0.6 + 40);
+
+      // Map domain to range
+      xScale.range([fadeEnd, width - paddingRight]);
     }
 
     // Data Join
@@ -470,23 +483,35 @@ d3.json('/data.json').then(data => {
       );
 
     // Initial positioning via zoom reset
+    const dimChanged = (currentDimensionX !== prevDimensionX) || (currentDimensionY !== prevDimensionY);
+
     if (selectedItem && filteredData.find(d => d.id === selectedItem.id)) {
       selectResult(selectedItem);
     } else {
-      // If selection is no longer valid, hide infobox
       if (selectedItem) {
         hideInfobox();
       }
-
       // Default Zoom
       if (currentDimensionX === "none") {
         const initialTransform = d3.zoomIdentity.translate(-width * 0.05, 0);
-        svg.transition().duration(750).call(zoom.transform, initialTransform);
+        if (isInitialLoad || dimChanged) {
+          svg.call(zoom.transform, initialTransform);
+        } else {
+          svg.transition().duration(750).call(zoom.transform, initialTransform);
+        }
       } else {
         // For 2D, maybe just fit?
-        svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+        if (isInitialLoad || dimChanged) {
+          svg.call(zoom.transform, d3.zoomIdentity);
+        } else {
+          svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+        }
       }
     }
+
+    isInitialLoad = false;
+    prevDimensionX = currentDimensionX;
+    prevDimensionY = currentDimensionY;
 
     updateLegend(filteredData);
     updateMask();
@@ -1001,14 +1026,18 @@ d3.json('/data.json').then(data => {
     svg.attr('viewBox', [0, 0, width, height]);
 
     // Update ranges
-    yScale.range([height - 50, 50]);
+    if (currentDimensionX !== "none") {
+      yScale.range([height - fadeBottomHeight, 50]);
+    } else {
+      yScale.range([height - 50, 50]);
+    }
     if (currentDimensionX === "none") {
       const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
       const screenCenter = width / 2;
       const xCenter = (xScale.domain()[0] + xScale.domain()[1]) / 2;
       xScale.range([screenCenter, screenCenter + initialDecadeHeight]);
     } else {
-      xScale.range([fadeEnd, width - 50]);
+      xScale.range([fadeEnd, width - paddingRight]);
     }
 
     updateMask();
