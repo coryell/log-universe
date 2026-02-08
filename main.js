@@ -4,9 +4,9 @@ import { getMatches, getLocalized, getSearchResultContent } from './search.js';
 
 const LANGUAGE = "en-us";
 // State
-let currentDimensionY = "mass";
+let currentDimensionY = "length";
 let currentDimensionX = "none"; // "none", "length", "mass"
-let prevDimensionY = "mass";
+let prevDimensionY = "length";
 let prevDimensionX = "none";
 let selectedItem = null;
 let lastMousePos = null;
@@ -935,6 +935,13 @@ d3.json('/data.json').then(data => {
   });
 
   searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      searchResults.style.display = 'none';
+      searchInput.blur();
+      hideInfobox();
+      return;
+    }
+
     const items = searchResults.querySelectorAll('.search-result-item');
     if (items.length === 0) return;
 
@@ -973,8 +980,6 @@ d3.json('/data.json').then(data => {
         }
       }
       e.preventDefault();
-    } else if (e.key === 'Escape') {
-      searchResults.style.display = 'none';
     }
   });
 
@@ -987,6 +992,10 @@ d3.json('/data.json').then(data => {
   document.addEventListener('keydown', (e) => {
     if (document.activeElement === searchInput) return;
     if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === 'Escape') {
+      hideInfobox();
+      return;
+    }
     if (e.key === 'Delete' || e.key === 'Backspace') {
       searchInput.value = '';
       renderResults([], '');
