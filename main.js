@@ -183,12 +183,11 @@ d3.json('/data.json').then(data => {
       const domainY = yScale.domain();
       if (domainY[0] === domainY[1]) return;
 
-      const minX = xScale.domain()[0];
-      const maxX = xScale.domain()[1];
+      const a = 0.5; // Padding factor
+      const domainX = xScale.domain();
+      const extX0 = xScale(domainX[0]) - (a * width) / t.k;
+      const extX1 = xScale(domainX[1]) + (a * width) / t.k;
 
-      const a = 0.5;
-      const extX0 = xScale(minX) - (a * width) / t.k;
-      const extX1 = xScale(maxX) + (a * width) / t.k;
       const extY0 = yScale(domainY[1]) - (a * height) / t.k;
       const extY1 = yScale(domainY[0]) + (a * height) / t.k;
 
@@ -416,12 +415,16 @@ d3.json('/data.json').then(data => {
       const minX = d3.min(filteredData, getDimensionValueX);
       const maxX = d3.max(filteredData, getDimensionValueX);
 
-      // Center logic for 1D
+      // Center logic for 1D - use full domain for pan constraints
       const xCenter = (minX + maxX) / 2;
       const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
       const screenCenter = width / 2;
-      xScale.domain([xCenter, xCenter + 1])
-        .range([screenCenter, screenCenter + initialDecadeHeight]);
+
+      const pixelMin = screenCenter + (minX - xCenter) * initialDecadeHeight;
+      const pixelMax = screenCenter + (maxX - xCenter) * initialDecadeHeight;
+
+      xScale.domain([minX, maxX])
+        .range([pixelMin, pixelMax]);
     } else {
       xScale = d3.scaleLog(); // Switch to Log
       const minDimX = d3.min(filteredData, getDimensionValueX);
