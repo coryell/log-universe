@@ -431,7 +431,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30,
+    "x": 43,
     "tags": {
       "en-us": [
         "interplanetary medium",
@@ -448,7 +448,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30,
+    "x": 43,
     "tags": {
       "en-us": [
         "interstellar medium",
@@ -465,7 +465,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30,
+    "x": 43,
     "tags": {
       "en-us": [
         "intergalactic medium",
@@ -482,7 +482,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "distance_between_air_molecules_at_sea_level",
@@ -493,7 +493,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "distance_between_particles_in_earth_core",
@@ -504,7 +504,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "distance_between_ions_in_sun_core",
@@ -515,7 +515,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "distance_between_ions_in_sun_corona",
@@ -526,7 +526,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "distance_between_water_molecules",
@@ -537,7 +537,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 43
+    "x": 64
   },
   {
     "id": "distance_between_neutrons_in_neutron_star",
@@ -548,7 +548,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "distance_between_ions_in_white_dwarf",
@@ -559,7 +559,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "distance_between_stars_in_milky_way",
@@ -570,7 +570,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "distance_between_galaxies_in_local_supercluster",
@@ -581,7 +581,7 @@
     "category": {
       "en-us": "Density"
     },
-    "x": 30
+    "x": 43
   },
   {
     "id": "largest_nuclear_radius_pb_208",
@@ -963,7 +963,7 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 40
+    "x": 65
   },
   {
     "id": "lowest_sounds_humans_hear",
@@ -974,7 +974,7 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 40
+    "x": 65
   },
   {
     "id": "lowest_sounds_animals_hear_pigeons",
@@ -985,7 +985,7 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 40
+    "x": 65
   },
   {
     "id": "highest_sounds_animals_hear_greater_wax_moths",
@@ -996,7 +996,7 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 40
+    "x": 65
   },
   {
     "id": "highest_sound_produced_recorded",
@@ -1007,7 +1007,7 @@
     "category": {
       "en-us": "Sound"
     },
-    "x": 40
+    "x": 65
   },
   {
     "id": "seismic_wave_shortest",
@@ -1018,7 +1018,7 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 43
   },
   {
     "id": "seismic_wave_longest",
@@ -1029,7 +1029,7 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 43
   },
   {
     "id": "wind_wave",
@@ -1040,7 +1040,7 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 43
   },
   {
     "id": "tsunami_shortest",
@@ -1051,7 +1051,7 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 43
   },
   {
     "id": "tsunami_longest",
@@ -1062,7 +1062,7 @@
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 43
   },
   {
     "id": "earth",
