@@ -991,7 +991,14 @@ d3.json('/data.json').then(data => {
 
   document.addEventListener('keydown', (e) => {
     if (document.activeElement === searchInput) return;
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.ctrlKey || e.metaKey) {
+      if (e.key === 'f') {
+        e.preventDefault();
+        searchInput.focus();
+        return;
+      }
+    }
+    if (e.altKey) return;
     if (e.key === 'Escape') {
       hideInfobox();
       return;
