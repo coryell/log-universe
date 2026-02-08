@@ -900,10 +900,10 @@ d3.json('/data.json').then(data => {
 
         let sourceLink = "";
         if (d.sources && d.sources[dim]) {
-          sourceLink = ` <a href="${d.sources[dim]}" target="_blank" style="color: #00aaff; text-decoration: none; margin-left: 5px; opacity: 0.7;">[source]</a>`;
+          sourceLink = `<button class="copy-btn" onclick="window.open('${d.sources[dim]}', '_blank')">Source</button>`;
         }
 
-        return `<div class="infobox-row"><span class="infobox-label">${label}:</span>${txt}${sourceLink}</div>`;
+        return `<div class="infobox-row"><span class="infobox-label">${label}:</span>${txt}<button class="copy-btn" data-copy-text="${txt}">Copy</button>${sourceLink}</div>`;
       }
       return "";
     };
@@ -925,6 +925,23 @@ d3.json('/data.json').then(data => {
       ${tagsContent}
     `)
       .style("display", "block");
+
+    // Attach copy event listeners
+    infobox.selectAll(".copy-btn").on("click", function (event) {
+      event.stopPropagation();
+      const textToCopy = d3.select(this).attr("data-copy-text");
+      if (!textToCopy) return; // Skip Source buttons
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const btn = d3.select(this);
+        const originalText = btn.text();
+        btn.text("Copied!");
+        setTimeout(() => {
+          btn.text(originalText);
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    });
   }
 
   function hideInfobox() {

@@ -259,7 +259,6 @@ svg {
   user-select: text;
   display: none;
   /* Hidden by default */
-  max-width: 300px;
   box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
 }
 
@@ -276,6 +275,7 @@ svg {
   margin-bottom: 4px;
   display: flex;
   align-items: baseline;
+  white-space: nowrap;
 }
 
 .infobox-label {
@@ -295,6 +295,7 @@ svg {
   border-radius: 3px;
   cursor: pointer;
   pointer-events: auto;
+  min-width: 50px;
   /* Ensure clickable */
 }
 
