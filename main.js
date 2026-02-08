@@ -388,6 +388,17 @@ d3.json('/data.json').then(data => {
 
   // Unified update function
   const updatePlot = () => {
+    // Capture previous positions if dimensions are changing
+    const dimChanged = (currentDimensionX !== prevDimensionX) || (currentDimensionY !== prevDimensionY);
+    const prevPositions = new Map();
+
+    if (dimChanged && !isInitialLoad) {
+      g.selectAll('.item-group').each(function (d) {
+        const tr = d3.select(this).attr('transform');
+        if (tr) prevPositions.set(d.id, tr);
+      });
+    }
+
     // Filter data
     let filteredData = [];
     if (currentDimensionX === "none") {
@@ -483,7 +494,7 @@ d3.json('/data.json').then(data => {
       );
 
     // Initial positioning via zoom reset
-    const dimChanged = (currentDimensionX !== prevDimensionX) || (currentDimensionY !== prevDimensionY);
+    // dimChanged calculated at start
 
     if (selectedItem && filteredData.find(d => d.id === selectedItem.id)) {
       selectResult(selectedItem);
@@ -507,6 +518,24 @@ d3.json('/data.json').then(data => {
           svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
         }
       }
+    }
+
+    // Animate points if dimensions changed
+    if (dimChanged && prevPositions.size > 0) {
+      items.each(function (d) {
+        const prevTransform = prevPositions.get(d.id);
+        if (prevTransform) {
+          const currentTransform = d3.select(this).attr('transform');
+          if (currentTransform && currentTransform !== prevTransform) {
+            d3.select(this)
+              .attr('transform', prevTransform)
+              .transition()
+              .duration(1000)
+              .ease(d3.easeCubicOut)
+              .attr('transform', currentTransform);
+          }
+        }
+      });
     }
 
     isInitialLoad = false;
