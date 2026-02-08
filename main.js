@@ -524,8 +524,47 @@ d3.json('/data.json').then(data => {
       const maxCharCount = d3.max(filteredData, d => getLocalized(d.displayName, LANGUAGE).length);
       paddingRight = Math.max(100, maxCharCount * 12 * 0.6 + 40);
 
-      // Map domain to range
-      xScale.range([fadeEnd, width - paddingRight]);
+      // Force 1:1 Aspect Ratio
+      const xDecades = Math.log10(maxDimX) - Math.log10(minDimX);
+      const yDecades = Math.log10(maxDimY) - Math.log10(minDimY);
+
+      // Available screen space
+      // X: [fadeEnd, width - paddingRight]
+      const availW = width - paddingRight - fadeEnd;
+      // Y: [height - fadeBottomHeight, 50] (Note: Y creates bottom-up coordinates)
+      // Height available is (height - fadeBottomHeight) - 50
+      const availH = (height - fadeBottomHeight) - 50;
+
+      // Pixels per decade
+      // We want the same pixels/decade for both.
+      // So we fit the larger dimension into the available space.
+      const ppdX = availW / xDecades;
+      const ppdY = availH / yDecades;
+      const ppd = Math.min(ppdX, ppdY);
+
+      const newWidth = xDecades * ppd;
+      const newHeight = yDecades * ppd;
+
+      // Center it
+      const xOffset = (availW - newWidth) / 2;
+      const yOffset = (availH - newHeight) / 2;
+
+      // Ranges
+      // X: Starts at fadeEnd + xOffset
+      xScale.range([fadeEnd + xOffset, fadeEnd + xOffset + newWidth]);
+
+      // Y: Top is 50 + yOffset. Bottom is Top + newHeight.
+      // But D3 Y scale is usually [bottom, top] for [min, max] value?
+      // Wait, standard D3 Y axis: range [height, 0] maps to domain [min, max].
+      // Here, range [bottomPixel, topPixel].
+      // We want minDimY (bottom) to be at bottomPixel.
+      // We want maxDimY (top) to be at topPixel.
+      // topPixel = 50 + yOffset
+      // bottomPixel = topPixel + newHeight
+      // So range is [bottomPixel, topPixel]
+      const topPixel = 50 + yOffset;
+      const bottomPixel = topPixel + newHeight;
+      yScale.range([bottomPixel, topPixel]);
     }
 
     // Data Join
