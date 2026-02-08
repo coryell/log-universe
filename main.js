@@ -6,12 +6,12 @@ const LANGUAGE = "en-us";
 // State
 let currentDimensionY = "length";
 let currentDimensionX = "none"; // "none", "length", "mass"
+let prevDimensionY = "length";
+let prevDimensionX = "none";
 let selectedItem = null;
 let lastMousePos = null;
 let paddingRight = 50;
 let isInitialLoad = true;
-let prevDimensionX = "none";
-let prevDimensionY = "length";
 
 const getUnit = (dim) => dim === "mass" ? "kg" : "m";
 const getDimensionValueY = (d) => d.dimensions[currentDimensionY];
@@ -545,6 +545,10 @@ d3.json('/data.json').then(data => {
     updateLegend(filteredData);
     updateMask();
   };
+
+  // Initialize Dropdowns
+  d3.select('#dimension-select-y').property('value', currentDimensionY);
+  d3.select('#dimension-select-x').property('value', currentDimensionX);
 
   d3.select('#dimension-select-y').on('change', function () {
     currentDimensionY = this.value;
