@@ -246,8 +246,11 @@ d3.json('/data.json').then(data => {
   ];
   const colorScale = d3.scaleOrdinal().domain(categories).range(colors);
 
-  // Initial draw with identity transform
-  updateGrid(d3.zoomIdentity);
+  // Initial Transform (shifted left by 5% for balance)
+  const initialTransform = d3.zoomIdentity.translate(-width * 0.05, 0);
+
+  // Initial draw with shifted transform
+  updateGrid(initialTransform);
 
   // Calculate initial font size based on axes (height of one decade)
   const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
@@ -261,7 +264,13 @@ d3.json('/data.json').then(data => {
     .data(data)
     .join('g')
     .attr('class', 'item-group')
-    .attr('transform', d => `translate(${xScale(d.x)}, ${yScale(d.length)})`);
+    // Apply initial transform to positions
+    .attr('transform', d => {
+      const t = initialTransform;
+      const newX = t.rescaleX(xScale)(d.x);
+      const newY = t.rescaleY(yScale)(d.length);
+      return `translate(${newX}, ${newY})`;
+    });
 
   // Hit Area (Transparent Rect)
   items.append('rect')
@@ -380,14 +389,14 @@ d3.json('/data.json').then(data => {
         });
     });
 
-  svg.call(zoom);
+  svg.call(zoom).call(zoom.transform, initialTransform);
 
   // Recenter logic
   d3.select('#recenter-btn').on('click', () => {
     svg.transition()
       .duration(750)
       .ease(d3.easeCubicInOut)
-      .call(zoom.transform, d3.zoomIdentity);
+      .call(zoom.transform, initialTransform);
   });
 
   // Legend
