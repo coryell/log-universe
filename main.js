@@ -263,13 +263,30 @@ d3.json('/data.json').then(data => {
     xLabelGroup.selectAll(".x-label").remove();
     yLabelGroup.selectAll(".y-label").remove();
 
+    // --- Y Axis Grid Calculation ---
     const yStart = newYScale.invert(height + padding);
     const yEnd = newYScale.invert(-padding);
     const paddedYScale = newYScale.copy().domain([
       d3.min([yStart, yEnd]),
       d3.max([yStart, yEnd])
     ]);
-    const yTickValues = paddedYScale.ticks(15, "~e");
+    let yTickValues = paddedYScale.ticks(15, "~e");
+    const hasSubTenY = yTickValues.some(d => !Number.isInteger(Math.log10(d)));
+    const majorYDecades = new Set();
+    yTickValues.forEach(d => {
+      if (Number.isInteger(Math.log10(d))) majorYDecades.add(d);
+    });
+
+    if (!hasSubTenY) {
+      // Add intermediate decades if not already there
+      const logMin = Math.ceil(Math.log10(d3.min([yStart, yEnd])));
+      const logMax = Math.floor(Math.log10(d3.max([yStart, yEnd])));
+      const allYDecades = [];
+      for (let i = logMin; i <= logMax; i++) {
+        allYDecades.push(Math.pow(10, i));
+      }
+      yTickValues = Array.from(new Set([...yTickValues, ...allYDecades])).sort((a, b) => a - b);
+    }
 
     // Horizontal Grid (Y-Axis)
     gridGroup.selectAll(".horizontal-grid").data([null]).join("g")
@@ -279,7 +296,7 @@ d3.json('/data.json').then(data => {
         .tickSize(width)
         .tickFormat(d => {
           const log10 = Math.log10(d);
-          if (Number.isInteger(log10)) {
+          if (majorYDecades.has(d)) {
             return `10^${log10} ${getUnit(currentDimensionY)}`;
           }
           return "";
@@ -287,14 +304,14 @@ d3.json('/data.json').then(data => {
       );
     gridGroup.select(".horizontal-grid .domain").remove();
 
-    // Vertical Grid (X-Axis)
+    // --- X Axis Grid Calculation ---
     gridGroup.selectAll(".vertical-grid").data([null]).join("g")
       .attr("class", "vertical-grid");
 
     if (currentDimensionX === "none") {
       // Linear Grid logic (original)
       const decadeHeight = Math.abs(newYScale(10) - newYScale(1));
-      const mainYTicks = yTickValues.filter(d => Math.abs(Math.log10(d) - Math.round(Math.log10(d))) < 1e-6);
+      const mainYTicks = yTickValues.filter(d => majorYDecades.has(d));
       let stride = 1;
       if (mainYTicks.length >= 2) {
         stride = Math.abs(Math.round(Math.log10(mainYTicks[1])) - Math.round(Math.log10(mainYTicks[0])));
@@ -342,15 +359,30 @@ d3.json('/data.json').then(data => {
         d3.min([xStart, xEnd]),
         d3.max([xStart, xEnd])
       ]);
-      const xTickValues = paddedXScale.ticks(15, "~e");
+      let xTickValues = paddedXScale.ticks(15, "~e");
+      const hasSubTenX = xTickValues.some(d => !Number.isInteger(Math.log10(d)));
+      const majorXDecades = new Set();
+      xTickValues.forEach(d => {
+        if (Number.isInteger(Math.log10(d))) majorXDecades.add(d);
+      });
+
+      if (!hasSubTenX) {
+        const logMin = Math.ceil(Math.log10(d3.min([xStart, xEnd])));
+        const logMax = Math.floor(Math.log10(d3.max([xStart, xEnd])));
+        const allXDecades = [];
+        for (let i = logMin; i <= logMax; i++) {
+          allXDecades.push(Math.pow(10, i));
+        }
+        xTickValues = Array.from(new Set([...xTickValues, ...allXDecades])).sort((a, b) => a - b);
+      }
 
       gridGroup.select(".vertical-grid")
         .call(d3.axisBottom(newXScale)
           .tickValues(xTickValues)
-          .tickSize(height) // Extends downwards, which is what we want for full grid
+          .tickSize(height)
           .tickFormat(d => {
             const log10 = Math.log10(d);
-            if (Number.isInteger(log10)) {
+            if (majorXDecades.has(d)) {
               return `10^${log10} ${getUnit(currentDimensionX)}`;
             }
             return "";
@@ -361,14 +393,13 @@ d3.json('/data.json').then(data => {
       gridGroup.selectAll(".vertical-grid .tick line")
         .attr("stroke", "#00aaff")
         .attr("stroke-dasharray", "2,2")
-        .attr("stroke-opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 0.4 : 0.25);
+        .attr("stroke-opacity", d => (majorXDecades.has(d)) ? 0.4 : 0.25);
 
       // Move X-axis labels to the masked labelGroup
       gridGroup.selectAll(".vertical-grid .tick text").each(function (d) {
-        const text = d3.select(this);
         const xPos = newXScale(d);
         const log10 = Math.log10(d);
-        if (d > 0 && Number.isInteger(log10)) {
+        if (majorXDecades.has(d)) {
           xLabelGroup.append("text")
             .attr("class", "x-label")
             .attr("x", xPos)
@@ -380,7 +411,7 @@ d3.json('/data.json').then(data => {
             .text(`10^${log10} ${getUnit(currentDimensionX)}`);
         }
       });
-      // Hide the original texts (don't remove - d3 needs them for updates)
+      // Hide the original texts
       gridGroup.selectAll(".vertical-grid .tick text").attr("opacity", 0);
     }
 
@@ -390,16 +421,14 @@ d3.json('/data.json').then(data => {
     gridGroup.selectAll(".horizontal-grid .tick line")
       .attr("stroke", "#00aaff")
       .attr("stroke-dasharray", "2,2")
-      .attr("stroke-opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 0.4 : 0.25);
+      .attr("stroke-opacity", d => (majorYDecades.has(d)) ? 0.4 : 0.25);
 
     // Move Y-axis labels to the masked labelGroup (only in 2D mode)
     if (currentDimensionX !== "none") {
-
       gridGroup.selectAll(".horizontal-grid .tick text").each(function (d) {
-        const text = d3.select(this);
         const yPos = newYScale(d);
         const log10 = Math.log10(d);
-        if (d > 0 && Number.isInteger(log10)) {
+        if (majorYDecades.has(d)) {
           yLabelGroup.append("text")
             .attr("class", "y-label")
             .attr("x", 10)
@@ -410,15 +439,15 @@ d3.json('/data.json').then(data => {
             .text(`10^${log10} ${getUnit(currentDimensionY)}`);
         }
       });
-      // Hide the original texts (don't remove - d3 needs them for updates)
+      // Hide original texts
       gridGroup.selectAll(".horizontal-grid .tick text").attr("opacity", 0);
     } else {
-      // In 1D mode, keep labels in gridGroup (no corner overlap issue)
+      // In 1D mode, keep labels in gridGroup
       gridGroup.selectAll(".horizontal-grid .tick text")
         .attr("x", 10)
         .attr("dy", -4)
         .attr("fill", "#00aaff")
-        .attr("opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 1.0 : 0)
+        .attr("opacity", d => majorYDecades.has(d) ? 1.0 : 0)
         .style("font-family", "monospace")
         .style("font-size", "12px");
     }
