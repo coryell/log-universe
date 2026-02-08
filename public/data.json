@@ -1505,12 +1505,16 @@
       ]
     },
     "dimensions": {
-      "length": 696000000
+      "length": 6.957e+8,
+      "mass": 1.988416e+30
     },
     "x_coordinates": {
       "length": 0
     },
-    "sources": {}
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Solar_radius",
+      "mass": "https://en.wikipedia.org/wiki/Solar_mass"
+    }
   },
   {
     "id": "earth_orbit_1_au",
@@ -2066,13 +2070,20 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": 3000
+      "length": 3000,
+      "mass": 1.988416e+30
     },
     "x_coordinates": {
       "length": 0
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Schwarzschild_radius"
+      "length": "https://en.wikipedia.org/wiki/Schwarzschild_radius",
+      "mass": "https://en.wikipedia.org/wiki/Solar_mass"
+    },
+    "tags": {
+      "en-us": [
+        "schwarzschild"
+      ]
     }
   },
   {
