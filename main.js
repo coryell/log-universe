@@ -309,21 +309,9 @@ d3.json('/data.json').then(data => {
       );
 
     // Initial positioning via zoom reset
-    // This will trigger zoom event which positions everything
-    // Only reset zoom if we don't have a selection we want to maintain context for?
-    // Actually, if we switch dimensions, the scales change completely.
-    // The previous zoom transform is invalid for the new scale anyway.
-    // But if we have a selected item, we might want to center on IT instead of global reset.
 
     if (selectedItem && filteredData.find(d => d.id === selectedItem.id)) {
       // If selected item exists in new view, center on it
-      // We need to re-find it in the new data to be safe, or just use selectedItem
-      // But we need to wait for the transition? Or just call selectResult logic?
-      // selectResult does a transition.
-      // We should probably just call selectResult(selectedItem) AFTER this function done?
-      // But we are inside updateDimension.
-
-      // Let's NOT call the global zoom reset if we have a selection.
       selectResult(selectedItem);
     } else {
       const initialTransform = d3.zoomIdentity.translate(-width * 0.05, 0);
@@ -335,9 +323,9 @@ d3.json('/data.json').then(data => {
         hideInfobox();
       }
     }
-  };
 
-  updateDimension('length');
+    updateLegend(filteredData);
+  };
 
   d3.select('#dimension-select').on('change', function () {
     updateDimension(this.value);
@@ -350,33 +338,54 @@ d3.json('/data.json').then(data => {
   // Legend
   const legendPadding = 15;
   const legendItemHeight = 20;
-  const legendHeight = categories.length * legendItemHeight + legendPadding * 2;
+
   const legend = svg.append("g").attr("class", "legend");
 
-  let maxTextWidth = 0;
-  categories.forEach((cat, i) => {
-    const text = legend.append("text")
+  // These need to be accessible for resize
+  let legendWidth = 0;
+  let legendHeight = 0;
+
+  function updateLegend(currentData) {
+    const activeCats = categories.filter(cat =>
+      currentData.some(d => getLocalized(d.category, LANGUAGE) === cat)
+    );
+
+    legendHeight = activeCats.length * legendItemHeight + legendPadding * 2;
+
+    // Data Join
+    const texts = legend.selectAll("text")
+      .data(activeCats, d => d);
+
+    texts.exit().remove();
+
+    const textEnter = texts.enter().append("text")
       .attr("x", legendPadding)
-      .attr("y", legendPadding + i * legendItemHeight + legendItemHeight / 2)
       .attr("dy", "0.35em")
-      .text(cat)
-      .attr("fill", colorScale(cat))
       .style("font-family", "monospace")
       .style("font-size", "12px")
       .style("cursor", "pointer")
-      .on("mouseover", function () {
-        g.selectAll(".item-group")
-          .transition().duration(200)
-          .attr("opacity", d => getLocalized(d.category, LANGUAGE) === cat ? 1 : 0.2);
-        g.selectAll(".item-group").filter(d => getLocalized(d.category, LANGUAGE) === cat).raise();
-      })
+      .attr("fill", d => colorScale(d));
+
+    const textMerge = textEnter.merge(texts)
+      .attr("y", (d, i) => legendPadding + i * legendItemHeight + legendItemHeight / 2)
+      .text(d => d);
+
+    // Re-attach listeners to ensure they use current scope correctly? 
+    // Or just attach to enter.
+
+    textEnter.on("mouseover", function (event, cat) {
+      g.selectAll(".item-group")
+        .transition().duration(200)
+        .attr("opacity", d => getLocalized(d.category, LANGUAGE) === cat ? 1 : 0.2);
+      g.selectAll(".item-group").filter(d => getLocalized(d.category, LANGUAGE) === cat).raise();
+    })
       .on("mouseout", function () {
         g.selectAll(".item-group")
           .transition().duration(200)
           .attr("opacity", 1);
         g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
       })
-      .on("click", function (event, d) {
+      .on("click", function (event, cat) {
         const categoryData = data.filter(item => getLocalized(item.category, LANGUAGE) === cat && item.dimensions[currentDimension] !== undefined);
         if (categoryData.length === 0) return;
 
@@ -390,56 +399,51 @@ d3.json('/data.json').then(data => {
 
         const boundsWidth = maxX - minX;
         const boundsHeight = maxY - minY;
-
-        const padLeft = 180;
-        const padRight = 460;
-        const padTop = 60;
-        const padBottom = 60;
-
+        const padLeft = 180; const padRight = 460; const padTop = 60; const padBottom = 60;
         const availWidth = width - padLeft - padRight;
         const availHeight = height - padTop - padBottom;
 
         let scaleX = boundsWidth > 0 ? availWidth / boundsWidth : 10000;
         let scaleY = boundsHeight > 0 ? availHeight / boundsHeight : 10000;
-
-        let scale = Math.min(scaleX, scaleY);
-        scale = Math.min(Math.max(scale, 1), 10000);
+        let scale = Math.min(Math.max(Math.min(scaleX, scaleY), 1), 10000);
 
         const cx = (minX + maxX) / 2;
         const cy = (minY + maxY) / 2;
-
         const screenCX = padLeft + availWidth / 2;
         const screenCY = padTop + availHeight / 2;
 
-        const translate = [
-          screenCX - cx * scale,
-          screenCY - cy * scale
-        ];
-
-        const transform = d3.zoomIdentity
-          .translate(translate[0], translate[1])
-          .scale(scale);
-
-        svg.transition()
-          .duration(750)
-          .call(zoom.transform, transform);
+        const translate = [screenCX - cx * scale, screenCY - cy * scale];
+        svg.transition().duration(750)
+          .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
       });
 
-    const bbox = text.node().getComputedTextLength();
-    if (bbox > maxTextWidth) maxTextWidth = bbox;
-  });
+    // Box
+    let maxTextWidth = 0;
+    textMerge.each(function () {
+      const bbox = this.getComputedTextLength();
+      if (bbox > maxTextWidth) maxTextWidth = bbox;
+    });
 
-  const legendWidth = maxTextWidth + legendPadding * 2;
-  legend.insert("rect", "text")
-    .attr("width", legendWidth)
-    .attr("height", legendHeight)
-    .attr("fill", "black")
-    .attr("stroke", "#00aaff")
-    .attr("stroke-width", 1);
+    legendWidth = maxTextWidth + legendPadding * 2;
 
-  const legendX = width - legendWidth - 20;
-  const legendY = height - legendHeight - 20;
-  legend.attr("transform", `translate(${legendX}, ${legendY})`);
+    // Update/Append Rect
+    let rect = legend.select("rect");
+    if (rect.empty()) {
+      rect = legend.insert("rect", "text")
+        .attr("fill", "black")
+        .attr("stroke", "#00aaff")
+        .attr("stroke-width", 1);
+    }
+
+    rect.attr("width", legendWidth).attr("height", legendHeight);
+
+    // Position
+    const legendX = width - legendWidth - 20;
+    const legendY = height - legendHeight - 20;
+    legend.attr("transform", `translate(${legendX}, ${legendY})`);
+  }
+
+  updateDimension('length');
 
 
   // Search Implementation
@@ -743,12 +747,6 @@ d3.json('/data.json').then(data => {
     height = app.clientHeight;
     svg.attr('viewBox', [0, 0, width, height]);
     mask.select("rect").attr("width", width).attr("height", height);
-
-    // We can call updateDimension to reflow?
-    // But maintaining Zoom state would be better.
-    // For now, simple re-init or layout update.
-    // The previous updateLayout function was complex.
-    // Calling updateDimension resets zoom.
 
     // Update ranges
     yScale.range([height - 50, 50]);
