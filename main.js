@@ -4,9 +4,9 @@ import { getMatches, getLocalized, getSearchResultContent } from './search.js';
 
 const LANGUAGE = "en-us";
 // State
-let currentDimensionY = "length";
+let currentDimensionY = "mass";
 let currentDimensionX = "none"; // "none", "length", "mass"
-let prevDimensionY = "length";
+let prevDimensionY = "mass";
 let prevDimensionX = "none";
 let selectedItem = null;
 let lastMousePos = null;
@@ -139,6 +139,17 @@ updateMask();
 const gridGroup = svg.append("g")
   .attr("class", "grid");
 
+// Separate label groups with appropriate masks:
+// - X-axis labels (at bottom) fade near the LEFT edge where Y-labels are
+// - Y-axis labels (at left) fade near the BOTTOM edge where X-labels are
+const xLabelGroup = svg.append("g")
+  .attr("class", "x-axis-labels")
+  .attr("mask", "url(#fade-mask-left)");
+
+const yLabelGroup = svg.append("g")
+  .attr("class", "y-axis-labels")
+  .attr("mask", "url(#fade-mask-bottom)");
+
 // Nested Groups for Multiplicative Masking
 const dataLayerOuter = svg.append('g')
   .attr("class", "data-layer-outer")
@@ -248,6 +259,10 @@ d3.json('/data.json').then(data => {
     const newXScale = transform.rescaleX(xScale);
     const padding = 200;
 
+    // Clear all labels at the start (they will be re-created below)
+    xLabelGroup.selectAll(".x-label").remove();
+    yLabelGroup.selectAll(".y-label").remove();
+
     const yStart = newYScale.invert(height + padding);
     const yEnd = newYScale.invert(-padding);
     const paddedYScale = newYScale.copy().domain([
@@ -348,14 +363,25 @@ d3.json('/data.json').then(data => {
         .attr("stroke-dasharray", "2,2")
         .attr("stroke-opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 0.4 : 0.25);
 
-      // Position labels
-      gridGroup.selectAll(".vertical-grid .tick text")
-        .attr("y", height - 20) // Position at bottom
-        .attr("dy", 0)
-        .attr("fill", "#00aaff")
-        .style("font-family", "monospace")
-        .style("font-size", "12px")
-        .attr("opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 1.0 : 0); // Hide minor labels too?
+      // Move X-axis labels to the masked labelGroup
+      gridGroup.selectAll(".vertical-grid .tick text").each(function (d) {
+        const text = d3.select(this);
+        const xPos = newXScale(d);
+        const log10 = Math.log10(d);
+        if (d > 0 && Number.isInteger(log10)) {
+          xLabelGroup.append("text")
+            .attr("class", "x-label")
+            .attr("x", xPos)
+            .attr("y", height - 20)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#00aaff")
+            .style("font-family", "monospace")
+            .style("font-size", "12px")
+            .text(`10^${log10} ${getUnit(currentDimensionX)}`);
+        }
+      });
+      // Hide the original texts (don't remove - d3 needs them for updates)
+      gridGroup.selectAll(".vertical-grid .tick text").attr("opacity", 0);
     }
 
     gridGroup.select(".vertical-grid .domain").remove();
@@ -366,13 +392,36 @@ d3.json('/data.json').then(data => {
       .attr("stroke-dasharray", "2,2")
       .attr("stroke-opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 0.4 : 0.25);
 
-    gridGroup.selectAll(".horizontal-grid .tick text")
-      .attr("x", 10)
-      .attr("dy", -4)
-      .attr("fill", "#00aaff")
-      .attr("opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 1.0 : 0) // Consistent label hiding?
-      .style("font-family", "monospace")
-      .style("font-size", "12px");
+    // Move Y-axis labels to the masked labelGroup (only in 2D mode)
+    if (currentDimensionX !== "none") {
+
+      gridGroup.selectAll(".horizontal-grid .tick text").each(function (d) {
+        const text = d3.select(this);
+        const yPos = newYScale(d);
+        const log10 = Math.log10(d);
+        if (d > 0 && Number.isInteger(log10)) {
+          yLabelGroup.append("text")
+            .attr("class", "y-label")
+            .attr("x", 10)
+            .attr("y", yPos - 4)
+            .attr("fill", "#00aaff")
+            .style("font-family", "monospace")
+            .style("font-size", "12px")
+            .text(`10^${log10} ${getUnit(currentDimensionY)}`);
+        }
+      });
+      // Hide the original texts (don't remove - d3 needs them for updates)
+      gridGroup.selectAll(".horizontal-grid .tick text").attr("opacity", 0);
+    } else {
+      // In 1D mode, keep labels in gridGroup (no corner overlap issue)
+      gridGroup.selectAll(".horizontal-grid .tick text")
+        .attr("x", 10)
+        .attr("dy", -4)
+        .attr("fill", "#00aaff")
+        .attr("opacity", d => (d > 0 && Number.isInteger(Math.log10(d))) ? 1.0 : 0)
+        .style("font-family", "monospace")
+        .style("font-size", "12px");
+    }
   };
 
   // Helper for highlighting
