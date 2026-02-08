@@ -4,9 +4,9 @@ import { getMatches, getLocalized, getSearchResultContent } from './search.js';
 
 const LANGUAGE = "en-us";
 // State
-let currentDimensionY = "length";
+let currentDimensionY = "mass";
 let currentDimensionX = "none"; // "none", "length", "mass"
-let prevDimensionY = "length";
+let prevDimensionY = "mass";
 let prevDimensionX = "none";
 let selectedItem = null;
 let lastMousePos = null;
@@ -437,15 +437,23 @@ d3.json('/data.json').then(data => {
       const maxX = d3.max(filteredData, getDimensionValueX);
 
       // Center logic for 1D - use full domain for pan constraints
-      const xCenter = (minX + maxX) / 2;
       const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
       const screenCenter = width / 2;
 
-      const pixelMin = screenCenter + (minX - xCenter) * initialDecadeHeight;
-      const pixelMax = screenCenter + (maxX - xCenter) * initialDecadeHeight;
+      if (minX === maxX) {
+        // Degenerate case (e.g. Mass view where all X are 0)
+        // Set scale to 1 unit = 1 decade height
+        xScale.domain([minX, minX + 1])
+          .range([screenCenter, screenCenter + initialDecadeHeight]);
+      } else {
+        const xCenter = (minX + maxX) / 2;
 
-      xScale.domain([minX, maxX])
-        .range([pixelMin, pixelMax]);
+        const pixelMin = screenCenter + (minX - xCenter) * initialDecadeHeight;
+        const pixelMax = screenCenter + (maxX - xCenter) * initialDecadeHeight;
+
+        xScale.domain([minX, maxX])
+          .range([pixelMin, pixelMax]);
+      }
     } else {
       xScale = d3.scaleLog(); // Switch to Log
       const minDimX = d3.min(filteredData, getDimensionValueX);
