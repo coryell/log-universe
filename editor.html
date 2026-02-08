@@ -137,10 +137,71 @@
         tr.drag-over {
             border-top: 2px solid #007bff;
         }
+
+        .remove-btn {
+            color: #ddd;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            background: none;
+            border: none;
+            padding: 0 5px;
+        }
+
+        .remove-btn:hover {
+            color: #d9534f;
+        }
+
+        button.insert-btn {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #28a745;
+            color: white;
+            border: none;
+            font-size: 20px;
+            line-height: 1;
+            padding: 0;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            transform: translateY(-50%);
+        }
+
+        button.insert-btn:hover {
+            background: #218838;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .insert-line {
+            position: fixed;
+            height: 2px;
+            background: #28a745;
+            left: 50px;
+            right: 50px;
+            z-index: 999;
+            display: none;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* Increase margin for hover area */
+        body {
+            padding: 20px 40px;
+            /* More horizontal padding */
+        }
     </style>
 </head>
 
 <body>
+
+
+
+    <button id="leftInsertBtn" class="insert-btn" style="left: 10px;">+</button>
+    <button id="rightInsertBtn" class="insert-btn" style="right: 10px;">+</button>
+    <div id="insertLine" class="insert-line"></div>
 
     <div class="controls">
         <button id="saveBtn">Save Changes (Cmd+S)</button>
@@ -162,6 +223,7 @@
                 <th id="header-tags">Tags</th>
                 <th class="dim-col">X: Length (decades)</th>
                 <th class="dim-col">X: Mass (decades)</th>
+                <th style="width: 30px;"></th>
             </tr>
         </thead>
         <tbody>
@@ -228,6 +290,7 @@
                     <td><input type="text" value="${tagsToString(getVal(row, `tags.${lang}`, []))}" onchange="updateTags(${index}, 'tags.${lang}', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.length')}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.mass')}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
+                    <td style="text-align: center; vertical-align: middle;"><button class="remove-btn" onclick="deleteRow(${index})" title="Remove">×</button></td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -254,6 +317,15 @@
             }
             delete current[keys[keys.length - 1]];
         }
+
+
+
+        window.deleteRow = function (index) {
+            if (confirm("Are you sure you want to delete this row?")) {
+                tableData.splice(index, 1);
+                renderTable();
+            }
+        };
 
         window.updateData = function (index, path, value) {
             if (value.trim() === '') {
@@ -319,13 +391,107 @@
                 renderTable();
             }
 
-            // Cleanup
-            const draggedRow = document.querySelector('.dragging');
-            if (draggedRow) draggedRow.classList.remove('dragging');
-
-            draggedIndex = null;
             return false;
         }
+
+        // Insertion Logic
+        const leftBtn = document.getElementById('leftInsertBtn');
+        const rightBtn = document.getElementById('rightInsertBtn');
+        const insertLine = document.getElementById('insertLine');
+        let hoverIndex = -1;
+
+        document.addEventListener('mousemove', (e) => {
+            // Only show if near margins or hovering buttons
+            const isNearLeft = e.clientX < 50;
+            const isNearRight = e.clientX > window.innerWidth - 50;
+            const isHoveringLeft = e.target === leftBtn;
+            const isHoveringRight = e.target === rightBtn;
+
+            if (!isNearLeft && !isNearRight && !isHoveringLeft && !isHoveringRight) {
+                hideInsertControls();
+                return;
+            }
+
+            // Find closest row boundary
+            const tbody = document.querySelector('#dataTable tbody');
+            const rows = Array.from(tbody.children);
+            if (rows.length === 0) return;
+
+            let closestDist = Infinity;
+            let closestY = 0;
+            let closestIndex = -1;
+
+            // Check top of first row
+            const firstRect = rows[0].getBoundingClientRect();
+            const distTop = Math.abs(e.clientY - firstRect.top);
+            if (distTop < closestDist) {
+                closestDist = distTop;
+                closestY = firstRect.top;
+                closestIndex = 0;
+            }
+
+            // Check bottom of all rows
+            rows.forEach((row, i) => {
+                const rect = row.getBoundingClientRect();
+                const distBottom = Math.abs(e.clientY - rect.bottom);
+                if (distBottom < closestDist) {
+                    closestDist = distBottom;
+                    closestY = rect.bottom;
+                    closestIndex = i + 1;
+                }
+            });
+
+            // Threshold for snapping
+            if (closestDist > 30) {
+                hideInsertControls();
+                return;
+            }
+
+            hoverIndex = closestIndex;
+            showInsertControls(closestY, isNearLeft || isHoveringLeft ? 'left' : 'right');
+        });
+
+        function showInsertControls(y, side) {
+            insertLine.style.top = y + 'px';
+            insertLine.style.display = 'block';
+
+            if (side === 'left') {
+                leftBtn.style.top = y + 'px';
+                leftBtn.style.display = 'block';
+                rightBtn.style.display = 'none';
+            } else {
+                rightBtn.style.top = y + 'px';
+                rightBtn.style.display = 'block';
+                leftBtn.style.display = 'none';
+            }
+        }
+
+        function hideInsertControls() {
+            leftBtn.style.display = 'none';
+            rightBtn.style.display = 'none';
+            insertLine.style.display = 'none';
+            hoverIndex = -1;
+        }
+
+        function insertRow() {
+            if (hoverIndex === -1) return;
+
+            const newRow = {
+                id: "",
+                displayName: { "en-us": "" },
+                category: { "en-us": "" },
+                dimensions: { length: "", mass: "" },
+                tags: { "en-us": [] },
+                x_coordinates: { length: "", mass: "" }
+            };
+
+            tableData.splice(hoverIndex, 0, newRow);
+            renderTable();
+            hideInsertControls();
+        }
+
+        leftBtn.addEventListener('click', insertRow);
+        rightBtn.addEventListener('click', insertRow);
 
         function handleDragEnd(e) {
             this.classList.remove('dragging');
