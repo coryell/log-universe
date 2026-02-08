@@ -34,9 +34,9 @@
     }
   },
   {
-    "id": "range_of_weak_force",
+    "id": "range_of_weak_interaction",
     "displayName": {
-      "en-us": "Range of Weak Force"
+      "en-us": "Range of Weak Interaction"
     },
     "length": 1e-17,
     "category": {
@@ -45,7 +45,7 @@
     "x": 5,
     "tags": {
       "en-us": [
-        "interaction",
+        "weak nuclear force",
         "quantum"
       ]
     }
@@ -67,9 +67,9 @@
     }
   },
   {
-    "id": "range_of_strong_force",
+    "id": "range_of_strong_interaction",
     "displayName": {
-      "en-us": "Range of Strong Force"
+      "en-us": "Range of Strong Interaction"
     },
     "length": 1e-15,
     "category": {
@@ -78,7 +78,7 @@
     "x": 5,
     "tags": {
       "en-us": [
-        "interaction",
+        "strong nuclear force",
         "quantum"
       ]
     }
