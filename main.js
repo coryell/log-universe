@@ -409,46 +409,54 @@ d3.json('/data.json').then(data => {
         const categoryData = data.filter(item => getLocalized(item.category, LANGUAGE) === cat); // i18n update
         if (categoryData.length === 0) return;
 
-        // Calculate bounding box in default screen coordinates
-        // We use the default xScale and yScale (before any zoom transform)
+        // Calculate raw bounding box in default screen coordinates
         const xValues = categoryData.map(d => xScale(d.x));
         const yValues = categoryData.map(d => yScale(d.length));
 
-        let minX = d3.min(xValues);
-        let maxX = d3.max(xValues);
-        let minY = d3.min(yValues);
-        let maxY = d3.max(yValues);
-
-        // Add padding and space for labels
-        const padding = 20;
-        const labelAllowance = 100; // Estimate for label width on the right
-
-        minX -= padding;
-        maxX += labelAllowance;
-        minY -= padding;
-        maxY += padding;
+        const minX = d3.min(xValues);
+        const maxX = d3.max(xValues);
+        const minY = d3.min(yValues);
+        const maxY = d3.max(yValues);
 
         const boundsWidth = maxX - minX;
         const boundsHeight = maxY - minY;
 
-        // Calculate scale and translation to fit
-        // Scale must fit both width and height
-        const scale = 0.95 / Math.max(boundsWidth / width, boundsHeight / height);
+        // Desired screen padding (pixels)
+        // asymmetric padding to allow space for labels on the right
+        const padLeft = 180;
+        const padRight = 460;
+        const padTop = 60;
+        const padBottom = 60;
 
-        // Clamp scale to extent
-        const clampedScale = Math.min(Math.max(scale, 1), 1000000); // Respect min scale 1
+        const availWidth = width - padLeft - padRight;
+        const availHeight = height - padTop - padBottom;
 
-        const centerX = (minX + maxX) / 2;
-        const centerY = (minY + maxY) / 2;
+        // Calculate scale to fit content into available screen space
+        // Handle case where boundsWidth/Height is 0 (single point) by defaulting to a max scale
+        let scaleX = boundsWidth > 0 ? availWidth / boundsWidth : 10000;
+        let scaleY = boundsHeight > 0 ? availHeight / boundsHeight : 10000;
+
+        let scale = Math.min(scaleX, scaleY);
+
+        // Clamp scale
+        scale = Math.min(Math.max(scale, 1), 10000);
+
+        // Center of the data
+        const cx = (minX + maxX) / 2;
+        const cy = (minY + maxY) / 2;
+
+        // Center of the available screen area
+        const screenCX = padLeft + availWidth / 2;
+        const screenCY = padTop + availHeight / 2;
 
         const translate = [
-          width / 2 - centerX * clampedScale,
-          height / 2 - centerY * clampedScale
+          screenCX - cx * scale,
+          screenCY - cy * scale
         ];
 
         const transform = d3.zoomIdentity
           .translate(translate[0], translate[1])
-          .scale(clampedScale);
+          .scale(scale);
 
         svg.transition()
           .duration(750)
