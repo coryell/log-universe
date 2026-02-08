@@ -63,12 +63,12 @@ const g = svg.append('g')
 d3.json('/data.json').then(data => {
   // Convert lengths to numbers just in case
   data.forEach(d => {
-    d.length = +d.length;
+    d.dimensions.length = +d.dimensions.length;
   });
 
   // Calculate domain extent
-  const minLength = d3.min(data, d => d.length);
-  const maxLength = d3.max(data, d => d.length);
+  const minLength = d3.min(data, d => d.dimensions.length);
+  const maxLength = d3.max(data, d => d.dimensions.length);
 
   // Calculate X extent
   const minX = d3.min(data, d => d.x) || 0;
@@ -268,7 +268,7 @@ d3.json('/data.json').then(data => {
     .attr('transform', d => {
       const t = initialTransform;
       const newX = t.rescaleX(xScale)(d.x);
-      const newY = t.rescaleY(yScale)(d.length);
+      const newY = t.rescaleY(yScale)(d.dimensions.length);
       return `translate(${newX}, ${newY})`;
     });
 
@@ -355,7 +355,7 @@ d3.json('/data.json').then(data => {
 
       // Update Group Positions
       g.selectAll('.item-group')
-        .attr('transform', d => `translate(${newXScale(d.x)}, ${newYScale(d.length)})`);
+        .attr('transform', d => `translate(${newXScale(d.x)}, ${newYScale(d.dimensions.length)})`);
 
       // Update Sizes (Semantic Zoom)
       g.selectAll('.item-group circle')
@@ -449,7 +449,7 @@ d3.json('/data.json').then(data => {
 
         // Calculate raw bounding box in default screen coordinates
         const xValues = categoryData.map(d => xScale(d.x));
-        const yValues = categoryData.map(d => yScale(d.length));
+        const yValues = categoryData.map(d => yScale(d.dimensions.length));
 
         const minX = d3.min(xValues);
         const maxX = d3.max(xValues);
@@ -579,18 +579,31 @@ d3.json('/data.json').then(data => {
   }
 
   // Select Result & Zoom
-  function selectResult(d) {
-    searchInput.value = getLocalized(d.displayName, LANGUAGE); // i18n update
+  function selectResult(result) {
+    searchInput.value = getLocalized(result.displayName, LANGUAGE); // i18n update
     searchResults.style.display = 'none';
 
     // Highlight immediately
-    highlightItem(d);
+    highlightItem(result);
 
     // Show Infobox immediately
-    showInfobox(d);
+    showInfobox(result);
 
-    // Zoom to point logic
-    // We want to center (d.x, d.length)
+    // Use zoom to center and scale on the item
+    // We want to center (d.x, d.dimensions.length)
+    const t = d3.zoomTransform(svg.node());
+
+    // Target scale (zoom into the item level)
+    // We want the item to be prominent.
+    // Let's find the closest items in Y to determine a good zoom level?
+    // Or just fixed high zoom? Let's try to frame it with some context.
+
+    // Find neighbors in log scale
+    const item = data.find(d => d.id === result.id);
+    if (!item) return;
+
+    const neighbors = data.filter(d => Math.abs(d.dimensions.length - item.dimensions.length) < item.dimensions.length * 2);
+
     // Calculate scale to show roughly 3 decades vertically
     const domain = yScale.domain();
     const totalDecades = Math.log10(domain[1]) - Math.log10(domain[0]);
@@ -603,15 +616,18 @@ d3.json('/data.json').then(data => {
     // Dynamic Zoom Constraint: Keep nearest neighbor visible
     // 1. Calculate distance to nearest neighbor in base screen coordinates (transform k=1)
     let minDiff = Infinity;
-    const x1 = xScale(d.x);
-    const y1 = yScale(d.length);
+    const x1 = xScale(item.x);
+    const y1 = yScale(item.dimensions.length);
 
-    data.forEach(p => {
-      if (p.id === d.id) return; // Skip self
+    let minX = x1, maxX = x1, minY = y1, maxY = y1;
+
+    neighbors.forEach(p => {
       const x2 = xScale(p.x);
-      const y2 = yScale(p.length);
-      const dist = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-      if (dist < minDiff) minDiff = dist;
+      const y2 = yScale(p.dimensions.length);
+      minX = Math.min(minX, x2);
+      maxX = Math.max(maxX, x2);
+      minY = Math.min(minY, y2);
+      maxY = Math.max(maxY, y2);
     });
 
     if (minDiff !== Infinity) {
@@ -625,20 +641,20 @@ d3.json('/data.json').then(data => {
 
     // Clamp scale reasonably
     targetScale = Math.max(1, Math.min(targetScale, 1000));
-    const x = xScale(d.x);
-    const y = yScale(d.length);
+    // Center on item
+    const x = xScale(item.x);
+    const y = yScale(item.dimensions.length);
 
-    const transform = d3.zoomIdentity
-      .translate(width / 2, height / 2) // Center of screen
+    // transform = translate(center - point * k)
+    const targetTransform = d3.zoomIdentity
+      .translate(width / 2, height / 2)
       .scale(targetScale)
-      .translate(-x, -y); // Move point to center
+      .translate(-x, -y);
 
     svg.transition()
-      .duration(1500)
-      .call(zoom.transform, transform);
-
-    // Optional: Trigger highlight effect for category?
-    // For now, just zoom.
+      .duration(750)
+      .call(zoom.transform, targetTransform)
+      .on("end", () => highlightItem(item));
   }
 
   // Keyboard Navigation
@@ -757,7 +773,7 @@ d3.json('/data.json').then(data => {
     // specific format: [i.j x 10^k] m
     let lengthContent = "";
     let lengthTextForCopy = "";
-    if (d.length !== undefined && d.length !== null) {
+    if (d.dimensions?.length !== undefined && d.dimensions?.length !== null) {
       // Calculate significant figures from the source string in data.json if possible
       // But here we have d.length as a number. In JS, 640 is just 640.
       // The user says: "for integer values like 640, assume the number of sig figs is the number of digits before the trailing zeros"
@@ -791,7 +807,7 @@ d3.json('/data.json').then(data => {
         return n.toExponential(2);
       };
 
-      const exp = formatWithSigFigs(d.length);
+      const exp = formatWithSigFigs(d.dimensions.length);
       const [mantissa, exponent] = exp.split('e');
       const expVal = parseInt(exponent, 10);
       lengthTextForCopy = `${mantissa} × 10^${expVal} m`;

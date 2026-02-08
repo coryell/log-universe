@@ -4,7 +4,6 @@
     "displayName": {
       "en-us": "Electron/Quark Radius Upper Limit"
     },
-    "length": 1e-18,
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
@@ -14,6 +13,9 @@
         "subatomic",
         "particle"
       ]
+    },
+    "dimensions": {
+      "length": 1e-18
     }
   },
   {
@@ -21,7 +23,6 @@
     "displayName": {
       "en-us": "Proton/Neutron"
     },
-    "length": 8e-16,
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
@@ -31,6 +32,9 @@
         "nucleon",
         "atomic nucleus"
       ]
+    },
+    "dimensions": {
+      "length": 8e-16
     }
   },
   {
@@ -38,7 +42,6 @@
     "displayName": {
       "en-us": "Range of Weak Interaction"
     },
-    "length": 1e-17,
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
@@ -48,6 +51,9 @@
         "weak nuclear force",
         "quantum"
       ]
+    },
+    "dimensions": {
+      "length": 1e-17
     }
   },
   {
@@ -55,7 +61,6 @@
     "displayName": {
       "en-us": "Planck Length"
     },
-    "length": 1.6e-35,
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
@@ -64,6 +69,9 @@
       "en-us": [
         "quantum"
       ]
+    },
+    "dimensions": {
+      "length": 1.6e-35
     }
   },
   {
@@ -71,7 +79,6 @@
     "displayName": {
       "en-us": "Range of Strong Interaction"
     },
-    "length": 1e-15,
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
@@ -81,6 +88,9 @@
         "strong nuclear force",
         "quantum"
       ]
+    },
+    "dimensions": {
+      "length": 1e-15
     }
   },
   {
@@ -88,7 +98,6 @@
     "displayName": {
       "en-us": "Most Energetic Photon Detected"
     },
-    "length": 9e-22,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -99,6 +108,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 9e-22
     }
   },
   {
@@ -106,7 +118,6 @@
     "displayName": {
       "en-us": "Lowest Energy Gamma Ray"
     },
-    "length": 8.2e-13,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -117,6 +128,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 8.2e-13
     }
   },
   {
@@ -124,7 +138,6 @@
     "displayName": {
       "en-us": "Highest Energy X-Ray"
     },
-    "length": 5e-12,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -134,6 +147,9 @@
         "light",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 5e-12
     }
   },
   {
@@ -141,7 +157,6 @@
     "displayName": {
       "en-us": "X-Ray/UV Boundary"
     },
-    "length": 1e-8,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -153,6 +168,9 @@
         "radiation",
         "ultraviolet"
       ]
+    },
+    "dimensions": {
+      "length": 1e-8
     }
   },
   {
@@ -160,7 +178,6 @@
     "displayName": {
       "en-us": "Highest Energy Visible (Violet)"
     },
-    "length": 4e-7,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -172,6 +189,9 @@
         "optical",
         "photon"
       ]
+    },
+    "dimensions": {
+      "length": 4e-7
     }
   },
   {
@@ -179,7 +199,6 @@
     "displayName": {
       "en-us": "Lowest Energy Visible (Red)"
     },
-    "length": 7e-7,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -191,6 +210,9 @@
         "optical",
         "photon"
       ]
+    },
+    "dimensions": {
+      "length": 7e-7
     }
   },
   {
@@ -198,7 +220,6 @@
     "displayName": {
       "en-us": "Infrared / Microwave Boundary"
     },
-    "length": 0.001,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -211,6 +232,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 0.001
     }
   },
   {
@@ -218,7 +242,6 @@
     "displayName": {
       "en-us": "Microwave / Radio Boundary"
     },
-    "length": 1,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -230,6 +253,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 1
     }
   },
   {
@@ -237,7 +263,6 @@
     "displayName": {
       "en-us": "Cell Phone Shortest Wavelength"
     },
-    "length": 10,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -249,6 +274,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 10
     }
   },
   {
@@ -256,7 +284,6 @@
     "displayName": {
       "en-us": "Cell Phone Longest Wavelength"
     },
-    "length": 1000,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -268,6 +295,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 1000
     }
   },
   {
@@ -275,7 +305,6 @@
     "displayName": {
       "en-us": "CMB Wavelength"
     },
-    "length": 0.0016,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -288,6 +317,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 0.0016
     }
   },
   {
@@ -295,7 +327,6 @@
     "displayName": {
       "en-us": "Longest Radio Possible in Galaxy"
     },
-    "length": 300000,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -306,6 +337,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 300000
     }
   },
   {
@@ -313,7 +347,6 @@
     "displayName": {
       "en-us": "Longest Radio Possible in Solar System"
     },
-    "length": 33000,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -324,6 +357,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 33000
     }
   },
   {
@@ -331,7 +367,6 @@
     "displayName": {
       "en-us": "Longest Radio That Penetrates Ionosphere"
     },
-    "length": 30,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -342,6 +377,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 30
     }
   },
   {
@@ -349,7 +387,6 @@
     "displayName": {
       "en-us": "Lyman Alpha"
     },
-    "length": 1.2e-7,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -362,6 +399,9 @@
         "radiation",
         "spectral line"
       ]
+    },
+    "dimensions": {
+      "length": 1.2e-7
     }
   },
   {
@@ -369,7 +409,6 @@
     "displayName": {
       "en-us": "IR Wavelength of Human Body"
     },
-    "length": 0.0000093,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -382,6 +421,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 0.0000093
     }
   },
   {
@@ -389,7 +431,6 @@
     "displayName": {
       "en-us": "IR Wavelength of Red Hot Metal"
     },
-    "length": 0.000004,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -402,6 +443,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 0.000004
     }
   },
   {
@@ -409,7 +453,6 @@
     "displayName": {
       "en-us": "Hydrogen Line"
     },
-    "length": 0.21,
     "category": {
       "en-us": "Electromagnetic"
     },
@@ -420,6 +463,9 @@
         "photon",
         "radiation"
       ]
+    },
+    "dimensions": {
+      "length": 0.21
     }
   },
   {
@@ -427,7 +473,6 @@
     "displayName": {
       "en-us": "Distance Between Particles IPM"
     },
-    "length": 0.005,
     "category": {
       "en-us": "Density"
     },
@@ -437,6 +482,9 @@
         "interplanetary medium",
         "space"
       ]
+    },
+    "dimensions": {
+      "length": 0.005
     }
   },
   {
@@ -444,7 +492,6 @@
     "displayName": {
       "en-us": "Distance Between Particles ISM"
     },
-    "length": 0.1,
     "category": {
       "en-us": "Density"
     },
@@ -454,6 +501,9 @@
         "interstellar medium",
         "space"
       ]
+    },
+    "dimensions": {
+      "length": 0.1
     }
   },
   {
@@ -461,7 +511,6 @@
     "displayName": {
       "en-us": "Distance Between Particles IGM"
     },
-    "length": 1,
     "category": {
       "en-us": "Density"
     },
@@ -471,6 +520,9 @@
         "intergalactic medium",
         "space"
       ]
+    },
+    "dimensions": {
+      "length": 1
     }
   },
   {
@@ -478,183 +530,214 @@
     "displayName": {
       "en-us": "Distance Between Particles in Best Artificial Vacuum"
     },
-    "length": 0.00001,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 0.00001
+    }
   },
   {
     "id": "distance_between_air_molecules_at_sea_level",
     "displayName": {
       "en-us": "Distance Between Air Molecules at Sea Level"
     },
-    "length": 3e-9,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 3e-9
+    }
   },
   {
     "id": "distance_between_particles_in_earth_core",
     "displayName": {
       "en-us": "Distance Between Particles in Earth Core"
     },
-    "length": 2e-10,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 2e-10
+    }
   },
   {
     "id": "distance_between_ions_in_sun_core",
     "displayName": {
       "en-us": "Distance Between Ions in Sun Core"
     },
-    "length": 3.5e-11,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 3.5e-11
+    }
   },
   {
     "id": "distance_between_ions_in_sun_corona",
     "displayName": {
       "en-us": "Distance Between Ions in Sun Corona"
     },
-    "length": 0.000001,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 0.000001
+    }
   },
   {
     "id": "distance_between_water_molecules",
     "displayName": {
       "en-us": "Distance Between Water Molecules"
     },
-    "length": 3.1e-10,
     "category": {
       "en-us": "Density"
     },
-    "x": 60
+    "x": 60,
+    "dimensions": {
+      "length": 3.1e-10
+    }
   },
   {
     "id": "distance_between_neutrons_in_neutron_star",
     "displayName": {
       "en-us": "Distance Between Neutrons in Neutron Star"
     },
-    "length": 1.5e-15,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 1.5e-15
+    }
   },
   {
     "id": "distance_between_ions_in_white_dwarf",
     "displayName": {
       "en-us": "Distance Between Ions in White Dwarf"
     },
-    "length": 3e-12,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 3e-12
+    }
   },
   {
     "id": "distance_between_stars_in_milky_way",
     "displayName": {
       "en-us": "Distance Between Stars in Milky Way"
     },
-    "length": 47000000000000000,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 47000000000000000
+    }
   },
   {
     "id": "distance_between_galaxies_in_local_supercluster",
     "displayName": {
       "en-us": "Distance Between Galaxies in Local Supercluster"
     },
-    "length": 2.2e+22,
     "category": {
       "en-us": "Density"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 2.2e+22
+    }
   },
   {
     "id": "largest_nuclear_radius_pb_208",
     "displayName": {
       "en-us": "Largest Nuclear Radius (Pb-208)"
     },
-    "length": 7e-15,
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 7e-15
+    }
   },
   {
     "id": "smallest_molecule_h_2",
     "displayName": {
       "en-us": "Smallest Molecule (H2)"
     },
-    "length": 7.4e-11,
     "category": {
       "en-us": "Molecules"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 7.4e-11
+    }
   },
   {
     "id": "largest_molecule_titin",
     "displayName": {
       "en-us": "Largest Molecule (Titin)"
     },
-    "length": 0.000001,
     "category": {
       "en-us": "Molecules"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 0.000001
+    }
   },
   {
     "id": "glucose_molecule",
     "displayName": {
       "en-us": "Glucose Molecule"
     },
-    "length": 1e-9,
     "category": {
       "en-us": "Molecules"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 1e-9
+    }
   },
   {
     "id": "water_molecule",
     "displayName": {
       "en-us": "Water Molecule"
     },
-    "length": 2.8e-10,
     "category": {
       "en-us": "Molecules"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 2.8e-10
+    }
   },
   {
     "id": "amino_acid",
     "displayName": {
       "en-us": "Amino Acid"
     },
-    "length": 1e-9,
     "category": {
       "en-us": "Molecules"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 1e-9
+    }
   },
   {
     "id": "dna_polymerase",
     "displayName": {
       "en-us": "DNA Polymerase"
     },
-    "length": 7.5e-9,
     "category": {
       "en-us": "Biology"
     },
@@ -665,6 +748,9 @@
         "protein",
         "replication"
       ]
+    },
+    "dimensions": {
+      "length": 7.5e-9
     }
   },
   {
@@ -672,7 +758,6 @@
     "displayName": {
       "en-us": "Collagen"
     },
-    "length": 3e-7,
     "category": {
       "en-us": "Biology"
     },
@@ -682,6 +767,9 @@
         "protein",
         "tissue"
       ]
+    },
+    "dimensions": {
+      "length": 3e-7
     }
   },
   {
@@ -689,7 +777,6 @@
     "displayName": {
       "en-us": "DNA in Human Chromosome"
     },
-    "length": 0.1,
     "category": {
       "en-us": "Biology"
     },
@@ -700,6 +787,9 @@
         "genetic",
         "genome"
       ]
+    },
+    "dimensions": {
+      "length": 0.1
     }
   },
   {
@@ -707,7 +797,6 @@
     "displayName": {
       "en-us": "Chromosome During Division"
     },
-    "length": 0.00001,
     "category": {
       "en-us": "Biology"
     },
@@ -720,6 +809,9 @@
         "genetic",
         "genome"
       ]
+    },
+    "dimensions": {
+      "length": 0.00001
     }
   },
   {
@@ -727,7 +819,6 @@
     "displayName": {
       "en-us": "Cell Membrane Thickness"
     },
-    "length": 1e-8,
     "category": {
       "en-us": "Biology"
     },
@@ -736,6 +827,9 @@
       "en-us": [
         "phospholipid bilayer"
       ]
+    },
+    "dimensions": {
+      "length": 1e-8
     }
   },
   {
@@ -743,7 +837,6 @@
     "displayName": {
       "en-us": "Smallest Virus (AAV)"
     },
-    "length": 2e-8,
     "category": {
       "en-us": "Biology"
     },
@@ -753,6 +846,9 @@
         "microbe",
         "pathogen"
       ]
+    },
+    "dimensions": {
+      "length": 2e-8
     }
   },
   {
@@ -760,7 +856,6 @@
     "displayName": {
       "en-us": "Largest Virus (Tupanvirus)"
     },
-    "length": 0.0000012,
     "category": {
       "en-us": "Biology"
     },
@@ -770,6 +865,9 @@
         "microbe",
         "pathogen"
       ]
+    },
+    "dimensions": {
+      "length": 0.0000012
     }
   },
   {
@@ -777,62 +875,71 @@
     "displayName": {
       "en-us": "Smallest Free Cell (Mycoplasma)"
     },
-    "length": 2e-7,
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 2e-7
+    }
   },
   {
     "id": "largest_cell_ostrich_egg",
     "displayName": {
       "en-us": "Largest Cell (Ostrich Egg)"
     },
-    "length": 0.15,
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 0.15
+    }
   },
   {
     "id": "smallest_human_cell_sperm",
     "displayName": {
       "en-us": "Smallest Human Cell (Sperm)"
     },
-    "length": 0.000005,
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 0.000005
+    }
   },
   {
     "id": "largest_human_cell_egg",
     "displayName": {
       "en-us": "Largest Human Cell (Egg)"
     },
-    "length": 0.0001,
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 0.0001
+    }
   },
   {
     "id": "human_skin_cell",
     "displayName": {
       "en-us": "Human Skin Cell"
     },
-    "length": 0.00003,
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 0.00003
+    }
   },
   {
     "id": "human_white_blood_cell",
     "displayName": {
       "en-us": "Human White Blood Cell"
     },
-    "length": 0.00001,
     "category": {
       "en-us": "Biology"
     },
@@ -842,6 +949,9 @@
         "immune",
         "leukocyte"
       ]
+    },
+    "dimensions": {
+      "length": 0.00001
     }
   },
   {
@@ -849,7 +959,6 @@
     "displayName": {
       "en-us": "Human Mitochondria"
     },
-    "length": 0.000002,
     "category": {
       "en-us": "Biology"
     },
@@ -859,6 +968,9 @@
         "mitochondrion",
         "organelle"
       ]
+    },
+    "dimensions": {
+      "length": 0.000002
     }
   },
   {
@@ -866,7 +978,6 @@
     "displayName": {
       "en-us": "Smallest Organelle (Ribosome)"
     },
-    "length": 2.5e-8,
     "category": {
       "en-us": "Biology"
     },
@@ -875,6 +986,9 @@
       "en-us": [
         "cell"
       ]
+    },
+    "dimensions": {
+      "length": 2.5e-8
     }
   },
   {
@@ -882,7 +996,6 @@
     "displayName": {
       "en-us": "Largest Organelle (Nucleus)"
     },
-    "length": 0.00001,
     "category": {
       "en-us": "Biology"
     },
@@ -892,6 +1005,9 @@
         "cell",
         "DNA storage"
       ]
+    },
+    "dimensions": {
+      "length": 0.00001
     }
   },
   {
@@ -899,51 +1015,58 @@
     "displayName": {
       "en-us": "Longest Human Axon"
     },
-    "length": 1,
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 1
+    }
   },
   {
     "id": "longest_axon_blue_whale",
     "displayName": {
       "en-us": "Longest Axon (Blue Whale)"
     },
-    "length": 30,
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 30
+    }
   },
   {
     "id": "typical_human_axon",
     "displayName": {
       "en-us": "Typical Human Axon"
     },
-    "length": 0.001,
     "category": {
       "en-us": "Biology"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 0.001
+    }
   },
   {
     "id": "human_hair_thickness",
     "displayName": {
       "en-us": "Human Hair Thickness"
     },
-    "length": 0.0001,
     "category": {
       "en-us": "Biology"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 0.0001
+    }
   },
   {
     "id": "computer_transistor_size",
     "displayName": {
       "en-us": "Computer Transistor Size"
     },
-    "length": 5e-8,
     "category": {
       "en-us": "Technology"
     },
@@ -952,6 +1075,9 @@
       "en-us": [
         "electronics"
       ]
+    },
+    "dimensions": {
+      "length": 5e-8
     }
   },
   {
@@ -959,117 +1085,136 @@
     "displayName": {
       "en-us": "Highest Sounds Humans Hear"
     },
-    "length": 0.17,
     "category": {
       "en-us": "Sound"
     },
-    "x": 60
+    "x": 60,
+    "dimensions": {
+      "length": 0.17
+    }
   },
   {
     "id": "lowest_sounds_humans_hear",
     "displayName": {
       "en-us": "Lowest Sounds Humans Hear"
     },
-    "length": 17,
     "category": {
       "en-us": "Sound"
     },
-    "x": 60
+    "x": 60,
+    "dimensions": {
+      "length": 17
+    }
   },
   {
     "id": "lowest_sounds_animals_hear_pigeons",
     "displayName": {
       "en-us": "Lowest Sounds Animals Hear (Pigeons)"
     },
-    "length": 7000,
     "category": {
       "en-us": "Sound"
     },
-    "x": 60
+    "x": 60,
+    "dimensions": {
+      "length": 7000
+    }
   },
   {
     "id": "highest_sounds_animals_hear_greater_wax_moths",
     "displayName": {
       "en-us": "Highest Sounds Animals Hear (Greater wax moths)"
     },
-    "length": 0.011,
     "category": {
       "en-us": "Sound"
     },
-    "x": 60
+    "x": 60,
+    "dimensions": {
+      "length": 0.011
+    }
   },
   {
     "id": "highest_sound_produced_recorded",
     "displayName": {
       "en-us": "Highest Sound Produced/Recorded"
     },
-    "length": 3.4e-7,
     "category": {
       "en-us": "Sound"
     },
-    "x": 60
+    "x": 60,
+    "dimensions": {
+      "length": 3.4e-7
+    }
   },
   {
     "id": "seismic_wave_shortest",
     "displayName": {
       "en-us": "Seismic Wave (Shortest)"
     },
-    "length": 40,
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 40
+    }
   },
   {
     "id": "seismic_wave_longest",
     "displayName": {
       "en-us": "Seismic Wave (Longest)"
     },
-    "length": 250,
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 250
+    }
   },
   {
     "id": "wind_wave",
     "displayName": {
       "en-us": "Wind Wave"
     },
-    "length": 100,
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 100
+    }
   },
   {
     "id": "tsunami_shortest",
     "displayName": {
       "en-us": "Tsunami (Shortest)"
     },
-    "length": 150000,
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 150000
+    }
   },
   {
     "id": "tsunami_longest",
     "displayName": {
       "en-us": "Tsunami (Longest)"
     },
-    "length": 1000000,
     "category": {
       "en-us": "Waves"
     },
-    "x": 40
+    "x": 40,
+    "dimensions": {
+      "length": 1000000
+    }
   },
   {
     "id": "earth",
     "displayName": {
       "en-us": "Earth"
     },
-    "length": 6378000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1079,6 +1224,9 @@
         "terra",
         "planet"
       ]
+    },
+    "dimensions": {
+      "length": 6378000
     }
   },
   {
@@ -1086,7 +1234,6 @@
     "displayName": {
       "en-us": "Moon"
     },
-    "length": 1740000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1097,6 +1244,9 @@
         "luna",
         "lunar"
       ]
+    },
+    "dimensions": {
+      "length": 1740000
     }
   },
   {
@@ -1104,18 +1254,19 @@
     "displayName": {
       "en-us": "Moon Orbit"
     },
-    "length": 380000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 380000000
+    }
   },
   {
     "id": "sun",
     "displayName": {
       "en-us": "Sun"
     },
-    "length": 696000000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1125,6 +1276,9 @@
         "Sol",
         "star"
       ]
+    },
+    "dimensions": {
+      "length": 696000000
     }
   },
   {
@@ -1132,29 +1286,32 @@
     "displayName": {
       "en-us": "Earth Orbit (1 AU)"
     },
-    "length": 150000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 150000000000
+    }
   },
   {
     "id": "mercury_orbit",
     "displayName": {
       "en-us": "Mercury Orbit"
     },
-    "length": 58000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 58000000000
+    }
   },
   {
     "id": "jupiter_orbit",
     "displayName": {
       "en-us": "Jupiter Orbit"
     },
-    "length": 778000000000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1164,6 +1321,9 @@
         "gas giant",
         "planet"
       ]
+    },
+    "dimensions": {
+      "length": 778000000000
     }
   },
   {
@@ -1171,7 +1331,6 @@
     "displayName": {
       "en-us": "Saturn Orbit"
     },
-    "length": 1400000000000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1181,6 +1340,9 @@
         "gas giant",
         "planet"
       ]
+    },
+    "dimensions": {
+      "length": 1400000000000
     }
   },
   {
@@ -1188,7 +1350,6 @@
     "displayName": {
       "en-us": "Pluto Orbit"
     },
-    "length": 6000000000000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1197,6 +1358,9 @@
       "en-us": [
         "dwarf planet"
       ]
+    },
+    "dimensions": {
+      "length": 6000000000000
     }
   },
   {
@@ -1204,348 +1368,409 @@
     "displayName": {
       "en-us": "Saturn"
     },
-    "length": 60000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 60000000
+    }
   },
   {
     "id": "saturn_s_rings_outer_radius",
     "displayName": {
       "en-us": "Saturn's Rings Outer Radius"
     },
-    "length": 140000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 140000000
+    }
   },
   {
     "id": "brown_dwarf",
     "displayName": {
       "en-us": "Brown Dwarf"
     },
-    "length": 58000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 58000000
+    }
   },
   {
     "id": "saturn_s_ring_thickness",
     "displayName": {
       "en-us": "Saturn's Ring Thickness"
     },
-    "length": 100,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 100
+    }
   },
   {
     "id": "earth_s_inner_core",
     "displayName": {
       "en-us": "Earth's Inner Core"
     },
-    "length": 1220000,
     "category": {
       "en-us": "Geology"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 1220000
+    }
   },
   {
     "id": "earth_s_outer_core",
     "displayName": {
       "en-us": "Earth's Outer Core"
     },
-    "length": 3480000,
     "category": {
       "en-us": "Geology"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 3480000
+    }
   },
   {
     "id": "earth_s_mantle_thickness",
     "displayName": {
       "en-us": "Earth's Mantle Thickness"
     },
-    "length": 2900000,
     "category": {
       "en-us": "Geology"
     },
-    "x": 12
+    "x": 12,
+    "dimensions": {
+      "length": 2900000
+    }
   },
   {
     "id": "earth_s_crust_continental_thickness",
     "displayName": {
       "en-us": "Earth's Crust Thickness (Continental)"
     },
-    "length": 40000,
     "category": {
       "en-us": "Geology"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 40000
+    }
   },
   {
     "id": "earth_s_crust_oceanic_thickness",
     "displayName": {
       "en-us": "Earth's Crust Thickness (Oceanic)"
     },
-    "length": 5000,
     "category": {
       "en-us": "Geology"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 5000
+    }
   },
   {
     "id": "largest_asteroid_ceres",
     "displayName": {
       "en-us": "Largest Asteroid (Ceres)"
     },
-    "length": 470000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 470000
+    }
   },
   {
     "id": "smallest_asteroid_2015_t_c_25",
     "displayName": {
       "en-us": "Smallest Asteroid (2015 TC25)"
     },
-    "length": 2,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 10
+    "x": 10,
+    "dimensions": {
+      "length": 2
+    }
   },
   {
     "id": "smallest_star_sgr_1935_2154",
     "displayName": {
       "en-us": "Smallest Star (SGR 1935+2154)"
     },
-    "length": 4000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 15,
+    "dimensions": {
+      "length": 4000
+    }
   },
   {
     "id": "neutron_star",
     "displayName": {
       "en-us": "Neutron Star"
     },
-    "length": 10000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 15,
+    "dimensions": {
+      "length": 10000
+    }
   },
   {
     "id": "smallest_white_dwarf_hd_49798",
     "displayName": {
       "en-us": "Smallest White Dwarf (HD 49798)"
     },
-    "length": 1600000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 19
+    "x": 19,
+    "dimensions": {
+      "length": 1600000
+    }
   },
   {
     "id": "smallest_subdwarf",
     "displayName": {
       "en-us": "Smallest Subdwarf"
     },
-    "length": 46000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 19
+    "x": 19,
+    "dimensions": {
+      "length": 46000000
+    }
   },
   {
     "id": "largest_white_dwarf_z_andromedae_b",
     "displayName": {
       "en-us": "Largest White Dwarf (Z Andromedae B)"
     },
-    "length": 118000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 19
+    "x": 19,
+    "dimensions": {
+      "length": 118000000
+    }
   },
   {
     "id": "red_dwarf",
     "displayName": {
       "en-us": "Red Dwarf"
     },
-    "length": 69600000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 10
+    "x": 10,
+    "dimensions": {
+      "length": 69600000
+    }
   },
   {
     "id": "largest_main_sequence_star",
     "displayName": {
       "en-us": "Largest Main Sequence Star"
     },
-    "length": 10440000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 10440000000
+    }
   },
   {
     "id": "sirius",
     "displayName": {
       "en-us": "Sirius"
     },
-    "length": 1183200000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 1183200000
+    }
   },
   {
     "id": "maximum_future_sun_radius",
     "displayName": {
       "en-us": "Maximum Future Sun Radius"
     },
-    "length": 139200000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 139200000000
+    }
   },
   {
     "id": "largest_known_star_uy_scuti",
     "displayName": {
       "en-us": "Largest Known Star (UY Scuti)"
     },
-    "length": 1183200000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 1183200000000
+    }
   },
   {
     "id": "kuiper_belt_outer_radius",
     "displayName": {
       "en-us": "Kuiper Belt Outer Radius"
     },
-    "length": 7480000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 7480000000000
+    }
   },
   {
     "id": "oort_cloud_outer_radius",
     "displayName": {
       "en-us": "Oort Cloud Outer Radius"
     },
-    "length": 29900000000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 29900000000000000
+    }
   },
   {
     "id": "oort_cloud_inner_radius",
     "displayName": {
       "en-us": "Oort Cloud Inner Radius"
     },
-    "length": 299000000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 299000000000000
+    }
   },
   {
     "id": "heliopause",
     "displayName": {
       "en-us": "Heliopause"
     },
-    "length": 18400000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 18400000000000
+    }
   },
   {
     "id": "voyager_1_distance",
     "displayName": {
       "en-us": "Voyager 1 Distance"
     },
-    "length": 24700000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 6
+    "x": 6,
+    "dimensions": {
+      "length": 24700000000000
+    }
   },
   {
     "id": "light_year",
     "displayName": {
       "en-us": "Light-year"
     },
-    "length": 9460000000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 9460000000000000
+    }
   },
   {
     "id": "parsec",
     "displayName": {
       "en-us": "Parsec"
     },
-    "length": 30900000000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 30900000000000000
+    }
   },
   {
     "id": "black_hole_1_solar_mass",
     "displayName": {
       "en-us": "Black Hole (1 Solar Mass)"
     },
-    "length": 3000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 3000
+    }
   },
   {
     "id": "distance_to_nearest_star_proxima_centauri",
     "displayName": {
       "en-us": "Distance to Nearest Star (Proxima Centauri)"
     },
-    "length": 40200000000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 15,
+    "dimensions": {
+      "length": 40200000000000000
+    }
   },
   {
     "id": "distance_to_furthest_known_star_earendel",
     "displayName": {
       "en-us": "Distance to Furthest Known Star (Earendel)"
     },
-    "length": 1.36e+26,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 15
+    "x": 15,
+    "dimensions": {
+      "length": 1.36e+26
+    }
   },
   {
     "id": "distance_to_sagittarius_a_star",
     "displayName": {
       "en-us": "Distance to Sagittarius A*"
     },
-    "length": 255000000000000000000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1555,6 +1780,9 @@
         "black hole",
         "supermassive black hole"
       ]
+    },
+    "dimensions": {
+      "length": 255000000000000000000
     }
   },
   {
@@ -1562,7 +1790,6 @@
     "displayName": {
       "en-us": "Milky Way"
     },
-    "length": 401000000000000000000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1572,6 +1799,9 @@
         "galaxy",
         "spiral galaxy"
       ]
+    },
+    "dimensions": {
+      "length": 401000000000000000000
     }
   },
   {
@@ -1579,18 +1809,19 @@
     "displayName": {
       "en-us": "Magellanic Clouds Distance from Galactic Center"
     },
-    "length": 1.7e+21,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 1.7e+21
+    }
   },
   {
     "id": "distance_to_closest_galaxy_andromeda",
     "displayName": {
       "en-us": "Distance to Closest Galaxy (Andromeda)"
     },
-    "length": 2.36e+22,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1600,6 +1831,9 @@
         "neighbor",
         "spiral galaxy"
       ]
+    },
+    "dimensions": {
+      "length": 2.36e+22
     }
   },
   {
@@ -1607,84 +1841,97 @@
     "displayName": {
       "en-us": "Largest Galaxy (ESO 383-76)"
     },
-    "length": 8.33e+21,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 8.33e+21
+    }
   },
   {
     "id": "globular_cluster",
     "displayName": {
       "en-us": "Globular Cluster"
     },
-    "length": 309000000000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 309000000000000000
+    }
   },
   {
     "id": "simeis_147_supernova_remnant",
     "displayName": {
       "en-us": "Simeis 147 (Supernova Remnant)"
     },
-    "length": 757000000000000000,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 757000000000000000
+    }
   },
   {
     "id": "distance_to_cosmic_event_horizon",
     "displayName": {
       "en-us": "Distance to Cosmic Event Horizon"
     },
-    "length": 1.54e+26,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 1.54e+26
+    }
   },
   {
     "id": "local_group",
     "displayName": {
       "en-us": "Local Group"
     },
-    "length": 4.73e+22,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 4.73e+22
+    }
   },
   {
     "id": "local_supercluster",
     "displayName": {
       "en-us": "Local Supercluster"
     },
-    "length": 4.94e+23,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 4.94e+23
+    }
   },
   {
     "id": "distance_to_great_attractor",
     "displayName": {
       "en-us": "Distance to Great Attractor"
     },
-    "length": 1.85e+24,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 0
+    "x": 0,
+    "dimensions": {
+      "length": 1.85e+24
+    }
   },
   {
     "id": "sagittarius_a_star",
     "displayName": {
       "en-us": "Sagittarius A*"
     },
-    "length": 12000000000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1694,6 +1941,9 @@
         "black hole",
         "supermassive black hole"
       ]
+    },
+    "dimensions": {
+      "length": 12000000000
     }
   },
   {
@@ -1701,7 +1951,6 @@
     "displayName": {
       "en-us": "Largest BH Found by LIGO"
     },
-    "length": 420000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1710,6 +1959,9 @@
       "en-us": [
         "black hole"
       ]
+    },
+    "dimensions": {
+      "length": 420000
     }
   },
   {
@@ -1717,7 +1969,6 @@
     "displayName": {
       "en-us": "Largest Black Hole"
     },
-    "length": 300000000000000,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1726,6 +1977,9 @@
       "en-us": [
         "supermassive black hole"
       ]
+    },
+    "dimensions": {
+      "length": 300000000000000
     }
   },
   {
@@ -1733,7 +1987,6 @@
     "displayName": {
       "en-us": "Milky Way Dark Matter Halo"
     },
-    "length": 4.63e+21,
     "category": {
       "en-us": "Astronomy"
     },
@@ -1742,6 +1995,9 @@
       "en-us": [
         "galaxy"
       ]
+    },
+    "dimensions": {
+      "length": 4.63e+21
     }
   },
   {
@@ -1749,11 +2005,13 @@
     "displayName": {
       "en-us": "Longest Galactic Filament"
     },
-    "length": 9.26e+25,
     "category": {
       "en-us": "Astronomy"
     },
-    "x": 30
+    "x": 30,
+    "dimensions": {
+      "length": 9.26e+25
+    }
   },
   {
     "id": "hydrogen",
@@ -1763,7 +2021,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 5.29e-11,
     "x": 0,
     "tags": {
       "en-us": [
@@ -1772,7 +2029,10 @@
         "hydrogen"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Bohr_radius"
+    "source": "https://en.wikipedia.org/wiki/Bohr_radius",
+    "dimensions": {
+      "length": 5.29e-11
+    }
   },
   {
     "id": "helium",
@@ -1782,7 +2042,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 3.0999999999999996e-11,
     "x": 3.1,
     "tags": {
       "en-us": [
@@ -1792,7 +2051,10 @@
         "smallest atom"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 3.0999999999999996e-11
+    }
   },
   {
     "id": "lithium",
@@ -1802,7 +2064,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.45e-10,
     "x": 0,
     "tags": {
       "en-us": [
@@ -1811,7 +2072,10 @@
         "lithium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.45e-10
+    }
   },
   {
     "id": "beryllium",
@@ -1821,7 +2085,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.05e-10,
     "x": 0.1,
     "tags": {
       "en-us": [
@@ -1830,7 +2093,10 @@
         "beryllium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.05e-10
+    }
   },
   {
     "id": "boron",
@@ -1840,7 +2106,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 8.5e-11,
     "x": 2.6,
     "tags": {
       "en-us": [
@@ -1849,7 +2114,10 @@
         "boron"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 8.5e-11
+    }
   },
   {
     "id": "carbon",
@@ -1859,7 +2127,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 7e-11,
     "x": 2.7,
     "tags": {
       "en-us": [
@@ -1868,7 +2135,10 @@
         "carbon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 7e-11
+    }
   },
   {
     "id": "nitrogen",
@@ -1878,7 +2148,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 6.5e-11,
     "x": 2.8000000000000003,
     "tags": {
       "en-us": [
@@ -1887,7 +2156,10 @@
         "nitrogen"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 6.5e-11
+    }
   },
   {
     "id": "oxygen",
@@ -1897,7 +2169,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 6e-11,
     "x": 2.9000000000000004,
     "tags": {
       "en-us": [
@@ -1906,7 +2177,10 @@
         "oxygen"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 6e-11
+    }
   },
   {
     "id": "fluorine",
@@ -1916,7 +2190,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 5e-11,
     "x": 3,
     "tags": {
       "en-us": [
@@ -1925,7 +2198,10 @@
         "fluorine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 5e-11
+    }
   },
   {
     "id": "neon",
@@ -1935,7 +2211,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 3.8e-11,
     "x": 3.1,
     "tags": {
       "en-us": [
@@ -1944,7 +2219,10 @@
         "neon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 3.8e-11
+    }
   },
   {
     "id": "sodium",
@@ -1954,7 +2232,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.8e-10,
     "x": 0,
     "tags": {
       "en-us": [
@@ -1963,7 +2240,10 @@
         "sodium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.8e-10
+    }
   },
   {
     "id": "magnesium",
@@ -1973,7 +2253,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.5e-10,
     "x": 0.1,
     "tags": {
       "en-us": [
@@ -1982,7 +2261,10 @@
         "magnesium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.5e-10
+    }
   },
   {
     "id": "aluminium",
@@ -1992,7 +2274,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.25e-10,
     "x": 2.6,
     "tags": {
       "en-us": [
@@ -2001,7 +2282,10 @@
         "aluminium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.25e-10
+    }
   },
   {
     "id": "silicon",
@@ -2011,7 +2295,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.1e-10,
     "x": 2.7,
     "tags": {
       "en-us": [
@@ -2020,7 +2303,10 @@
         "silicon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.1e-10
+    }
   },
   {
     "id": "phosphorus",
@@ -2030,7 +2316,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1e-10,
     "x": 2.8000000000000003,
     "tags": {
       "en-us": [
@@ -2039,7 +2324,10 @@
         "phosphorus"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1e-10
+    }
   },
   {
     "id": "sulfur",
@@ -2049,7 +2337,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1e-10,
     "x": 2.9000000000000004,
     "tags": {
       "en-us": [
@@ -2058,7 +2345,10 @@
         "sulfur"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1e-10
+    }
   },
   {
     "id": "chlorine",
@@ -2068,7 +2358,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1e-10,
     "x": 3,
     "tags": {
       "en-us": [
@@ -2077,7 +2366,10 @@
         "chlorine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1e-10
+    }
   },
   {
     "id": "argon",
@@ -2087,7 +2379,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 7.1e-11,
     "x": 3.1,
     "tags": {
       "en-us": [
@@ -2096,7 +2387,10 @@
         "argon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 7.1e-11
+    }
   },
   {
     "id": "potassium",
@@ -2106,7 +2400,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 2.2e-10,
     "x": 0,
     "tags": {
       "en-us": [
@@ -2115,7 +2408,10 @@
         "potassium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 2.2e-10
+    }
   },
   {
     "id": "calcium",
@@ -2125,7 +2421,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.8e-10,
     "x": 0.1,
     "tags": {
       "en-us": [
@@ -2134,7 +2429,10 @@
         "calcium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.8e-10
+    }
   },
   {
     "id": "scandium",
@@ -2144,7 +2442,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.6e-10,
     "x": 1.6,
     "tags": {
       "en-us": [
@@ -2153,7 +2450,10 @@
         "scandium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.6e-10
+    }
   },
   {
     "id": "titanium",
@@ -2163,7 +2463,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.4e-10,
     "x": 1.7000000000000002,
     "tags": {
       "en-us": [
@@ -2172,7 +2471,10 @@
         "titanium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.4e-10
+    }
   },
   {
     "id": "vanadium",
@@ -2182,7 +2484,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 1.8,
     "tags": {
       "en-us": [
@@ -2191,7 +2492,10 @@
         "vanadium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "chromium",
@@ -2201,7 +2505,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.4e-10,
     "x": 1.9000000000000001,
     "tags": {
       "en-us": [
@@ -2210,7 +2513,10 @@
         "chromium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.4e-10
+    }
   },
   {
     "id": "manganese",
@@ -2220,7 +2526,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.4e-10,
     "x": 2,
     "tags": {
       "en-us": [
@@ -2229,7 +2534,10 @@
         "manganese"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.4e-10
+    }
   },
   {
     "id": "iron",
@@ -2239,7 +2547,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.4e-10,
     "x": 2.1,
     "tags": {
       "en-us": [
@@ -2248,7 +2555,10 @@
         "iron"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.4e-10
+    }
   },
   {
     "id": "cobalt",
@@ -2258,7 +2568,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2.2,
     "tags": {
       "en-us": [
@@ -2267,7 +2576,10 @@
         "cobalt"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "nickel",
@@ -2277,7 +2589,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2.3000000000000003,
     "tags": {
       "en-us": [
@@ -2286,7 +2597,10 @@
         "nickel"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "copper",
@@ -2296,7 +2610,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2.4000000000000004,
     "tags": {
       "en-us": [
@@ -2305,7 +2618,10 @@
         "copper"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "zinc",
@@ -2315,7 +2631,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2.5,
     "tags": {
       "en-us": [
@@ -2324,7 +2639,10 @@
         "zinc"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "gallium",
@@ -2334,7 +2652,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.3e-10,
     "x": 2.6,
     "tags": {
       "en-us": [
@@ -2343,7 +2660,10 @@
         "gallium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.3e-10
+    }
   },
   {
     "id": "germanium",
@@ -2353,7 +2673,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.25e-10,
     "x": 2.7,
     "tags": {
       "en-us": [
@@ -2362,7 +2681,10 @@
         "germanium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.25e-10
+    }
   },
   {
     "id": "arsenic",
@@ -2372,7 +2694,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.15e-10,
     "x": 2.8000000000000003,
     "tags": {
       "en-us": [
@@ -2381,7 +2702,10 @@
         "arsenic"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.15e-10
+    }
   },
   {
     "id": "selenium",
@@ -2391,7 +2715,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.15e-10,
     "x": 2.9000000000000004,
     "tags": {
       "en-us": [
@@ -2400,7 +2723,10 @@
         "selenium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.15e-10
+    }
   },
   {
     "id": "bromine",
@@ -2410,7 +2736,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.15e-10,
     "x": 3,
     "tags": {
       "en-us": [
@@ -2419,7 +2744,10 @@
         "bromine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.15e-10
+    }
   },
   {
     "id": "krypton",
@@ -2429,7 +2757,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 8.799999999999999e-11,
     "x": 3.1,
     "tags": {
       "en-us": [
@@ -2438,7 +2765,10 @@
         "krypton"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 8.799999999999999e-11
+    }
   },
   {
     "id": "rubidium",
@@ -2448,7 +2778,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 2.35e-10,
     "x": 0,
     "tags": {
       "en-us": [
@@ -2457,7 +2786,10 @@
         "rubidium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 2.35e-10
+    }
   },
   {
     "id": "strontium",
@@ -2467,7 +2799,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 2e-10,
     "x": 0.1,
     "tags": {
       "en-us": [
@@ -2476,7 +2807,10 @@
         "strontium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 2e-10
+    }
   },
   {
     "id": "yttrium",
@@ -2486,7 +2820,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.8e-10,
     "x": 1.6,
     "tags": {
       "en-us": [
@@ -2495,7 +2828,10 @@
         "yttrium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.8e-10
+    }
   },
   {
     "id": "zirconium",
@@ -2505,7 +2841,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.55e-10,
     "x": 1.7000000000000002,
     "tags": {
       "en-us": [
@@ -2514,7 +2849,10 @@
         "zirconium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.55e-10
+    }
   },
   {
     "id": "niobium",
@@ -2524,7 +2862,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.45e-10,
     "x": 1.8,
     "tags": {
       "en-us": [
@@ -2533,7 +2870,10 @@
         "niobium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.45e-10
+    }
   },
   {
     "id": "molybdenum",
@@ -2543,7 +2883,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.45e-10,
     "x": 1.9000000000000001,
     "tags": {
       "en-us": [
@@ -2552,7 +2891,10 @@
         "molybdenum"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.45e-10
+    }
   },
   {
     "id": "technetium",
@@ -2562,7 +2904,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2,
     "tags": {
       "en-us": [
@@ -2571,7 +2912,10 @@
         "technetium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "ruthenium",
@@ -2581,7 +2925,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.3e-10,
     "x": 2.1,
     "tags": {
       "en-us": [
@@ -2590,7 +2933,10 @@
         "ruthenium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.3e-10
+    }
   },
   {
     "id": "rhodium",
@@ -2600,7 +2946,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2.2,
     "tags": {
       "en-us": [
@@ -2609,7 +2954,10 @@
         "rhodium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "palladium",
@@ -2619,7 +2967,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.4e-10,
     "x": 2.3000000000000003,
     "tags": {
       "en-us": [
@@ -2628,7 +2975,10 @@
         "palladium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.4e-10
+    }
   },
   {
     "id": "silver",
@@ -2638,7 +2988,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.6e-10,
     "x": 2.4000000000000004,
     "tags": {
       "en-us": [
@@ -2647,7 +2996,10 @@
         "silver"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.6e-10
+    }
   },
   {
     "id": "cadmium",
@@ -2657,7 +3009,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.55e-10,
     "x": 2.5,
     "tags": {
       "en-us": [
@@ -2666,7 +3017,10 @@
         "cadmium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.55e-10
+    }
   },
   {
     "id": "indium",
@@ -2676,7 +3030,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.55e-10,
     "x": 2.6,
     "tags": {
       "en-us": [
@@ -2685,7 +3038,10 @@
         "indium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.55e-10
+    }
   },
   {
     "id": "tin",
@@ -2695,7 +3051,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.45e-10,
     "x": 2.7,
     "tags": {
       "en-us": [
@@ -2704,7 +3059,10 @@
         "tin"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.45e-10
+    }
   },
   {
     "id": "antimony",
@@ -2714,7 +3072,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.45e-10,
     "x": 2.8000000000000003,
     "tags": {
       "en-us": [
@@ -2723,7 +3080,10 @@
         "antimony"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.45e-10
+    }
   },
   {
     "id": "tellurium",
@@ -2733,7 +3093,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.4e-10,
     "x": 2.9000000000000004,
     "tags": {
       "en-us": [
@@ -2742,7 +3101,10 @@
         "tellurium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.4e-10
+    }
   },
   {
     "id": "iodine",
@@ -2752,7 +3114,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.4e-10,
     "x": 3,
     "tags": {
       "en-us": [
@@ -2761,7 +3122,10 @@
         "iodine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.4e-10
+    }
   },
   {
     "id": "xenon",
@@ -2771,7 +3135,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.08e-10,
     "x": 3.1,
     "tags": {
       "en-us": [
@@ -2780,7 +3143,10 @@
         "xenon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.08e-10
+    }
   },
   {
     "id": "caesium",
@@ -2790,7 +3156,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 2.6e-10,
     "x": 0,
     "tags": {
       "en-us": [
@@ -2800,7 +3165,10 @@
         "largest stable atom"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 2.6e-10
+    }
   },
   {
     "id": "barium",
@@ -2810,7 +3178,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 2.15e-10,
     "x": 0.1,
     "tags": {
       "en-us": [
@@ -2819,7 +3186,10 @@
         "barium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 2.15e-10
+    }
   },
   {
     "id": "lanthanum",
@@ -2829,7 +3199,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.95e-10,
     "x": 0.2,
     "tags": {
       "en-us": [
@@ -2838,7 +3207,10 @@
         "lanthanum"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.95e-10
+    }
   },
   {
     "id": "cerium",
@@ -2848,7 +3220,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.85e-10,
     "x": 0.30000000000000004,
     "tags": {
       "en-us": [
@@ -2857,7 +3228,10 @@
         "cerium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.85e-10
+    }
   },
   {
     "id": "praseodymium",
@@ -2867,7 +3241,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.85e-10,
     "x": 0.4,
     "tags": {
       "en-us": [
@@ -2876,7 +3249,10 @@
         "praseodymium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.85e-10
+    }
   },
   {
     "id": "neodymium",
@@ -2886,7 +3262,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.85e-10,
     "x": 0.5,
     "tags": {
       "en-us": [
@@ -2895,7 +3270,10 @@
         "neodymium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.85e-10
+    }
   },
   {
     "id": "promethium",
@@ -2905,7 +3283,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.85e-10,
     "x": 0.6000000000000001,
     "tags": {
       "en-us": [
@@ -2914,7 +3291,10 @@
         "promethium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.85e-10
+    }
   },
   {
     "id": "samarium",
@@ -2924,7 +3304,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.85e-10,
     "x": 0.7000000000000001,
     "tags": {
       "en-us": [
@@ -2933,7 +3312,10 @@
         "samarium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.85e-10
+    }
   },
   {
     "id": "europium",
@@ -2943,7 +3325,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.85e-10,
     "x": 0.8,
     "tags": {
       "en-us": [
@@ -2952,7 +3333,10 @@
         "europium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.85e-10
+    }
   },
   {
     "id": "gadolinium",
@@ -2962,7 +3346,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.8e-10,
     "x": 0.9,
     "tags": {
       "en-us": [
@@ -2971,7 +3354,10 @@
         "gadolinium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.8e-10
+    }
   },
   {
     "id": "terbium",
@@ -2981,7 +3367,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 1,
     "tags": {
       "en-us": [
@@ -2990,7 +3375,10 @@
         "terbium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "dysprosium",
@@ -3000,7 +3388,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 1.1,
     "tags": {
       "en-us": [
@@ -3009,7 +3396,10 @@
         "dysprosium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "holmium",
@@ -3019,7 +3409,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 1.2000000000000002,
     "tags": {
       "en-us": [
@@ -3028,7 +3417,10 @@
         "holmium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "erbium",
@@ -3038,7 +3430,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 1.3,
     "tags": {
       "en-us": [
@@ -3047,7 +3438,10 @@
         "erbium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "thulium",
@@ -3057,7 +3451,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 1.4000000000000001,
     "tags": {
       "en-us": [
@@ -3066,7 +3459,10 @@
         "thulium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "ytterbium",
@@ -3076,7 +3472,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 1.5,
     "tags": {
       "en-us": [
@@ -3085,7 +3480,10 @@
         "ytterbium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "lutetium",
@@ -3095,7 +3493,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 1.6,
     "tags": {
       "en-us": [
@@ -3104,7 +3501,10 @@
         "lutetium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "hafnium",
@@ -3114,7 +3514,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.55e-10,
     "x": 1.7000000000000002,
     "tags": {
       "en-us": [
@@ -3123,7 +3522,10 @@
         "hafnium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.55e-10
+    }
   },
   {
     "id": "tantalum",
@@ -3133,7 +3535,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.45e-10,
     "x": 1.8,
     "tags": {
       "en-us": [
@@ -3142,7 +3543,10 @@
         "tantalum"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.45e-10
+    }
   },
   {
     "id": "tungsten",
@@ -3152,7 +3556,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 1.9000000000000001,
     "tags": {
       "en-us": [
@@ -3161,7 +3564,10 @@
         "tungsten"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "rhenium",
@@ -3171,7 +3577,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2,
     "tags": {
       "en-us": [
@@ -3180,7 +3585,10 @@
         "rhenium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "osmium",
@@ -3190,7 +3598,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.3e-10,
     "x": 2.1,
     "tags": {
       "en-us": [
@@ -3199,7 +3606,10 @@
         "osmium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.3e-10
+    }
   },
   {
     "id": "iridium",
@@ -3209,7 +3619,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2.2,
     "tags": {
       "en-us": [
@@ -3218,7 +3627,10 @@
         "iridium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "platinum",
@@ -3228,7 +3640,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2.3000000000000003,
     "tags": {
       "en-us": [
@@ -3237,7 +3648,10 @@
         "platinum"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "gold",
@@ -3247,7 +3661,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.35e-10,
     "x": 2.4000000000000004,
     "tags": {
       "en-us": [
@@ -3256,7 +3669,10 @@
         "gold"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.35e-10
+    }
   },
   {
     "id": "mercury",
@@ -3266,7 +3682,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.5e-10,
     "x": 2.5,
     "tags": {
       "en-us": [
@@ -3275,7 +3690,10 @@
         "mercury"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.5e-10
+    }
   },
   {
     "id": "thallium",
@@ -3285,7 +3703,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.9e-10,
     "x": 2.6,
     "tags": {
       "en-us": [
@@ -3294,7 +3711,10 @@
         "thallium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.9e-10
+    }
   },
   {
     "id": "lead",
@@ -3304,7 +3724,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.8e-10,
     "x": 2.7,
     "tags": {
       "en-us": [
@@ -3313,7 +3732,10 @@
         "lead"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.8e-10
+    }
   },
   {
     "id": "bismuth",
@@ -3323,7 +3745,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.6e-10,
     "x": 2.8000000000000003,
     "tags": {
       "en-us": [
@@ -3332,7 +3753,10 @@
         "bismuth"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.6e-10
+    }
   },
   {
     "id": "polonium",
@@ -3342,7 +3766,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.9e-10,
     "x": 2.9000000000000004,
     "tags": {
       "en-us": [
@@ -3351,7 +3774,10 @@
         "polonium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.9e-10
+    }
   },
   {
     "id": "astatine",
@@ -3361,7 +3787,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.27e-10,
     "x": 3,
     "tags": {
       "en-us": [
@@ -3370,7 +3795,10 @@
         "astatine"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.27e-10
+    }
   },
   {
     "id": "radon",
@@ -3380,7 +3808,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.2e-10,
     "x": 3.1,
     "tags": {
       "en-us": [
@@ -3389,7 +3816,10 @@
         "radon"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.2e-10
+    }
   },
   {
     "id": "francium",
@@ -3399,7 +3829,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 3.48e-10,
     "x": 0,
     "tags": {
       "en-us": [
@@ -3409,7 +3838,10 @@
         "largest atom"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 3.48e-10
+    }
   },
   {
     "id": "radium",
@@ -3419,7 +3851,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 2.15e-10,
     "x": 0.1,
     "tags": {
       "en-us": [
@@ -3428,7 +3859,10 @@
         "radium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 2.15e-10
+    }
   },
   {
     "id": "actinium",
@@ -3438,7 +3872,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.95e-10,
     "x": 0.2,
     "tags": {
       "en-us": [
@@ -3447,7 +3880,10 @@
         "actinium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.95e-10
+    }
   },
   {
     "id": "thorium",
@@ -3457,7 +3893,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.8e-10,
     "x": 0.30000000000000004,
     "tags": {
       "en-us": [
@@ -3466,7 +3901,10 @@
         "thorium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.8e-10
+    }
   },
   {
     "id": "protactinium",
@@ -3476,7 +3914,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.8e-10,
     "x": 0.4,
     "tags": {
       "en-us": [
@@ -3485,7 +3922,10 @@
         "protactinium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.8e-10
+    }
   },
   {
     "id": "uranium",
@@ -3495,7 +3935,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 0.5,
     "tags": {
       "en-us": [
@@ -3504,7 +3943,10 @@
         "uranium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "neptunium",
@@ -3514,7 +3956,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 0.6000000000000001,
     "tags": {
       "en-us": [
@@ -3523,7 +3964,10 @@
         "neptunium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "plutonium",
@@ -3533,7 +3977,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 0.7000000000000001,
     "tags": {
       "en-us": [
@@ -3542,7 +3985,10 @@
         "plutonium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "americium",
@@ -3552,7 +3998,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.75e-10,
     "x": 0.8,
     "tags": {
       "en-us": [
@@ -3561,7 +4006,10 @@
         "americium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.75e-10
+    }
   },
   {
     "id": "curium",
@@ -3571,7 +4019,6 @@
     "category": {
       "en-us": "Atoms / Elements"
     },
-    "length": 1.7599999999999999e-10,
     "x": 0.9,
     "tags": {
       "en-us": [
@@ -3580,6 +4027,9 @@
         "curium"
       ]
     },
-    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+    "source": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+    "dimensions": {
+      "length": 1.7599999999999999e-10
+    }
   }
 ]
