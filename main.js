@@ -271,6 +271,14 @@ d3.json('/data.json').then(data => {
     .attr('fill', 'transparent')
     .style('cursor', 'pointer');
 
+  // Visual Background for Selection (Hidden by default)
+  items.append('rect')
+    .attr('class', 'label-bg')
+    .attr('rx', 4)
+    .attr('ry', 4)
+    .attr('fill', 'black')
+    .attr('opacity', 0); // Visible only when highlighted
+
   // Circle
   items.append('circle')
     .attr('cx', 0)
@@ -337,11 +345,29 @@ d3.json('/data.json').then(data => {
       g.selectAll('.item-group text.label')
         .style('font-size', `${currentFS}px`);
 
+      // Update Background Rect Size
+      // Estimate width based on char count (monospace is approx 0.6em wide)
+      // width = (radius + gap + char_count * 0.6em * fs) + padding
+      g.selectAll('.item-group rect.label-bg')
+        .attr('x', 8) // Start near text (text is at 10)
+        .attr('y', -currentFS * 0.7) // Roughly vertically centered
+        .attr('height', currentFS * 1.5)
+        .attr('width', d => {
+          const textLen = getLocalized(d.displayName, LANGUAGE).length;
+          const charWidth = currentFS * 0.6;
+          return (textLen * charWidth + 6); // Just text width + padding
+        });
+
       // Update Hit Area Size
       g.selectAll('.item-group rect.hit-area')
         .attr('x', -currentRadius - 5)
         .attr('y', -currentFS)
-        .attr('height', currentFS * 2);
+        .attr('height', currentFS * 2)
+        .attr('width', d => {
+          // similar calculation but slightly larger
+          const textLen = getLocalized(d.displayName, LANGUAGE).length;
+          return (currentRadius + 20 + textLen * currentFS * 0.6);
+        });
     });
 
   svg.call(zoom);
@@ -355,30 +381,29 @@ d3.json('/data.json').then(data => {
   });
 
   // Legend
-  // Legend
   const legendPadding = 15;
   const legendItemHeight = 20;
-  // const legendWidth = 260; // Removed hardcoded width
+  const legendWidth = 260;
   const legendHeight = categories.length * legendItemHeight + legendPadding * 2;
 
-  // Create group first
-  const legend = svg.append("g")
-    .attr("class", "legend");
-  // .attr("transform", `translate(${legendX}, ${legendY})`); // Set later
+  const legendX = width - legendWidth - 20;
+  const legendY = height - legendHeight - 20;
 
-  // Legend Box (placeholder width initially)
-  const legendRect = legend.append("rect")
-    .attr("width", 100) // Will be updated
+  const legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", `translate(${legendX}, ${legendY})`);
+
+  // Legend Box
+  legend.append("rect")
+    .attr("width", legendWidth)
     .attr("height", legendHeight)
     .attr("fill", "black")
     .attr("stroke", "#00aaff")
     .attr("stroke-width", 1);
 
-  let maxTextWidth = 0;
-
   // Legend Items
   categories.forEach((cat, i) => {
-    const text = legend.append("text")
+    legend.append("text")
       .attr("x", legendPadding)
       .attr("y", legendPadding + i * legendItemHeight + legendItemHeight / 2)
       .attr("dy", "0.35em")
@@ -386,21 +411,16 @@ d3.json('/data.json').then(data => {
       .attr("fill", colorScale(cat))
       .style("font-family", "monospace")
       .style("font-size", "12px")
-      .style("cursor", "pointer");
+      .style("cursor", "pointer")
+      .on("mouseover", function () {
+        // Dim all groups that don't match
+        g.selectAll(".item-group")
+          .transition().duration(200)
+          .attr("opacity", d => getLocalized(d.category, LANGUAGE) === cat ? 1 : 0.2);
 
-    // Measure width
-    const w = text.node().getComputedTextLength();
-    if (w > maxTextWidth) maxTextWidth = w;
-
-    text.on("mouseover", function () {
-      // Dim all groups that don't match
-      g.selectAll(".item-group")
-        .transition().duration(200)
-        .attr("opacity", d => getLocalized(d.category, LANGUAGE) === cat ? 1 : 0.2);
-
-      // Bring matching groups to front
-      g.selectAll(".item-group").filter(d => getLocalized(d.category, LANGUAGE) === cat).raise();
-    })
+        // Bring matching groups to front
+        g.selectAll(".item-group").filter(d => getLocalized(d.category, LANGUAGE) === cat).raise();
+      })
       .on("mouseout", function () {
         // Restore opacity
         g.selectAll(".item-group")
@@ -468,15 +488,7 @@ d3.json('/data.json').then(data => {
           .duration(750)
           .call(zoom.transform, transform);
       });
-  }); // End of categories.forEach
-
-  // Update Legend Dimensions
-  const legendWidth = maxTextWidth + legendPadding * 2;
-  legendRect.attr("width", legendWidth);
-
-  const legendX = width - legendWidth - 20;
-  const legendY = height - legendHeight - 20;
-  legend.attr("transform", `translate(${legendX}, ${legendY})`);
+  });
 
 
 
@@ -517,14 +529,23 @@ d3.json('/data.json').then(data => {
   }
 
   // Helper functions for highlighting
+  // Helper functions for highlighting
   function highlightItem(d) {
+    // Reset Z-order for all items first
+    items.sort((a, b) => data.indexOf(a) - data.indexOf(b));
+
+    // Highlight new item
     items.classed("highlighted", false); // Reset others
     items.filter(item => item.id === d.id).classed("highlighted", true);
-    items.filter(item => item.id === d.id).raise(); // Bring to front
+
+    // Bring new item to front
+    items.filter(item => item.id === d.id).raise();
   }
 
   function unhighlightItems() {
     items.classed("highlighted", false);
+    // Restore z-order
+    items.sort((a, b) => data.indexOf(a) - data.indexOf(b));
   }
 
   // Select Result & Zoom

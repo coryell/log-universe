@@ -197,6 +197,10 @@ svg {
   font-weight: bold;
 }
 
+.item-group.highlighted .label-bg {
+  opacity: 1;
+}
+
 /* Infobox Styling */
 .infobox {
   position: absolute;
