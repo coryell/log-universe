@@ -8,7 +8,7 @@
       "en-us": "Fundamental / Nuclear"
     },
     "dimensions": {
-      "length": "1e-18",
+      "length": "1e-22",
       "mass": "9.1093837139e-31"
     },
     "tags": {
@@ -18,30 +18,13 @@
       ]
     },
     "x_coordinates": {
-      "mass": 0
+      "mass": "0",
+      "length": "0"
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Electron_mass",
+      "length": "https://iopscience.iop.org/article/10.1088/0031-8949/1988/T22/016"
     }
-  },
-  {
-    "id": "electron_quark_radius_upper_limit",
-    "displayName": {
-      "en-us": "Electron/Quark Radius Upper Limit"
-    },
-    "category": {
-      "en-us": "Fundamental / Nuclear"
-    },
-    "tags": {
-      "en-us": [
-        "subatomic",
-        "particle"
-      ]
-    },
-    "dimensions": {
-      "length": "1e-18"
-    },
-    "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
   },
   {
     "id": "proton_neutron",
@@ -61,9 +44,8 @@
       "length": "8e-16"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "range_of_weak_interaction",
@@ -83,9 +65,8 @@
       "length": "1e-17"
     },
     "x_coordinates": {
-      "length": 5
-    },
-    "sources": {}
+      "length": "5"
+    }
   },
   {
     "id": "planck_length",
@@ -104,9 +85,8 @@
       "length": "1.6e-35"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "range_of_strong_interaction",
@@ -126,9 +106,8 @@
       "length": "1e-15"
     },
     "x_coordinates": {
-      "length": 5
-    },
-    "sources": {}
+      "length": "5"
+    }
   },
   {
     "id": "largest_nuclear_radius_pb_208",
@@ -142,9 +121,8 @@
       "length": "7e-15"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "most_energetic_photon_detected",
@@ -165,9 +143,8 @@
       "length": "9e-22"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "lowest_energy_gamma_ray",
@@ -188,9 +165,8 @@
       "length": "8.2e-13"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "highest_energy_x_ray",
@@ -210,9 +186,8 @@
       "length": "5e-12"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "x_ray_uv_boundary",
@@ -234,9 +209,8 @@
       "length": "1e-8"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "highest_energy_visible_violet",
@@ -258,9 +232,8 @@
       "length": "4e-7"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "lowest_energy_visible_red",
@@ -282,9 +255,8 @@
       "length": "7e-7"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "infrared_microwave_boundary",
@@ -307,9 +279,8 @@
       "length": "0.001"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "microwave_radio_boundary",
@@ -331,9 +302,8 @@
       "length": "1"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "cell_phone_shortest_wavelength",
@@ -355,9 +325,8 @@
       "length": "10"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "cell_phone_longest_wavelength",
@@ -379,9 +348,8 @@
       "length": "1000"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "cmb_wavelength",
@@ -404,9 +372,8 @@
       "length": "0.0016"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "longest_radio_possible_in_galaxy",
@@ -427,9 +394,8 @@
       "length": "300000"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "longest_radio_possible_in_solar_system",
@@ -450,9 +416,8 @@
       "length": "33000"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "longest_radio_that_penetrates_ionosphere",
@@ -473,9 +438,8 @@
       "length": "30"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "lyman_alpha",
@@ -498,9 +462,8 @@
       "length": "1.2e-7"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "ir_wavelength_of_human_body",
@@ -523,9 +486,8 @@
       "length": "0.0000093"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "ir_wavelength_of_red_hot_metal",
@@ -548,9 +510,8 @@
       "length": "0.000004"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "hydrogen_line",
@@ -571,9 +532,8 @@
       "length": "0.21"
     },
     "x_coordinates": {
-      "length": 20
-    },
-    "sources": {}
+      "length": "20"
+    }
   },
   {
     "id": "distance_between_particles_ipm",
@@ -593,9 +553,8 @@
       "length": "0.005"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_particles_ism",
@@ -615,9 +574,8 @@
       "length": "0.1"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_particles_igm",
@@ -637,9 +595,8 @@
       "length": "1"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_particles_in_best_artificial_vacuum",
@@ -653,9 +610,8 @@
       "length": "0.00001"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_air_molecules_at_sea_level",
@@ -669,9 +625,8 @@
       "length": "3e-9"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_particles_in_earth_core",
@@ -685,9 +640,8 @@
       "length": "2e-10"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_ions_in_sun_core",
@@ -701,9 +655,8 @@
       "length": "3.5e-11"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_ions_in_sun_corona",
@@ -717,9 +670,8 @@
       "length": "0.000001"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_water_molecules",
@@ -733,9 +685,8 @@
       "length": "3.1e-10"
     },
     "x_coordinates": {
-      "length": 60
-    },
-    "sources": {}
+      "length": "60"
+    }
   },
   {
     "id": "distance_between_neutrons_in_neutron_star",
@@ -749,9 +700,8 @@
       "length": "1.5e-15"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_ions_in_white_dwarf",
@@ -765,9 +715,8 @@
       "length": "3e-12"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_stars_in_milky_way",
@@ -781,9 +730,8 @@
       "length": "47000000000000000"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "distance_between_galaxies_in_local_supercluster",
@@ -797,9 +745,8 @@
       "length": "2.2e+22"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "smallest_molecule_h_2",
@@ -813,9 +760,8 @@
       "length": "7.4e-11"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "largest_molecule_titin",
@@ -829,9 +775,8 @@
       "length": "0.000001"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "glucose_molecule",
@@ -845,9 +790,8 @@
       "length": "1e-9"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "water_molecule",
@@ -861,9 +805,8 @@
       "length": "2.8e-10"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "amino_acid",
@@ -877,9 +820,8 @@
       "length": "1e-9"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "dna_polymerase",
@@ -900,9 +842,8 @@
       "length": "7.5e-9"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "collagen",
@@ -922,9 +863,8 @@
       "length": "3e-7"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "dna_in_human_chromosome",
@@ -945,9 +885,8 @@
       "length": "0.1"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "chromosome_during_division",
@@ -970,9 +909,8 @@
       "length": "0.00001"
     },
     "x_coordinates": {
-      "length": 12
-    },
-    "sources": {}
+      "length": "12"
+    }
   },
   {
     "id": "cell_membrane_thickness",
@@ -991,9 +929,8 @@
       "length": "1e-8"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "smallest_virus_aav",
@@ -1013,9 +950,8 @@
       "length": "2e-8"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "largest_virus_tupanvirus",
@@ -1035,9 +971,8 @@
       "length": "0.0000012"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "smallest_free_cell_mycoplasma",
@@ -1051,9 +986,8 @@
       "length": "2e-7"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "largest_cell_ostrich_egg",
@@ -1067,9 +1001,8 @@
       "length": "0.15"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "smallest_human_cell_sperm",
@@ -1083,9 +1016,8 @@
       "length": "0.000005"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "largest_human_cell_egg",
@@ -1099,9 +1031,8 @@
       "length": "0.0001"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "human_skin_cell",
@@ -1115,9 +1046,8 @@
       "length": "0.00003"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "human_white_blood_cell",
@@ -1137,9 +1067,8 @@
       "length": "0.00001"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "human_mitochondria",
@@ -1159,9 +1088,8 @@
       "length": "0.000002"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "smallest_organelle_ribosome",
@@ -1180,9 +1108,8 @@
       "length": "2.5e-8"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "largest_organelle_nucleus",
@@ -1202,9 +1129,8 @@
       "length": "0.00001"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "longest_human_axon",
@@ -1218,9 +1144,8 @@
       "length": "1"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "longest_axon_blue_whale",
@@ -1234,9 +1159,8 @@
       "length": "30"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "typical_human_axon",
@@ -1250,9 +1174,8 @@
       "length": "0.001"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "human_hair_thickness",
@@ -1266,9 +1189,8 @@
       "length": "0.0001"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "computer_transistor_size",
@@ -1287,9 +1209,8 @@
       "length": "5e-8"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "highest_sounds_humans_hear",
@@ -1303,9 +1224,8 @@
       "length": "0.17"
     },
     "x_coordinates": {
-      "length": 60
-    },
-    "sources": {}
+      "length": "60"
+    }
   },
   {
     "id": "lowest_sounds_humans_hear",
@@ -1319,9 +1239,8 @@
       "length": "17"
     },
     "x_coordinates": {
-      "length": 60
-    },
-    "sources": {}
+      "length": "60"
+    }
   },
   {
     "id": "lowest_sounds_animals_hear_pigeons",
@@ -1335,9 +1254,8 @@
       "length": "7000"
     },
     "x_coordinates": {
-      "length": 60
-    },
-    "sources": {}
+      "length": "60"
+    }
   },
   {
     "id": "highest_sounds_animals_hear_greater_wax_moths",
@@ -1351,9 +1269,8 @@
       "length": "0.011"
     },
     "x_coordinates": {
-      "length": 60
-    },
-    "sources": {}
+      "length": "60"
+    }
   },
   {
     "id": "highest_sound_produced_recorded",
@@ -1367,9 +1284,8 @@
       "length": "3.4e-7"
     },
     "x_coordinates": {
-      "length": 60
-    },
-    "sources": {}
+      "length": "60"
+    }
   },
   {
     "id": "seismic_wave_shortest",
@@ -1383,9 +1299,8 @@
       "length": "40"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "seismic_wave_longest",
@@ -1399,9 +1314,8 @@
       "length": "250"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "wind_wave",
@@ -1415,9 +1329,8 @@
       "length": "100"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "tsunami_shortest",
@@ -1431,9 +1344,8 @@
       "length": "150000"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "tsunami_longest",
@@ -1447,9 +1359,8 @@
       "length": "1000000"
     },
     "x_coordinates": {
-      "length": 40
-    },
-    "sources": {}
+      "length": "40"
+    }
   },
   {
     "id": "earth",
@@ -1469,9 +1380,8 @@
       "length": "6378000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "moon",
@@ -1492,9 +1402,8 @@
       "length": "1740000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "moon_orbit",
@@ -1508,9 +1417,8 @@
       "length": "380000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "sun",
@@ -1531,8 +1439,8 @@
       "mass": "1.988416e+30"
     },
     "x_coordinates": {
-      "length": 0,
-      "mass": 0
+      "length": "0",
+      "mass": "0"
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Solar_radius",
@@ -1551,9 +1459,8 @@
       "length": "150000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "mercury_orbit",
@@ -1567,9 +1474,8 @@
       "length": "58000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "jupiter_orbit",
@@ -1589,9 +1495,8 @@
       "length": "778000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "saturn_orbit",
@@ -1611,9 +1516,8 @@
       "length": "1400000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "pluto_orbit",
@@ -1632,9 +1536,8 @@
       "length": "6000000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "saturn",
@@ -1648,9 +1551,8 @@
       "length": "60000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "saturn_s_rings_outer_radius",
@@ -1664,9 +1566,8 @@
       "length": "140000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "brown_dwarf",
@@ -1680,9 +1581,8 @@
       "length": "58000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "saturn_s_ring_thickness",
@@ -1696,9 +1596,8 @@
       "length": "100"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "earth_s_inner_core",
@@ -1712,9 +1611,8 @@
       "length": "1220000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "earth_s_outer_core",
@@ -1728,9 +1626,8 @@
       "length": "3480000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "earth_s_mantle_thickness",
@@ -1744,9 +1641,8 @@
       "length": "2900000"
     },
     "x_coordinates": {
-      "length": 12
-    },
-    "sources": {}
+      "length": "12"
+    }
   },
   {
     "id": "earth_s_crust_continental_thickness",
@@ -1760,9 +1656,8 @@
       "length": "40000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "earth_s_crust_oceanic_thickness",
@@ -1776,9 +1671,8 @@
       "length": "5000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "largest_asteroid_ceres",
@@ -1792,9 +1686,8 @@
       "length": "470000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "smallest_asteroid_2015_t_c_25",
@@ -1808,9 +1701,8 @@
       "length": "2"
     },
     "x_coordinates": {
-      "length": 10
-    },
-    "sources": {}
+      "length": "10"
+    }
   },
   {
     "id": "smallest_star_sgr_1935_2154",
@@ -1824,9 +1716,8 @@
       "length": "4000"
     },
     "x_coordinates": {
-      "length": 15
-    },
-    "sources": {}
+      "length": "15"
+    }
   },
   {
     "id": "neutron_star",
@@ -1840,9 +1731,8 @@
       "length": "10000"
     },
     "x_coordinates": {
-      "length": 15
-    },
-    "sources": {}
+      "length": "15"
+    }
   },
   {
     "id": "smallest_white_dwarf_hd_49798",
@@ -1856,9 +1746,8 @@
       "length": "1600000"
     },
     "x_coordinates": {
-      "length": 19
-    },
-    "sources": {}
+      "length": "19"
+    }
   },
   {
     "id": "smallest_subdwarf",
@@ -1872,9 +1761,8 @@
       "length": "46000000"
     },
     "x_coordinates": {
-      "length": 19
-    },
-    "sources": {}
+      "length": "19"
+    }
   },
   {
     "id": "largest_white_dwarf_z_andromedae_b",
@@ -1888,9 +1776,8 @@
       "length": "118000000"
     },
     "x_coordinates": {
-      "length": 19
-    },
-    "sources": {}
+      "length": "19"
+    }
   },
   {
     "id": "red_dwarf",
@@ -1904,9 +1791,8 @@
       "length": "69600000"
     },
     "x_coordinates": {
-      "length": 10
-    },
-    "sources": {}
+      "length": "10"
+    }
   },
   {
     "id": "largest_main_sequence_star",
@@ -1920,9 +1806,8 @@
       "length": "10440000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "sirius",
@@ -1936,9 +1821,8 @@
       "length": "1183200000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "maximum_future_sun_radius",
@@ -1952,9 +1836,8 @@
       "length": "139200000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "largest_known_star_uy_scuti",
@@ -1968,9 +1851,8 @@
       "length": "1183200000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "kuiper_belt_outer_radius",
@@ -1984,9 +1866,8 @@
       "length": "7480000000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "oort_cloud_outer_radius",
@@ -2000,9 +1881,8 @@
       "length": "29900000000000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "oort_cloud_inner_radius",
@@ -2016,9 +1896,8 @@
       "length": "299000000000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "heliopause",
@@ -2032,9 +1911,8 @@
       "length": "18400000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "voyager_1_distance",
@@ -2048,9 +1926,8 @@
       "length": "24700000000000"
     },
     "x_coordinates": {
-      "length": 6
-    },
-    "sources": {}
+      "length": "6"
+    }
   },
   {
     "id": "light_year",
@@ -2064,9 +1941,8 @@
       "length": "9460000000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "parsec",
@@ -2080,9 +1956,8 @@
       "length": "30900000000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "black_hole_1_solar_mass",
@@ -2097,7 +1972,7 @@
       "mass": "1.988416e+30"
     },
     "x_coordinates": {
-      "length": 0
+      "length": "0"
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Schwarzschild_radius",
@@ -2121,9 +1996,8 @@
       "length": "40200000000000000"
     },
     "x_coordinates": {
-      "length": 15
-    },
-    "sources": {}
+      "length": "15"
+    }
   },
   {
     "id": "distance_to_furthest_known_star_earendel",
@@ -2137,9 +2011,8 @@
       "length": "1.36e+26"
     },
     "x_coordinates": {
-      "length": 15
-    },
-    "sources": {}
+      "length": "15"
+    }
   },
   {
     "id": "distance_to_sagittarius_a_star",
@@ -2159,9 +2032,8 @@
       "length": "255000000000000000000"
     },
     "x_coordinates": {
-      "length": 15
-    },
-    "sources": {}
+      "length": "15"
+    }
   },
   {
     "id": "milky_way",
@@ -2181,9 +2053,8 @@
       "length": "401000000000000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "magellanic_clouds_distance_from_galactic_center",
@@ -2197,9 +2068,8 @@
       "length": "1.7e+21"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "distance_to_closest_galaxy_andromeda",
@@ -2219,9 +2089,8 @@
       "length": "2.36e+22"
     },
     "x_coordinates": {
-      "length": 15
-    },
-    "sources": {}
+      "length": "15"
+    }
   },
   {
     "id": "largest_galaxy_eso_383_76",
@@ -2235,9 +2104,8 @@
       "length": "8.33e+21"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "globular_cluster",
@@ -2251,9 +2119,8 @@
       "length": "309000000000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "simeis_147_supernova_remnant",
@@ -2267,9 +2134,8 @@
       "length": "757000000000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "distance_to_cosmic_event_horizon",
@@ -2283,9 +2149,8 @@
       "length": "1.54e+26"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "local_group",
@@ -2299,9 +2164,8 @@
       "length": "4.73e+22"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "local_supercluster",
@@ -2315,9 +2179,8 @@
       "length": "4.94e+23"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "distance_to_great_attractor",
@@ -2331,9 +2194,8 @@
       "length": "1.85e+24"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "sagittarius_a_star",
@@ -2353,9 +2215,8 @@
       "length": "12000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "largest_bh_found_by_ligo",
@@ -2374,9 +2235,8 @@
       "length": "420000"
     },
     "x_coordinates": {
-      "length": 10
-    },
-    "sources": {}
+      "length": "10"
+    }
   },
   {
     "id": "largest_bh",
@@ -2395,9 +2255,8 @@
       "length": "300000000000000"
     },
     "x_coordinates": {
-      "length": 0
-    },
-    "sources": {}
+      "length": "0"
+    }
   },
   {
     "id": "milky_way_dark_matter_halo",
@@ -2416,9 +2275,8 @@
       "length": "4.63e+21"
     },
     "x_coordinates": {
-      "length": 15
-    },
-    "sources": {}
+      "length": "15"
+    }
   },
   {
     "id": "longest_galactic_filament",
@@ -2432,9 +2290,8 @@
       "length": "9.26e+25"
     },
     "x_coordinates": {
-      "length": 30
-    },
-    "sources": {}
+      "length": "30"
+    }
   },
   {
     "id": "hydrogen",
@@ -2459,8 +2316,8 @@
       "mass": "1.6738233814511998e-27"
     },
     "x_coordinates": {
-      "length": 0,
-      "mass": 0
+      "length": "0",
+      "mass": "0"
     }
   },
   {
@@ -2487,8 +2344,8 @@
       "mass": "6.646473677179139e-27"
     },
     "x_coordinates": {
-      "length": 3.1,
-      "mass": 0
+      "length": "3.1",
+      "mass": "0"
     }
   },
   {
@@ -2514,8 +2371,8 @@
       "mass": "1.1524141138166e-26"
     },
     "x_coordinates": {
-      "length": 0,
-      "mass": 0
+      "length": "0",
+      "mass": "0"
     }
   },
   {
@@ -2541,8 +2398,8 @@
       "mass": "1.496511019674058e-26"
     },
     "x_coordinates": {
-      "length": 0.1,
-      "mass": 0
+      "length": "0.1",
+      "mass": "0"
     }
   },
   {
@@ -2568,8 +2425,8 @@
       "mass": "1.7950427334808999e-26"
     },
     "x_coordinates": {
-      "length": 2.6,
-      "mass": 0
+      "length": "2.6",
+      "mass": "0"
     }
   },
   {
@@ -2595,8 +2452,8 @@
       "mass": "1.9944734756557899e-26"
     },
     "x_coordinates": {
-      "length": 2.7,
-      "mass": 0
+      "length": "2.7",
+      "mass": "0"
     }
   },
   {
@@ -2622,8 +2479,8 @@
       "mass": "2.32591707380823e-26"
     },
     "x_coordinates": {
-      "length": 2.8000000000000003,
-      "mass": 0
+      "length": "2.8",
+      "mass": "0"
     }
   },
   {
@@ -2649,8 +2506,8 @@
       "mass": "2.6566964563331097e-26"
     },
     "x_coordinates": {
-      "length": 2.9000000000000004,
-      "mass": 0
+      "length": "2.9",
+      "mass": "0"
     }
   },
   {
@@ -2676,8 +2533,8 @@
       "mass": "3.15469212309622e-26"
     },
     "x_coordinates": {
-      "length": 3,
-      "mass": 0
+      "length": "3",
+      "mass": "0"
     }
   },
   {
@@ -2703,8 +2560,8 @@
       "mass": "3.3509678410402e-26"
     },
     "x_coordinates": {
-      "length": 3.1,
-      "mass": 0
+      "length": "3.1",
+      "mass": "0"
     }
   },
   {
@@ -2730,8 +2587,8 @@
       "mass": "3.8175793194010994e-26"
     },
     "x_coordinates": {
-      "length": 0,
-      "mass": 0
+      "length": "0",
+      "mass": "0"
     }
   },
   {
@@ -2757,8 +2614,8 @@
       "mass": "4.03594020696145e-26"
     },
     "x_coordinates": {
-      "length": 0.1,
-      "mass": 0
+      "length": "0.1",
+      "mass": "0"
     }
   },
   {
@@ -2784,8 +2641,8 @@
       "mass": "4.4804665157059795e-26"
     },
     "x_coordinates": {
-      "length": 2.6,
-      "mass": 0
+      "length": "2.6",
+      "mass": "0"
     }
   },
   {
@@ -2811,8 +2668,8 @@
       "mass": "4.6636239750056496e-26"
     },
     "x_coordinates": {
-      "length": 2.7,
-      "mass": 0
+      "length": "2.7",
+      "mass": "0"
     }
   },
   {
@@ -2838,8 +2695,8 @@
       "mass": "5.1433537120108596e-26"
     },
     "x_coordinates": {
-      "length": 2.8000000000000003,
-      "mass": 0
+      "length": "2.8",
+      "mass": "0"
     }
   },
   {
@@ -2865,8 +2722,8 @@
       "mass": "5.3236882548934e-26"
     },
     "x_coordinates": {
-      "length": 2.9000000000000004,
-      "mass": 0
+      "length": "2.9",
+      "mass": "0"
     }
   },
   {
@@ -2892,8 +2749,8 @@
       "mass": "5.8866109992505e-26"
     },
     "x_coordinates": {
-      "length": 3,
-      "mass": 0
+      "length": "3",
+      "mass": "0"
     }
   },
   {
@@ -2919,8 +2776,8 @@
       "mass": "6.6338535802555e-26"
     },
     "x_coordinates": {
-      "length": 3.1,
-      "mass": 0
+      "length": "3.1",
+      "mass": "0"
     }
   },
   {
@@ -2946,8 +2803,8 @@
       "mass": "6.49237565158522e-26"
     },
     "x_coordinates": {
-      "length": 0,
-      "mass": 0
+      "length": "0",
+      "mass": "0"
     }
   },
   {
@@ -2973,8 +2830,8 @@
       "mass": "6.65510848033742e-26"
     },
     "x_coordinates": {
-      "length": 0.1,
-      "mass": 0
+      "length": "0.1",
+      "mass": "0"
     }
   },
   {
@@ -3000,8 +2857,8 @@
       "mass": "7.46511943814684e-26"
     },
     "x_coordinates": {
-      "length": 1.6,
-      "mass": 0
+      "length": "1.6",
+      "mass": "0"
     }
   },
   {
@@ -3027,8 +2884,8 @@
       "mass": "7.948502361103629e-26"
     },
     "x_coordinates": {
-      "length": 1.7000000000000002,
-      "mass": 0
+      "length": "1.7",
+      "mass": "0"
     }
   },
   {
@@ -3054,8 +2911,8 @@
       "mass": "8.45911812479038e-26"
     },
     "x_coordinates": {
-      "length": 1.8,
-      "mass": 0
+      "length": "1.8",
+      "mass": "0"
     }
   },
   {
@@ -3081,8 +2938,8 @@
       "mass": "8.63413894265244e-26"
     },
     "x_coordinates": {
-      "length": 1.9000000000000001,
-      "mass": 0
+      "length": "1.9",
+      "mass": "0"
     }
   },
   {
@@ -3108,8 +2965,8 @@
       "mass": "9.12266953672282e-26"
     },
     "x_coordinates": {
-      "length": 2,
-      "mass": 0
+      "length": "2",
+      "mass": "0"
     }
   },
   {
@@ -3135,8 +2992,8 @@
       "mass": "9.273280430272049e-26"
     },
     "x_coordinates": {
-      "length": 2.1,
-      "mass": 0
+      "length": "2.1",
+      "mass": "0"
     }
   },
   {
@@ -3162,8 +3019,8 @@
       "mass": "9.78605489474837e-26"
     },
     "x_coordinates": {
-      "length": 2.2,
-      "mass": 0
+      "length": "2.2",
+      "mass": "0"
     }
   },
   {
@@ -3189,8 +3046,8 @@
       "mass": "9.746201957094769e-26"
     },
     "x_coordinates": {
-      "length": 2.3000000000000003,
-      "mass": 0
+      "length": "2.3",
+      "mass": "0"
     }
   },
   {
@@ -3216,8 +3073,8 @@
       "mass": "1.0552061567231939e-25"
     },
     "x_coordinates": {
-      "length": 2.4000000000000004,
-      "mass": 0
+      "length": "2.4",
+      "mass": "0"
     }
   },
   {
@@ -3243,8 +3100,8 @@
       "mass": "1.0856604432468199e-25"
     },
     "x_coordinates": {
-      "length": 2.5,
-      "mass": 0
+      "length": "2.5",
+      "mass": "0"
     }
   },
   {
@@ -3270,8 +3127,8 @@
       "mass": "1.157777655009147e-25"
     },
     "x_coordinates": {
-      "length": 2.6,
-      "mass": 0
+      "length": "2.6",
+      "mass": "0"
     }
   },
   {
@@ -3297,8 +3154,8 @@
       "mass": "1.2060495257420697e-25"
     },
     "x_coordinates": {
-      "length": 2.7,
-      "mass": 0
+      "length": "2.7",
+      "mass": "0"
     }
   },
   {
@@ -3324,8 +3181,8 @@
       "mass": "1.2441090812012578e-25"
     },
     "x_coordinates": {
-      "length": 2.8000000000000003,
-      "mass": 0
+      "length": "2.8",
+      "mass": "0"
     }
   },
   {
@@ -3351,8 +3208,8 @@
       "mass": "1.3113443081010189e-25"
     },
     "x_coordinates": {
-      "length": 2.9000000000000004,
-      "mass": 0
+      "length": "2.9",
+      "mass": "0"
     }
   },
   {
@@ -3378,8 +3235,8 @@
       "mass": "1.3268371376138557e-25"
     },
     "x_coordinates": {
-      "length": 3,
-      "mass": 0
+      "length": "3",
+      "mass": "0"
     }
   },
   {
@@ -3405,8 +3262,8 @@
       "mass": "1.391498528956822e-25"
     },
     "x_coordinates": {
-      "length": 3.1,
-      "mass": 0
+      "length": "3.1",
+      "mass": "0"
     }
   },
   {
@@ -3432,8 +3289,8 @@
       "mass": "1.419229531407452e-25"
     },
     "x_coordinates": {
-      "length": 0,
-      "mass": 0
+      "length": "0",
+      "mass": "0"
     }
   },
   {
@@ -3459,8 +3316,8 @@
       "mass": "1.45496433217018e-25"
     },
     "x_coordinates": {
-      "length": 0.1,
-      "mass": 0
+      "length": "0.1",
+      "mass": "0"
     }
   },
   {
@@ -3486,8 +3343,8 @@
       "mass": "1.476318864596234e-25"
     },
     "x_coordinates": {
-      "length": 1.6,
-      "mass": 0
+      "length": "1.6",
+      "mass": "0"
     }
   },
   {
@@ -3513,8 +3370,8 @@
       "mass": "1.5147769494319578e-25"
     },
     "x_coordinates": {
-      "length": 1.7000000000000002,
-      "mass": 0
+      "length": "1.7",
+      "mass": "0"
     }
   },
   {
@@ -3540,8 +3397,8 @@
       "mass": "1.542740427352234e-25"
     },
     "x_coordinates": {
-      "length": 1.8,
-      "mass": 0
+      "length": "1.8",
+      "mass": "0"
     }
   },
   {
@@ -3567,8 +3424,8 @@
       "mass": "1.59328723660955e-25"
     },
     "x_coordinates": {
-      "length": 1.9000000000000001,
-      "mass": 0
+      "length": "1.9",
+      "mass": "0"
     }
   },
   {
@@ -3593,8 +3450,8 @@
       "length": "1.35e-10"
     },
     "x_coordinates": {
-      "length": 2,
-      "mass": 0
+      "length": "2",
+      "mass": "0"
     }
   },
   {
@@ -3620,8 +3477,8 @@
       "mass": "1.6783068369372298e-25"
     },
     "x_coordinates": {
-      "length": 2.1,
-      "mass": 0
+      "length": "2.1",
+      "mass": "0"
     }
   },
   {
@@ -3647,8 +3504,8 @@
       "mass": "1.7088607558049899e-25"
     },
     "x_coordinates": {
-      "length": 2.2,
-      "mass": 0
+      "length": "2.2",
+      "mass": "0"
     }
   },
   {
@@ -3674,8 +3531,8 @@
       "mass": "1.7671456771233799e-25"
     },
     "x_coordinates": {
-      "length": 2.3000000000000003,
-      "mass": 0
+      "length": "2.3",
+      "mass": "0"
     }
   },
   {
@@ -3701,8 +3558,8 @@
       "mass": "1.79122349362243e-25"
     },
     "x_coordinates": {
-      "length": 2.4000000000000004,
-      "mass": 0
+      "length": "2.4",
+      "mass": "0"
     }
   },
   {
@@ -3728,8 +3585,8 @@
       "mass": "1.86661196735049e-25"
     },
     "x_coordinates": {
-      "length": 2.5,
-      "mass": 0
+      "length": "2.5",
+      "mass": "0"
     }
   },
   {
@@ -3755,8 +3612,8 @@
       "mass": "1.9066309589109799e-25"
     },
     "x_coordinates": {
-      "length": 2.6,
-      "mass": 0
+      "length": "2.6",
+      "mass": "0"
     }
   },
   {
@@ -3782,8 +3639,8 @@
       "mass": "1.9712259286911898e-25"
     },
     "x_coordinates": {
-      "length": 2.7,
-      "mass": 0
+      "length": "2.7",
+      "mass": "0"
     }
   },
   {
@@ -3809,8 +3666,8 @@
       "mass": "2.02187237029264e-25"
     },
     "x_coordinates": {
-      "length": 2.8000000000000003,
-      "mass": 0
+      "length": "2.8",
+      "mass": "0"
     }
   },
   {
@@ -3836,8 +3693,8 @@
       "mass": "2.1188478519163997e-25"
     },
     "x_coordinates": {
-      "length": 2.9000000000000004,
-      "mass": 0
+      "length": "2.9",
+      "mass": "0"
     }
   },
   {
@@ -3863,8 +3720,8 @@
       "mass": "2.1072240784341e-25"
     },
     "x_coordinates": {
-      "length": 3,
-      "mass": 0
+      "length": "3",
+      "mass": "0"
     }
   },
   {
@@ -3890,8 +3747,8 @@
       "mass": "2.1801217435588097e-25"
     },
     "x_coordinates": {
-      "length": 3.1,
-      "mass": 0
+      "length": "3.1",
+      "mass": "0"
     }
   },
   {
@@ -3918,8 +3775,8 @@
       "mass": "2.20702247647499e-25"
     },
     "x_coordinates": {
-      "length": 0,
-      "mass": 0
+      "length": "0",
+      "mass": "0"
     }
   },
   {
@@ -3945,8 +3802,8 @@
       "mass": "2.28041830332037e-25"
     },
     "x_coordinates": {
-      "length": 0.1,
-      "mass": 0
+      "length": "0.1",
+      "mass": "0"
     }
   },
   {
@@ -3972,8 +3829,8 @@
       "mass": "2.3066548206089896e-25"
     },
     "x_coordinates": {
-      "length": 0.2,
-      "mass": 0
+      "length": "0.2",
+      "mass": "0"
     }
   },
   {
@@ -3999,8 +3856,8 @@
       "mass": "2.32674734334268e-25"
     },
     "x_coordinates": {
-      "length": 0.30000000000000004,
-      "mass": 0
+      "length": "0.3",
+      "mass": "0"
     }
   },
   {
@@ -4026,8 +3883,8 @@
       "mass": "2.3398656019869897e-25"
     },
     "x_coordinates": {
-      "length": 0.4,
-      "mass": 0
+      "length": "0.4",
+      "mass": "0"
     }
   },
   {
@@ -4053,8 +3910,8 @@
       "mass": "2.39516155298136e-25"
     },
     "x_coordinates": {
-      "length": 0.5,
-      "mass": 0
+      "length": "0.5",
+      "mass": "0"
     }
   },
   {
@@ -4079,8 +3936,8 @@
       "length": "1.85e-10"
     },
     "x_coordinates": {
-      "length": 0.6000000000000001,
-      "mass": 0
+      "length": "0.6",
+      "mass": "0"
     }
   },
   {
@@ -4106,8 +3963,8 @@
       "mass": "2.49678654399804e-25"
     },
     "x_coordinates": {
-      "length": 0.7000000000000001,
-      "mass": 0
+      "length": "0.7",
+      "mass": "0"
     }
   },
   {
@@ -4133,8 +3990,8 @@
       "mass": "2.52335516910044e-25"
     },
     "x_coordinates": {
-      "length": 0.8,
-      "mass": 0
+      "length": "0.8",
+      "mass": "0"
     }
   },
   {
@@ -4160,8 +4017,8 @@
       "mass": "2.61119768584525e-25"
     },
     "x_coordinates": {
-      "length": 0.9,
-      "mass": 0
+      "length": "0.9",
+      "mass": "0"
     }
   },
   {
@@ -4187,8 +4044,8 @@
       "mass": "2.63909474220277e-25"
     },
     "x_coordinates": {
-      "length": 1,
-      "mass": 0
+      "length": "1",
+      "mass": "0"
     }
   },
   {
@@ -4214,8 +4071,8 @@
       "mass": "2.6983759869625e-25"
     },
     "x_coordinates": {
-      "length": 1.1,
-      "mass": 0
+      "length": "1.1",
+      "mass": "0"
     }
   },
   {
@@ -4241,8 +4098,8 @@
       "mass": "2.73872708633677e-25"
     },
     "x_coordinates": {
-      "length": 1.2000000000000002,
-      "mass": 0
+      "length": "1.2",
+      "mass": "0"
     }
   },
   {
@@ -4268,8 +4125,8 @@
       "mass": "2.7774176466421397e-25"
     },
     "x_coordinates": {
-      "length": 1.3,
-      "mass": 0
+      "length": "1.3",
+      "mass": "0"
     }
   },
   {
@@ -4295,8 +4152,8 @@
       "mass": "2.80514864909277e-25"
     },
     "x_coordinates": {
-      "length": 1.4000000000000001,
-      "mass": 0
+      "length": "1.4",
+      "mass": "0"
     }
   },
   {
@@ -4322,8 +4179,8 @@
       "mass": "2.87356285873145e-25"
     },
     "x_coordinates": {
-      "length": 1.5,
-      "mass": 0
+      "length": "1.5",
+      "mass": "0"
     }
   },
   {
@@ -4349,8 +4206,8 @@
       "mass": "2.9054452088543297e-25"
     },
     "x_coordinates": {
-      "length": 1.6,
-      "mass": 0
+      "length": "1.6",
+      "mass": "0"
     }
   },
   {
@@ -4376,8 +4233,8 @@
       "mass": "2.96389618407961e-25"
     },
     "x_coordinates": {
-      "length": 1.7000000000000002,
-      "mass": 0
+      "length": "1.7",
+      "mass": "0"
     }
   },
   {
@@ -4403,8 +4260,8 @@
       "mass": "3.0047454451745496e-25"
     },
     "x_coordinates": {
-      "length": 1.8,
-      "mass": 0
+      "length": "1.8",
+      "mass": "0"
     }
   },
   {
@@ -4430,8 +4287,8 @@
       "mass": "3.0527350242657598e-25"
     },
     "x_coordinates": {
-      "length": 1.9000000000000001,
-      "mass": 0
+      "length": "1.9",
+      "mass": "0"
     }
   },
   {
@@ -4457,8 +4314,8 @@
       "mass": "3.09208980019869e-25"
     },
     "x_coordinates": {
-      "length": 2,
-      "mass": 0
+      "length": "2",
+      "mass": "0"
     }
   },
   {
@@ -4484,8 +4341,8 @@
       "mass": "3.15884347076847e-25"
     },
     "x_coordinates": {
-      "length": 2.1,
-      "mass": 0
+      "length": "2.1",
+      "mass": "0"
     }
   },
   {
@@ -4511,8 +4368,8 @@
       "mass": "3.19188819823958e-25"
     },
     "x_coordinates": {
-      "length": 2.2,
-      "mass": 0
+      "length": "2.2",
+      "mass": "0"
     }
   },
   {
@@ -4538,8 +4395,8 @@
       "mass": "3.23937961561012e-25"
     },
     "x_coordinates": {
-      "length": 2.3000000000000003,
-      "mass": 0
+      "length": "2.3",
+      "mass": "0"
     }
   },
   {
@@ -4565,8 +4422,8 @@
       "mass": "3.27076380401233e-25"
     },
     "x_coordinates": {
-      "length": 2.4000000000000004,
-      "mass": 0
+      "length": "2.4",
+      "mass": "0"
     }
   },
   {
@@ -4592,8 +4449,8 @@
       "mass": "3.3308753183065097e-25"
     },
     "x_coordinates": {
-      "length": 2.5,
-      "mass": 0
+      "length": "2.5",
+      "mass": "0"
     }
   },
   {
@@ -4619,8 +4476,8 @@
       "mass": "3.39380974901782e-25"
     },
     "x_coordinates": {
-      "length": 2.6,
-      "mass": 0
+      "length": "2.6",
+      "mass": "0"
     }
   },
   {
@@ -4646,8 +4503,8 @@
       "mass": "3.4406369507607997e-25"
     },
     "x_coordinates": {
-      "length": 2.7,
-      "mass": 0
+      "length": "2.7",
+      "mass": "0"
     }
   },
   {
@@ -4673,8 +4530,8 @@
       "mass": "3.47019454618722e-25"
     },
     "x_coordinates": {
-      "length": 2.8000000000000003,
-      "mass": 0
+      "length": "2.8",
+      "mass": "0"
     }
   },
   {
@@ -4699,8 +4556,8 @@
       "length": "1.9e-10"
     },
     "x_coordinates": {
-      "length": 2.9000000000000004,
-      "mass": 0
+      "length": "2.9",
+      "mass": "0"
     }
   },
   {
@@ -4725,8 +4582,8 @@
       "length": "1.27e-10"
     },
     "x_coordinates": {
-      "length": 3,
-      "mass": 0
+      "length": "3",
+      "mass": "0"
     }
   },
   {
@@ -4751,8 +4608,8 @@
       "length": "1.2e-10"
     },
     "x_coordinates": {
-      "length": 3.1,
-      "mass": 0
+      "length": "3.1",
+      "mass": "0"
     }
   },
   {
@@ -4778,8 +4635,8 @@
       "length": "3.48e-10"
     },
     "x_coordinates": {
-      "length": 0,
-      "mass": 0
+      "length": "0",
+      "mass": "0"
     }
   },
   {
@@ -4804,8 +4661,8 @@
       "length": "2.15e-10"
     },
     "x_coordinates": {
-      "length": 0.1,
-      "mass": 0
+      "length": "0.1",
+      "mass": "0"
     }
   },
   {
@@ -4830,8 +4687,8 @@
       "length": "1.95e-10"
     },
     "x_coordinates": {
-      "length": 0.24,
-      "mass": 0
+      "length": "0.24",
+      "mass": "0"
     }
   },
   {
@@ -4857,8 +4714,8 @@
       "mass": "3.8531148554755595e-25"
     },
     "x_coordinates": {
-      "length": 0.30000000000000004,
-      "mass": 0
+      "length": "0.3",
+      "mass": "0"
     }
   },
   {
@@ -4884,8 +4741,8 @@
       "mass": "3.8365094647865595e-25"
     },
     "x_coordinates": {
-      "length": 0.4,
-      "mass": 0
+      "length": "0.4",
+      "mass": "0"
     }
   },
   {
@@ -4911,8 +4768,8 @@
       "mass": "3.95258114570267e-25"
     },
     "x_coordinates": {
-      "length": 0.5,
-      "mass": 0
+      "length": "0.5",
+      "mass": "0"
     }
   },
   {
@@ -4937,8 +4794,8 @@
       "length": "1.75e-10"
     },
     "x_coordinates": {
-      "length": 0.6000000000000001,
-      "mass": 0
+      "length": "0.6",
+      "mass": "0"
     }
   },
   {
@@ -4963,8 +4820,8 @@
       "length": "1.75e-10"
     },
     "x_coordinates": {
-      "length": 0.7000000000000001,
-      "mass": 0
+      "length": "0.7",
+      "mass": "0"
     }
   },
   {
@@ -4989,8 +4846,8 @@
       "length": "1.75e-10"
     },
     "x_coordinates": {
-      "length": 0.8,
-      "mass": 0
+      "length": "0.8",
+      "mass": "0"
     }
   },
   {
@@ -5015,8 +4872,8 @@
       "length": "1.7599999999999999e-10"
     },
     "x_coordinates": {
-      "length": 0.9,
-      "mass": 0
+      "length": "0.9",
+      "mass": "0"
     }
   }
 ]

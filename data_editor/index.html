@@ -343,7 +343,17 @@
             if (value.trim() === '') {
                 deleteVal(tableData[index], path);
             } else {
-                setVal(tableData[index], path, Number(value));
+                let str = value.trim();
+                // Apply cleaning logic for precision errors (4+ zeros)
+                const match = str.match(/\.(\d*?)0000/);
+                if (match) {
+                    str = str.substring(0, str.indexOf('.') + match[1].length + 1);
+                    str = str.replace(/\.$/, "");
+                    if (str.includes('.')) {
+                        str = str.replace(/0+$/, "").replace(/\.$/, "");
+                    }
+                }
+                setVal(tableData[index], path, str);
             }
         };
 
@@ -519,8 +529,8 @@
             try {
                 // Determine format based on structure (handled by server_editor.js logic or we send JSON)
                 // We send the array of objects back.
-                // NOTE: 'dimensions' values are STRINGS in our tableData, which is consistent with the migration.
-                // 'x_coordinates' are NUMBERS (coerced in updateX).
+                // NOTE: 'dimensions' values are STRINGS in our tableData.
+                // 'x_coordinates' are also STRINGS.
 
                 // Clean up data before saving
                 const dataToSave = tableData.map(row => {
