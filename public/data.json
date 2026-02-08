@@ -536,12 +536,12 @@
     }
   },
   {
-    "id": "distance_between_particles_ipm",
+    "id": "between_particles_ipm",
     "displayName": {
-      "en-us": "Distance Between Particles IPM"
+      "en-us": "Between Particles IPM"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "tags": {
       "en-us": [
@@ -557,12 +557,12 @@
     }
   },
   {
-    "id": "distance_between_particles_ism",
+    "id": "between_particles_ism",
     "displayName": {
-      "en-us": "Distance Between Particles ISM"
+      "en-us": "Between Particles ISM"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "tags": {
       "en-us": [
@@ -578,12 +578,12 @@
     }
   },
   {
-    "id": "distance_between_particles_igm",
+    "id": "between_particles_igm",
     "displayName": {
-      "en-us": "Distance Between Particles IGM"
+      "en-us": "Between Particles IGM"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "tags": {
       "en-us": [
@@ -599,12 +599,12 @@
     }
   },
   {
-    "id": "distance_between_particles_in_best_artificial_vacuum",
+    "id": "between_particles_in_best_artificial_vacuum",
     "displayName": {
-      "en-us": "Distance Between Particles in Best Artificial Vacuum"
+      "en-us": "Between Particles in Best Artificial Vacuum"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "1e-5"
@@ -614,12 +614,12 @@
     }
   },
   {
-    "id": "distance_between_air_molecules_at_sea_level",
+    "id": "between_air_molecules_at_sea_level",
     "displayName": {
-      "en-us": "Distance Between Air Molecules at Sea Level"
+      "en-us": "Between Air Molecules at Sea Level"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "3e-9"
@@ -629,12 +629,12 @@
     }
   },
   {
-    "id": "distance_between_particles_in_earth_core",
+    "id": "between_particles_in_earth_core",
     "displayName": {
-      "en-us": "Distance Between Particles in Earth Core"
+      "en-us": "Between Particles in Earth Core"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "2e-10"
@@ -644,12 +644,12 @@
     }
   },
   {
-    "id": "distance_between_ions_in_sun_core",
+    "id": "between_ions_in_sun_core",
     "displayName": {
-      "en-us": "Distance Between Ions in Sun Core"
+      "en-us": "Between Ions in Sun Core"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "3.5e-11"
@@ -659,12 +659,12 @@
     }
   },
   {
-    "id": "distance_between_ions_in_sun_corona",
+    "id": "between_ions_in_sun_corona",
     "displayName": {
-      "en-us": "Distance Between Ions in Sun Corona"
+      "en-us": "Between Ions in Sun Corona"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "1e-6"
@@ -674,12 +674,12 @@
     }
   },
   {
-    "id": "distance_between_water_molecules",
+    "id": "between_water_molecules",
     "displayName": {
-      "en-us": "Distance Between Water Molecules"
+      "en-us": "Between Water Molecules"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "3.1e-10"
@@ -689,12 +689,12 @@
     }
   },
   {
-    "id": "distance_between_neutrons_in_neutron_star",
+    "id": "between_neutrons_in_neutron_star",
     "displayName": {
-      "en-us": "Distance Between Neutrons in Neutron Star"
+      "en-us": "Between Neutrons in Neutron Star"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "1.5e-15"
@@ -704,12 +704,12 @@
     }
   },
   {
-    "id": "distance_between_ions_in_white_dwarf",
+    "id": "between_ions_in_white_dwarf",
     "displayName": {
-      "en-us": "Distance Between Ions in White Dwarf"
+      "en-us": "Between Ions in White Dwarf"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "3e-12"
@@ -719,12 +719,12 @@
     }
   },
   {
-    "id": "distance_between_stars_in_milky_way",
+    "id": "between_stars_in_milky_way",
     "displayName": {
-      "en-us": "Distance Between Stars in Milky Way"
+      "en-us": "Between Stars in Milky Way"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "4.7e+16"
@@ -734,12 +734,12 @@
     }
   },
   {
-    "id": "distance_between_galaxies_in_local_supercluster",
+    "id": "between_galaxies_in_local_supercluster",
     "displayName": {
-      "en-us": "Distance Between Galaxies in Local Supercluster"
+      "en-us": "Between Galaxies in Local Supercluster"
     },
     "category": {
-      "en-us": "Density"
+      "en-us": "Spacing"
     },
     "dimensions": {
       "length": "2.2e+22"
@@ -1985,9 +1985,9 @@
     }
   },
   {
-    "id": "distance_to_nearest_star_proxima_centauri",
+    "id": "to_nearest_star_proxima_centauri",
     "displayName": {
-      "en-us": "Distance to Nearest Star (Proxima Centauri)"
+      "en-us": "To Nearest Star (Proxima Centauri)"
     },
     "category": {
       "en-us": "Astronomy"
@@ -2000,9 +2000,9 @@
     }
   },
   {
-    "id": "distance_to_furthest_known_star_earendel",
+    "id": "to_furthest_known_star_earendel",
     "displayName": {
-      "en-us": "Distance to Furthest Known Star (Earendel)"
+      "en-us": "To Furthest Known Star (Earendel)"
     },
     "category": {
       "en-us": "Astronomy"
@@ -2015,9 +2015,9 @@
     }
   },
   {
-    "id": "distance_to_sagittarius_a_star",
+    "id": "to_sagittarius_a_star",
     "displayName": {
-      "en-us": "Distance to Sagittarius A*"
+      "en-us": "To Sagittarius A*"
     },
     "category": {
       "en-us": "Astronomy"
@@ -2072,9 +2072,9 @@
     }
   },
   {
-    "id": "distance_to_closest_galaxy_andromeda",
+    "id": "to_closest_galaxy_andromeda",
     "displayName": {
-      "en-us": "Distance to Closest Galaxy (Andromeda)"
+      "en-us": "To Closest Galaxy (Andromeda)"
     },
     "category": {
       "en-us": "Astronomy"
@@ -2138,9 +2138,9 @@
     }
   },
   {
-    "id": "distance_to_cosmic_event_horizon",
+    "id": "to_cosmic_event_horizon",
     "displayName": {
-      "en-us": "Distance to Cosmic Event Horizon"
+      "en-us": "To Cosmic Event Horizon"
     },
     "category": {
       "en-us": "Astronomy"
@@ -2183,9 +2183,9 @@
     }
   },
   {
-    "id": "distance_to_great_attractor",
+    "id": "to_great_attractor",
     "displayName": {
-      "en-us": "Distance to Great Attractor"
+      "en-us": "To Great Attractor"
     },
     "category": {
       "en-us": "Astronomy"
