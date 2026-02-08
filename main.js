@@ -355,29 +355,30 @@ d3.json('/data.json').then(data => {
   });
 
   // Legend
+  // Legend
   const legendPadding = 15;
   const legendItemHeight = 20;
-  const legendWidth = 260;
+  // const legendWidth = 260; // Removed hardcoded width
   const legendHeight = categories.length * legendItemHeight + legendPadding * 2;
 
-  const legendX = width - legendWidth - 20;
-  const legendY = height - legendHeight - 20;
-
+  // Create group first
   const legend = svg.append("g")
-    .attr("class", "legend")
-    .attr("transform", `translate(${legendX}, ${legendY})`);
+    .attr("class", "legend");
+  // .attr("transform", `translate(${legendX}, ${legendY})`); // Set later
 
-  // Legend Box
-  legend.append("rect")
-    .attr("width", legendWidth)
+  // Legend Box (placeholder width initially)
+  const legendRect = legend.append("rect")
+    .attr("width", 100) // Will be updated
     .attr("height", legendHeight)
     .attr("fill", "black")
     .attr("stroke", "#00aaff")
     .attr("stroke-width", 1);
 
+  let maxTextWidth = 0;
+
   // Legend Items
   categories.forEach((cat, i) => {
-    legend.append("text")
+    const text = legend.append("text")
       .attr("x", legendPadding)
       .attr("y", legendPadding + i * legendItemHeight + legendItemHeight / 2)
       .attr("dy", "0.35em")
@@ -385,16 +386,21 @@ d3.json('/data.json').then(data => {
       .attr("fill", colorScale(cat))
       .style("font-family", "monospace")
       .style("font-size", "12px")
-      .style("cursor", "pointer")
-      .on("mouseover", function () {
-        // Dim all groups that don't match
-        g.selectAll(".item-group")
-          .transition().duration(200)
-          .attr("opacity", d => getLocalized(d.category, LANGUAGE) === cat ? 1 : 0.2);
+      .style("cursor", "pointer");
 
-        // Bring matching groups to front
-        g.selectAll(".item-group").filter(d => getLocalized(d.category, LANGUAGE) === cat).raise();
-      })
+    // Measure width
+    const w = text.node().getComputedTextLength();
+    if (w > maxTextWidth) maxTextWidth = w;
+
+    text.on("mouseover", function () {
+      // Dim all groups that don't match
+      g.selectAll(".item-group")
+        .transition().duration(200)
+        .attr("opacity", d => getLocalized(d.category, LANGUAGE) === cat ? 1 : 0.2);
+
+      // Bring matching groups to front
+      g.selectAll(".item-group").filter(d => getLocalized(d.category, LANGUAGE) === cat).raise();
+    })
       .on("mouseout", function () {
         // Restore opacity
         g.selectAll(".item-group")
@@ -462,7 +468,15 @@ d3.json('/data.json').then(data => {
           .duration(750)
           .call(zoom.transform, transform);
       });
-  });
+  }); // End of categories.forEach
+
+  // Update Legend Dimensions
+  const legendWidth = maxTextWidth + legendPadding * 2;
+  legendRect.attr("width", legendWidth);
+
+  const legendX = width - legendWidth - 20;
+  const legendY = height - legendHeight - 20;
+  legend.attr("transform", `translate(${legendX}, ${legendY})`);
 
 
 
