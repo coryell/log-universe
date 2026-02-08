@@ -4,9 +4,9 @@ import { getMatches, getLocalized, getSearchResultContent } from './search.js';
 
 const LANGUAGE = "en-us";
 // State
-let currentDimensionY = "mass";
+let currentDimensionY = "length";
 let currentDimensionX = "none"; // "none", "length", "mass"
-let prevDimensionY = "mass";
+let prevDimensionY = "length";
 let prevDimensionX = "none";
 let selectedItem = null;
 let lastMousePos = null;
@@ -14,14 +14,14 @@ let paddingRight = 50;
 let isInitialLoad = true;
 
 const getUnit = (dim) => dim === "mass" ? "kg" : "m";
-const getDimensionValueY = (d) => d.dimensions[currentDimensionY];
+const getDimensionValueY = (d) => Number(d.dimensions[currentDimensionY]);
 // Helper for X value: depends on mode
 const getDimensionValueX = (d) => {
   if (currentDimensionX === "none") {
     return d.x_coordinates[currentDimensionY];
   } else {
     // Log plot mode
-    return d.dimensions[currentDimensionX];
+    return Number(d.dimensions[currentDimensionX]);
   }
 };
 
@@ -152,7 +152,8 @@ d3.json('/data.json').then(data => {
   // Data Processing
   data.forEach(d => {
     if (!d.dimensions) d.dimensions = {};
-    for (const key in d.dimensions) d.dimensions[key] = +d.dimensions[key];
+    // dimensions are now strings, do NOT coerce them here.
+    // for (const key in d.dimensions) d.dimensions[key] = +d.dimensions[key];
 
     if (!d.x_coordinates) d.x_coordinates = {};
     for (const key in d.x_coordinates) d.x_coordinates[key] = +d.x_coordinates[key];
@@ -929,16 +930,16 @@ d3.json('/data.json').then(data => {
     // Build dimensions content
     let dimsContent = "";
 
-    const formatWithSigFigs = (num) => {
-      let n = num;
-      if (n === 0) return "0";
-      if (Number.isInteger(n) && !n.toString().includes('e')) {
-        const s = Math.abs(n).toString();
-        const trimmed = s.replace(/0+$/, '');
-        const sigFigs = trimmed.length;
-        return n.toExponential(Math.max(0, sigFigs - 1));
+    const formatDimension = (val) => {
+      if (val === undefined || val === null) return "";
+      const s = val.toString().toLowerCase();
+      if (s.includes('e')) {
+        const parts = s.split('e');
+        const coeff = parts[0];
+        const exp = parseInt(parts[1], 10);
+        return `${coeff} × 10^${exp}`;
       }
-      return n.toExponential(2);
+      return s;
     };
 
     const addDimRow = (dim) => {
@@ -946,10 +947,8 @@ d3.json('/data.json').then(data => {
       if (val !== undefined) {
         const unit = getUnit(dim);
         const label = dim.charAt(0).toUpperCase() + dim.slice(1);
-        const exp = formatWithSigFigs(val);
-        const [mantissa, exponent] = exp.split('e');
-        const expVal = parseInt(exponent, 10);
-        const txt = `${mantissa} × 10^${expVal} ${unit}`;
+        const formattedVal = formatDimension(val);
+        const txt = `${formattedVal} ${unit}`;
 
         let sourceLink = "";
         if (d.sources && d.sources[dim]) {
