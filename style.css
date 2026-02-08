@@ -230,11 +230,14 @@ svg {
 
 .infobox-row {
   margin-bottom: 4px;
+  display: flex;
+  align-items: baseline;
 }
 
 .infobox-label {
   color: rgba(0, 170, 255, 0.7);
   margin-right: 5px;
+  flex-shrink: 0;
 }
 
 .copy-btn {
