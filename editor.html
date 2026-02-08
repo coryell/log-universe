@@ -299,6 +299,66 @@
                 e.preventDefault();
                 saveData();
             }
+
+            // Arrow key navigation
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                const input = e.target;
+                if (input.tagName !== 'INPUT') return;
+
+                const td = input.closest('td');
+                if (!td) return;
+
+                const tr = td.closest('tr');
+                const tbody = tr.closest('tbody');
+
+                const colIndex = Array.from(tr.children).indexOf(td);
+                const rowIndex = Array.from(tbody.children).indexOf(tr);
+
+                let targetRow = rowIndex;
+                let targetCol = colIndex;
+
+                if (e.key === 'ArrowUp') {
+                    if (rowIndex > 0) {
+                        targetRow--;
+                        e.preventDefault(); // Prevent cursor moving to start of line in some browsers
+                        const targetInput = tbody.children[targetRow].children[targetCol].querySelector('input');
+                        if (targetInput) targetInput.focus();
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    if (rowIndex < tbody.children.length - 1) {
+                        targetRow++;
+                        e.preventDefault();
+                        const targetInput = tbody.children[targetRow].children[targetCol].querySelector('input');
+                        if (targetInput) targetInput.focus();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (input.selectionStart === 0 && input.selectionEnd === 0) {
+                        if (colIndex > 0) {
+                            targetCol--;
+                            e.preventDefault();
+                            const targetInput = tr.children[targetCol].querySelector('input');
+                            if (targetInput) {
+                                targetInput.focus();
+                                // Optional: Move cursor to end of previous cell for seamless nav?
+                                // targetInput.setSelectionRange(targetInput.value.length, targetInput.value.length);
+                            }
+                        }
+                    }
+                } else if (e.key === 'ArrowRight') {
+                    if (input.selectionStart === input.value.length) {
+                        if (colIndex < tr.children.length - 1) {
+                            targetCol++;
+                            e.preventDefault();
+                            const targetInput = tr.children[targetCol].querySelector('input');
+                            if (targetInput) {
+                                targetInput.focus();
+                                // Optional: Move cursor to start
+                                // targetInput.setSelectionRange(0, 0);
+                            }
+                        }
+                    }
+                }
+            }
         });
 
         document.getElementById('saveBtn').addEventListener('click', saveData);
