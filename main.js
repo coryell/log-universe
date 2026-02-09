@@ -163,14 +163,21 @@ const g = dataLayerOuter.append('g')
   .attr("class", "data-layer")
   .attr("mask", "url(#fade-mask-bottom)");
 
+const gCombined = dataLayerOuter.append('g')
+  .attr("class", "combined-layer")
+  .attr("mask", "url(#fade-mask-bottom)");
+
 d3.json('/data.json').then(data => {
   // Data Processing
   data.forEach(d => {
     if (!d.dimensions) d.dimensions = {};
-    // dimensions are now strings, do NOT coerce them here.
-    // for (const key in d.dimensions) d.dimensions[key] = +d.dimensions[key];
+    // Store original strings for exact comparison
+    d._orig_dimensions = { ...d.dimensions };
 
     if (!d.x_coordinates) d.x_coordinates = {};
+    d._orig_x_coordinates = { ...d.x_coordinates };
+
+    // Numerical coersion for calculations
     for (const key in d.x_coordinates) d.x_coordinates[key] = +d.x_coordinates[key];
 
     // Fallbacks
@@ -221,16 +228,27 @@ d3.json('/data.json').then(data => {
       const currentRadius = currentFS / 2.4;
 
       // Update positions using helpers
+      const allItemGroups = d3.selectAll('.dataLayerOuter .item-group'); // This is too broad maybe? 
+      // Better: select specifically
       g.selectAll('.item-group')
         .attr('transform', d => `translate(${newXScale(getDimensionValueX(d))}, ${newYScale(getDimensionValueY(d))})`);
+      gCombined.selectAll('.item-group')
+        .attr('transform', d => {
+          // Combined data contains _members[0] which we can use for position
+          const first = d._members[0];
+          return `translate(${newXScale(getDimensionValueX(first))}, ${newYScale(getDimensionValueY(first))})`;
+        });
 
-      g.selectAll('.item-group circle')
+      // Update circles and labels for both individual and combined
+      const allGroups = dataLayerOuter.selectAll('.item-group');
+
+      allGroups.selectAll('circle')
         .attr('r', currentRadius);
 
-      g.selectAll('.item-group text.label')
+      allGroups.selectAll('text.label')
         .style('font-size', `${currentFS}px`);
 
-      g.selectAll('.item-group rect.label-bg')
+      allGroups.selectAll('rect.label-bg')
         .attr('x', 8)
         .attr('y', -currentFS * 0.7)
         .attr('height', currentFS * 1.5)
@@ -240,7 +258,7 @@ d3.json('/data.json').then(data => {
           return (textLen * charWidth + 6);
         });
 
-      g.selectAll('.item-group rect.hit-area')
+      allGroups.selectAll('rect.hit-area')
         .attr('x', -currentRadius - 5)
         .attr('y', -currentFS)
         .attr('height', currentFS * 2)
@@ -480,11 +498,32 @@ d3.json('/data.json').then(data => {
   // Helper for highlighting
   function highlightItem(d) {
     g.selectAll('.item-group').classed("highlighted", false);
-    g.selectAll('.item-group').filter(item => item.id === d.id).classed("highlighted", true).raise();
+    gCombined.selectAll('.item-group').classed("highlighted", false);
+
+    // If d is itself a combined item, highlight it directly
+    if (d._isCombined) {
+      gCombined.selectAll('.item-group').filter(cd => cd.id === d.id).classed("highlighted", true).raise();
+      return;
+    }
+
+    // Check if it's in a combined point
+    let combined = null;
+    gCombined.selectAll('.item-group').each(function (cd) {
+      if (cd._members && cd._members.some(m => m.id === d.id)) {
+        combined = this;
+      }
+    });
+
+    if (combined) {
+      d3.select(combined).classed("highlighted", true).raise();
+    } else {
+      g.selectAll('.item-group').filter(item => item.id === d.id).classed("highlighted", true).raise();
+    }
   }
 
   function unhighlightItems() {
     g.selectAll('.item-group').classed("highlighted", false);
+    gCombined.selectAll('.item-group').classed("highlighted", false);
   }
 
   const getFilteredData = (dataList) => {
@@ -507,6 +546,11 @@ d3.json('/data.json').then(data => {
     const prevPositions = new Map();
 
     if (dimChanged && !isInitialLoad) {
+      gCombined.selectAll(".item-group").remove();
+      g.selectAll('.item-group')
+        .style("opacity", 1)
+        .style("pointer-events", "auto");
+
       g.selectAll('.item-group').each(function (d) {
         const tr = d3.select(this).attr('transform');
         if (tr) prevPositions.set(d.id, tr);
@@ -701,12 +745,18 @@ d3.json('/data.json').then(data => {
       });
     }
 
+    updateLegend(filteredData);
+    updateMask();
+
+    if (dimChanged) {
+      d3.timeout(applyGrouping, 1100);
+    } else {
+      applyGrouping();
+    }
+
     isInitialLoad = false;
     prevDimensionX = currentDimensionX;
     prevDimensionY = currentDimensionY;
-
-    updateLegend(filteredData);
-    updateMask();
   };
 
   // Initialize Dropdowns
@@ -1060,63 +1110,73 @@ d3.json('/data.json').then(data => {
     selectedItem = d;
     highlightItem(d);
 
-    const localizedDisplayName = getLocalized(d.displayName, LANGUAGE);
-    const localizedCategory = getLocalized(d.category, LANGUAGE);
-    let tagsContent = "";
-    if (d.tags && d.tags[LANGUAGE]) {
-      tagsContent = `<div class="infobox-row"><span class="infobox-label">Tags:</span>${d.tags[LANGUAGE].join(", ")}</div>`;
-    }
+    const members = d._isCombined ? d._members : [d];
+    let fullContent = "";
 
-    // Build dimensions content
-    let dimsContent = "";
-
-    const formatDimension = (val) => {
-      if (val === undefined || val === null) return "";
-      const s = val.toString().toLowerCase();
-      if (s.includes('e')) {
-        const parts = s.split('e');
-        const coeff = parts[0];
-        const exp = parseInt(parts[1], 10);
-        return `${coeff} × 10^${exp}`;
+    members.forEach((member, index) => {
+      const localizedDisplayName = getLocalized(member.displayName, LANGUAGE);
+      const localizedCategory = getLocalized(member.category, LANGUAGE);
+      let tagsContent = "";
+      if (member.tags && member.tags[LANGUAGE]) {
+        tagsContent = `<div class="infobox-row"><span class="infobox-label">Tags:</span>${member.tags[LANGUAGE].join(", ")}</div>`;
       }
-      return s;
-    };
 
-    const addDimRow = (dim) => {
-      const val = d.dimensions[dim];
-      if (val !== undefined) {
-        const unit = getUnit(dim);
-        const label = dim.charAt(0).toUpperCase() + dim.slice(1);
-        const formattedVal = formatDimension(val);
-        const txt = `${formattedVal} ${unit}`;
+      // Build dimensions content
+      let dimsContent = "";
 
-        let sourceLink = "";
-        if (d.sources && d.sources[dim]) {
-          sourceLink = `<button class="copy-btn" onclick="window.open('${d.sources[dim]}', '_blank')">Source</button>`;
+      const formatDimension = (val) => {
+        if (val === undefined || val === null) return "";
+        const s = val.toString().toLowerCase();
+        if (s.includes('e')) {
+          const parts = s.split('e');
+          const coeff = parts[0];
+          const exp = parseInt(parts[1], 10);
+          return `${coeff} × 10^${exp}`;
         }
+        return s;
+      };
 
-        return `<div class="infobox-row"><span class="infobox-label">${label}:</span>${txt}<button class="copy-btn" data-copy-text="${txt}">Copy</button>${sourceLink}</div>`;
+      const addDimRow = (dim) => {
+        const val = member.dimensions[dim];
+        if (val !== undefined) {
+          const unit = getUnit(dim);
+          const label = dim.charAt(0).toUpperCase() + dim.slice(1);
+          const formattedVal = formatDimension(val);
+          const txt = `${formattedVal} ${unit}`;
+
+          let sourceLink = "";
+          if (member.sources && member.sources[dim]) {
+            sourceLink = `<button class="copy-btn" onclick="window.open('${member.sources[dim]}', '_blank')">Source</button>`;
+          }
+
+          return `<div class="infobox-row"><span class="infobox-label">${label}:</span>${txt}<button class="copy-btn" data-copy-text="${txt}">Copy</button>${sourceLink}</div>`;
+        }
+        return "";
+      };
+
+      // Always show Y dimension
+      dimsContent += addDimRow(currentDimensionY);
+      // Show X dimension if selected
+      if (currentDimensionX !== "none") {
+        dimsContent += addDimRow(currentDimensionX);
       }
-      return "";
-    };
 
-    // Always show Y dimension
-    dimsContent += addDimRow(currentDimensionY);
-    // Show X dimension if selected
-    if (currentDimensionX !== "none") {
-      dimsContent += addDimRow(currentDimensionX);
-    }
+      const categoryColor = colorScale(localizedCategory);
 
+      const entrySeparator = (index > 0) ? '<div class="infobox-divider"></div>' : '';
 
-    const categoryColor = colorScale(localizedCategory);
+      fullContent += `
+        ${entrySeparator}
+        <div class="infobox-entry" data-id="${member.id}">
+          <div class="infobox-title">${localizedDisplayName}</div>
+          ${dimsContent}
+          <div class="infobox-row"><span class="infobox-label">Category:</span><span style="color: ${categoryColor}">${localizedCategory}</span></div>
+          ${tagsContent}
+        </div>
+      `;
+    });
 
-    infobox.html(`
-      <div class="infobox-title">${localizedDisplayName}</div>
-      ${dimsContent}
-      <div class="infobox-row"><span class="infobox-label">Category:</span><span style="color: ${categoryColor}">${localizedCategory}</span></div>
-      ${tagsContent}
-    `)
-      .style("display", "block");
+    infobox.html(fullContent).style("display", "block");
 
     // Attach copy event listeners
     infobox.selectAll(".copy-btn").on("click", function (event) {
@@ -1143,6 +1203,104 @@ d3.json('/data.json').then(data => {
   }
 
   // Hide on background click
+  function applyGrouping() {
+    gCombined.selectAll(".item-group").remove();
+
+    // Grouping
+    const groups = new Map();
+    const filteredData = getFilteredData(data);
+
+    filteredData.forEach(d => {
+      let key = "";
+      if (currentDimensionX === "none") {
+        key = `y:${d._orig_dimensions[currentDimensionY]}|x:${d._orig_x_coordinates[currentDimensionY]}`;
+      } else {
+        key = `y:${d._orig_dimensions[currentDimensionY]}|x:${d._orig_dimensions[currentDimensionX]}`;
+      }
+
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(d);
+    });
+
+    groups.forEach((members, key) => {
+      if (members.length > 1) {
+        // Hide individual points
+        members.forEach(m => {
+          g.selectAll(".item-group").filter(d => d.id === m.id)
+            .style("opacity", 0)
+            .style("pointer-events", "none");
+        });
+
+        // Create combined point
+        const first = members[0];
+        const combinedDisplayName = members.map(m => getLocalized(m.displayName, LANGUAGE)).join(" / ");
+        const combinedCategory = first.category; // Just use first for color
+
+        // Clone/Mock a member for the SVG join
+        const combinedData = {
+          ...first,
+          id: `combined-${key}`,
+          displayName: { [LANGUAGE]: combinedDisplayName },
+          _isCombined: true,
+          _members: members
+        };
+
+        const t = d3.zoomTransform(svg.node());
+        const newXScale = t.rescaleX(xScale);
+        const newYScale = t.rescaleY(yScale);
+
+        const currentDecadeHeight = Math.abs(newYScale(10) - newYScale(1));
+        const currentFS = Math.min(12, currentDecadeHeight);
+        const currentRadius = currentFS / 2.4;
+
+        const grp = gCombined.append("g")
+          .datum(combinedData)
+          .attr("class", "item-group combined")
+          .attr("transform", `translate(${newXScale(getDimensionValueX(first))}, ${newYScale(getDimensionValueY(first))})`);
+
+        grp.append('rect').attr('class', 'hit-area')
+          .attr('fill', 'transparent').style('cursor', 'pointer')
+          .attr('x', -currentRadius - 5)
+          .attr('y', -currentFS)
+          .attr('height', currentFS * 2)
+          .attr('width', (combinedDisplayName.length * currentFS * 0.6 + currentRadius + 20));
+
+        grp.append('rect').attr('class', 'label-bg')
+          .attr('rx', 4).attr('ry', 4).attr('fill', 'black').attr('opacity', 0)
+          .attr('x', 8)
+          .attr('y', -currentFS * 0.7)
+          .attr('height', currentFS * 1.5)
+          .attr('width', (combinedDisplayName.length * currentFS * 0.6 + 6));
+
+        grp.append('circle').attr('cx', 0).attr('cy', 0)
+          .attr('r', currentRadius)
+          .attr('fill', colorScale(getLocalized(first.category, LANGUAGE)));
+
+        // Build label with individual colors for names, slash colored by following label
+        const textEl = grp.append('text').attr('class', 'label')
+          .attr('x', 10).attr('y', 0).attr('dy', '.35em')
+          .style('font-family', 'monospace')
+          .style('font-size', `${currentFS}px`);
+
+        members.forEach((m, i) => {
+          const name = getLocalized(m.displayName, LANGUAGE);
+          const cat = getLocalized(m.category, LANGUAGE);
+          textEl.append('tspan').text(name).attr('fill', colorScale(cat));
+          if (i < members.length - 1) {
+            // Slash colored by the next label's category
+            const nextCat = getLocalized(members[i + 1].category, LANGUAGE);
+            textEl.append('tspan').text(' / ').attr('fill', colorScale(nextCat));
+          }
+        });
+
+        grp.on("click", (event) => {
+          showInfobox(combinedData);
+          event.stopPropagation();
+        });
+      }
+    });
+  }
+
   svg.on("click", () => {
     hideInfobox();
   });

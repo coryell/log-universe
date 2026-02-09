@@ -18,7 +18,7 @@
       ]
     },
     "x_coordinates": {
-      "mass": "4",
+      "mass": "0",
       "length": "0"
     },
     "sources": {
@@ -32,11 +32,12 @@
       "en-us": "Proton"
     },
     "category": {
-      "en-us": "Fundamental / Nuclear"
+      "en-us": "Electromagnetic"
     },
     "dimensions": {
       "mass": "1.67e-27",
-      "length": "8e-16"
+      "length": "8e-16",
+      "duration": "9.6e+29"
     },
     "tags": {
       "en-us": [
@@ -45,12 +46,13 @@
       ]
     },
     "x_coordinates": {
-      "mass": "4",
+      "mass": "0",
       "length": "0"
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Nucleon",
-      "length": "https://arxiv.org/pdf/2401.05404v1"
+      "length": "https://arxiv.org/pdf/2401.05404v1",
+      "duration": "https://en.wikipedia.org/wiki/Proton_decay"
     }
   },
   {
@@ -74,7 +76,7 @@
     },
     "x_coordinates": {
       "length": "0",
-      "mass": "4",
+      "mass": "0",
       "duration": "0"
     },
     "sources": {
@@ -2363,7 +2365,7 @@
     },
     "dimensions": {
       "length": "5.3e-11",
-      "mass": "1.6738233814511998e-27"
+      "mass": "1.67e-27"
     },
     "x_coordinates": {
       "length": "0",
@@ -5039,15 +5041,20 @@
     },
     "dimensions": {
       "length": "1.54e+26",
-      "duration": "4.35e+17"
+      "duration": "4.35e+17",
+      "mass": "1e+54"
     },
     "tags": {
       "en-us": [
         "cosmos"
       ]
     },
+    "x_coordinates": {
+      "mass": "0"
+    },
     "sources": {
-      "duration": "https://en.wikipedia.org/wiki/Age_of_the_universe"
+      "duration": "https://en.wikipedia.org/wiki/Age_of_the_universe",
+      "mass": "https://en.wikipedia.org/wiki/Observable_universe"
     }
   }
 ]

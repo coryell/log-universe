@@ -233,12 +233,16 @@ svg {
 }
 
 .item-group.highlighted text.label {
-  fill: white;
+  fill: white !important;
   font-weight: bold;
 }
 
 .item-group.highlighted .label-bg {
   opacity: 1;
+}
+
+.item-group.highlighted text.label tspan {
+  fill: white !important;
 }
 
 /* Infobox Styling */
@@ -260,6 +264,19 @@ svg {
   display: none;
   /* Hidden by default */
   box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+  max-width: 350px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.infobox-divider {
+  height: 1px;
+  background-color: rgba(0, 170, 255, 0.3);
+  margin: 15px 0;
+}
+
+.infobox-entry {
+  position: relative;
 }
 
 .infobox-title {
