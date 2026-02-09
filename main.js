@@ -18,14 +18,23 @@ const getUnit = (dim) => {
   if (dim === "duration") return "s";
   return "m";
 };
-const getDimensionValueY = (d) => Number(d.dimensions[currentDimensionY]);
+
+const parseValue = (val) => {
+  if (val === undefined || val === null) return { value: NaN, type: "equal" };
+  const s = String(val);
+  if (s.startsWith(">")) return { value: Number(s.slice(1)), type: "greater" };
+  if (s.startsWith("<")) return { value: Number(s.slice(1)), type: "less" };
+  return { value: Number(s), type: "equal" };
+};
+
+const getDimensionValueY = (d) => parseValue(d.dimensions[currentDimensionY]).value;
 // Helper for X value: depends on mode
 const getDimensionValueX = (d) => {
   if (currentDimensionX === "none") {
     return d.x_coordinates[currentDimensionY];
   } else {
     // Log plot mode
-    return Number(d.dimensions[currentDimensionX]);
+    return parseValue(d.dimensions[currentDimensionX]).value;
   }
 };
 
@@ -88,6 +97,31 @@ const maskLeft = defs.append("mask")
 
 const maskBottom = defs.append("mask")
   .attr("id", "fade-mask-bottom");
+
+const createInequalityMask = (id, x1, y1, x2, y2) => {
+  const gradId = id + "-grad";
+  const grad = defs.append("linearGradient")
+    .attr("id", gradId)
+    .attr("x1", x1)
+    .attr("y1", y1)
+    .attr("x2", x2)
+    .attr("y2", y2);
+  grad.append("stop").attr("offset", "0%").attr("stop-color", "white").attr("stop-opacity", 1);
+  grad.append("stop").attr("offset", "10%").attr("stop-color", "white").attr("stop-opacity", 1);
+  grad.append("stop").attr("offset", "100%").attr("stop-color", "white").attr("stop-opacity", 0);
+
+  defs.append("mask")
+    .attr("id", id)
+    .attr("maskContentUnits", "objectBoundingBox")
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", 1)
+    .attr("height", 1)
+    .attr("fill", `url(#${gradId})`);
+};
+
+createInequalityMask("ineq-fade", "0%", "0%", "100%", "0%");
 
 function updateMask() {
   maskLeft.selectAll("rect").remove();
@@ -245,27 +279,9 @@ d3.json('/data.json').then(data => {
       allGroups.selectAll('circle')
         .attr('r', currentRadius);
 
-      allGroups.selectAll('text.label')
-        .style('font-size', `${currentFS}px`);
-
-      allGroups.selectAll('rect.label-bg')
-        .attr('x', 8)
-        .attr('y', -currentFS * 0.7)
-        .attr('height', currentFS * 1.5)
-        .attr('width', d => {
-          const textLen = getLocalized(d.displayName, LANGUAGE).length;
-          const charWidth = currentFS * 0.6;
-          return (textLen * charWidth + 6);
-        });
-
-      allGroups.selectAll('rect.hit-area')
-        .attr('x', -currentRadius - 5)
-        .attr('y', -currentFS)
-        .attr('height', currentFS * 2)
-        .attr('width', d => {
-          const textLen = getLocalized(d.displayName, LANGUAGE).length;
-          return (currentRadius + 20 + textLen * currentFS * 0.6);
-        });
+      // Moved label positioning to updateInequalityGradients
+      updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
+      updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
 
       if (event.sourceEvent) {
         updateRuler(event.sourceEvent);
@@ -519,11 +535,27 @@ d3.json('/data.json').then(data => {
     } else {
       g.selectAll('.item-group').filter(item => item.id === d.id).classed("highlighted", true).raise();
     }
+
+    // Immediate sync for gradients
+    const t = d3.zoomTransform(svg.node());
+    const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
+    const currentFS = Math.min(12, currentDecadeHeight);
+    const currentRadius = currentFS / 2.4;
+    updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
+    updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
   }
 
   function unhighlightItems() {
     g.selectAll('.item-group').classed("highlighted", false);
     gCombined.selectAll('.item-group').classed("highlighted", false);
+
+    // Immediate sync for gradients
+    const t = d3.zoomTransform(svg.node());
+    const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
+    const currentFS = Math.min(12, currentDecadeHeight);
+    const currentRadius = currentFS / 2.4;
+    updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
+    updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
   }
 
   const getFilteredData = (dataList) => {
@@ -537,6 +569,93 @@ d3.json('/data.json').then(data => {
         d.dimensions[currentDimensionX] !== undefined
       );
     }
+  };
+
+  const updateInequalityGradients = (selection, radius, fs) => {
+    selection.each(function (d) {
+      const group = d3.select(this);
+      const inequRect = group.select('.inequality-rect');
+      const label = group.select('text.label');
+      const bg = group.select('rect.label-bg');
+      const hit = group.select('rect.hit-area');
+      const dataItem = d._members ? d._members[0] : d;
+
+      const xInfo = currentDimensionX === "none" ? { type: "equal" } : parseValue(dataItem.dimensions[currentDimensionX]);
+      const yInfo = parseValue(dataItem.dimensions[currentDimensionY]);
+
+      let angle = 0;
+      let showInequality = true;
+
+      if (xInfo.type === "equal" && yInfo.type === "equal") {
+        showInequality = false;
+      } else {
+        if (currentDimensionX === "none") {
+          if (yInfo.type === "greater") angle = -90; // Up
+          else if (yInfo.type === "less") angle = 90; // Down
+          else showInequality = false;
+        } else {
+          // 2D logic
+          if (xInfo.type === "greater" && yInfo.type === "greater") angle = -45;
+          else if (xInfo.type === "less" && yInfo.type === "greater") angle = -135;
+          else if (xInfo.type === "greater" && yInfo.type === "less") angle = 45;
+          else if (xInfo.type === "less" && yInfo.type === "less") angle = 135;
+          else if (xInfo.type === "greater") angle = 0;
+          else if (xInfo.type === "less") angle = 180;
+          else if (yInfo.type === "greater") angle = -90;
+          else if (yInfo.type === "less") angle = 90;
+          else showInequality = false;
+        }
+      }
+
+      const text = getLocalized(d.displayName || (d._members && d._members[0].displayName), LANGUAGE);
+      const textLen = text ? text.length : 0;
+      const charWidth = fs * 0.6;
+      const textWidth = textLen * charWidth + 6;
+
+      // Determine label position based on gradient direction
+      // If gradient points rightward (abs(angle) < 90), move label to left
+      const isRightward = showInequality && Math.abs(angle) < 90;
+
+      if (isRightward) {
+        label.attr('x', -10).style('text-anchor', 'end');
+        bg.attr('x', -textWidth - 10);
+        hit.attr('x', -radius - 10 - textWidth);
+      } else {
+        label.attr('x', 10).style('text-anchor', 'start');
+        bg.attr('x', 8);
+        hit.attr('x', -radius - 5);
+      }
+
+      // Shared updates
+      label.style('font-size', `${fs}px`);
+      bg.attr('y', -fs * 0.7)
+        .attr('height', fs * 1.5)
+        .attr('width', textWidth);
+
+      hit.attr('y', -fs)
+        .attr('height', fs * 2)
+        .attr('width', radius + 20 + textLen * fs * 0.6);
+
+      if (showInequality) {
+        const isHighlighted = group.classed('highlighted');
+        const cat = getLocalized(dataItem.category, LANGUAGE);
+        const color = isHighlighted ? 'white' : colorScale(cat);
+        const thickness = (2 * radius) + (isHighlighted ? 2 : 0);
+        const length = 20 * radius;
+
+        inequRect
+          .attr('x', 0)
+          .attr('y', -thickness / 2)
+          .attr('width', length)
+          .attr('height', thickness)
+          .attr('fill', color)
+          .attr('mask', 'url(#ineq-fade)')
+          .attr('transform', `rotate(${angle})`)
+          .attr('opacity', 1);
+      } else {
+        inequRect.attr('opacity', 0);
+      }
+    });
   };
 
   // Unified update function
@@ -677,6 +796,9 @@ d3.json('/data.json').then(data => {
             .attr('fill', 'transparent').style('cursor', 'pointer');
           grp.append('rect').attr('class', 'label-bg')
             .attr('rx', 4).attr('ry', 4).attr('fill', 'black').attr('opacity', 0);
+          grp.append('rect').attr('class', 'inequality-rect')
+            .style('cursor', 'pointer')
+            .attr('opacity', 0); // Hidden by default
           grp.append('circle').attr('cx', 0).attr('cy', 0)
             .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE)));
           grp.append('text').attr('class', 'label')
@@ -750,8 +872,22 @@ d3.json('/data.json').then(data => {
 
     if (dimChanged) {
       d3.timeout(applyGrouping, 1100);
+      d3.timeout(() => {
+        const t = d3.zoomTransform(svg.node());
+        const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
+        const currentFS = Math.min(12, currentDecadeHeight);
+        const currentRadius = currentFS / 2.4;
+        updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
+        updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
+      }, 1100);
     } else {
       applyGrouping();
+      const t = d3.zoomTransform(svg.node());
+      const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
+      const currentFS = Math.min(12, currentDecadeHeight);
+      const currentRadius = currentFS / 2.4;
+      updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
+      updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
     }
 
     isInitialLoad = false;
@@ -1126,14 +1262,19 @@ d3.json('/data.json').then(data => {
 
       const formatDimension = (val) => {
         if (val === undefined || val === null) return "";
-        const s = val.toString().toLowerCase();
+        let s = val.toString().toLowerCase();
+        let prefix = "";
+        if (s.startsWith('>') || s.startsWith('<')) {
+          prefix = s[0] + " ";
+          s = s.slice(1);
+        }
         if (s.includes('e')) {
           const parts = s.split('e');
           const coeff = parts[0];
           const exp = parseInt(parts[1], 10);
-          return `${coeff} × 10^${exp}`;
+          return `${prefix}${coeff} × 10^${exp}`;
         }
-        return s;
+        return `${prefix}${s}`;
       };
 
       const addDimRow = (dim) => {
@@ -1271,6 +1412,10 @@ d3.json('/data.json').then(data => {
           .attr('y', -currentFS * 0.7)
           .attr('height', currentFS * 1.5)
           .attr('width', (combinedDisplayName.length * currentFS * 0.6 + 6));
+
+        grp.append('rect').attr('class', 'inequality-rect')
+          .style('cursor', 'pointer')
+          .attr('opacity', 0); // Hidden by default
 
         grp.append('circle').attr('cx', 0).attr('cy', 0)
           .attr('r', currentRadius)

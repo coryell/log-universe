@@ -37,7 +37,7 @@
     "dimensions": {
       "mass": "1.67e-27",
       "length": "8e-16",
-      "duration": "9.6e+29"
+      "duration": ">9.6e+29"
     },
     "tags": {
       "en-us": [
@@ -47,7 +47,8 @@
     },
     "x_coordinates": {
       "mass": "0",
-      "length": "0"
+      "length": "0",
+      "duration": "0"
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Nucleon",
