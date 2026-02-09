@@ -985,7 +985,7 @@ d3.json('/data.json').then(data => {
 
         const boundsWidth = maxX - minX;
         const boundsHeight = maxY - minY;
-        const padLeft = 180; const padRight = 460; const padTop = 60; const padBottom = 60;
+        const padLeft = 180; const padRight = 460; const padTop = 60; const padBottom = 120;
         const availWidth = width - padLeft - padRight;
         const availHeight = height - padTop - padBottom;
 
