@@ -283,15 +283,12 @@
 
             tableData.forEach((row, index) => {
                 const tr = document.createElement('tr');
-                tr.setAttribute('draggable', 'true');
                 tr.dataset.index = index;
 
-                tr.addEventListener('dragstart', handleDragStart);
                 tr.addEventListener('dragover', handleDragOver);
                 tr.addEventListener('drop', handleDrop);
                 tr.addEventListener('dragenter', handleDragEnter);
                 tr.addEventListener('dragleave', handleDragLeave);
-                tr.addEventListener('dragend', handleDragEnd);
 
                 // Helper to safely get nested values
                 const getVal = (obj, path, defaultVal = '') => {
@@ -303,7 +300,7 @@
                 const tagsToString = (tags) => (tags || []).join(', ');
 
                 tr.innerHTML = `
-                    <td class="drag-handle">☰</td>
+                    <td class="drag-handle" draggable="true">☰</td>
                     <td class="id-col"><input type="text" value="${row.id}" onchange="updateData(${index}, 'id', this.value)"></td>
                     <td><input type="text" value="${getVal(row, `displayName.${lang}`)}" onchange="updateData(${index}, 'displayName.${lang}', this.value)"></td>
                     <td><input type="text" value="${getVal(row, `description.${lang}`)}" onchange="updateData(${index}, 'description.${lang}', this.value)"></td>
@@ -320,6 +317,10 @@
                     <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.duration')}" onchange="updateX(${index}, 'x_coordinates.duration', this.value)"></td>
                     <td style="text-align: center; vertical-align: middle;"><button class="remove-btn" onclick="deleteRow(${index})" title="Remove">×</button></td>
                 `;
+                const handle = tr.querySelector('.drag-handle');
+                handle.addEventListener('dragstart', handleDragStart);
+                handle.addEventListener('dragend', handleDragEnd);
+
                 tbody.appendChild(tr);
             });
         }
@@ -392,10 +393,11 @@
 
         // Drag and Drop Logic
         function handleDragStart(e) {
-            draggedIndex = Number(this.dataset.index);
+            const tr = this.closest('tr');
+            draggedIndex = Number(tr.dataset.index);
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text/plain', draggedIndex);
-            this.classList.add('dragging');
+            tr.classList.add('dragging');
         }
 
         function handleDragOver(e) {
@@ -533,7 +535,8 @@
         rightBtn.addEventListener('click', insertRow);
 
         function handleDragEnd(e) {
-            this.classList.remove('dragging');
+            const tr = this.closest('tr');
+            tr.classList.remove('dragging');
             document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
             draggedIndex = null;
         }
