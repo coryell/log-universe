@@ -299,22 +299,33 @@
                 // Helper to format tags array to string
                 const tagsToString = (tags) => (tags || []).join(', ');
 
+                // Helper to escape HTML for attribute values
+                const escapeHTML = (str) => {
+                    if (typeof str !== 'string') return str;
+                    return str
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#039;');
+                };
+
                 tr.innerHTML = `
                     <td class="drag-handle" draggable="true">☰</td>
-                    <td class="id-col"><input type="text" value="${row.id}" onchange="updateData(${index}, 'id', this.value)"></td>
-                    <td><input type="text" value="${getVal(row, `displayName.${lang}`)}" onchange="updateData(${index}, 'displayName.${lang}', this.value)"></td>
-                    <td><input type="text" value="${getVal(row, `description.${lang}`)}" onchange="updateData(${index}, 'description.${lang}', this.value)"></td>
-                    <td><input type="text" value="${getVal(row, `category.${lang}`)}" onchange="updateData(${index}, 'category.${lang}', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.length')}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'sources.length')}" onchange="updateData(${index}, 'sources.length', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.mass')}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'sources.mass')}" onchange="updateData(${index}, 'sources.mass', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.duration')}" onchange="updateData(${index}, 'dimensions.duration', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'sources.duration')}" onchange="updateData(${index}, 'sources.duration', this.value)"></td>
-                    <td><input type="text" value="${tagsToString(getVal(row, `tags.${lang}`, []))}" onchange="updateTags(${index}, 'tags.${lang}', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.length')}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.mass')}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.duration')}" onchange="updateX(${index}, 'x_coordinates.duration', this.value)"></td>
+                    <td class="id-col"><input type="text" value="${escapeHTML(row.id)}" onchange="updateData(${index}, 'id', this.value)"></td>
+                    <td><input type="text" value="${escapeHTML(getVal(row, `displayName.${lang}`))}" onchange="updateData(${index}, 'displayName.${lang}', this.value)"></td>
+                    <td><input type="text" value="${escapeHTML(getVal(row, `description.${lang}`))}" onchange="updateData(${index}, 'description.${lang}', this.value)"></td>
+                    <td><input type="text" value="${escapeHTML(getVal(row, `category.${lang}`))}" onchange="updateData(${index}, 'category.${lang}', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'dimensions.length'))}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.length'))}" onchange="updateData(${index}, 'sources.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'dimensions.mass'))}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.mass'))}" onchange="updateData(${index}, 'sources.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'dimensions.duration'))}" onchange="updateData(${index}, 'dimensions.duration', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.duration'))}" onchange="updateData(${index}, 'sources.duration', this.value)"></td>
+                    <td><input type="text" value="${escapeHTML(tagsToString(getVal(row, `tags.${lang}`, [])))}" onchange="updateTags(${index}, 'tags.${lang}', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'x_coordinates.length'))}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'x_coordinates.mass'))}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'x_coordinates.duration'))}" onchange="updateX(${index}, 'x_coordinates.duration', this.value)"></td>
                     <td style="text-align: center; vertical-align: middle;"><button class="remove-btn" onclick="deleteRow(${index})" title="Remove">×</button></td>
                 `;
                 const handle = tr.querySelector('.drag-handle');
