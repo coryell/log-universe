@@ -222,9 +222,12 @@
                 <th class="dim-col">Src: Length</th>
                 <th class="dim-col">Dim: Mass (kg)</th>
                 <th class="dim-col">Src: Mass</th>
+                <th class="dim-col">Dim: Duration (s)</th>
+                <th class="dim-col">Src: Duration</th>
                 <th id="header-tags">Tags</th>
                 <th class="dim-col">X: Length (decades)</th>
                 <th class="dim-col">X: Mass (decades)</th>
+                <th class="dim-col">X: Duration (decades)</th>
                 <th style="width: 30px;"></th>
             </tr>
         </thead>
@@ -291,9 +294,12 @@
                     <td><input type="text" class="dim-col" value="${getVal(row, 'sources.length')}" onchange="updateData(${index}, 'sources.length', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.mass')}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'sources.mass')}" onchange="updateData(${index}, 'sources.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.duration')}" onchange="updateData(${index}, 'dimensions.duration', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'sources.duration')}" onchange="updateData(${index}, 'sources.duration', this.value)"></td>
                     <td><input type="text" value="${tagsToString(getVal(row, `tags.${lang}`, []))}" onchange="updateTags(${index}, 'tags.${lang}', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.length')}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.mass')}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${getVal(row, 'x_coordinates.duration')}" onchange="updateX(${index}, 'x_coordinates.duration', this.value)"></td>
                     <td style="text-align: center; vertical-align: middle;"><button class="remove-btn" onclick="deleteRow(${index})" title="Remove">×</button></td>
                 `;
                 tbody.appendChild(tr);
@@ -540,6 +546,7 @@
                     if (cleanRow.x_coordinates) {
                         if (cleanRow.x_coordinates.length === "") delete cleanRow.x_coordinates.length;
                         if (cleanRow.x_coordinates.mass === "") delete cleanRow.x_coordinates.mass;
+                        if (cleanRow.x_coordinates.duration === "") delete cleanRow.x_coordinates.duration;
                         if (Object.keys(cleanRow.x_coordinates).length === 0) delete cleanRow.x_coordinates;
                     }
 
@@ -547,6 +554,7 @@
                     if (cleanRow.dimensions) {
                         if (cleanRow.dimensions.length === "") delete cleanRow.dimensions.length;
                         if (cleanRow.dimensions.mass === "") delete cleanRow.dimensions.mass;
+                        if (cleanRow.dimensions.duration === "") delete cleanRow.dimensions.duration;
                         if (Object.keys(cleanRow.dimensions).length === 0) delete cleanRow.dimensions;
                     }
 
@@ -554,6 +562,7 @@
                     if (cleanRow.sources) {
                         if (cleanRow.sources.length === "") delete cleanRow.sources.length;
                         if (cleanRow.sources.mass === "") delete cleanRow.sources.mass;
+                        if (cleanRow.sources.duration === "") delete cleanRow.sources.duration;
                         if (Object.keys(cleanRow.sources).length === 0) delete cleanRow.sources;
                     }
 

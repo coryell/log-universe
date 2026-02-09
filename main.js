@@ -5,7 +5,7 @@ import { getMatches, getLocalized, getSearchResultContent } from './search.js';
 const LANGUAGE = "en-us";
 // State
 let currentDimensionY = "length";
-let currentDimensionX = "none"; // "none", "length", "mass"
+let currentDimensionX = "none"; // "none", "length", "mass", "duration"
 let prevDimensionY = "length";
 let prevDimensionX = "none";
 let selectedItem = null;
@@ -13,7 +13,11 @@ let lastMousePos = null;
 let paddingRight = 50;
 let isInitialLoad = true;
 
-const getUnit = (dim) => dim === "mass" ? "kg" : "m";
+const getUnit = (dim) => {
+  if (dim === "mass") return "kg";
+  if (dim === "duration") return "s";
+  return "m";
+};
 const getDimensionValueY = (d) => Number(d.dimensions[currentDimensionY]);
 // Helper for X value: depends on mode
 const getDimensionValueX = (d) => {

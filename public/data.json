@@ -27,9 +27,9 @@
     }
   },
   {
-    "id": "proton_neutron",
+    "id": "proton",
     "displayName": {
-      "en-us": "Proton / Neutron"
+      "en-us": "Proton"
     },
     "category": {
       "en-us": "Fundamental / Nuclear"
@@ -51,6 +51,36 @@
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Nucleon",
       "length": "https://arxiv.org/pdf/2401.05404v1"
+    }
+  },
+  {
+    "id": "neutron",
+    "displayName": {
+      "en-us": "Neutron"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "duration": "8.78e+2",
+      "length": "8e-16",
+      "mass": "1.67e-27"
+    },
+    "tags": {
+      "en-us": [
+        "nucleon",
+        "atomic nucleus"
+      ]
+    },
+    "x_coordinates": {
+      "length": "0",
+      "mass": "4",
+      "duration": "0"
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Free_neutron_decay",
+      "length": "https://arxiv.org/pdf/2401.05404v1",
+      "mass": "https://en.wikipedia.org/wiki/Nucleon"
     }
   },
   {
@@ -92,6 +122,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Planck_units"
     }
   },
   {
@@ -4865,6 +4898,156 @@
     "x_coordinates": {
       "length": "0.8",
       "mass": "0"
+    }
+  },
+  {
+    "id": "planck_time",
+    "displayName": {
+      "en-us": "Planck Time"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "duration": "5.39e-44"
+    },
+    "x_coordinates": {
+      "duration": "0"
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Planck_units"
+    }
+  },
+  {
+    "id": "higgs_boson",
+    "displayName": {
+      "en-us": "Higgs Boson"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "duration": "1.56e-22"
+    },
+    "x_coordinates": {
+      "duration": "2"
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Higgs_boson"
+    },
+    "tags": {
+      "en-us": [
+        "quantum",
+        "subatomic"
+      ]
+    }
+  },
+  {
+    "id": "muon",
+    "displayName": {
+      "en-us": "Muon"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "duration": "2.1969811e-6"
+    },
+    "x_coordinates": {
+      "duration": "4"
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Muon"
+    },
+    "tags": {
+      "en-us": [
+        "quantum",
+        "subatomic"
+      ]
+    }
+  },
+  {
+    "id": "one_second",
+    "displayName": {
+      "en-us": "1 Second"
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "duration": "1e0"
+    },
+    "x_coordinates": {
+      "duration": "10"
+    }
+  },
+  {
+    "id": "one_hour",
+    "displayName": {
+      "en-us": "1 Hour"
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "duration": "3.6e3"
+    },
+    "x_coordinates": {
+      "duration": "10"
+    }
+  },
+  {
+    "id": "one_year",
+    "displayName": {
+      "en-us": "1 Year"
+    },
+    "category": {
+      "en-us": "Astronomy"
+    },
+    "dimensions": {
+      "duration": "3.154e+7"
+    },
+    "x_coordinates": {
+      "duration": "10"
+    }
+  },
+  {
+    "id": "since_big_bang",
+    "displayName": {
+      "en-us": "Since Big Bang"
+    },
+    "category": {
+      "en-us": "Astronomy"
+    },
+    "dimensions": {
+      "duration": "4.35e+17"
+    },
+    "x_coordinates": {
+      "duration": "10"
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Age_of_the_universe"
+    }
+  },
+  {
+    "id": "universe",
+    "displayName": {
+      "en-us": "Universe"
+    },
+    "category": {
+      "en-us": "Astronomy"
+    },
+    "dimensions": {
+      "length": "1.54e+26",
+      "duration": "4.35e+17"
+    },
+    "tags": {
+      "en-us": [
+        "cosmos"
+      ]
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Age_of_the_universe"
     }
   }
 ]
