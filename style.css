@@ -288,6 +288,15 @@ svg {
   padding-bottom: 4px;
 }
 
+.infobox-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  white-space: normal;
+}
+
 .infobox-row {
   margin-bottom: 4px;
   display: flex;

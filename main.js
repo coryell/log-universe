@@ -1310,6 +1310,7 @@ d3.json('/data.json').then(data => {
         ${entrySeparator}
         <div class="infobox-entry" data-id="${member.id}">
           <div class="infobox-title">${localizedDisplayName}</div>
+          ${member.description && getLocalized(member.description, LANGUAGE) ? `<div class="infobox-description">${getLocalized(member.description, LANGUAGE)}</div>` : ''}
           ${dimsContent}
           <div class="infobox-row"><span class="infobox-label">Category:</span><span style="color: ${categoryColor}">${localizedCategory}</span></div>
           ${tagsContent}

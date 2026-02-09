@@ -41,7 +41,8 @@
         }
 
         table {
-            width: 100%;
+            width: max-content;
+            min-width: 100%;
             border-collapse: collapse;
             background: white;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -82,13 +83,25 @@
             color: #555;
         }
 
+        .name-col {
+            width: 250px;
+        }
+
+        .desc-col {
+            width: 450px;
+        }
+
+        .cat-col {
+            width: 200px;
+        }
+
         .dim-col {
-            width: 100px;
+            width: 150px;
             font-family: monospace;
         }
 
         .tag-col {
-            width: 200px;
+            width: 250px;
         }
 
         tr:hover {
@@ -190,7 +203,9 @@
         /* Increase margin for hover area */
         body {
             padding: 20px 40px;
-            /* More horizontal padding */
+            width: fit-content;
+            min-width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -216,15 +231,16 @@
             <tr>
                 <th style="width: 40px;"></th>
                 <th class="id-col">ID</th>
-                <th id="header-displayName">Display Name</th>
-                <th id="header-category">Category</th>
+                <th id="header-displayName" class="name-col">Display Name</th>
+                <th id="header-description" class="desc-col">Description</th>
+                <th id="header-category" class="cat-col">Category</th>
                 <th class="dim-col">Dim: Length (m)</th>
                 <th class="dim-col">Src: Length</th>
                 <th class="dim-col">Dim: Mass (kg)</th>
                 <th class="dim-col">Src: Mass</th>
                 <th class="dim-col">Dim: Duration (s)</th>
                 <th class="dim-col">Src: Duration</th>
-                <th id="header-tags">Tags</th>
+                <th id="header-tags" class="tag-col">Tags</th>
                 <th class="dim-col">X: Length (decades)</th>
                 <th class="dim-col">X: Mass (decades)</th>
                 <th class="dim-col">X: Duration (decades)</th>
@@ -259,6 +275,7 @@
 
             // Update headers
             document.getElementById('header-displayName').innerText = `Display Name (${lang})`;
+            document.getElementById('header-description').innerText = `Description (${lang})`;
             document.getElementById('header-category').innerText = `Category (${lang})`;
             document.getElementById('header-tags').innerText = `Tags (${lang})`;
 
@@ -289,6 +306,7 @@
                     <td class="drag-handle">☰</td>
                     <td class="id-col"><input type="text" value="${row.id}" onchange="updateData(${index}, 'id', this.value)"></td>
                     <td><input type="text" value="${getVal(row, `displayName.${lang}`)}" onchange="updateData(${index}, 'displayName.${lang}', this.value)"></td>
+                    <td><input type="text" value="${getVal(row, `description.${lang}`)}" onchange="updateData(${index}, 'description.${lang}', this.value)"></td>
                     <td><input type="text" value="${getVal(row, `category.${lang}`)}" onchange="updateData(${index}, 'category.${lang}', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'dimensions.length')}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${getVal(row, 'sources.length')}" onchange="updateData(${index}, 'sources.length', this.value)"></td>
@@ -499,6 +517,7 @@
             const newRow = {
                 id: "",
                 displayName: { "en-us": "" },
+                description: { "en-us": "" },
                 category: { "en-us": "" },
                 dimensions: {},
                 tags: { "en-us": [] },

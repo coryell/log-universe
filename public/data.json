@@ -1,8 +1,11 @@
 [
   {
-    "id": "planck",
+    "id": "planck_units",
     "displayName": {
-      "en-us": "Planck"
+      "en-us": "Planck Units"
+    },
+    "description": {
+      "en-us": "The Universe's favorite units of measurement. \"Natural\" units constructed from fundamental constants."
     },
     "category": {
       "en-us": "Fundamental / Nuclear"
@@ -44,6 +47,9 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Planck_units"
+    },
+    "description": {
+      "en-us": "The \"natural\" unit of length, constructed from fundamental constants. Around this size, our ideas about space break down."
     }
   },
   {
@@ -67,6 +73,9 @@
       "en-us": [
         "quantum"
       ]
+    },
+    "description": {
+      "en-us": "The \"natural\" unit of time, constructed from fundamental constants. Around this size, our ideas about time break down."
     }
   },
   {
@@ -90,6 +99,9 @@
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Planck_units"
+    },
+    "description": {
+      "en-us": "The \"natural\" unit of mass, constructed from fundamental constants. Around this mass, current therories of quantum mechanics and general relativity break down."
     }
   },
   {
