@@ -1,5 +1,98 @@
 [
   {
+    "id": "planck",
+    "displayName": {
+      "en-us": "Planck"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "length": "1.6e-35",
+      "duration": "5.39e-44",
+      "mass": "2.176434e-8"
+    },
+    "tags": {
+      "en-us": [
+        "quantum"
+      ]
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Planck_units",
+      "duration": "https://en.wikipedia.org/wiki/Planck_units",
+      "mass": "https://en.wikipedia.org/wiki/Planck_units"
+    }
+  },
+  {
+    "id": "planck_length",
+    "displayName": {
+      "en-us": "Planck Length"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "tags": {
+      "en-us": [
+        "quantum"
+      ]
+    },
+    "dimensions": {
+      "length": "1.6e-35"
+    },
+    "x_coordinates": {
+      "length": "0"
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Planck_units"
+    }
+  },
+  {
+    "id": "planck_time",
+    "displayName": {
+      "en-us": "Planck Time"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "duration": "5.39e-44"
+    },
+    "x_coordinates": {
+      "duration": "0"
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Planck_units"
+    },
+    "tags": {
+      "en-us": [
+        "quantum"
+      ]
+    }
+  },
+  {
+    "id": "planck_mass",
+    "displayName": {
+      "en-us": "Planck Mass"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "mass": "2.176434e-8"
+    },
+    "tags": {
+      "en-us": [
+        "quantum"
+      ]
+    },
+    "x_coordinates": {
+      "mass": "0"
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Planck_units"
+    }
+  },
+  {
     "id": "electron",
     "displayName": {
       "en-us": "Electron"
@@ -9,7 +102,8 @@
     },
     "dimensions": {
       "length": "1e-22",
-      "mass": "9.1093837139e-31"
+      "mass": "9.1093837139e-31",
+      "duration": ">6.6e+28"
     },
     "tags": {
       "en-us": [
@@ -19,11 +113,13 @@
     },
     "x_coordinates": {
       "mass": "0",
-      "length": "0"
+      "length": "0",
+      "duration": "0"
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Electron_mass",
-      "length": "https://iopscience.iop.org/article/10.1088/0031-8949/1988/T22/016"
+      "length": "https://iopscience.iop.org/article/10.1088/0031-8949/1988/T22/016",
+      "duration": "https://en.wikipedia.org/wiki/Electron"
     }
   },
   {
@@ -32,7 +128,7 @@
       "en-us": "Proton"
     },
     "category": {
-      "en-us": "Electromagnetic"
+      "en-us": "Fundamental / Nuclear"
     },
     "dimensions": {
       "mass": "1.67e-27",
@@ -108,29 +204,6 @@
     }
   },
   {
-    "id": "planck_length",
-    "displayName": {
-      "en-us": "Planck Length"
-    },
-    "category": {
-      "en-us": "Fundamental / Nuclear"
-    },
-    "tags": {
-      "en-us": [
-        "quantum"
-      ]
-    },
-    "dimensions": {
-      "length": "1.6e-35"
-    },
-    "x_coordinates": {
-      "length": "0"
-    },
-    "sources": {
-      "length": "https://en.wikipedia.org/wiki/Planck_units"
-    }
-  },
-  {
     "id": "range_of_strong_interaction",
     "displayName": {
       "en-us": "Range of Strong Interaction"
@@ -152,9 +225,9 @@
     }
   },
   {
-    "id": "largest_nuclear_radius_pb_208",
+    "id": "largest_nucleus_pb_208",
     "displayName": {
-      "en-us": "Largest Nuclear Radius (Pb-208)"
+      "en-us": "Largest Nucleus (Pb-208)"
     },
     "category": {
       "en-us": "Fundamental / Nuclear"
@@ -4901,24 +4974,6 @@
     "x_coordinates": {
       "length": "0.8",
       "mass": "0"
-    }
-  },
-  {
-    "id": "planck_time",
-    "displayName": {
-      "en-us": "Planck Time"
-    },
-    "category": {
-      "en-us": "Fundamental / Nuclear"
-    },
-    "dimensions": {
-      "duration": "5.39e-44"
-    },
-    "x_coordinates": {
-      "duration": "0"
-    },
-    "sources": {
-      "duration": "https://en.wikipedia.org/wiki/Planck_units"
     }
   },
   {
