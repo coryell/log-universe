@@ -559,7 +559,7 @@ d3.json('/data.json').then(data => {
   }
 
   const getFilteredData = (dataList) => {
-    if (currentDimensionX === "none") {
+    if (currentDimensionX === "none" || currentDimensionX === currentDimensionY) {
       // Show items that have the Y dimension AND valid x_coordinates for that dimension
       return dataList.filter(d => d.dimensions[currentDimensionY] !== undefined && d.x_coordinates[currentDimensionY] !== undefined);
     } else {
