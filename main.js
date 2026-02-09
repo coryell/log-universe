@@ -254,6 +254,26 @@ d3.json('/data.json').then(data => {
 
   svg.call(zoom);
 
+  // Recenter on zoom out at limit
+  let lastRecenterTime = 0;
+  // Use capture phase to ensure we see the event before D3's zoom handler might swallow it
+  svg.node().addEventListener('wheel', (event) => {
+    const t = d3.zoomTransform(svg.node());
+    // On trackpads, pinch-out often results in deltaY > 0 with ctrlKey: true
+    // Standard scroll-to-zoom also uses deltaY > 0
+    if (t.k <= 1.05 && event.deltaY > 0) {
+      const now = Date.now();
+      if (now - lastRecenterTime > 1500) {
+        lastRecenterTime = now;
+        if (currentDimensionX === "none") {
+          svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
+        } else {
+          svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+        }
+      }
+    }
+  }, { capture: true, passive: true });
+
   const updateGrid = (transform) => {
     const newYScale = transform.rescaleY(yScale);
     const newXScale = transform.rescaleX(xScale);
