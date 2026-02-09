@@ -483,6 +483,19 @@ d3.json('/data.json').then(data => {
     g.selectAll('.item-group').classed("highlighted", false);
   }
 
+  const getFilteredData = (dataList) => {
+    if (currentDimensionX === "none") {
+      // Show items that have the Y dimension AND valid x_coordinates for that dimension
+      return dataList.filter(d => d.dimensions[currentDimensionY] !== undefined && d.x_coordinates[currentDimensionY] !== undefined);
+    } else {
+      // 2D behavior: Show items that have BOTH dimensions
+      return dataList.filter(d =>
+        d.dimensions[currentDimensionY] !== undefined &&
+        d.dimensions[currentDimensionX] !== undefined
+      );
+    }
+  };
+
   // Unified update function
   const updatePlot = () => {
     // Capture previous positions if dimensions are changing
@@ -497,17 +510,7 @@ d3.json('/data.json').then(data => {
     }
 
     // Filter data
-    let filteredData = [];
-    if (currentDimensionX === "none") {
-      // Show items that have the Y dimension AND valid x_coordinates for that dimension
-      filteredData = data.filter(d => d.dimensions[currentDimensionY] !== undefined && d.x_coordinates[currentDimensionY] !== undefined);
-    } else {
-      // 2D behavior: Show items that have BOTH dimensions
-      filteredData = data.filter(d =>
-        d.dimensions[currentDimensionY] !== undefined &&
-        d.dimensions[currentDimensionX] !== undefined
-      );
-    }
+    const filteredData = getFilteredData(data);
 
     // Clear if no data
     if (filteredData.length === 0) {
@@ -958,12 +961,7 @@ d3.json('/data.json').then(data => {
     const matches = getMatches(data, query, LANGUAGE);
 
     // Filter matches
-    let filtered = [];
-    if (currentDimensionX === "none") {
-      filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined);
-    } else {
-      filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
-    }
+    const filtered = getFilteredData(matches);
 
     renderResults(filtered, query);
   });
@@ -972,12 +970,7 @@ d3.json('/data.json').then(data => {
     const query = searchInput.value;
     if (query) {
       const matches = getMatches(data, query, LANGUAGE);
-      let filtered = [];
-      if (currentDimensionX === "none") {
-        filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined);
-      } else {
-        filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
-      }
+      const filtered = getFilteredData(matches);
       renderResults(filtered, query);
     }
     searchResults.scrollTop = 0;
@@ -1006,24 +999,14 @@ d3.json('/data.json').then(data => {
       if (selectedIndex >= 0) {
         const query = searchInput.value;
         const matches = getMatches(data, query, LANGUAGE);
-        let filtered = [];
-        if (currentDimensionX === "none") {
-          filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined);
-        } else {
-          filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
-        }
+        const filtered = getFilteredData(matches);
         if (filtered[selectedIndex]) {
           selectResult(filtered[selectedIndex]);
         }
       } else if (items.length > 0) {
         const query = searchInput.value;
         const matches = getMatches(data, query, LANGUAGE);
-        let filtered = [];
-        if (currentDimensionX === "none") {
-          filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined);
-        } else {
-          filtered = matches.filter(d => d.dimensions[currentDimensionY] !== undefined && d.dimensions[currentDimensionX] !== undefined);
-        }
+        const filtered = getFilteredData(matches);
         if (filtered[0]) {
           selectResult(filtered[0]);
         }
