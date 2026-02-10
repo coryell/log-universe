@@ -3000,7 +3000,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Bohr_radius"
+      "length": "https://en.wikipedia.org/wiki/Bohr_radius",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "5.3e-11",
@@ -3031,11 +3032,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "3.1e-11",
-      "mass": "6.646473677179139e-27"
+      "mass": "6.65e-27"
     },
     "x_coordinates": {
       "length": "1.7",
@@ -3061,11 +3063,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.45e-10",
-      "mass": "1.1524141138166e-26"
+      "mass": "1.15e-26"
     },
     "x_coordinates": {
       "length": "0",
@@ -3091,11 +3094,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.05e-10",
-      "mass": "1.496511019674058e-26"
+      "mass": "1.50e-26"
     },
     "x_coordinates": {
       "length": "0.1",
@@ -3121,11 +3125,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "8.5e-11",
-      "mass": "1.7950427334808999e-26"
+      "mass": "1.80e-26"
     },
     "x_coordinates": {
       "length": "1.2",
@@ -3151,11 +3156,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "7.0e-11",
-      "mass": "1.9944734756557899e-26"
+      "mass": "1.99e-26"
     },
     "x_coordinates": {
       "length": "1.3",
@@ -3181,11 +3187,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "6.5e-11",
-      "mass": "2.32591707380823e-26"
+      "mass": "2.33e-26"
     },
     "x_coordinates": {
       "length": "1.4",
@@ -3211,11 +3218,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "6.0e-11",
-      "mass": "2.6566964563331097e-26"
+      "mass": "2.66e-26"
     },
     "x_coordinates": {
       "length": "1.5",
@@ -3241,11 +3249,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "5.0e-11",
-      "mass": "3.15469212309622e-26"
+      "mass": "3.15e-26"
     },
     "x_coordinates": {
       "length": "1.6",
@@ -3271,11 +3280,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "3.8e-11",
-      "mass": "3.3509678410402e-26"
+      "mass": "3.35e-26"
     },
     "x_coordinates": {
       "length": "1.7",
@@ -3301,11 +3311,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.8e-10",
-      "mass": "3.8175793194010994e-26"
+      "mass": "3.82e-26"
     },
     "x_coordinates": {
       "length": "0",
@@ -3331,11 +3342,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.5e-10",
-      "mass": "4.03594020696145e-26"
+      "mass": "4.04e-26"
     },
     "x_coordinates": {
       "length": "0.1",
@@ -3361,11 +3373,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.25e-10",
-      "mass": "4.4804665157059795e-26"
+      "mass": "4.48e-26"
     },
     "x_coordinates": {
       "length": "1.2",
@@ -3391,11 +3404,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.10e-10",
-      "mass": "4.6636239750056496e-26"
+      "mass": "4.66e-26"
     },
     "x_coordinates": {
       "length": "1.3",
@@ -3421,11 +3435,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.00e-10",
-      "mass": "5.1433537120108596e-26"
+      "mass": "5.14e-26"
     },
     "x_coordinates": {
       "length": "1.4",
@@ -3451,11 +3466,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.00e-10",
-      "mass": "5.3236882548934e-26"
+      "mass": "5.32e-26"
     },
     "x_coordinates": {
       "length": "1.5",
@@ -3481,11 +3497,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.00e-10",
-      "mass": "5.8866109992505e-26"
+      "mass": "5.89e-26"
     },
     "x_coordinates": {
       "length": "1.6",
@@ -3511,11 +3528,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "7.1e-11",
-      "mass": "6.6338535802555e-26"
+      "mass": "6.63e-26"
     },
     "x_coordinates": {
       "length": "1.7",
@@ -3541,11 +3559,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "2.20e-10",
-      "mass": "6.49237565158522e-26"
+      "mass": "6.49e-26"
     },
     "x_coordinates": {
       "length": "0",
@@ -3571,11 +3590,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "6.65510848033742e-26"
+      "mass": "6.66e-26"
     },
     "x_coordinates": {
       "length": "0.1",
@@ -3601,11 +3621,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.60e-10",
-      "mass": "7.46511943814684e-26"
+      "mass": "7.47e-26"
     },
     "x_coordinates": {
       "length": "0.2",
@@ -3631,18 +3652,19 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.40e-10",
-      "mass": "7.948502361103629e-26"
+      "mass": "7.95e-26"
     },
     "x_coordinates": {
       "length": "0.3",
       "mass": "0"
     },
     "description": {
-      "en-us": "A strong, lightweight, and corrosion-resistant metal frequently used in médical implants."
+      "en-us": "A strong, lightweight, and corrosion-resistant metal frequently used in m\u00e9dical implants."
     }
   },
   {
@@ -3661,11 +3683,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "8.45911812479038e-26"
+      "mass": "8.46e-26"
     },
     "x_coordinates": {
       "length": "0.4",
@@ -3691,11 +3714,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.40e-10",
-      "mass": "8.63413894265244e-26"
+      "mass": "8.63e-26"
     },
     "x_coordinates": {
       "length": "0.5",
@@ -3721,11 +3745,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.40e-10",
-      "mass": "9.12266953672282e-26"
+      "mass": "9.12e-26"
     },
     "x_coordinates": {
       "length": "0.6",
@@ -3751,11 +3776,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.40e-10",
-      "mass": "9.273280430272049e-26"
+      "mass": "9.27e-26"
     },
     "x_coordinates": {
       "length": "0.7",
@@ -3781,11 +3807,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "9.78605489474837e-26"
+      "mass": "9.79e-26"
     },
     "x_coordinates": {
       "length": "0.76",
@@ -3811,11 +3838,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "9.746201957094769e-26"
+      "mass": "9.75e-26"
     },
     "x_coordinates": {
       "length": "0.88",
@@ -3841,11 +3869,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "1.0552061567231939e-25"
+      "mass": "1.06e-25"
     },
     "x_coordinates": {
       "length": "0.98",
@@ -3871,11 +3900,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "1.0856604432468199e-25"
+      "mass": "1.09e-25"
     },
     "x_coordinates": {
       "length": "1.1",
@@ -3901,11 +3931,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.30e-10",
-      "mass": "1.157777655009147e-25"
+      "mass": "1.16e-25"
     },
     "x_coordinates": {
       "length": "1.2",
@@ -3931,11 +3962,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.25e-10",
-      "mass": "1.2060495257420697e-25"
+      "mass": "1.21e-25"
     },
     "x_coordinates": {
       "length": "1.3",
@@ -3961,11 +3993,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.15e-10",
-      "mass": "1.2441090812012578e-25"
+      "mass": "1.24e-25"
     },
     "x_coordinates": {
       "length": "1.4",
@@ -3991,11 +4024,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.15e-10",
-      "mass": "1.3113443081010189e-25"
+      "mass": "1.31e-25"
     },
     "x_coordinates": {
       "length": "1.5",
@@ -4021,11 +4055,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.15e-10",
-      "mass": "1.3268371376138557e-25"
+      "mass": "1.33e-25"
     },
     "x_coordinates": {
       "length": "1.6",
@@ -4051,11 +4086,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "8.8e-11",
-      "mass": "1.391498528956822e-25"
+      "mass": "1.39e-25"
     },
     "x_coordinates": {
       "length": "1.7",
@@ -4081,11 +4117,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "2.35e-10",
-      "mass": "1.419229531407452e-25"
+      "mass": "1.42e-25"
     },
     "x_coordinates": {
       "length": "0",
@@ -4111,11 +4148,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "2.00e-10",
-      "mass": "1.45496433217018e-25"
+      "mass": "1.45e-25"
     },
     "x_coordinates": {
       "length": "0.1",
@@ -4141,11 +4179,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "1.476318864596234e-25"
+      "mass": "1.48e-25"
     },
     "x_coordinates": {
       "length": "0.2",
@@ -4171,11 +4210,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.55e-10",
-      "mass": "1.5147769494319578e-25"
+      "mass": "1.51e-25"
     },
     "x_coordinates": {
       "length": "0.28",
@@ -4201,11 +4241,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.45e-10",
-      "mass": "1.542740427352234e-25"
+      "mass": "1.54e-25"
     },
     "x_coordinates": {
       "length": "0.38",
@@ -4231,11 +4272,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.45e-10",
-      "mass": "1.59328723660955e-25"
+      "mass": "1.59e-25"
     },
     "x_coordinates": {
       "length": "0.5",
@@ -4261,7 +4303,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10"
@@ -4290,11 +4333,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.30e-10",
-      "mass": "1.6783068369372298e-25"
+      "mass": "1.68e-25"
     },
     "x_coordinates": {
       "length": "0.68",
@@ -4320,11 +4364,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "1.7088607558049899e-25"
+      "mass": "1.71e-25"
     },
     "x_coordinates": {
       "length": "0.8",
@@ -4350,11 +4395,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.40e-10",
-      "mass": "1.7671456771233799e-25"
+      "mass": "1.77e-25"
     },
     "x_coordinates": {
       "length": "0.9",
@@ -4380,11 +4426,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.60e-10",
-      "mass": "1.79122349362243e-25"
+      "mass": "1.79e-25"
     },
     "x_coordinates": {
       "length": "1",
@@ -4410,11 +4457,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.55e-10",
-      "mass": "1.86661196735049e-25"
+      "mass": "1.87e-25"
     },
     "x_coordinates": {
       "length": "1.1",
@@ -4440,11 +4488,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.55e-10",
-      "mass": "1.9066309589109799e-25"
+      "mass": "1.91e-25"
     },
     "x_coordinates": {
       "length": "1.2",
@@ -4470,11 +4519,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.45e-10",
-      "mass": "1.9712259286911898e-25"
+      "mass": "1.97e-25"
     },
     "x_coordinates": {
       "length": "1.3",
@@ -4500,11 +4550,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.45e-10",
-      "mass": "2.02187237029264e-25"
+      "mass": "2.02e-25"
     },
     "x_coordinates": {
       "length": "1.4",
@@ -4530,11 +4581,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.40e-10",
-      "mass": "2.1188478519163997e-25"
+      "mass": "2.12e-25"
     },
     "x_coordinates": {
       "length": "1.5",
@@ -4560,11 +4612,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.40e-10",
-      "mass": "2.1072240784341e-25"
+      "mass": "2.11e-25"
     },
     "x_coordinates": {
       "length": "1.6",
@@ -4590,11 +4643,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.08e-10",
-      "mass": "2.1801217435588097e-25"
+      "mass": "2.18e-25"
     },
     "x_coordinates": {
       "length": "1.7",
@@ -4621,11 +4675,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "2.60e-10",
-      "mass": "2.20702247647499e-25"
+      "mass": "2.21e-25"
     },
     "x_coordinates": {
       "length": "0",
@@ -4651,11 +4706,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "2.15e-10",
-      "mass": "2.28041830332037e-25"
+      "mass": "2.28e-25"
     },
     "x_coordinates": {
       "length": "0.08",
@@ -4681,11 +4737,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.95e-10",
-      "mass": "2.3066548206089896e-25"
+      "mass": "2.31e-25"
     },
     "x_coordinates": {
       "length": "0.18",
@@ -4711,11 +4768,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.85e-10",
-      "mass": "2.32674734334268e-25"
+      "mass": "2.33e-25"
     },
     "x_coordinates": {
       "length": "0.3",
@@ -4741,11 +4799,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.85e-10",
-      "mass": "2.3398656019869897e-25"
+      "mass": "2.34e-25"
     },
     "x_coordinates": {
       "length": "0.4",
@@ -4771,11 +4830,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.85e-10",
-      "mass": "2.39516155298136e-25"
+      "mass": "2.40e-25"
     },
     "x_coordinates": {
       "length": "0.5",
@@ -4801,7 +4861,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.85e-10"
@@ -4830,11 +4891,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.85e-10",
-      "mass": "2.49678654399804e-25"
+      "mass": "2.50e-25"
     },
     "x_coordinates": {
       "length": "0.7",
@@ -4860,11 +4922,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.85e-10",
-      "mass": "2.52335516910044e-25"
+      "mass": "2.52e-25"
     },
     "x_coordinates": {
       "length": "0.8",
@@ -4890,11 +4953,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "2.61119768584525e-25"
+      "mass": "2.61e-25"
     },
     "x_coordinates": {
       "length": "0.9",
@@ -4920,11 +4984,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "2.63909474220277e-25"
+      "mass": "2.64e-25"
     },
     "x_coordinates": {
       "length": "1",
@@ -4950,11 +5015,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "2.6983759869625e-25"
+      "mass": "2.70e-25"
     },
     "x_coordinates": {
       "length": "1.1",
@@ -4980,11 +5046,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "2.73872708633677e-25"
+      "mass": "2.74e-25"
     },
     "x_coordinates": {
       "length": "1.2",
@@ -5010,11 +5077,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "2.7774176466421397e-25"
+      "mass": "2.78e-25"
     },
     "x_coordinates": {
       "length": "1.3",
@@ -5040,11 +5108,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "2.80514864909277e-25"
+      "mass": "2.81e-25"
     },
     "x_coordinates": {
       "length": "1.4",
@@ -5070,11 +5139,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "2.87356285873145e-25"
+      "mass": "2.87e-25"
     },
     "x_coordinates": {
       "length": "1.5",
@@ -5100,11 +5170,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "2.9054452088543297e-25"
+      "mass": "2.91e-25"
     },
     "x_coordinates": {
       "length": "1.6",
@@ -5130,11 +5201,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.55e-10",
-      "mass": "2.96389618407961e-25"
+      "mass": "2.96e-25"
     },
     "x_coordinates": {
       "length": "0.32",
@@ -5160,11 +5232,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.45e-10",
-      "mass": "3.0047454451745496e-25"
+      "mass": "3.00e-25"
     },
     "x_coordinates": {
       "length": "0.42",
@@ -5190,11 +5263,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "3.0527350242657598e-25"
+      "mass": "3.05e-25"
     },
     "x_coordinates": {
       "length": "0.5",
@@ -5220,11 +5294,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "3.09208980019869e-25"
+      "mass": "3.09e-25"
     },
     "x_coordinates": {
       "length": "0.62",
@@ -5250,11 +5325,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.30e-10",
-      "mass": "3.15884347076847e-25"
+      "mass": "3.16e-25"
     },
     "x_coordinates": {
       "length": "0.72",
@@ -5280,11 +5356,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "3.19188819823958e-25"
+      "mass": "3.19e-25"
     },
     "x_coordinates": {
       "length": "0.84",
@@ -5310,11 +5387,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "3.23937961561012e-25"
+      "mass": "3.24e-25"
     },
     "x_coordinates": {
       "length": "0.92",
@@ -5340,11 +5418,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "3.27076380401233e-25"
+      "mass": "3.27e-25"
     },
     "x_coordinates": {
       "length": "1.02",
@@ -5370,11 +5449,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.50e-10",
-      "mass": "3.3308753183065097e-25"
+      "mass": "3.33e-25"
     },
     "x_coordinates": {
       "length": "1.1",
@@ -5400,11 +5480,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.90e-10",
-      "mass": "3.39380974901782e-25"
+      "mass": "3.39e-25"
     },
     "x_coordinates": {
       "length": "1.2",
@@ -5430,11 +5511,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "3.4406369507607997e-25"
+      "mass": "3.44e-25"
     },
     "x_coordinates": {
       "length": "1.3",
@@ -5460,11 +5542,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.60e-10",
-      "mass": "3.47019454618722e-25"
+      "mass": "3.47e-25"
     },
     "x_coordinates": {
       "length": "1.4",
@@ -5490,7 +5573,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.90e-10"
@@ -5519,7 +5603,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.27e-10"
@@ -5548,7 +5633,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.20e-10"
@@ -5578,7 +5664,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "3.48e-10"
@@ -5607,7 +5694,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "2.15e-10"
@@ -5636,7 +5724,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.95e-10"
@@ -5665,11 +5754,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "3.8531148554755595e-25"
+      "mass": "3.85e-25"
     },
     "x_coordinates": {
       "length": "0.3",
@@ -5695,11 +5785,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "3.8365094647865595e-25"
+      "mass": "3.84e-25"
     },
     "x_coordinates": {
       "length": "0.4",
@@ -5725,11 +5816,12 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "3.95258114570267e-25"
+      "mass": "3.95e-25"
     },
     "x_coordinates": {
       "length": "0.5",
@@ -5755,7 +5847,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10"
@@ -5784,7 +5877,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10"
@@ -5813,7 +5907,8 @@
       ]
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)"
+      "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
     },
     "dimensions": {
       "length": "1.75e-10"
