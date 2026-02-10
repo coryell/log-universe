@@ -6,10 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Physics Poster Data Editor</title>
     <style>
+        :root {
+            --bg-primary: #f0f0f0;
+            --text-primary: #333;
+            --bg-card: white;
+            --border-color: #ddd;
+            --border-strong: #ccc;
+            --bg-header: #f8f9fa;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --hover-bg: #f9f9f9;
+            --input-focus-bg: #e8f0fe;
+            --dim-text: #555;
+            --drag-handle-color: #ccc;
+            --drag-over-border: #007bff;
+            --remove-btn-color: #ddd;
+            --remove-btn-hover: #dc3545;
+            --insert-color: #28a745;
+            --insert-hover: #218838;
+            --toast-bg: #333;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #121212;
+            --text-primary: #e0e0e0;
+            --bg-card: #1e1e1e;
+            --border-color: #333;
+            --border-strong: #444;
+            --bg-header: #252525;
+            --accent-color: #375a7f;
+            --accent-hover: #4b71a0;
+            --hover-bg: #2a2a2a;
+            --input-focus-bg: #2c3e50;
+            --dim-text: #aaa;
+            --drag-handle-color: #444;
+            --drag-over-border: #375a7f;
+            --remove-btn-color: #444;
+            --remove-btn-hover: #ff5c5c;
+            --insert-color: #1e7e34;
+            --insert-hover: #218838;
+            --toast-bg: #444;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
         body {
             font-family: sans-serif;
-            padding: 20px;
-            background: #f0f0f0;
+            padding: 20px 40px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            width: fit-content;
+            min-width: 100%;
+            box-sizing: border-box;
         }
 
         h1 {
@@ -20,9 +68,9 @@
             margin-bottom: 20px;
             position: sticky;
             top: 0;
-            background: #f0f0f0;
+            background: var(--bg-primary);
             padding: 10px 0;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--border-strong);
             z-index: 100;
         }
 
@@ -30,34 +78,34 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            background: #007bff;
+            background: var(--accent-color);
             color: white;
             border: none;
             border-radius: 4px;
         }
 
         button:hover {
-            background: #0056b3;
+            background: var(--accent-hover);
         }
 
         table {
             width: max-content;
             min-width: 100%;
             border-collapse: collapse;
-            background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: var(--bg-card);
+            box-shadow: 0 1px 3px var(--shadow);
         }
 
         th,
         td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             padding: 8px;
             text-align: left;
             vertical-align: top;
         }
 
         th {
-            background-color: #f8f9fa;
+            background-color: var(--bg-header);
             position: sticky;
             top: 60px;
             z-index: 10;
@@ -69,18 +117,20 @@
             box-sizing: border-box;
             padding: 4px;
             border: 1px solid transparent;
+            background: transparent;
+            color: inherit;
         }
 
         input[type="text"]:focus {
-            border-color: #007bff;
+            border-color: var(--accent-color);
             outline: none;
-            background: #e8f0fe;
+            background: var(--input-focus-bg);
         }
 
         .id-col {
             width: 250px;
             font-family: monospace;
-            color: #555;
+            color: var(--dim-text);
         }
 
         .name-col {
@@ -105,14 +155,14 @@
         }
 
         tr:hover {
-            background-color: #f9f9f9;
+            background-color: var(--hover-bg);
         }
 
         .toast {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #333;
+            background: var(--toast-bg);
             color: white;
             padding: 10px 20px;
             border-radius: 4px;
@@ -131,7 +181,7 @@
 
         .drag-handle {
             cursor: move;
-            color: #ccc;
+            color: var(--drag-handle-color);
             user-select: none;
             width: 30px;
             text-align: center;
@@ -139,20 +189,20 @@
         }
 
         .drag-handle:hover {
-            color: #555;
+            color: var(--dim-text);
         }
 
         tr.dragging {
             opacity: 0.5;
-            background: #e0e0e0;
+            background: var(--bg-primary);
         }
 
         tr.drag-over {
-            border-top: 2px solid #007bff;
+            border-top: 2px solid var(--drag-over-border);
         }
 
         .remove-btn {
-            color: #ddd;
+            color: var(--remove-btn-color);
             cursor: pointer;
             font-weight: bold;
             font-size: 18px;
@@ -162,7 +212,7 @@
         }
 
         .remove-btn:hover {
-            color: #d9534f;
+            color: var(--remove-btn-hover);
         }
 
         button.insert-btn {
@@ -170,42 +220,34 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: #28a745;
+            background: var(--insert-color);
             color: white;
             border: none;
             font-size: 20px;
             line-height: 1;
             padding: 0;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 5px var(--shadow);
             z-index: 1000;
             display: none;
             transform: translateY(-50%);
         }
 
         button.insert-btn:hover {
-            background: #218838;
+            background: var(--insert-hover);
             transform: translateY(-50%) scale(1.1);
         }
 
         .insert-line {
             position: fixed;
             height: 2px;
-            background: #28a745;
+            background: var(--insert-color);
             left: 50px;
             right: 50px;
             z-index: 999;
             display: none;
             pointer-events: none;
             opacity: 0.5;
-        }
-
-        /* Increase margin for hover area */
-        body {
-            padding: 20px 40px;
-            width: fit-content;
-            min-width: 100%;
-            box-sizing: border-box;
         }
     </style>
 </head>
@@ -220,10 +262,12 @@
 
     <div class="controls">
         <button id="saveBtn">Save Changes (Cmd+S)</button>
-        <select id="langSelect" style="margin-left: 10px; padding: 5px; font-size: 16px;">
+        <button id="themeToggle" style="margin-left: 10px;">🌓 Toggle Theme</button>
+        <select id="langSelect"
+            style="margin-left: 10px; padding: 5px; font-size: 16px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 4px;">
             <option value="en-us">en-us</option>
         </select>
-        <span id="status" style="margin-left: 10px; color: #666;"></span>
+        <span id="status" style="margin-left: 10px; color: var(--dim-text);"></span>
     </div>
 
     <table id="dataTable">
@@ -257,6 +301,24 @@
     <script>
         let tableData = [];
         let draggedIndex = null;
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
 
         async function loadData() {
             try {
