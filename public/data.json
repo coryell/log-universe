@@ -1,5 +1,31 @@
 [
   {
+    "id": "one_meter",
+    "displayName": {
+      "en-us": "1 Meter"
+    },
+    "description": {
+      "en-us": "The base unit of length in the International System of Units (SI). Defined as the length light travels in vacuum in 1 / 299,792,458 seconds."
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "length": "1e+0"
+    },
+    "tags": {
+      "en-us": [
+        "measurement"
+      ]
+    },
+    "x_coordinates": {
+      "length": "55"
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Metre"
+    }
+  },
+  {
     "id": "planck_units",
     "displayName": {
       "en-us": "Planck Units"
@@ -75,7 +101,7 @@
       ]
     },
     "description": {
-      "en-us": "The \"natural\" unit of time, constructed from fundamental constants. Around this size, our ideas about time break down."
+      "en-us": "The \"natural\" unit of time, constructed from fundamental constants. Around this timescale, our ideas about time break down."
     }
   },
   {
@@ -101,7 +127,7 @@
       "mass": "https://en.wikipedia.org/wiki/Planck_units"
     },
     "description": {
-      "en-us": "The \"natural\" unit of mass, constructed from fundamental constants. Around this mass, current therories of quantum mechanics and general relativity break down."
+      "en-us": "The \"natural\" unit of mass, constructed from fundamental constants. Current theories can't describe particles of this mass."
     }
   },
   {
@@ -126,12 +152,15 @@
     "x_coordinates": {
       "mass": "0",
       "length": "0",
-      "duration": "0"
+      "duration": "10"
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Electron_mass",
       "length": "https://iopscience.iop.org/article/10.1088/0031-8949/1988/T22/016",
       "duration": "https://en.wikipedia.org/wiki/Electron"
+    },
+    "description": {
+      "en-us": "A subatomic particle that carries a negative charge and orbits the atomic nucleus."
     }
   },
   {
@@ -162,6 +191,9 @@
       "mass": "https://en.wikipedia.org/wiki/Nucleon",
       "length": "https://arxiv.org/pdf/2401.05404v1",
       "duration": "https://en.wikipedia.org/wiki/Proton_decay"
+    },
+    "description": {
+      "en-us": "A positively charged subatomic particle that, along with neutrons, makes up the atomic nucleus."
     }
   },
   {
@@ -186,12 +218,15 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0",
-      "duration": "0"
+      "duration": "10"
     },
     "sources": {
       "duration": "https://en.wikipedia.org/wiki/Free_neutron_decay",
       "length": "https://arxiv.org/pdf/2401.05404v1",
       "mass": "https://en.wikipedia.org/wiki/Nucleon"
+    },
+    "description": {
+      "en-us": "An uncharged subatomic particle that helps bind protons together in the nucleus."
     }
   },
   {
@@ -213,6 +248,12 @@
     },
     "x_coordinates": {
       "length": "5"
+    },
+    "description": {
+      "en-us": "Mediated by W+, W-, and Z bosons, the weak nuclear interaction is responsible for radioactive decay."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Weak_interaction"
     }
   },
   {
@@ -234,6 +275,12 @@
     },
     "x_coordinates": {
       "length": "5"
+    },
+    "description": {
+      "en-us": "Mediated by gluons, the strong nuclear interaction binds quarks within nucleons and nucleons within nuclei."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Strong_interaction"
     }
   },
   {
@@ -245,10 +292,16 @@
       "en-us": "Fundamental / Nuclear"
     },
     "dimensions": {
-      "length": "7e-15"
+      "length": "5.5e-15"
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "Lead-208 is the heaviest known stable nucleus, featuring a \"doubly magic\" number of protons and neutrons."
+    },
+    "sources": {
+      "length": "https://www.chemlin.org/isotope/lead-208"
     }
   },
   {
@@ -267,16 +320,21 @@
       ]
     },
     "dimensions": {
-      "length": "9e-22"
+      "length": "5e-22"
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The record-holding gamma ray from space, detected by the Large High Altitude Air Shower Observatory."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray"
     }
   },
   {
-    "id": "lowest_energy_gamma_ray",
     "displayName": {
-      "en-us": "Lowest Energy Gamma Ray"
+      "en-us": "Gamma Ray/X-Ray Boundary"
     },
     "category": {
       "en-us": "Electromagnetic"
@@ -289,31 +347,17 @@
       ]
     },
     "dimensions": {
-      "length": "8.2e-13"
+      "length": "1e-11"
     },
     "x_coordinates": {
       "length": "20"
-    }
-  },
-  {
-    "id": "highest_energy_x_ray",
-    "displayName": {
-      "en-us": "Highest Energy X-Ray"
     },
-    "category": {
-      "en-us": "Electromagnetic"
+    "description": {
+      "en-us": "Gamma rays are very high energy photons often produced by radioactive decay. X-rays are high energy photons, though not as high energy as gamma rays, often produced by the collisions of charged particles."
     },
-    "tags": {
-      "en-us": [
-        "light",
-        "radiation"
-      ]
-    },
-    "dimensions": {
-      "length": "5e-12"
-    },
-    "x_coordinates": {
-      "length": "20"
+    "id": "gamma_ray_x_ray_boundary",
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/X-ray"
     }
   },
   {
@@ -337,6 +381,12 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The fuzzy transition point where ultraviolet light becomes ionizing X-ray radiation."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Extreme_ultraviolet"
     }
   },
   {
@@ -356,10 +406,16 @@
       ]
     },
     "dimensions": {
-      "length": "4e-7"
+      "length": "3.80e-7"
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The shortest wavelength of light that the human eye can perceive."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Visible_spectrum"
     }
   },
   {
@@ -379,10 +435,16 @@
       ]
     },
     "dimensions": {
-      "length": "7e-7"
+      "length": "7.50e-7"
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The longest wavelength of light that the human eye can perceive."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Visible_spectrum"
     }
   },
   {
@@ -407,6 +469,12 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The boundary near 1 millimeter where thermal infrared heat transitions into microwave radiation."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Microwave"
     }
   },
   {
@@ -430,6 +498,12 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The 1-meter mark where shorter microwaves are categorized as longer radio waves."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Microwave"
     }
   },
   {
@@ -449,10 +523,18 @@
       ]
     },
     "dimensions": {
-      "length": "1e+1"
+      "length": "4.2e-3",
+      "duration": "1.4e-11"
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The high-frequency signals used by mobile networks to transmit data at high speeds over short ranges."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/5G",
+      "duration": "https://en.wikipedia.org/wiki/5G"
     }
   },
   {
@@ -472,16 +554,24 @@
       ]
     },
     "dimensions": {
-      "length": "1e+3"
+      "length": "5.0e-1",
+      "duration": "1.7e-9"
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "Lower frequency radio waves used by mobile phones for better range and penetration through obstacles."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Wireless_device_radiation_and_health",
+      "duration": "https://en.wikipedia.org/wiki/5G"
     }
   },
   {
-    "id": "cmb_wavelength",
+    "id": "cosmic_microwave_background",
     "displayName": {
-      "en-us": "CMB Wavelength"
+      "en-us": "Cosmic Microwave Background"
     },
     "category": {
       "en-us": "Electromagnetic"
@@ -500,6 +590,9 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The stretched-out light from the early universe that now permeates space as a microwave glow."
     }
   },
   {
@@ -522,6 +615,9 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "A theoretical limit set by the \"plasma frequency\" of ionized gas between stars."
     }
   },
   {
@@ -544,6 +640,9 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "Radio waves so long they are reflected by the thin plasma filling our solar system."
     }
   },
   {
@@ -566,6 +665,9 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The longest radio waves that can pass through Earth's atmosphere without being bounced back into space."
     }
   },
   {
@@ -590,6 +692,9 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "A famous ultraviolet spectral line used by astronomers to map the distribution of hydrogen across the cosmos."
     }
   },
   {
@@ -614,6 +719,9 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The specific infrared frequency at which you are glowing right now due to your body heat."
     }
   },
   {
@@ -638,6 +746,9 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The infrared wavelength emitted by metal just before it begins to glow a visible red."
     }
   },
   {
@@ -660,6 +771,9 @@
     },
     "x_coordinates": {
       "length": "20"
+    },
+    "description": {
+      "en-us": "The 21-centimeter radio signal emitted by cold hydrogen that allows us to map the spiral arms of our galaxy."
     }
   },
   {
@@ -681,6 +795,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The vast average distance between the sparse particles of plasma that fill the space between planets."
     }
   },
   {
@@ -702,6 +819,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The average separation between gas and dust particles in the interstellar medium of our galaxy."
     }
   },
   {
@@ -723,6 +843,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The immense distance between the extremely sparse hydrogen ions that bridge the gap between galaxies."
     }
   },
   {
@@ -738,6 +861,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "Even in the highest-quality vacuums created by humans, millions of molecules remain in every cubic centimeter."
     }
   },
   {
@@ -753,6 +879,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The average distance between molecules in the air you breathe is about 10 times their own size."
     }
   },
   {
@@ -768,6 +897,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "Particles in the Earth's solid inner core are packed tightly under pressures millions of times higher than at the surface."
     }
   },
   {
@@ -783,6 +915,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "Ions in the suns core are crushed so closely together that nuclear fusion can ignite."
     }
   },
   {
@@ -798,6 +933,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The thin but incredibly hot plasma of the suns outer atmosphere has vastly more space between ions than the core."
     }
   },
   {
@@ -813,6 +951,9 @@
     },
     "x_coordinates": {
       "length": "60"
+    },
+    "description": {
+      "en-us": "The average distance between neighboring H2O molecules in liquid water at room temperature."
     }
   },
   {
@@ -828,6 +969,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "Neutrons in these collapsed stellar remnants are packed as tightly as they are inside an atomic nucleus."
     }
   },
   {
@@ -843,6 +987,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "A state of degenerate matter where ions are squeezed into a space far smaller than in any normal solid."
     }
   },
   {
@@ -858,6 +1005,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The typical distance between star systems in our galaxy is measured in light-years, making collisions extremely rare."
     }
   },
   {
@@ -873,6 +1023,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The colossal separation between the islands of stars we call galaxies."
     }
   },
   {
@@ -899,6 +1052,9 @@
       "en-us": [
         "hydrogen gas"
       ]
+    },
+    "description": {
+      "en-us": "Molecular hydrogen consists of just two protons and two electrons, making it the simplest and smallest molecule."
     }
   },
   {
@@ -914,6 +1070,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The largest known protein in the human body, serving as a molecular spring in our muscles."
     }
   },
   {
@@ -929,6 +1088,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "A simple sugar that serves as the primary source of energy for most living organisms."
     }
   },
   {
@@ -944,6 +1106,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "A polar molecule essential for all known forms of life, often described as the universal solvent."
     }
   },
   {
@@ -959,6 +1124,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The fundamental building blocks of proteins, which carry out most of the work inside your cells."
     }
   },
   {
@@ -981,6 +1149,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A sophisticated molecular machine that copies DNA with incredible speed and accuracy during cell division."
     }
   },
   {
@@ -1002,6 +1173,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The most abundant protein in mammals, providing structural support to skin, bones, and connective tissues."
     }
   },
   {
@@ -1024,6 +1198,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "A single, long strand of DNA that is tightly coiled and packed into a structure visible under a microscope."
     }
   },
   {
@@ -1048,6 +1225,9 @@
     },
     "x_coordinates": {
       "length": "12"
+    },
+    "description": {
+      "en-us": "DNA that has condensed into compact, X-shaped structures to ensure safe transport into new cells."
     }
   },
   {
@@ -1068,6 +1248,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The ultra-thin oily layer that protects the contents of a cell and controls what enters and exits."
     }
   },
   {
@@ -1089,6 +1272,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "Adeno-associated viruses are among the tiniest known, measuring only about 20 nanometers across."
     }
   },
   {
@@ -1110,6 +1296,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A giant virus discovered in South America that possesses one of the most complex genetic toolkits of any virus."
     }
   },
   {
@@ -1125,6 +1314,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The smallest known organisms capable of growing and reproducing without a host cell."
     }
   },
   {
@@ -1140,6 +1332,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "While technically a single cell, its massive size is due to the large amount of stored yolk."
     }
   },
   {
@@ -1155,6 +1350,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The tiny male reproductive cell is specialized for one thing: swimming to an egg."
     }
   },
   {
@@ -1170,6 +1368,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The female reproductive cell is large enough to be seen with the naked eye, about the size of a grain of sand."
     }
   },
   {
@@ -1185,6 +1386,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The flat, protective cells that form the outermost barrier between your body and the environment."
     }
   },
   {
@@ -1206,6 +1410,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The mobile defenders of your immune system that seek out and destroy invading pathogens."
     }
   },
   {
@@ -1227,6 +1434,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "Ancient bacteria-like structures that now live inside our cells to produce chemical energy."
     }
   },
   {
@@ -1247,6 +1457,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The tiny protein factories found in all living cells, translating genetic code into physical traits."
     }
   },
   {
@@ -1268,6 +1481,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The control center of the cell that houses the vast majority of our genetic information."
     }
   },
   {
@@ -1283,6 +1499,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A single nerve fiber that can stretch from the base of your spine all the way down to your big toe."
     }
   },
   {
@@ -1298,6 +1517,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "Nerve fibers in the largest animal on Earth can reach lengths of over 25 meters."
     }
   },
   {
@@ -1313,6 +1535,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The long, cable-like projections of neurons that carry electrical signals throughout your body."
     }
   },
   {
@@ -1328,6 +1553,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The width of a strand of hair, often used as a standard reference for measuring micro-scale objects."
     }
   },
   {
@@ -1348,6 +1576,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The size of the tiny electronic switches on modern computer chips, which can be just a few nanometers wide."
     }
   },
   {
@@ -1363,6 +1594,9 @@
     },
     "x_coordinates": {
       "length": "60"
+    },
+    "description": {
+      "en-us": "The upper limit of human hearing, roughly 20,000 Hz, which gradually declines as we age."
     }
   },
   {
@@ -1378,6 +1612,9 @@
     },
     "x_coordinates": {
       "length": "60"
+    },
+    "description": {
+      "en-us": "The deep, low-frequency rumble at 20 Hz that marks the bottom edge of human hearing."
     }
   },
   {
@@ -1393,6 +1630,9 @@
     },
     "x_coordinates": {
       "length": "60"
+    },
+    "description": {
+      "en-us": "Pigeons can detect incredibly low-frequency infrasound from distant storms or mountains."
     }
   },
   {
@@ -1408,6 +1648,9 @@
     },
     "x_coordinates": {
       "length": "60"
+    },
+    "description": {
+      "en-us": "These moths have the highest recorded hearing range of any animal, reaching frequencies of 300,000 Hz."
     }
   },
   {
@@ -1423,6 +1666,9 @@
     },
     "x_coordinates": {
       "length": "60"
+    },
+    "description": {
+      "en-us": "The extreme limit of high-frequency sound waves generated in high-tech research laboratories."
     }
   },
   {
@@ -1438,6 +1684,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "High-frequency tremors that are often the first to be felt near the epicenter of an earthquake."
     }
   },
   {
@@ -1453,6 +1702,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "Massive low-frequency waves that can ripple through the entire planet during a powerful earthquake."
     }
   },
   {
@@ -1468,6 +1720,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "Ripples and swells on the ocean surface generated by the friction of wind blowing across the water."
     }
   },
   {
@@ -1483,6 +1738,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "The shorter-wavelength end of the massive sea waves triggered by underwater earthquakes or landslides."
     }
   },
   {
@@ -1498,6 +1756,9 @@
     },
     "x_coordinates": {
       "length": "40"
+    },
+    "description": {
+      "en-us": "Vast waves that can stretch over 100 kilometers from crest to crest as they race across the deep ocean."
     }
   },
   {
@@ -1519,6 +1780,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "Our home planet, the only place in the universe known to harbor life."
     }
   },
   {
@@ -1541,6 +1805,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "Earth's only natural satellite, which stabilizes our planets wobble and creates the tides."
     }
   },
   {
@@ -1556,6 +1823,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The elliptical path the Moon takes around Earth, averaging about 384,400 kilometers away."
     }
   },
   {
@@ -1583,6 +1853,9 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Solar_radius",
       "mass": "https://en.wikipedia.org/wiki/Solar_mass"
+    },
+    "description": {
+      "en-us": "The massive star at the center of our solar system that provides the energy for life on Earth."
     }
   },
   {
@@ -1598,6 +1871,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The average distance from the Earth to the Sun, approximately 150 million kilometers."
     }
   },
   {
@@ -1613,6 +1889,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The fastest orbital path in the solar system, keeping the scorched planet closest to the Sun."
     }
   },
   {
@@ -1634,6 +1913,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A vast path through the outer solar system taken by our solar systems largest planet."
     }
   },
   {
@@ -1655,6 +1937,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The distant track taken by the ringed planet, nearly twice as far from the Sun as Jupiter."
     }
   },
   {
@@ -1675,6 +1960,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A tilted, highly elliptical path that occasionally brings the dwarf planet closer to the Sun than Neptune."
     }
   },
   {
@@ -1690,6 +1978,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A gas giant famous for its elaborate ring system and dozens of moons."
     }
   },
   {
@@ -1705,6 +1996,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The edge of Saturn's spectacular main rings, stretching far beyond the planets surface."
     }
   },
   {
@@ -1720,6 +2014,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "A failed star that is too large to be a planet but too small to ignite nuclear fusion in its core."
     }
   },
   {
@@ -1731,10 +2028,16 @@
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "1e+2"
+      "length": "1e+1"
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "Despite being thousands of kilometers wide, Saturn's rings are incredibly thin, averaging only about 10 meters."
+    },
+    "sources": {
+      "length": "https://science.nasa.gov/mission/cassini/science/rings/"
     }
   },
   {
@@ -1750,6 +2053,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "A solid ball of iron and nickel at the center of the Earth, kept solid by immense pressure despite the heat."
     }
   },
   {
@@ -1765,6 +2071,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "A layer of liquid iron and nickel that generates Earth's protective magnetic field as it flows."
     }
   },
   {
@@ -1780,6 +2089,9 @@
     },
     "x_coordinates": {
       "length": "12"
+    },
+    "description": {
+      "en-us": "The thick layer of hot, solid-ish rock that makes up the bulk of Earth's volume."
     }
   },
   {
@@ -1795,6 +2107,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The thick, lighter layer of rock that forms the continents we live on."
     }
   },
   {
@@ -1810,6 +2125,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The thinner, denser layer of volcanic rock that forms the floor of the worlds oceans."
     }
   },
   {
@@ -1825,6 +2143,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A dwarf planet in the asteroid belt that contains nearly a third of the belts total mass."
     }
   },
   {
@@ -1840,6 +2161,9 @@
     },
     "x_coordinates": {
       "length": "10"
+    },
+    "description": {
+      "en-us": "One of the smallest known asteroids, a tiny space rock only about 2 meters wide."
     }
   },
   {
@@ -1855,6 +2179,9 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "An incredibly dense neutron star that is among the smallest and most energetic stars known."
     }
   },
   {
@@ -1870,6 +2197,9 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "The collapsed core of a massive star, so dense that a teaspoon of its matter would weigh a billion tons."
     }
   },
   {
@@ -1885,6 +2215,9 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "A tiny, hot remnant of a dead star that is part of a unique binary system."
     }
   },
   {
@@ -1900,6 +2233,9 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "A type of star that is cooler and smaller than typical main-sequence stars of the same brightness."
     }
   },
   {
@@ -1915,6 +2251,9 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "An unusually large white dwarf located in a complex symbiotic star system."
     }
   },
   {
@@ -1930,6 +2269,9 @@
     },
     "x_coordinates": {
       "length": "10"
+    },
+    "description": {
+      "en-us": "Small, cool stars that are the most common type in the Milky Way and can live for trillions of years."
     }
   },
   {
@@ -1945,6 +2287,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The most massive stars currently fusing hydrogen, pushing the physical limits of stellar stability."
     }
   },
   {
@@ -1960,6 +2305,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The brightest star in Earth's night sky, also known as the Dog Star."
     }
   },
   {
@@ -1975,6 +2323,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The vast size the Sun will reach as a red giant, likely swallowing the inner planets."
     }
   },
   {
@@ -1990,6 +2341,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "An extreme red hypergiant so large that it could fit nearly 5 billion Suns inside it."
     }
   },
   {
@@ -2005,6 +2359,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The outer edge of the icy region beyond Neptune where Pluto and many other dwarf planets reside."
     }
   },
   {
@@ -2020,6 +2377,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The theoretical outer boundary of our solar system, home to trillions of dormant comets."
     }
   },
   {
@@ -2035,6 +2395,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The beginning of the vast, spherical shell of icy objects that surrounds our solar system."
     }
   },
   {
@@ -2050,6 +2413,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The boundary where the solar wind from our Sun is finally pushed back by the winds of other stars."
     }
   },
   {
@@ -2065,6 +2431,9 @@
     },
     "x_coordinates": {
       "length": "6"
+    },
+    "description": {
+      "en-us": "The current location of the furthest human-made object, now traveling through interstellar space."
     }
   },
   {
@@ -2080,6 +2449,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The distance light travels in one year, approximately 9.46 trillion kilometers."
     }
   },
   {
@@ -2095,6 +2467,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A unit of astronomical distance equal to about 3.26 light-years, used by professionals to map the stars."
     }
   },
   {
@@ -2120,6 +2495,9 @@
       "en-us": [
         "schwarzschild"
       ]
+    },
+    "description": {
+      "en-us": "The theoretical size of a black hole with the same mass as our Sun."
     }
   },
   {
@@ -2135,21 +2513,30 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "The distance to the closest star system to our own, roughly 4.24 light-years away."
     }
   },
   {
-    "id": "to_furthest_known_star_earendel",
+    "id": "to_farthest_known_star_earendel",
     "displayName": {
-      "en-us": "To Furthest Known Star (Earendel)"
+      "en-us": "To Farthest Known Star (Earendel)"
     },
     "category": {
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "1.36e+26"
+      "length": "2.65e+26"
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "The distance to the most distant individual star ever detected, seen as it was 12.9 billion years ago."
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/List_of_most_distant_stars"
     }
   },
   {
@@ -2163,7 +2550,8 @@
     "tags": {
       "en-us": [
         "black hole",
-        "supermassive black hole"
+        "supermassive black hole",
+        "A star"
       ]
     },
     "dimensions": {
@@ -2171,6 +2559,9 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "The distance from Earth to the supermassive black hole at the heart of the Milky Way."
     }
   },
   {
@@ -2192,6 +2583,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "Our home galaxy, a barred spiral containing hundreds of billions of stars."
     }
   },
   {
@@ -2207,6 +2601,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The distance to the two satellite galaxies that orbit our Milky Way."
     }
   },
   {
@@ -2228,6 +2625,9 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "The distance to our neighbor galaxy, which is currently on a collision course with the Milky Way."
     }
   },
   {
@@ -2243,6 +2643,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "One of the largest known galaxies, a supergiant elliptical that dwarfs our Milky Way."
     }
   },
   {
@@ -2258,6 +2661,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A dense, spherical collection of hundreds of thousands of ancient stars held together by gravity."
     }
   },
   {
@@ -2273,6 +2679,41 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The expanding leftovers of a star that exploded in a violent supernova thousands of years ago."
+    }
+  },
+  {
+    "id": "observable_universe",
+    "displayName": {
+      "en-us": "Observable Universe"
+    },
+    "category": {
+      "en-us": "Astronomy"
+    },
+    "dimensions": {
+      "length": "4.40e+26",
+      "duration": "4.35e+17",
+      "mass": "1e+54"
+    },
+    "tags": {
+      "en-us": [
+        "cosmos",
+        "particle horizon"
+      ]
+    },
+    "x_coordinates": {
+      "mass": "0",
+      "length": "0"
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Age_of_the_universe",
+      "mass": "https://en.wikipedia.org/wiki/Observable_universe",
+      "length": "https://en.wikipedia.org/wiki/Observable_universe#:~:text=According%20to%20calculations%2C%20the%20current,))%20will%20never%20reach%20Earth."
+    },
+    "description": {
+      "en-us": "The spherical region that contains all matter we can observe from Earth."
     }
   },
   {
@@ -2280,14 +2721,20 @@
     "displayName": {
       "en-us": "To Cosmic Event Horizon"
     },
+    "description": {
+      "en-us": "The farthest distance from which light emitted now will ever reach us. Objects farther than this can never affect us."
+    },
     "category": {
       "en-us": "Astronomy"
     },
     "dimensions": {
-      "length": "1.54e+26"
+      "length": "1.51e+26"
     },
-    "x_coordinates": {
-      "length": "0"
+    "tags": {
+      "en-us": []
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Cosmological_horizon"
     }
   },
   {
@@ -2303,6 +2750,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The small cluster of galaxies that includes the Milky Way, Andromeda, and about 50 other smaller galaxies."
     }
   },
   {
@@ -2318,6 +2768,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The vast collection of galaxy groups that includes our own Local Group."
     }
   },
   {
@@ -2333,6 +2786,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "A gravitational anomaly in intergalactic space that is pulling our galaxy and others toward it."
     }
   },
   {
@@ -2346,7 +2802,8 @@
     "tags": {
       "en-us": [
         "black hole",
-        "supermassive black hole"
+        "supermassive black hole",
+        "A star"
       ]
     },
     "dimensions": {
@@ -2354,6 +2811,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The supermassive black hole at the center of our galaxy, weighing as much as 4 million Suns."
     }
   },
   {
@@ -2374,6 +2834,9 @@
     },
     "x_coordinates": {
       "length": "10"
+    },
+    "description": {
+      "en-us": "A massive black hole formed by the collision of two others, detected through ripples in spacetime."
     }
   },
   {
@@ -2394,6 +2857,9 @@
     },
     "x_coordinates": {
       "length": "0"
+    },
+    "description": {
+      "en-us": "The most massive black holes known, some weighing as much as 60 billion Suns."
     }
   },
   {
@@ -2414,6 +2880,9 @@
     },
     "x_coordinates": {
       "length": "15"
+    },
+    "description": {
+      "en-us": "The invisible cloud of dark matter that surrounds and outweighs the visible stars of our galaxy."
     }
   },
   {
@@ -2429,6 +2898,9 @@
     },
     "x_coordinates": {
       "length": "30"
+    },
+    "description": {
+      "en-us": "One of the largest structures in the universe, a thread-like bridge of galaxies stretching over a billion light-years."
     }
   },
   {
@@ -2456,6 +2928,9 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The lightest and most abundant element in the universe, fueling the stars through nuclear fusion."
     }
   },
   {
@@ -2484,6 +2959,9 @@
     "x_coordinates": {
       "length": "1.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The second lightest element, first discovered in the Suns atmosphere before being found on Earth."
     }
   },
   {
@@ -2511,6 +2989,9 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft, silvery metal that is the lightest solid element and a critical component of modern batteries."
     }
   },
   {
@@ -2538,6 +3019,9 @@
     "x_coordinates": {
       "length": "0.1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A lightweight, high-melting-point metal often used in aerospace and X-ray windows."
     }
   },
   {
@@ -2565,6 +3049,9 @@
     "x_coordinates": {
       "length": "1.2",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "An essential nutrient for plants and a key ingredient in heat-resistant glassware."
     }
   },
   {
@@ -2592,6 +3079,9 @@
     "x_coordinates": {
       "length": "1.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The versatile building block of life that forms the basis of all organic chemistry."
     }
   },
   {
@@ -2619,6 +3109,9 @@
     "x_coordinates": {
       "length": "1.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The most abundant gas in Earth's atmosphere, essential for protein and DNA."
     }
   },
   {
@@ -2646,6 +3139,9 @@
     "x_coordinates": {
       "length": "1.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The highly reactive gas that fuels cellular respiration and makes up about 21% of our air."
     }
   },
   {
@@ -2673,6 +3169,9 @@
     "x_coordinates": {
       "length": "1.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The most reactive of all chemical elements, commonly used to prevent tooth decay."
     }
   },
   {
@@ -2700,6 +3199,9 @@
     "x_coordinates": {
       "length": "1.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A noble gas famous for its vivid orange-red glow when used in advertising signs."
     }
   },
   {
@@ -2727,6 +3229,9 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft, silvery metal that reacts explosively with water and is a key part of table salt."
     }
   },
   {
@@ -2754,6 +3259,9 @@
     "x_coordinates": {
       "length": "0.1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A lightweight metal that burns with a brilliant white light and is vital for photosynthesis."
     }
   },
   {
@@ -2781,6 +3289,9 @@
     "x_coordinates": {
       "length": "1.2",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The most abundant metal in Earth's crust, prized for its low density and corrosion resistance."
     }
   },
   {
@@ -2808,6 +3319,9 @@
     "x_coordinates": {
       "length": "1.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The backbone of modern electronics and the primary component of sand and glass."
     }
   },
   {
@@ -2835,6 +3349,9 @@
     "x_coordinates": {
       "length": "1.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A highly reactive nonmetal essential for energy transfer in cells and the structure of bones."
     }
   },
   {
@@ -2862,6 +3379,9 @@
     "x_coordinates": {
       "length": "1.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A bright yellow nonmetal often associated with the smell of rotten eggs and volcanic activity."
     }
   },
   {
@@ -2889,6 +3409,9 @@
     "x_coordinates": {
       "length": "1.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A greenish-yellow gas frequently used to disinfect swimming pools and drinking water."
     }
   },
   {
@@ -2916,6 +3439,9 @@
     "x_coordinates": {
       "length": "1.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The most common noble gas on Earth, often used to provide an inert atmosphere for welding."
     }
   },
   {
@@ -2943,6 +3469,9 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft metal that helps regulate fluid balance and nerve signals in the human body."
     }
   },
   {
@@ -2970,6 +3499,9 @@
     "x_coordinates": {
       "length": "0.1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A silvery-white metal that is the primary structural component of teeth, bones, and shells."
     }
   },
   {
@@ -2997,6 +3529,9 @@
     "x_coordinates": {
       "length": "0.2",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A rare-earth metal used in high-strength aluminum alloys for sports equipment and aerospace."
     }
   },
   {
@@ -3024,6 +3559,9 @@
     "x_coordinates": {
       "length": "0.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A strong, lightweight, and corrosion-resistant metal frequently used in médical implants."
     }
   },
   {
@@ -3051,6 +3589,9 @@
     "x_coordinates": {
       "length": "0.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A hard, silvery-grey metal primarily used as an additive to strengthen steel alloys."
     }
   },
   {
@@ -3078,6 +3619,9 @@
     "x_coordinates": {
       "length": "0.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A shiny, hard metal that gives stainless steel its corrosion resistance and rubies their red color."
     }
   },
   {
@@ -3105,6 +3649,9 @@
     "x_coordinates": {
       "length": "0.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "An essential mineral for bone health and a key component in the production of steel."
     }
   },
   {
@@ -3132,6 +3679,9 @@
     "x_coordinates": {
       "length": "0.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The most common element on Earth by mass, forming the core of our planet and the basis of steel."
     }
   },
   {
@@ -3159,6 +3709,9 @@
     "x_coordinates": {
       "length": "0.76",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A magnetic metal used in high-strength alloys and as a blue pigment in ceramics and glass."
     }
   },
   {
@@ -3186,6 +3739,9 @@
     "x_coordinates": {
       "length": "0.88",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A silvery-white metal used in coins, rechargeable batteries, and stainless steel."
     }
   },
   {
@@ -3213,6 +3769,9 @@
     "x_coordinates": {
       "length": "0.98",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A reddish-orange metal prized for its excellent electrical conductivity and use in plumbing."
     }
   },
   {
@@ -3240,6 +3799,9 @@
     "x_coordinates": {
       "length": "1.1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A bluish-white metal used to galvanize steel and as an essential micronutrient for the immune system."
     }
   },
   {
@@ -3267,6 +3829,9 @@
     "x_coordinates": {
       "length": "1.2",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A unique metal that melts in your hand and is widely used in high-speed electronics."
     }
   },
   {
@@ -3294,6 +3859,9 @@
     "x_coordinates": {
       "length": "1.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A semiconductor material that was used to create the first transistors."
     }
   },
   {
@@ -3321,6 +3889,9 @@
     "x_coordinates": {
       "length": "1.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A notorious poison that also has historic uses in pigments and modern uses in semiconductors."
     }
   },
   {
@@ -3348,6 +3919,9 @@
     "x_coordinates": {
       "length": "1.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "An essential trace element that also conducts electricity better when exposed to light."
     }
   },
   {
@@ -3375,6 +3949,9 @@
     "x_coordinates": {
       "length": "1.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The only nonmetallic element that exists as a liquid at room temperature."
     }
   },
   {
@@ -3402,6 +3979,9 @@
     "x_coordinates": {
       "length": "1.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A noble gas used alongside neon in high-efficiency fluorescent lamps and flashbulbs."
     }
   },
   {
@@ -3429,6 +4009,9 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "An extremely reactive soft metal that is used in high-precision atomic clocks."
     }
   },
   {
@@ -3456,6 +4039,9 @@
     "x_coordinates": {
       "length": "0.1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A metal that burns with a brilliant red flame, making it a staple in fireworks and flares."
     }
   },
   {
@@ -3483,6 +4069,9 @@
     "x_coordinates": {
       "length": "0.2",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A silvery-white metal used to create the red phosphors in old television screens."
     }
   },
   {
@@ -3510,6 +4099,9 @@
     "x_coordinates": {
       "length": "0.28",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A highly corrosion-resistant metal used in nuclear reactors and as a diamond-like gemstone."
     }
   },
   {
@@ -3537,6 +4129,9 @@
     "x_coordinates": {
       "length": "0.38",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft, grey metal used in superconducting magnets and high-strength alloys for jet engines."
     }
   },
   {
@@ -3564,6 +4159,9 @@
     "x_coordinates": {
       "length": "0.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A hard metal with a very high melting point, used to strengthen steel for extreme temperatures."
     }
   },
   {
@@ -3590,6 +4188,9 @@
     "x_coordinates": {
       "length": "0.58",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The first element to be produced artificially, widely used as a radioactive tracer in medicine."
     }
   },
   {
@@ -3617,6 +4218,9 @@
     "x_coordinates": {
       "length": "0.68",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A rare transition metal used to harden platinum and as a catalyst in chemical reactions."
     }
   },
   {
@@ -3644,6 +4248,9 @@
     "x_coordinates": {
       "length": "0.8",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "One of the rarest and most valuable precious metals, used primarily in catalytic converters."
     }
   },
   {
@@ -3671,6 +4278,9 @@
     "x_coordinates": {
       "length": "0.9",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A precious metal that can absorb 900 times its own volume in hydrogen gas."
     }
   },
   {
@@ -3698,6 +4308,9 @@
     "x_coordinates": {
       "length": "1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The element with the highest electrical and thermal conductivity of any known metal."
     }
   },
   {
@@ -3725,6 +4338,9 @@
     "x_coordinates": {
       "length": "1.1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft, bluish-white metal historically used in yellow pigments and rechargeable batteries."
     }
   },
   {
@@ -3752,6 +4368,9 @@
     "x_coordinates": {
       "length": "1.2",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A very soft metal used to create the transparent conductive coatings on touchscreens."
     }
   },
   {
@@ -3779,6 +4398,9 @@
     "x_coordinates": {
       "length": "1.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A silvery metal used for centuries to prevent corrosion in tin cans and as a component of bronze."
     }
   },
   {
@@ -3806,6 +4428,9 @@
     "x_coordinates": {
       "length": "1.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A semi-metal that expands as it freezes, often used to harden lead alloys."
     }
   },
   {
@@ -3833,6 +4458,9 @@
     "x_coordinates": {
       "length": "1.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A rare semi-metal used to improve the machinability of steel and in solar panels."
     }
   },
   {
@@ -3860,6 +4488,9 @@
     "x_coordinates": {
       "length": "1.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A lustrous purple-black solid that is essential for the production of thyroid hormones."
     }
   },
   {
@@ -3887,6 +4518,9 @@
     "x_coordinates": {
       "length": "1.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A heavy noble gas used in specialized light sources like IMAX projectors and ion thrusters."
     }
   },
   {
@@ -3915,6 +4549,9 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The most reactive of all metals, used to define the standard length of a second."
     }
   },
   {
@@ -3942,6 +4579,9 @@
     "x_coordinates": {
       "length": "0.08",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft, silvery metal used in barium swallows to image the digestive system with X-rays."
     }
   },
   {
@@ -3969,6 +4609,9 @@
     "x_coordinates": {
       "length": "0.18",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The first of the rare-earth elements, used in battery electrodes and high-quality camera lenses."
     }
   },
   {
@@ -3996,6 +4639,9 @@
     "x_coordinates": {
       "length": "0.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The most abundant rare-earth metal, famous for creating sparks when struck in lighter flints."
     }
   },
   {
@@ -4023,6 +4669,9 @@
     "x_coordinates": {
       "length": "0.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft, silvery metal that gives specialized glass a unique yellow tint."
     }
   },
   {
@@ -4050,6 +4699,9 @@
     "x_coordinates": {
       "length": "0.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A rare-earth metal used to create the strongest known permanent magnets."
     }
   },
   {
@@ -4076,6 +4728,9 @@
     "x_coordinates": {
       "length": "0.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The only rare-earth element with no stable isotopes, often used in nuclear batteries."
     }
   },
   {
@@ -4103,6 +4758,9 @@
     "x_coordinates": {
       "length": "0.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A hard, silvery metal used in high-temperature magnets and as a neutron absorber."
     }
   },
   {
@@ -4130,6 +4788,9 @@
     "x_coordinates": {
       "length": "0.8",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The most reactive rare-earth element, used to create the red and blue phosphors in displays."
     }
   },
   {
@@ -4157,6 +4818,9 @@
     "x_coordinates": {
       "length": "0.9",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A rare-earth metal used as a contrast agent in MRI scans and in specialized nuclear applications."
     }
   },
   {
@@ -4184,6 +4848,9 @@
     "x_coordinates": {
       "length": "1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A silvery-grey metal used in the manufacture of electronic devices and high-efficiency lighting."
     }
   },
   {
@@ -4211,6 +4878,9 @@
     "x_coordinates": {
       "length": "1.1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A metal with high magnetic strength used in laser materials and nuclear reactor control rods."
     }
   },
   {
@@ -4238,6 +4908,9 @@
     "x_coordinates": {
       "length": "1.2",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The element with the highest magnetic strength of any naturally occurring element."
     }
   },
   {
@@ -4265,6 +4938,9 @@
     "x_coordinates": {
       "length": "1.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A pinkish metal used to amplify signals in long-distance fiber optic cables."
     }
   },
   {
@@ -4292,6 +4968,9 @@
     "x_coordinates": {
       "length": "1.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The rarest naturally occurring rare-earth metal, used as a portable X-ray source."
     }
   },
   {
@@ -4319,6 +4998,9 @@
     "x_coordinates": {
       "length": "1.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft, silvery metal used in high-intensity lasers and as a doping agent in fiber optics."
     }
   },
   {
@@ -4346,6 +5028,9 @@
     "x_coordinates": {
       "length": "1.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The densest and hardest of the lanthanide elements, used as a catalyst in petroleum cracking."
     }
   },
   {
@@ -4373,6 +5058,9 @@
     "x_coordinates": {
       "length": "0.32",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A corrosion-resistant metal with a high affinity for neutrons, used in nuclear control rods."
     }
   },
   {
@@ -4400,6 +5088,9 @@
     "x_coordinates": {
       "length": "0.42",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A highly corrosion-resistant metal used to make tiny, high-performance capacitors for cell phones."
     }
   },
   {
@@ -4427,6 +5118,9 @@
     "x_coordinates": {
       "length": "0.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The element with the highest melting point, traditionally used in incandescent light bulb filaments."
     }
   },
   {
@@ -4454,6 +5148,9 @@
     "x_coordinates": {
       "length": "0.62",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "One of the rarest elements in Earth's crust, used in high-temperature superalloys for jet engines."
     }
   },
   {
@@ -4481,6 +5178,9 @@
     "x_coordinates": {
       "length": "0.72",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The densest naturally occurring element, prized for its extreme hardness and durability."
     }
   },
   {
@@ -4508,6 +5208,9 @@
     "x_coordinates": {
       "length": "0.84",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "One of the most corrosion-resistant metals known, often associated with the asteroid that killed the dinosaurs."
     }
   },
   {
@@ -4535,6 +5238,9 @@
     "x_coordinates": {
       "length": "0.92",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A dense, stable, and precious metal used in jewelry and as a vital industrial catalyst."
     }
   },
   {
@@ -4562,6 +5268,9 @@
     "x_coordinates": {
       "length": "1.02",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A noble metal valued for its beauty, rarity, and exceptional resistance to chemical corrosion."
     }
   },
   {
@@ -4589,6 +5298,9 @@
     "x_coordinates": {
       "length": "1.1",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The only metal that exists as a liquid at room temperature, famous for its use in thermometers."
     }
   },
   {
@@ -4616,6 +5328,9 @@
     "x_coordinates": {
       "length": "1.2",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A soft, grey metal that is highly toxic and was once widely used as a rodenticide."
     }
   },
   {
@@ -4643,6 +5358,9 @@
     "x_coordinates": {
       "length": "1.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A dense, soft metal that has been used for millennia but is now known to be a potent neurotoxin."
     }
   },
   {
@@ -4670,6 +5388,9 @@
     "x_coordinates": {
       "length": "1.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A brittle, silvery-pink metal used in stomach medicines and as a non-toxic replacement for lead."
     }
   },
   {
@@ -4696,6 +5417,9 @@
     "x_coordinates": {
       "length": "1.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A highly radioactive and toxic element discovered by Marie Curie and named after her homeland."
     }
   },
   {
@@ -4722,6 +5446,9 @@
     "x_coordinates": {
       "length": "1.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The rarest naturally occurring element on Earth, with less than one gram present in the entire crust at any time."
     }
   },
   {
@@ -4748,6 +5475,9 @@
     "x_coordinates": {
       "length": "1.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A colorless, odorless radioactive gas that can accumulate in buildings and pose a health risk."
     }
   },
   {
@@ -4775,6 +5505,9 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The second rarest naturally occurring element, so unstable that it has no practical uses."
     }
   },
   {
@@ -4801,6 +5534,9 @@
     "x_coordinates": {
       "length": "0.12",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "An intensely radioactive element once used in glow-in-the-dark watch dials before the health risks were known."
     }
   },
   {
@@ -4827,6 +5563,9 @@
     "x_coordinates": {
       "length": "0.22",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A silvery radioactive metal that glows in the dark with an eerie blue light."
     }
   },
   {
@@ -4854,6 +5593,9 @@
     "x_coordinates": {
       "length": "0.3",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A radioactive metal that is three times more abundant than uranium and a potential future nuclear fuel."
     }
   },
   {
@@ -4881,6 +5623,9 @@
     "x_coordinates": {
       "length": "0.4",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A rare, dense, and highly toxic radioactive metal found in uranium ores."
     }
   },
   {
@@ -4908,6 +5653,9 @@
     "x_coordinates": {
       "length": "0.5",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The heaviest naturally occurring element found in significant quantities, vital for nuclear power and weapons."
     }
   },
   {
@@ -4934,6 +5682,9 @@
     "x_coordinates": {
       "length": "0.6",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "The first transuranic element ever produced, formed in nuclear reactors from uranium."
     }
   },
   {
@@ -4960,6 +5711,9 @@
     "x_coordinates": {
       "length": "0.7",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A radioactive element used in nuclear weapons and as a long-term fuel source for space probes."
     }
   },
   {
@@ -4986,6 +5740,9 @@
     "x_coordinates": {
       "length": "0.8",
       "mass": "0"
+    },
+    "description": {
+      "en-us": "A radioactive element used in most household smoke detectors to detect smoke particles."
     }
   },
   {
@@ -5000,7 +5757,7 @@
       "duration": "1.56e-22"
     },
     "x_coordinates": {
-      "duration": "2"
+      "duration": "0"
     },
     "sources": {
       "duration": "https://en.wikipedia.org/wiki/Higgs_boson"
@@ -5010,6 +5767,9 @@
         "quantum",
         "subatomic"
       ]
+    },
+    "description": {
+      "en-us": "The fundamental particle discovered at the Large Hadron Collider that gives mass to other fundamental particles through its interaction with the Higgs field."
     }
   },
   {
@@ -5024,7 +5784,7 @@
       "duration": "2.1969811e-6"
     },
     "x_coordinates": {
-      "duration": "4"
+      "duration": "0"
     },
     "sources": {
       "duration": "https://en.wikipedia.org/wiki/Muon"
@@ -5034,6 +5794,9 @@
         "quantum",
         "subatomic"
       ]
+    },
+    "description": {
+      "en-us": "A \"heavy electron\" that is about 200 times more massive and decays in just a few microseconds."
     }
   },
   {
@@ -5045,10 +5808,21 @@
       "en-us": "Technology"
     },
     "dimensions": {
-      "duration": "1e0"
+      "duration": "1e+0"
     },
     "x_coordinates": {
-      "duration": "10"
+      "duration": "0"
+    },
+    "description": {
+      "en-us": "The base unit of time in the International System of Units, defined by the vibrations of a cesium atom."
+    },
+    "tags": {
+      "en-us": [
+        "measurement"
+      ]
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Second"
     }
   },
   {
@@ -5060,10 +5834,13 @@
       "en-us": "Technology"
     },
     "dimensions": {
-      "duration": "3.6e3"
+      "duration": "3.6e+3"
     },
     "x_coordinates": {
-      "duration": "10"
+      "duration": "0"
+    },
+    "description": {
+      "en-us": "A span of 3,600 seconds, originally based on dividing the day into 24 equal parts."
     }
   },
   {
@@ -5078,7 +5855,10 @@
       "duration": "3.154e+7"
     },
     "x_coordinates": {
-      "duration": "10"
+      "duration": "0"
+    },
+    "description": {
+      "en-us": "The time it takes for Earth to complete one full revolution around the Sun."
     }
   },
   {
@@ -5093,36 +5873,13 @@
       "duration": "4.35e+17"
     },
     "x_coordinates": {
-      "duration": "10"
+      "duration": "0"
     },
     "sources": {
       "duration": "https://en.wikipedia.org/wiki/Age_of_the_universe"
-    }
-  },
-  {
-    "id": "universe",
-    "displayName": {
-      "en-us": "Universe"
     },
-    "category": {
-      "en-us": "Astronomy"
-    },
-    "dimensions": {
-      "length": "1.54e+26",
-      "duration": "4.35e+17",
-      "mass": "1e+54"
-    },
-    "tags": {
-      "en-us": [
-        "cosmos"
-      ]
-    },
-    "x_coordinates": {
-      "mass": "0"
-    },
-    "sources": {
-      "duration": "https://en.wikipedia.org/wiki/Age_of_the_universe",
-      "mass": "https://en.wikipedia.org/wiki/Observable_universe"
+    "description": {
+      "en-us": "The estimated age of the universe, currently calculated to be roughly 13.8 billion years."
     }
   }
 ]

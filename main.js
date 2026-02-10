@@ -10,6 +10,7 @@ let prevDimensionY = "length";
 let prevDimensionX = "none";
 let selectedItem = null;
 let lastMousePos = null;
+let markedYData = null;
 let paddingRight = 50;
 let isInitialLoad = true;
 
@@ -1449,8 +1450,30 @@ d3.json('/data.json').then(data => {
 
   svg.on("click", () => {
     hideInfobox();
+    markedYData = null;
+    updateRuler();
   });
 
+  svg.on("contextmenu", (event) => {
+    if (currentDimensionX === "none") {
+      event.preventDefault();
+      const t = d3.zoomTransform(svg.node());
+      const mouseY = d3.pointer(event, svg.node())[1];
+      const newYScale = t.rescaleY(yScale);
+      markedYData = newYScale.invert(mouseY);
+      updateRuler(event);
+    }
+  });
+
+
+  // Mark Ruler (the persistent mark)
+  const markGroup = svg.append("g")
+    .attr("class", "mark-ruler")
+    .style("pointer-events", "none")
+    .style("display", "none");
+
+  const markLine = markGroup.append("line")
+    .attr("x1", 0).attr("x2", width).attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
   // Cursor Ruler
   const rulerGroup = svg.append("g")
@@ -1462,18 +1485,24 @@ d3.json('/data.json').then(data => {
   const rulerLineX = rulerGroup.append("line")
     .attr("x1", 0).attr("x2", width).attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
-  // Horizontal line (tracks Y position) -> only need if we want crosshair.
-  // Original only had horizontal line (tracking Y).
-  // "2D Crosshair" means horizontal AND vertical lines.
-
   const rulerLineY = rulerGroup.append("line") // This will be the vertical line tracking X
     .attr("y1", 0).attr("y2", height).attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
+
+  // Interval connecting line
+  const intervalLine = rulerGroup.append("line")
+    .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "2,2");
 
   const rulerLabelBackground = rulerGroup.append("rect")
     .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
 
   const rulerLabel = rulerGroup.append("text")
     .attr("fill", "white").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+
+  const intervalLabelBackground = rulerGroup.append("rect")
+    .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
+
+  const intervalLabel = rulerGroup.append("text")
+    .attr("fill", "red").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
 
   function updateRuler(event) {
     if (event) {
@@ -1521,6 +1550,73 @@ d3.json('/data.json').then(data => {
 
     const bbox = rulerLabel.node().getBBox();
     rulerLabelBackground.attr("x", bbox.x - 4).attr("y", bbox.y - 4).attr("width", bbox.width + 8).attr("height", bbox.height + 8);
+
+    // Update Interval if marked
+    if (markedYData !== null && currentDimensionX === "none") {
+      const markY = newYScale(markedYData);
+      markGroup.style("display", null);
+      markLine.attr("y1", markY).attr("y2", markY).attr("x2", width);
+
+      // Hide interval if very close
+      if (Math.abs(mouseY - markY) < 2) {
+        intervalLine.style("display", "none");
+        intervalLabel.style("display", "none");
+        intervalLabelBackground.style("display", "none");
+      } else {
+        intervalLine.style("display", null)
+          .attr("x1", mouseX).attr("x2", mouseX)
+          .attr("y1", markY).attr("y2", mouseY);
+
+        const absDiff = valY - markedYData;
+        const relDiff = valY / markedYData;
+
+        const formatAbsolute = (v) => {
+          const sign = v > 0 ? "+" : "";
+          if (v === 0) return `0 ${getUnit(currentDimensionY)}`;
+          const exp = v.toExponential(1);
+          const [mantissa, exponent] = exp.split('e');
+          return `${sign}${mantissa} × 10^${parseInt(exponent, 10)} ${getUnit(currentDimensionY)}`;
+        };
+
+        const formatRelative = (v) => {
+          const log = Math.log10(v);
+          const exp = Math.floor(log);
+          const coeff = v / Math.pow(10, exp);
+
+          // Close to regular power of 10
+          if (Math.abs(coeff - 1) < 0.001) {
+            return `10^${exp}`;
+          }
+          if (Math.abs(coeff - 10) < 0.001) {
+            return `10^${exp + 1}`;
+          }
+
+          return `${coeff.toFixed(1)} × 10^${exp}`;
+        };
+
+        const relText = `x${formatRelative(relDiff)}`;
+        const absText = formatAbsolute(absDiff);
+
+        intervalLabel.style("display", null)
+          .attr("x", mouseX + 15)
+          .attr("y", (mouseY + markY) / 2)
+          .selectAll("tspan")
+          .data([relText, absText])
+          .join("tspan")
+          .attr("x", mouseX + 15)
+          .attr("dy", (d, i) => i === 0 ? 0 : "1.2em")
+          .text(d => d);
+
+        const ibox = intervalLabel.node().getBBox();
+        intervalLabelBackground.style("display", null)
+          .attr("x", ibox.x - 4).attr("y", ibox.y - 4).attr("width", ibox.width + 8).attr("height", ibox.height + 8);
+      }
+    } else {
+      markGroup.style("display", "none");
+      intervalLine.style("display", "none");
+      intervalLabel.style("display", "none");
+      intervalLabelBackground.style("display", "none");
+    }
   }
 
   svg.on("mousemove", (event) => {
