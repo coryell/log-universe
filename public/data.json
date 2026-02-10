@@ -1,11 +1,64 @@
 [
   {
-    "id": "one_meter",
+    "id": "si_units",
     "displayName": {
-      "en-us": "1 Meter"
+      "en-us": "SI Units"
     },
     "description": {
-      "en-us": "The base unit of length in the International System of Units (SI). Defined as the length light travels in vacuum in 1 / 299,792,458 seconds."
+      "en-us": "The base units of the International System of Units (SI), our best effort to redeem historical units of measurement using fancy physical constants."
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "length": "1e+0",
+      "mass": "1e+0",
+      "duration": "1e+0"
+    },
+    "tags": {
+      "en-us": [
+        "measurement unit"
+      ]
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Metre",
+      "mass": "https://en.wikipedia.org/wiki/Kilogram",
+      "duration": "https://en.wikipedia.org/wiki/Second"
+    }
+  },
+  {
+    "id": "kilogram",
+    "displayName": {
+      "en-us": "Kilogram"
+    },
+    "description": {
+      "en-us": "The base unit of mass in the International System of Units (SI), defined by the vibrations of a cesium atom."
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "mass": "1e+0"
+    },
+    "tags": {
+      "en-us": [
+        "measurement unit"
+      ]
+    },
+    "x_coordinates": {
+      "mass": "0"
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Kilogram"
+    }
+  },
+  {
+    "id": "meter",
+    "displayName": {
+      "en-us": "Meter"
+    },
+    "description": {
+      "en-us": "The base unit of length in the International System of Units (SI), defined as the length light travels in vacuum in 1 / 299,792,458 seconds."
     },
     "category": {
       "en-us": "Technology"
@@ -15,7 +68,7 @@
     },
     "tags": {
       "en-us": [
-        "measurement"
+        "measurement unit"
       ]
     },
     "x_coordinates": {
@@ -23,6 +76,32 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Metre"
+    }
+  },
+  {
+    "id": "second",
+    "displayName": {
+      "en-us": "Second"
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "duration": "1e+0"
+    },
+    "x_coordinates": {
+      "duration": "0"
+    },
+    "description": {
+      "en-us": "The base unit of time in the International System of Units (SI), defined by the vibrations of a cesium atom."
+    },
+    "tags": {
+      "en-us": [
+        "measurement unit"
+      ]
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Second"
     }
   },
   {
@@ -320,7 +399,8 @@
       ]
     },
     "dimensions": {
-      "length": "5e-22"
+      "length": "5.0e-22",
+      "duration": "1.7e-30"
     },
     "x_coordinates": {
       "length": "20"
@@ -329,7 +409,8 @@
       "en-us": "The record-holding gamma ray from space, detected by the Large High Altitude Air Shower Observatory."
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray"
+      "length": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray",
+      "duration": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray"
     }
   },
   {
@@ -5800,35 +5881,9 @@
     }
   },
   {
-    "id": "one_second",
-    "displayName": {
-      "en-us": "1 Second"
-    },
-    "category": {
-      "en-us": "Technology"
-    },
-    "dimensions": {
-      "duration": "1e+0"
-    },
-    "x_coordinates": {
-      "duration": "0"
-    },
-    "description": {
-      "en-us": "The base unit of time in the International System of Units, defined by the vibrations of a cesium atom."
-    },
-    "tags": {
-      "en-us": [
-        "measurement"
-      ]
-    },
-    "sources": {
-      "duration": "https://en.wikipedia.org/wiki/Second"
-    }
-  },
-  {
     "id": "one_hour",
     "displayName": {
-      "en-us": "1 Hour"
+      "en-us": "Hour"
     },
     "category": {
       "en-us": "Technology"
@@ -5841,12 +5896,17 @@
     },
     "description": {
       "en-us": "A span of 3,600 seconds, originally based on dividing the day into 24 equal parts."
+    },
+    "tags": {
+      "en-us": [
+        "measurement unit"
+      ]
     }
   },
   {
     "id": "one_year",
     "displayName": {
-      "en-us": "1 Year"
+      "en-us": "Year"
     },
     "category": {
       "en-us": "Astronomy"
@@ -5859,6 +5919,11 @@
     },
     "description": {
       "en-us": "The time it takes for Earth to complete one full revolution around the Sun."
+    },
+    "tags": {
+      "en-us": [
+        "measurement unit"
+      ]
     }
   },
   {
