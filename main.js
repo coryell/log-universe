@@ -203,10 +203,39 @@ const gCombined = dataLayerOuter.append('g')
   .attr("class", "combined-layer")
   .attr("mask", "url(#fade-mask-bottom)");
 
-d3.json('/data.json').then(data => {
-  // Data Processing
+d3.json('/data.json').then(rawData => {
+  // 1. Validation and Filtering (Once on load)
+  const dimensionRegex = /^[<>]?[1-9](\.\d+)?[eE][-+]?\d+$/;
+  const data = rawData.filter(d => {
+    // Validate Dimensions
+    if (!d.dimensions) {
+      d.dimensions = {};
+    } else {
+      for (const [dim, val] of Object.entries(d.dimensions)) {
+        if (typeof val !== 'string' || !dimensionRegex.test(val)) {
+          console.error(`Skipping data point "${d.id || d.displayName?.['en-us'] || 'Unknown'}": Invalid dimension "${dim}" format ("${val}"). Expected scientific notation like "1.23e+4".`);
+          return false;
+        }
+      }
+    }
+
+    // Validate X Coordinates
+    if (!d.x_coordinates) {
+      d.x_coordinates = {};
+    } else {
+      for (const [key, val] of Object.entries(d.x_coordinates)) {
+        if (typeof val !== 'string' || val.trim() === '' || isNaN(Number(val))) {
+          console.error(`Skipping data point "${d.id || d.displayName?.['en-us'] || 'Unknown'}": Invalid x_coordinate "${key}" format ("${val}"). Expected a numerical string.`);
+          return false;
+        }
+      }
+    }
+
+    return true;
+  });
+
+  // 2. Data Processing (Numerical Coercion)
   data.forEach(d => {
-    if (!d.dimensions) d.dimensions = {};
     // Store original strings for exact comparison
     d._orig_dimensions = { ...d.dimensions };
 
@@ -215,10 +244,6 @@ d3.json('/data.json').then(data => {
 
     // Numerical coersion for calculations
     for (const key in d.x_coordinates) d.x_coordinates[key] = +d.x_coordinates[key];
-
-    // Fallbacks
-    // if (d.x_coordinates.length === undefined) d.x_coordinates.length = 0;
-    // if (d.x_coordinates.mass === undefined) d.x_coordinates.mass = 0;
   });
 
   const categories = [
