@@ -249,6 +249,12 @@
             pointer-events: none;
             opacity: 0.5;
         }
+
+        input.invalid {
+            border-color: #dc3545 !important;
+            background-color: rgba(220, 53, 69, 0.1) !important;
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+        }
     </style>
 </head>
 
@@ -301,6 +307,7 @@
     <script>
         let tableData = [];
         let draggedIndex = null;
+        const dimensionRegex = /^[<>]?[1-9](\.\d+)?[eE][-+]?\d+$/;
 
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
@@ -378,16 +385,16 @@
                     <td><input type="text" value="${escapeHTML(getVal(row, `displayName.${lang}`))}" onchange="updateData(${index}, 'displayName.${lang}', this.value)"></td>
                     <td><input type="text" value="${escapeHTML(getVal(row, `description.${lang}`))}" onchange="updateData(${index}, 'description.${lang}', this.value)"></td>
                     <td><input type="text" value="${escapeHTML(getVal(row, `category.${lang}`))}" onchange="updateData(${index}, 'category.${lang}', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'dimensions.length'))}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="dimensions.length" value="${escapeHTML(getVal(row, 'dimensions.length'))}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.length'))}" onchange="updateData(${index}, 'sources.length', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'dimensions.mass'))}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="dimensions.mass" value="${escapeHTML(getVal(row, 'dimensions.mass'))}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.mass'))}" onchange="updateData(${index}, 'sources.mass', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'dimensions.duration'))}" onchange="updateData(${index}, 'dimensions.duration', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="dimensions.duration" value="${escapeHTML(getVal(row, 'dimensions.duration'))}" onchange="updateData(${index}, 'dimensions.duration', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.duration'))}" onchange="updateData(${index}, 'sources.duration', this.value)"></td>
                     <td><input type="text" value="${escapeHTML(tagsToString(getVal(row, `tags.${lang}`, [])))}" onchange="updateTags(${index}, 'tags.${lang}', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'x_coordinates.length'))}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'x_coordinates.mass'))}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
-                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'x_coordinates.duration'))}" onchange="updateX(${index}, 'x_coordinates.duration', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="x_coordinates.length" value="${escapeHTML(getVal(row, 'x_coordinates.length'))}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="x_coordinates.mass" value="${escapeHTML(getVal(row, 'x_coordinates.mass'))}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="x_coordinates.duration" value="${escapeHTML(getVal(row, 'x_coordinates.duration'))}" onchange="updateX(${index}, 'x_coordinates.duration', this.value)"></td>
                     <td style="text-align: center; vertical-align: middle;"><button class="remove-btn" onclick="deleteRow(${index})" title="Remove">×</button></td>
                 `;
                 const handle = tr.querySelector('.drag-handle');
@@ -620,8 +627,39 @@
                 document.activeElement.blur();
             }
 
-            // Small delay to allow change event to propagate if needed (though synch dispatch should work)
+            // Small delay to allow change event to propagate 
             await new Promise(r => setTimeout(r, 50));
+
+            // Clear previous errors
+            document.querySelectorAll('input.invalid').forEach(el => el.classList.remove('invalid'));
+
+            // Validation
+            for (let i = 0; i < tableData.length; i++) {
+                const row = tableData[i];
+                const tr = document.querySelector(`tr[data-index="${i}"]`);
+                const id = row.id || row.displayName?.['en-us'] || `Row ${i + 1}`;
+
+                // Validate dimensions
+                const dims = ['length', 'mass', 'duration'];
+                for (const dim of dims) {
+                    const val = row.dimensions?.[dim];
+                    if (val && (typeof val !== 'string' || !dimensionRegex.test(val))) {
+                        tr.querySelector(`input[data-field="dimensions.${dim}"]`).classList.add('invalid');
+                        showError(`Cannot save: ${id} -> Dim: ${dim.charAt(0).toUpperCase() + dim.slice(1)} is not in scientific notation`);
+                        return;
+                    }
+                }
+
+                // Validate x_coordinates
+                for (const dim of dims) {
+                    const val = row.x_coordinates?.[dim];
+                    if (val && (typeof val !== 'string' || val.trim() === '' || isNaN(Number(val)))) {
+                        tr.querySelector(`input[data-field="x_coordinates.${dim}"]`).classList.add('invalid');
+                        showError(`Cannot save: ${id} -> X: ${dim.charAt(0).toUpperCase() + dim.slice(1)} is not a number`);
+                        return;
+                    }
+                }
+            }
 
             const btn = document.getElementById('saveBtn');
             const originalText = btn.innerText;
@@ -690,6 +728,10 @@
             setTimeout(() => {
                 toast.className = 'toast';
             }, 3000);
+        }
+
+        function showError(msg) {
+            showToast(msg, true);
         }
 
         // Shortcuts
