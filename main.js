@@ -23,6 +23,9 @@ const getUnit = (dim) => {
 
 const parseValue = (val) => {
   if (val === undefined || val === null) return { value: NaN, type: "equal" };
+  if (Array.isArray(val)) {
+    return { value: Number(val[0]), value2: Number(val[1]), type: "range" };
+  }
   const s = String(val);
   if (s.startsWith(">")) return { value: Number(s.slice(1)), type: "greater" };
   if (s.startsWith("<")) return { value: Number(s.slice(1)), type: "less" };
@@ -212,8 +215,19 @@ d3.json('/data.json').then(rawData => {
       d.dimensions = {};
     } else {
       for (const [dim, val] of Object.entries(d.dimensions)) {
-        if (typeof val !== 'string' || !dimensionRegex.test(val)) {
-          console.error(`Skipping data point "${d.id || d.displayName?.['en-us'] || 'Unknown'}": Invalid dimension "${dim}" format ("${val}"). Expected scientific notation like "1.23e+4".`);
+        if (Array.isArray(val)) {
+          if (val.length !== 2 || !val.every(v => typeof v === 'string' && /^[1-9](\.\d+)?[eE][-+]?\d+$/.test(v))) {
+            const reason = val.some(v => typeof v === 'string' && v.startsWith('-'))
+              ? "negative quantities aren't allowed"
+              : "Expected exactly 2 strictly scientific notation strings";
+            console.error(`Skipping data point "${d.id || d.displayName?.['en-us'] || 'Unknown'}": Invalid dimension array "${dim}". ${reason}.`);
+            return false;
+          }
+        } else if (typeof val !== 'string' || !dimensionRegex.test(val)) {
+          const reason = (typeof val === 'string' && val.startsWith('-'))
+            ? "negative quantities aren't allowed"
+            : `Expected scientific notation like "1.23e+4"`;
+          console.error(`Skipping data point "${d.id || d.displayName?.['en-us'] || 'Unknown'}": Invalid dimension "${dim}" format ("${val}"). ${reason}.`);
           return false;
         }
       }
@@ -306,9 +320,9 @@ d3.json('/data.json').then(rawData => {
       allGroups.selectAll('circle')
         .attr('r', currentRadius);
 
-      // Moved label positioning to updateInequalityGradients
-      updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
-      updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
+      // Moved label positioning to updateItemAnnotations
+      updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, newYScale);
+      updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, newYScale);
 
       if (event.sourceEvent) {
         updateRuler(event.sourceEvent);
@@ -568,8 +582,8 @@ d3.json('/data.json').then(rawData => {
     const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
     const currentFS = Math.min(12, currentDecadeHeight);
     const currentRadius = currentFS / 2.4;
-    updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
-    updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
+    updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale));
+    updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale));
   }
 
   function unhighlightItems() {
@@ -581,47 +595,195 @@ d3.json('/data.json').then(rawData => {
     const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
     const currentFS = Math.min(12, currentDecadeHeight);
     const currentRadius = currentFS / 2.4;
-    updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
-    updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
+    updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale));
+    updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale));
   }
 
   const getFilteredData = (dataList) => {
-    if (currentDimensionX === "none" || currentDimensionX === currentDimensionY) {
-      // Show items that have the Y dimension AND valid x_coordinates for that dimension
+    if (currentDimensionX === "none") {
+      // 1D Mode: Show items that have the Y dimension AND valid x_coordinates for that dimension
       return dataList.filter(d => d.dimensions[currentDimensionY] !== undefined && d.x_coordinates[currentDimensionY] !== undefined);
     } else {
-      // 2D behavior: Show items that have BOTH dimensions
-      return dataList.filter(d =>
-        d.dimensions[currentDimensionY] !== undefined &&
-        d.dimensions[currentDimensionX] !== undefined
-      );
+      // 2D Mode: Strictly no ranges. Exclude if either X or Y is an array.
+      return dataList.filter(d => {
+        const valY = d.dimensions[currentDimensionY];
+        const valX = d.dimensions[currentDimensionX];
+        return (
+          valY !== undefined && !Array.isArray(valY) &&
+          valX !== undefined && !Array.isArray(valX)
+        );
+      });
     }
   };
 
-  const updateInequalityGradients = (selection, radius, fs) => {
+  const renderInequalityAnnotation = (group, dataItem, radius, fs, angle, textWidth) => {
+    const inequRect = group.select('.inequality-rect');
+    const label = group.select('text.label');
+    const bg = group.select('rect.label-bg');
+    const hit = group.select('rect.hit-area');
+    const circle = group.select('circle');
+
+    // Determine label position based on gradient direction
+    const isRightward = Math.abs(angle) < 90;
+
+    if (isRightward) {
+      label.attr('x', -10).style('text-anchor', 'end');
+      bg.attr('x', -textWidth - 10);
+      hit.attr('x', -radius - 10 - textWidth);
+    } else {
+      label.attr('x', 10).style('text-anchor', 'start');
+      bg.attr('x', 8);
+      hit.attr('x', -radius - 5);
+    }
+
+    // Shared layout
+    label.style('font-size', `${fs}px`)
+      .style('font-weight', 'bold')
+      .attr('y', 0)
+      .attr('transform', null);
+
+    bg.attr('y', -fs * 0.7)
+      .attr('height', fs * 1.5)
+      .attr('width', textWidth)
+      .attr('transform', null);
+
+    hit.attr('y', -fs)
+      .attr('height', fs * 2)
+      .attr('width', radius + 20 + textWidth);
+
+    const isHighlighted = group.classed('highlighted');
+    const cat = getLocalized(dataItem.category, LANGUAGE);
+    const color = isHighlighted ? 'white' : colorScale(cat);
+    const thickness = (2 * radius) + (isHighlighted ? 2 : 0);
+    const length = 20 * radius;
+
+    inequRect
+      .attr('x', 0)
+      .attr('y', -thickness / 2)
+      .attr('width', length)
+      .attr('height', thickness)
+      .attr('fill', color)
+      .attr('mask', 'url(#ineq-fade)')
+      .attr('transform', `rotate(${angle})`)
+      .attr('opacity', 1);
+
+    group.select('.range-line').attr('opacity', 0);
+    circle.attr('opacity', 1);
+  };
+
+  const renderRangeAnnotation = (group, dataItem, radius, fs, yInfo, currentYScale, textWidth) => {
+    const rangeLine = group.select('.range-line');
+    const label = group.select('text.label');
+    const bg = group.select('rect.label-bg');
+    const hit = group.select('rect.hit-area');
+
+    const isHighlighted = group.classed('highlighted');
+    const cat = getLocalized(dataItem.category, LANGUAGE);
+    const color = isHighlighted ? 'white' : colorScale(cat);
+    const thickness = (0.75 * radius);
+
+    const y1 = currentYScale(yInfo.value);
+    const y2 = currentYScale(yInfo.value2);
+    const y2_rel = y2 - y1;
+    const yMid_rel = y2_rel / 2;
+
+    rangeLine
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', 0).attr('y2', y2_rel)
+      .attr('stroke', color)
+      .attr('stroke-width', thickness)
+      .attr('stroke-linecap', 'round')
+      .attr('opacity', 1);
+
+    const rangeFS = fs * 1.75;
+    const textLen = (getLocalized(dataItem.displayName, LANGUAGE) || "").length;
+    const charWidth = rangeFS * 0.6;
+    const rangeTextWidth = textLen * charWidth + 6;
+    const labelX = -thickness - 20;
+    const labelY = yMid_rel;
+
+    label
+      .style('font-size', `${rangeFS}px`)
+      .style('font-weight', 'bold')
+      .attr('x', labelX)
+      .attr('y', labelY)
+      .attr('transform', `rotate(-90, ${labelX}, ${labelY})`)
+      .style('text-anchor', 'middle');
+
+    bg
+      .attr('x', labelX - rangeTextWidth / 2)
+      .attr('y', labelY - rangeFS * 0.75)
+      .attr('width', rangeTextWidth)
+      .attr('height', rangeFS * 1.5)
+      .attr('transform', `rotate(-90, ${labelX}, ${labelY})`);
+
+    hit
+      .attr('x', labelX - rangeFS)
+      .attr('y', Math.min(0, y2_rel) - rangeFS)
+      .attr('width', rangeFS * 2 + Math.abs(labelX))
+      .attr('height', Math.abs(y2_rel) + rangeFS * 2);
+
+    group.select('.inequality-rect').attr('opacity', 0);
+    group.select('circle').attr('opacity', 0);
+  };
+
+  const renderDefaultAnnotation = (group, dataItem, radius, fs, textWidth) => {
+    const label = group.select('text.label');
+    const bg = group.select('rect.label-bg');
+    const hit = group.select('rect.hit-area');
+    const circle = group.select('circle');
+
+    label.attr('x', 10)
+      .attr('y', 0)
+      .style('text-anchor', 'start')
+      .style('font-size', `${fs}px`)
+      .style('font-weight', 'bold')
+      .attr('transform', null);
+
+    bg.attr('x', 8)
+      .attr('y', -fs * 0.7)
+      .attr('height', fs * 1.5)
+      .attr('width', textWidth)
+      .attr('transform', null);
+
+    hit.attr('x', -radius - 5)
+      .attr('y', -fs)
+      .attr('height', fs * 2)
+      .attr('width', radius + 20 + textWidth);
+
+    group.select('.inequality-rect').attr('opacity', 0);
+    group.select('.range-line').attr('opacity', 0);
+    circle.attr('opacity', 1);
+  };
+
+  const updateItemAnnotations = (selection, radius, fs, currentYScale) => {
     selection.each(function (d) {
       const group = d3.select(this);
-      const inequRect = group.select('.inequality-rect');
-      const label = group.select('text.label');
-      const bg = group.select('rect.label-bg');
-      const hit = group.select('rect.hit-area');
       const dataItem = d._members ? d._members[0] : d;
+      const xInfo = currentDimensionX === "none" ? { type: "equal" } : parseValue(dataItem._orig_dimensions[currentDimensionX]);
+      const yInfo = parseValue(dataItem._orig_dimensions[currentDimensionY]);
 
-      const xInfo = currentDimensionX === "none" ? { type: "equal" } : parseValue(dataItem.dimensions[currentDimensionX]);
-      const yInfo = parseValue(dataItem.dimensions[currentDimensionY]);
+      const text = getLocalized(d.displayName || (d._members && d._members[0].displayName), LANGUAGE);
+      const textLen = text ? text.length : 0;
+      const charWidth = fs * 0.6;
+      const textWidth = textLen * charWidth + 6;
 
       let angle = 0;
-      let showInequality = true;
+      let showInequality = false;
+      let showRange = false;
 
-      if (xInfo.type === "equal" && yInfo.type === "equal") {
-        showInequality = false;
+      if (currentDimensionX === "none") {
+        // 1D Mode
+        if (yInfo.type === "range") {
+          showRange = true;
+        } else if (yInfo.type !== "equal") {
+          showInequality = true;
+          angle = (yInfo.type === "greater") ? -90 : 90;
+        }
       } else {
-        if (currentDimensionX === "none") {
-          if (yInfo.type === "greater") angle = -90; // Up
-          else if (yInfo.type === "less") angle = 90; // Down
-          else showInequality = false;
-        } else {
-          // 2D logic
+        // 2D Mode: Strictly no ranges. Only show inequalities if both aren't ranges.
+        showRange = false;
+        if (xInfo.type !== "range" && yInfo.type !== "range") {
           if (xInfo.type === "greater" && yInfo.type === "greater") angle = -45;
           else if (xInfo.type === "less" && yInfo.type === "greater") angle = -135;
           else if (xInfo.type === "greater" && yInfo.type === "less") angle = 45;
@@ -630,57 +792,19 @@ d3.json('/data.json').then(rawData => {
           else if (xInfo.type === "less") angle = 180;
           else if (yInfo.type === "greater") angle = -90;
           else if (yInfo.type === "less") angle = 90;
-          else showInequality = false;
+
+          if (angle !== 0 || (angle === 0 && (xInfo.type === "greater" || xInfo.type === "less"))) {
+            showInequality = true;
+          }
         }
       }
 
-      const text = getLocalized(d.displayName || (d._members && d._members[0].displayName), LANGUAGE);
-      const textLen = text ? text.length : 0;
-      const charWidth = fs * 0.6;
-      const textWidth = textLen * charWidth + 6;
-
-      // Determine label position based on gradient direction
-      // If gradient points rightward (abs(angle) < 90), move label to left
-      const isRightward = showInequality && Math.abs(angle) < 90;
-
-      if (isRightward) {
-        label.attr('x', -10).style('text-anchor', 'end');
-        bg.attr('x', -textWidth - 10);
-        hit.attr('x', -radius - 10 - textWidth);
+      if (showRange && currentYScale) {
+        renderRangeAnnotation(group, dataItem, radius, fs, yInfo, currentYScale, textWidth);
+      } else if (showInequality) {
+        renderInequalityAnnotation(group, dataItem, radius, fs, angle, textWidth);
       } else {
-        label.attr('x', 10).style('text-anchor', 'start');
-        bg.attr('x', 8);
-        hit.attr('x', -radius - 5);
-      }
-
-      // Shared updates
-      label.style('font-size', `${fs}px`);
-      bg.attr('y', -fs * 0.7)
-        .attr('height', fs * 1.5)
-        .attr('width', textWidth);
-
-      hit.attr('y', -fs)
-        .attr('height', fs * 2)
-        .attr('width', radius + 20 + textLen * fs * 0.6);
-
-      if (showInequality) {
-        const isHighlighted = group.classed('highlighted');
-        const cat = getLocalized(dataItem.category, LANGUAGE);
-        const color = isHighlighted ? 'white' : colorScale(cat);
-        const thickness = (2 * radius) + (isHighlighted ? 2 : 0);
-        const length = 20 * radius;
-
-        inequRect
-          .attr('x', 0)
-          .attr('y', -thickness / 2)
-          .attr('width', length)
-          .attr('height', thickness)
-          .attr('fill', color)
-          .attr('mask', 'url(#ineq-fade)')
-          .attr('transform', `rotate(${angle})`)
-          .attr('opacity', 1);
-      } else {
-        inequRect.attr('opacity', 0);
+        renderDefaultAnnotation(group, dataItem, radius, fs, textWidth);
       }
     });
   };
@@ -826,13 +950,17 @@ d3.json('/data.json').then(rawData => {
           grp.append('rect').attr('class', 'inequality-rect')
             .style('cursor', 'pointer')
             .attr('opacity', 0); // Hidden by default
+          grp.append('line').attr('class', 'range-line')
+            .style('cursor', 'pointer')
+            .attr('opacity', 0);
           grp.append('circle').attr('cx', 0).attr('cy', 0)
             .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE)));
           grp.append('text').attr('class', 'label')
             .attr('x', 10).attr('y', 0).attr('dy', '.35em')
             .text(d => getLocalized(d.displayName, LANGUAGE))
             .attr('fill', d => colorScale(getLocalized(d.category, LANGUAGE)))
-            .style('font-family', 'monospace');
+            .style('font-family', 'monospace')
+            .style('font-weight', 'bold');
 
           // Attach listeners
           grp.on("click", (event, d) => {
@@ -907,8 +1035,8 @@ d3.json('/data.json').then(rawData => {
         const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
         const currentFS = Math.min(12, currentDecadeHeight);
         const currentRadius = currentFS / 2.4;
-        updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
-        updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
+        updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale));
+        updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale));
       }, 1100);
     } else {
       applyGrouping();
@@ -916,8 +1044,8 @@ d3.json('/data.json').then(rawData => {
       const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
       const currentFS = Math.min(12, currentDecadeHeight);
       const currentRadius = currentFS / 2.4;
-      updateInequalityGradients(g.selectAll('.item-group'), currentRadius, currentFS);
-      updateInequalityGradients(gCombined.selectAll('.item-group'), currentRadius, currentFS);
+      updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale));
+      updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale));
     }
 
     isInitialLoad = false;
@@ -1113,7 +1241,10 @@ d3.json('/data.json').then(rawData => {
     const matchItem = data.find(d => d.id === result.id);
     if (!matchItem) return;
 
-    const valY = getDimensionValueY(matchItem);
+    const rawDimY = matchItem.dimensions[currentDimensionY];
+    const valY = Array.isArray(rawDimY)
+      ? Math.sqrt(Number(rawDimY[0]) * Number(rawDimY[1]))
+      : getDimensionValueY(matchItem);
     const domainY = yScale.domain();
     const totalDecades = Math.log10(domainY[1]) - Math.log10(domainY[0]);
     const availableHeight = height - 100;
@@ -1133,7 +1264,7 @@ d3.json('/data.json').then(rawData => {
     const neighbors = filteredData.filter(d => Math.abs(getDimensionValueY(d) - valY) < valY * 2);
 
     let minDiff = Infinity;
-    const y1 = yScale(getDimensionValueY(matchItem));
+    const y1 = yScale(valY);
 
     neighbors.forEach(p => {
       if (p.id === matchItem.id) return;
@@ -1148,10 +1279,21 @@ d3.json('/data.json').then(rawData => {
       targetScale = Math.min(targetScale, maxScaleForNeighbor);
     }
 
+    // Constraint for ranges: Ensure both bounds fit in view
+    if (Array.isArray(rawDimY)) {
+      const y1_raw = yScale(Number(rawDimY[0]));
+      const y2_raw = yScale(Number(rawDimY[1]));
+      const deltaY = Math.abs(y1_raw - y2_raw);
+      if (deltaY > 0) {
+        const rangeScale = (availableHeight * 0.7) / deltaY;
+        targetScale = Math.min(targetScale, rangeScale);
+      }
+    }
+
     targetScale = Math.max(1, Math.min(targetScale, 1000));
 
     const x = xScale(getDimensionValueX(matchItem));
-    const y = yScale(getDimensionValueY(matchItem));
+    const y = yScale(valY);
 
     const targetTransform = d3.zoomIdentity
       .translate(width / 2, height / 2)
@@ -1292,19 +1434,27 @@ d3.json('/data.json').then(rawData => {
 
       const formatDimension = (val) => {
         if (val === undefined || val === null) return "";
-        let s = val.toString().toLowerCase();
-        let prefix = "";
-        if (s.startsWith('>') || s.startsWith('<')) {
-          prefix = s[0] + " ";
-          s = s.slice(1);
+
+        const formatSingle = (v) => {
+          let s = v.toString().toLowerCase();
+          let prefix = "";
+          if (s.startsWith('>') || s.startsWith('<')) {
+            prefix = s[0] + " ";
+            s = s.slice(1);
+          }
+          if (s.includes('e')) {
+            const parts = s.split('e');
+            const coeff = parts[0];
+            const exp = parseInt(parts[1], 10);
+            return `${prefix}${coeff} × 10^${exp}`;
+          }
+          return `${prefix}${s}`;
+        };
+
+        if (Array.isArray(val)) {
+          return `${formatSingle(val[0])} – ${formatSingle(val[1])}`;
         }
-        if (s.includes('e')) {
-          const parts = s.split('e');
-          const coeff = parts[0];
-          const exp = parseInt(parts[1], 10);
-          return `${prefix}${coeff} × 10^${exp}`;
-        }
-        return `${prefix}${s}`;
+        return formatSingle(val);
       };
 
       const addDimRow = (dim) => {
@@ -1317,7 +1467,9 @@ d3.json('/data.json').then(rawData => {
 
           let sourceLink = "";
           if (member.sources && member.sources[dim]) {
-            sourceLink = `<button class="copy-btn" onclick="window.open('${member.sources[dim]}', '_blank')">Source</button>`;
+            const s = member.sources[dim];
+            const link = Array.isArray(s) ? s[0] : s;
+            sourceLink = `<button class="copy-btn" onclick="window.open('${link}', '_blank')">Source</button>`;
           }
 
           return `<div class="infobox-row"><span class="infobox-label">${label}:</span>${txt}<button class="copy-btn" data-copy-text="${txt}">Copy</button>${sourceLink}</div>`;

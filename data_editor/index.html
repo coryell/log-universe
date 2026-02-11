@@ -308,6 +308,7 @@
         let tableData = [];
         let draggedIndex = null;
         const dimensionRegex = /^[<>]?[1-9](\.\d+)?[eE][-+]?\d+$/;
+        const strictDimensionRegex = /^[1-9](\.\d+)?[eE][-+]?\d+$/;
 
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
@@ -368,6 +369,9 @@
                 // Helper to format tags array to string
                 const tagsToString = (tags) => (tags || []).join(', ');
 
+                // Helper to format dimensions (handles arrays)
+                const formatDim = (val) => Array.isArray(val) ? val.join(', ') : val;
+
                 // Helper to escape HTML for attribute values
                 const escapeHTML = (str) => {
                     if (typeof str !== 'string') return str;
@@ -385,11 +389,11 @@
                     <td><input type="text" value="${escapeHTML(getVal(row, `displayName.${lang}`))}" onchange="updateData(${index}, 'displayName.${lang}', this.value)"></td>
                     <td><input type="text" value="${escapeHTML(getVal(row, `description.${lang}`))}" onchange="updateData(${index}, 'description.${lang}', this.value)"></td>
                     <td><input type="text" value="${escapeHTML(getVal(row, `category.${lang}`))}" onchange="updateData(${index}, 'category.${lang}', this.value)"></td>
-                    <td><input type="text" class="dim-col" data-field="dimensions.length" value="${escapeHTML(getVal(row, 'dimensions.length'))}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="dimensions.length" value="${escapeHTML(formatDim(getVal(row, 'dimensions.length')))}" onchange="updateData(${index}, 'dimensions.length', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.length'))}" onchange="updateData(${index}, 'sources.length', this.value)"></td>
-                    <td><input type="text" class="dim-col" data-field="dimensions.mass" value="${escapeHTML(getVal(row, 'dimensions.mass'))}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="dimensions.mass" value="${escapeHTML(formatDim(getVal(row, 'dimensions.mass')))}" onchange="updateData(${index}, 'dimensions.mass', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.mass'))}" onchange="updateData(${index}, 'sources.mass', this.value)"></td>
-                    <td><input type="text" class="dim-col" data-field="dimensions.duration" value="${escapeHTML(getVal(row, 'dimensions.duration'))}" onchange="updateData(${index}, 'dimensions.duration', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="dimensions.duration" value="${escapeHTML(formatDim(getVal(row, 'dimensions.duration')))}" onchange="updateData(${index}, 'dimensions.duration', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.duration'))}" onchange="updateData(${index}, 'sources.duration', this.value)"></td>
                     <td><input type="text" value="${escapeHTML(tagsToString(getVal(row, `tags.${lang}`, [])))}" onchange="updateTags(${index}, 'tags.${lang}', this.value)"></td>
                     <td><input type="text" class="dim-col" data-field="x_coordinates.length" value="${escapeHTML(getVal(row, 'x_coordinates.length'))}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
@@ -440,7 +444,12 @@
             if (value.trim() === '') {
                 deleteVal(tableData[index], path);
             } else {
-                setVal(tableData[index], path, value);
+                let finalValue = value.trim();
+                // Support comma-separated ranges for dimensions
+                if (path.startsWith('dimensions.') && finalValue.includes(',')) {
+                    finalValue = finalValue.split(',').map(v => v.trim());
+                }
+                setVal(tableData[index], path, finalValue);
             }
         };
 
@@ -643,10 +652,44 @@
                 const dims = ['length', 'mass', 'duration'];
                 for (const dim of dims) {
                     const val = row.dimensions?.[dim];
-                    if (val && (typeof val !== 'string' || !dimensionRegex.test(val))) {
-                        tr.querySelector(`input[data-field="dimensions.${dim}"]`).classList.add('invalid');
-                        showError(`Cannot save: ${id} -> Dim: ${dim.charAt(0).toUpperCase() + dim.slice(1)} is not in scientific notation`);
-                        return;
+                    if (val) {
+                        if (Array.isArray(val)) {
+                            // Validate array (range)
+                            if (val.length !== 2) {
+                                tr.querySelector(`input[data-field="dimensions.${dim}"]`).classList.add('invalid');
+                                showError(`Cannot save: ${id} -> Dim: ${dim.charAt(0).toUpperCase() + dim.slice(1)} range must have exactly 2 elements (only one comma allowed)`);
+                                return;
+                            }
+                            for (const v of val) {
+                                if (v.startsWith('-')) {
+                                    tr.querySelector(`input[data-field="dimensions.${dim}"]`).classList.add('invalid');
+                                    showError(`Cannot save: ${id} -> Dim: ${dim.charAt(0).toUpperCase() + dim.slice(1)}: negative quantities aren't allowed`);
+                                    return;
+                                }
+                                if (typeof v !== 'string' || !strictDimensionRegex.test(v)) {
+                                    tr.querySelector(`input[data-field="dimensions.${dim}"]`).classList.add('invalid');
+                                    showError(`Cannot save: ${id} -> Dim: ${dim.charAt(0).toUpperCase() + dim.slice(1)} range element "${v}" is not strictly scientific notation (no < or > allowed)`);
+                                    return;
+                                }
+                            }
+                            if (Number(val[0]) > Number(val[1])) {
+                                tr.querySelector(`input[data-field="dimensions.${dim}"]`).classList.add('invalid');
+                                showError(`Cannot save: ${id} -> Dim: ${dim.charAt(0).toUpperCase() + dim.slice(1)} range is not in order (start must be <= end)`);
+                                return;
+                            }
+                        } else {
+                            // Validate single value
+                            if (val.startsWith('-')) {
+                                tr.querySelector(`input[data-field="dimensions.${dim}"]`).classList.add('invalid');
+                                showError(`Cannot save: ${id} -> Dim: ${dim.charAt(0).toUpperCase() + dim.slice(1)}: negative quantities aren't allowed`);
+                                return;
+                            }
+                            if (typeof val !== 'string' || !dimensionRegex.test(val)) {
+                                tr.querySelector(`input[data-field="dimensions.${dim}"]`).classList.add('invalid');
+                                showError(`Cannot save: ${id} -> Dim: ${dim.charAt(0).toUpperCase() + dim.slice(1)} is not in scientific notation`);
+                                return;
+                            }
+                        }
                     }
                 }
 

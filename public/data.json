@@ -660,20 +660,25 @@
     "tags": {
       "en-us": [
         "big bang",
-        "cosmic microwave background",
+        "CMB",
         "light",
         "photon",
         "radiation"
       ]
     },
     "dimensions": {
-      "length": "1.6e-3"
+      "length": "1.8e-3",
+      "duration": "6.2e-12"
     },
     "x_coordinates": {
       "length": "20"
     },
     "description": {
       "en-us": "The stretched-out light from the early universe that now permeates space as a microwave glow."
+    },
+    "sources": {
+      "length": "https://astro.kias.re.kr/CMBR/",
+      "duration": "https://astro.kias.re.kr/CMBR/"
     }
   },
   {
@@ -1903,7 +1908,7 @@
       "length": "3.8e+8"
     },
     "x_coordinates": {
-      "length": "6"
+      "length": "0"
     },
     "description": {
       "en-us": "The elliptical path the Moon takes around Earth, averaging about 384,400 kilometers away."
@@ -1928,7 +1933,7 @@
       "mass": "1.988416e+30"
     },
     "x_coordinates": {
-      "length": "0",
+      "length": "6",
       "mass": "0"
     },
     "sources": {
@@ -2133,7 +2138,7 @@
       "length": "1.22e+6"
     },
     "x_coordinates": {
-      "length": "6"
+      "length": "15"
     },
     "description": {
       "en-us": "A solid ball of iron and nickel at the center of the Earth, kept solid by immense pressure despite the heat."
@@ -2151,7 +2156,7 @@
       "length": "3.48e+6"
     },
     "x_coordinates": {
-      "length": "6"
+      "length": "15"
     },
     "description": {
       "en-us": "A layer of liquid iron and nickel that generates Earth's protective magnetic field as it flows."
@@ -2169,7 +2174,7 @@
       "length": "2.9e+6"
     },
     "x_coordinates": {
-      "length": "12"
+      "length": "17"
     },
     "description": {
       "en-us": "The thick layer of hot, solid-ish rock that makes up the bulk of Earth's volume."
@@ -2187,7 +2192,7 @@
       "length": "4e+4"
     },
     "x_coordinates": {
-      "length": "6"
+      "length": "15"
     },
     "description": {
       "en-us": "The thick, lighter layer of rock that forms the continents we live on."
@@ -2205,7 +2210,7 @@
       "length": "5e+3"
     },
     "x_coordinates": {
-      "length": "6"
+      "length": "15"
     },
     "description": {
       "en-us": "The thinner, denser layer of volcanic rock that forms the floor of the worlds oceans."
@@ -2241,16 +2246,16 @@
       "length": "2e+0"
     },
     "x_coordinates": {
-      "length": "10"
+      "length": "0"
     },
     "description": {
       "en-us": "One of the smallest known asteroids, a tiny space rock only about 2 meters wide."
     }
   },
   {
-    "id": "smallest_star_sgr_1935_2154",
+    "id": "smallest_known_star_sgr_1935_2154",
     "displayName": {
-      "en-us": "Smallest Star (SGR 1935+2154)"
+      "en-us": "Smallest Known Star (SGR 1935+2154)"
     },
     "category": {
       "en-us": "Astronomy"
@@ -2259,7 +2264,7 @@
       "length": "4e+3"
     },
     "x_coordinates": {
-      "length": "15"
+      "length": "6"
     },
     "description": {
       "en-us": "An incredibly dense neutron star that is among the smallest and most energetic stars known."
@@ -2277,7 +2282,7 @@
       "length": "1e+4"
     },
     "x_coordinates": {
-      "length": "15"
+      "length": "6"
     },
     "description": {
       "en-us": "The collapsed core of a massive star, so dense that a teaspoon of its matter would weigh a billion tons."
@@ -2295,7 +2300,7 @@
       "length": "1.6e+6"
     },
     "x_coordinates": {
-      "length": "15"
+      "length": "6"
     },
     "description": {
       "en-us": "A tiny, hot remnant of a dead star that is part of a unique binary system."
@@ -2313,7 +2318,7 @@
       "length": "4.6e+7"
     },
     "x_coordinates": {
-      "length": "15"
+      "length": "6"
     },
     "description": {
       "en-us": "A type of star that is cooler and smaller than typical main-sequence stars of the same brightness."
@@ -2331,7 +2336,7 @@
       "length": "1.18e+8"
     },
     "x_coordinates": {
-      "length": "15"
+      "length": "6"
     },
     "description": {
       "en-us": "An unusually large white dwarf located in a complex symbiotic star system."
@@ -2349,7 +2354,7 @@
       "length": "6.96e+7"
     },
     "x_coordinates": {
-      "length": "10"
+      "length": "6"
     },
     "description": {
       "en-us": "Small, cool stars that are the most common type in the Milky Way and can live for trillions of years."
@@ -2425,6 +2430,93 @@
     },
     "description": {
       "en-us": "An extreme red hypergiant so large that it could fit nearly 5 billion Suns inside it."
+    }
+  },
+  {
+    "id": "lightest_known_star_eblm_j0555_57ab",
+    "displayName": {
+      "en-us": "Lightest Known Star (EBLM J0555−57Ab)"
+    },
+    "description": {
+      "en-us": "The smallest known hydrogen-burning star, it lives in a triple star system."
+    },
+    "category": {
+      "en-us": "Astronomy"
+    },
+    "dimensions": {
+      "mass": "1.7e+29",
+      "length": "5.8e+7"
+    },
+    "tags": {
+      "en-us": [
+        "star"
+      ]
+    },
+    "x_coordinates": {
+      "length": "6",
+      "mass": "0"
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/EBLM_J0555%E2%88%9257",
+      "length": "https://en.wikipedia.org/wiki/EBLM_J0555%E2%88%9257"
+    }
+  },
+  {
+    "id": "heaviest_known_star_r136a1",
+    "displayName": {
+      "en-us": "Heaviest Known Star R136a1"
+    },
+    "description": {
+      "en-us": "The most massive and luminous star known, it lurks in the Large Magellanic Cloud."
+    },
+    "category": {
+      "en-us": "Astronomy"
+    },
+    "dimensions": {
+      "mass": "6e+32",
+      "length": "3.0e10",
+      "duration": "3.22e13"
+    },
+    "tags": {
+      "en-us": [
+        "star"
+      ]
+    },
+    "x_coordinates": {
+      "length": "6",
+      "mass": "0",
+      "duration": "0"
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/R136a1",
+      "length": "https://en.wikipedia.org/wiki/R136a1",
+      "duration": "https://en.wikipedia.org/wiki/R136a1"
+    }
+  },
+  {
+    "id": "stars",
+    "displayName": {
+      "en-us": "Stars"
+    },
+    "category": {
+      "en-us": "Astronomy"
+    },
+    "dimensions": {
+      "length": [
+        "4e+3",
+        "1.1832e+12"
+      ],
+      "mass": [
+        "1.7e+29",
+        "6e+32"
+      ]
+    },
+    "x_coordinates": {
+      "length": "5.8",
+      "mass": "0"
+    },
+    "description": {
+      "en-us": "Bright spheres of plasma in space, so large they are held together by gravity."
     }
   },
   {
@@ -2672,7 +2764,7 @@
   {
     "id": "magellanic_clouds_distance_from_galactic_center",
     "displayName": {
-      "en-us": "Magellanic Clouds Distance from Galactic Center"
+      "en-us": "To Magellanic Clouds from Galactic Center"
     },
     "category": {
       "en-us": "Astronomy"
@@ -2681,10 +2773,15 @@
       "length": "1.7e+21"
     },
     "x_coordinates": {
-      "length": "0"
+      "length": "15"
     },
     "description": {
       "en-us": "The distance to the two satellite galaxies that orbit our Milky Way."
+    },
+    "tags": {
+      "en-us": [
+        "satellite galaxy"
+      ]
     }
   },
   {
@@ -2866,7 +2963,7 @@
       "length": "1.85e+24"
     },
     "x_coordinates": {
-      "length": "0"
+      "length": "15"
     },
     "description": {
       "en-us": "A gravitational anomaly in intergalactic space that is pulling our galaxy and others toward it."
@@ -2960,7 +3057,7 @@
       "length": "4.63e+21"
     },
     "x_coordinates": {
-      "length": "15"
+      "length": "0"
     },
     "description": {
       "en-us": "The invisible cloud of dark matter that surrounds and outweighs the visible stars of our galaxy."
@@ -2982,6 +3079,30 @@
     },
     "description": {
       "en-us": "One of the largest structures in the universe, a thread-like bridge of galaxies stretching over a billion light-years."
+    }
+  },
+  {
+    "id": "neutral_atoms",
+    "displayName": {
+      "en-us": "Neutral Atoms"
+    },
+    "description": {
+      "en-us": "Building blocks for our world of matter, neutral atoms consist of an equal number of protons and electrons, plus enough neutrons to bind protons together in the nucleus."
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "length": [
+        "3.1e-11",
+        "3.48e-10"
+      ]
+    },
+    "tags": {
+      "en-us": []
+    },
+    "x_coordinates": {
+      "length": "-0.1"
     }
   },
   {
@@ -3664,7 +3785,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A strong, lightweight, and corrosion-resistant metal frequently used in m\u00e9dical implants."
+      "en-us": "A strong, lightweight, and corrosion-resistant metal frequently used in médical implants."
     }
   },
   {
@@ -4304,10 +4425,11 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Technetium"
     },
     "dimensions": {
-      "length": "1.35e-10"
+      "length": "1.35e-10",
+      "mass": "1.6e-25"
     },
     "x_coordinates": {
       "length": "0.58",
@@ -4862,10 +4984,11 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Promethium"
     },
     "dimensions": {
-      "length": "1.85e-10"
+      "length": "1.85e-10",
+      "mass": "2.41e-25"
     },
     "x_coordinates": {
       "length": "0.6",
@@ -5574,10 +5697,11 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Polonium"
     },
     "dimensions": {
-      "length": "1.90e-10"
+      "length": "1.90e-10",
+      "mass": "3.47e-25"
     },
     "x_coordinates": {
       "length": "1.5",
@@ -5604,10 +5728,11 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Astatine"
     },
     "dimensions": {
-      "length": "1.27e-10"
+      "length": "1.27e-10",
+      "mass": "3.49e-25"
     },
     "x_coordinates": {
       "length": "1.6",
@@ -5634,10 +5759,11 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Radon"
     },
     "dimensions": {
-      "length": "1.20e-10"
+      "length": "1.20e-10",
+      "mass": "3.69e-25"
     },
     "x_coordinates": {
       "length": "1.7",
