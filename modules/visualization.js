@@ -287,10 +287,15 @@ export function createVisualization(container, config) {
             const maxCharCount = d3.max(filteredData, d => getLocalized(d.displayName, currentState.language).length) || 10;
             paddingRight = Math.max(100, maxCharCount * 12 * 0.6 + 40);
 
+            // Clamp padding for small viewports
+            const effectiveFadeEnd = Math.min(fadeEnd, width * 0.15);
+            const effectivePadRight = Math.min(paddingRight, width * 0.15);
+            const effectiveFadeBotH = Math.min(fadeBottomHeight, height * 0.15);
+
             const xDecades = Math.log10(maxDimX) - Math.log10(minDimX) || 1;
             const yDecades = Math.log10(maxDimY) - Math.log10(minDimY) || 1;
-            const availW = width - paddingRight - fadeEnd;
-            const availH = (height - fadeBottomHeight) - 50;
+            const availW = Math.max(1, width - effectivePadRight - effectiveFadeEnd);
+            const availH = Math.max(1, (height - effectiveFadeBotH) - 50);
             const ppdX = availW / xDecades;
             const ppdY = availH / yDecades;
             const ppd = Math.min(ppdX, ppdY);
@@ -299,7 +304,7 @@ export function createVisualization(container, config) {
             const xOffset = (availW - newWidth) / 2;
             const yOffset = (availH - newHeight) / 2;
 
-            xScale.range([fadeEnd + xOffset, fadeEnd + xOffset + newWidth]);
+            xScale.range([effectiveFadeEnd + xOffset, effectiveFadeEnd + xOffset + newWidth]);
             const topPixel = 50 + yOffset;
             const bottomPixel = topPixel + newHeight;
             yScale.range([bottomPixel, topPixel]);

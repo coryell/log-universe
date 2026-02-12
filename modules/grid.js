@@ -32,9 +32,11 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup) {
         if (!hasSubTenY) {
             const logMin = Math.ceil(Math.log10(d3.min([yStart, yEnd])));
             const logMax = Math.floor(Math.log10(d3.max([yStart, yEnd])));
-            const allYDecades = [];
-            for (let i = logMin; i <= logMax; i++) allYDecades.push(Math.pow(10, i));
-            yTickValues = Array.from(new Set([...yTickValues, ...allYDecades])).sort((a, b) => a - b);
+            if (isFinite(logMin) && isFinite(logMax) && logMax - logMin < 200) {
+                const allYDecades = [];
+                for (let i = logMin; i <= logMax; i++) allYDecades.push(Math.pow(10, i));
+                yTickValues = Array.from(new Set([...yTickValues, ...allYDecades])).sort((a, b) => a - b);
+            }
         }
 
         gridGroup.selectAll(".horizontal-grid").data([null]).join("g")
@@ -95,9 +97,11 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup) {
             if (!hasSubTenX) {
                 const logMin = Math.ceil(Math.log10(d3.min([xStart, xEnd])));
                 const logMax = Math.floor(Math.log10(d3.max([xStart, xEnd])));
-                const allXDecades = [];
-                for (let i = logMin; i <= logMax; i++) allXDecades.push(Math.pow(10, i));
-                xTickValues = Array.from(new Set([...xTickValues, ...allXDecades])).sort((a, b) => a - b);
+                if (isFinite(logMin) && isFinite(logMax) && logMax - logMin < 200) {
+                    const allXDecades = [];
+                    for (let i = logMin; i <= logMax; i++) allXDecades.push(Math.pow(10, i));
+                    xTickValues = Array.from(new Set([...xTickValues, ...allXDecades])).sort((a, b) => a - b);
+                }
             }
 
             gridGroup.select(".vertical-grid")
