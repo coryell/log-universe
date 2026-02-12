@@ -81,6 +81,10 @@ header {
   align-items: center;
 }
 
+#mobile-legend {
+  display: none;
+}
+
 #page-title {
   margin: 0;
   color: #00aaff;
@@ -412,6 +416,30 @@ svg {
 
   #recenter-btn {
     max-width: 200px;
+  }
+
+  .svg-legend {
+    display: none;
+  }
+
+  #mobile-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+    margin-top: 10px;
+  }
+
+  .mobile-legend-item {
+    font-family: monospace;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border: 1px solid #333;
+    border-radius: 4px;
   }
 
   /* Infobox Mobile */

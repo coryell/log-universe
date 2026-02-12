@@ -50,6 +50,16 @@ d3.json('/data.json').then(rawData => {
         controlsWrapper.classList.remove('active');
       }
     });
+
+    const recenterBtn = document.getElementById('recenter-btn');
+    if (recenterBtn) {
+      recenterBtn.addEventListener('click', () => controlsWrapper.classList.remove('active'));
+    }
+
+    const mobileLegend = document.getElementById('mobile-legend');
+    if (mobileLegend) {
+      mobileLegend.addEventListener('click', () => controlsWrapper.classList.remove('active'));
+    }
   }
 
   // Gesture-based interactions (zoom, pan, long-press for ruler) are handled 

@@ -3,18 +3,36 @@ import { getLocalized } from './utils.js';
 
 /**
  * Creates a legend component that shows active categories with hover filtering.
+ * Renders both an SVG legend (desktop) and an HTML legend (mobile menu).
  */
 export function createLegend(svg, g, gCombined) {
     const legendPadding = 15;
     const legendItemHeight = 20;
-    const legendGroup = svg.append("g").attr("class", "legend");
+    const legendGroup = svg.append("g").attr("class", "legend svg-legend");
     let legendWidth = 0;
     let legendHeight = 0;
+
+    const mobileLegend = document.getElementById('mobile-legend');
+
+    function fadeToCategory(cat, language) {
+        g.selectAll(".item-group").transition().duration(200)
+            .attr("opacity", d => getLocalized(d.category, language) === cat ? 1 : 0.2);
+        g.selectAll(".item-group").filter(d => getLocalized(d.category, language) === cat).raise();
+        gCombined.selectAll(".item-group").transition().duration(200)
+            .attr("opacity", d => d._members && d._members.some(m => getLocalized(m.category, language) === cat) ? 1 : 0.2);
+        gCombined.selectAll(".item-group").filter(d => d._members && d._members.some(m => getLocalized(m.category, language) === cat)).raise();
+    }
+
+    function unfade() {
+        g.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
+        g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
+        gCombined.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
+    }
 
     /**
      * Updates the legend with active categories from the current data.
      * @param {Array} currentData - Currently filtered data items
-     * @param {Object} state - { categories, colorScale, language, width, height }
+     * @param {Object} state - { categories, colorScale, language, width, height, onCategoryClick }
      */
     function updateLegend(currentData, state) {
         const { categories, colorScale, language, width, height } = state;
@@ -24,6 +42,7 @@ export function createLegend(svg, g, gCombined) {
             currentData.some(d => getLocalized(d.category, language) === cat)
         );
 
+        // --- SVG Legend (desktop) ---
         legendHeight = activeCats.length * legendItemHeight + legendPadding * 2;
         const texts = legendGroup.selectAll("text").data(activeCats, d => d);
         texts.exit().remove();
@@ -37,19 +56,9 @@ export function createLegend(svg, g, gCombined) {
             .attr("y", (d, i) => legendPadding + i * legendItemHeight + legendItemHeight / 2)
             .text(d => d);
 
-        textEnter.on("mouseover", function (event, cat) {
-            g.selectAll(".item-group").transition().duration(200)
-                .attr("opacity", d => getLocalized(d.category, language) === cat ? 1 : 0.2);
-            g.selectAll(".item-group").filter(d => getLocalized(d.category, language) === cat).raise();
-            gCombined.selectAll(".item-group").transition().duration(200)
-                .attr("opacity", d => d._members && d._members.some(m => getLocalized(m.category, language) === cat) ? 1 : 0.2);
-            gCombined.selectAll(".item-group").filter(d => d._members && d._members.some(m => getLocalized(m.category, language) === cat)).raise();
-        })
-            .on("mouseout", function () {
-                g.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
-                g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
-                gCombined.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
-            })
+        textEnter
+            .on("mouseover", (event, cat) => fadeToCategory(cat, language))
+            .on("mouseout", () => unfade())
             .on("click", function (event, cat) {
                 event.stopPropagation();
                 if (state.onCategoryClick) state.onCategoryClick(cat);
@@ -68,11 +77,27 @@ export function createLegend(svg, g, gCombined) {
         const legendX = width - legendWidth - 20;
         const legendY = height - legendHeight - 60;
         legendGroup.attr("transform", `translate(${legendX}, ${legendY})`);
+
+        // --- HTML Legend (mobile menu) ---
+        updateMobileLegend(activeCats, colorScale, language, state.onCategoryClick);
     }
 
-    /**
-     * Repositions the legend after a resize.
-     */
+    function updateMobileLegend(activeCats, colorScale, language, onCategoryClick) {
+        if (!mobileLegend) return;
+        mobileLegend.innerHTML = '';
+
+        activeCats.forEach(cat => {
+            const span = document.createElement('span');
+            span.className = 'mobile-legend-item';
+            span.textContent = cat;
+            span.style.color = colorScale ? colorScale(cat) : '#fff';
+            span.addEventListener('click', () => {
+                if (onCategoryClick) onCategoryClick(cat);
+            });
+            mobileLegend.appendChild(span);
+        });
+    }
+
     function reposition(width, height) {
         const legendX = width - legendWidth - 20;
         const legendY = height - legendHeight - 60;
