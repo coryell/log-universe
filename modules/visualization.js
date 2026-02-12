@@ -342,7 +342,7 @@ export function createVisualization(container, config) {
         legend.updateLegend(filteredData, { ...currentState, width, height, onCategoryClick: zoomToCategory });
         updateMask(width, height, currentDimensionX);
 
-        if (dimChanged) {
+        if (dimChanged && !isInitialLoad) {
             d3.timeout(runGrouping, 1100);
             d3.timeout(() => {
                 const t = d3.zoomTransform(svg.node());
@@ -353,6 +353,8 @@ export function createVisualization(container, config) {
                 updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
             }, 1100);
         } else {
+            prevDimensionX = currentDimensionX;
+            prevDimensionY = currentDimensionY;
             runGrouping();
             const t = d3.zoomTransform(svg.node());
             const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
