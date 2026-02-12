@@ -37,20 +37,27 @@ d3.json('/data.json').then(rawData => {
   const mobileToggle = document.getElementById('mobile-menu-toggle');
   const controlsWrapper = document.querySelector('.controls-wrapper');
   if (mobileToggle && controlsWrapper) {
+    // Toggle button
     mobileToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       controlsWrapper.classList.toggle('active');
     });
 
-    document.addEventListener('click', (e) => {
+    // Clicks inside the menu should NOT close it (stop bubbling)
+    controlsWrapper.addEventListener('pointerdown', (e) => {
+      e.stopPropagation();
+    });
+
+    // Any pointerdown outside the menu and toggle closes it
+    document.addEventListener('pointerdown', (e) => {
       if (controlsWrapper.classList.contains('active') &&
-        !controlsWrapper.contains(e.target) &&
         e.target !== mobileToggle &&
         !mobileToggle.contains(e.target)) {
         controlsWrapper.classList.remove('active');
       }
     });
 
+    // Explicit close on recenter and legend clicks
     const recenterBtn = document.getElementById('recenter-btn');
     if (recenterBtn) {
       recenterBtn.addEventListener('click', () => controlsWrapper.classList.remove('active'));
@@ -58,7 +65,11 @@ d3.json('/data.json').then(rawData => {
 
     const mobileLegend = document.getElementById('mobile-legend');
     if (mobileLegend) {
-      mobileLegend.addEventListener('click', () => controlsWrapper.classList.remove('active'));
+      mobileLegend.addEventListener('click', (e) => {
+        if (e.target.classList.contains('mobile-legend-item')) {
+          controlsWrapper.classList.remove('active');
+        }
+      });
     }
   }
 
