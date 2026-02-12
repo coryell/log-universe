@@ -1916,6 +1916,11 @@ d3.json('/data.json').then(rawData => {
 
   // Resize Handler
   window.addEventListener('resize', () => {
+    // 1. Capture current data center
+    const t = d3.zoomTransform(svg.node());
+    const dataX = t.rescaleX(xScale).invert(width / 2);
+    const dataY = t.rescaleY(yScale).invert(height / 2);
+
     width = app.clientWidth;
     height = app.clientHeight;
     svg.attr('viewBox', [0, 0, width, height]);
@@ -1929,8 +1934,11 @@ d3.json('/data.json').then(rawData => {
     if (currentDimensionX === "none") {
       const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
       const screenCenter = width / 2;
-      const xCenter = (xScale.domain()[0] + xScale.domain()[1]) / 2;
-      xScale.range([screenCenter, screenCenter + initialDecadeHeight]);
+      const domainX = xScale.domain();
+      const xCenter = (domainX[0] + domainX[1]) / 2;
+      const pixelMin = screenCenter + (domainX[0] - xCenter) * initialDecadeHeight;
+      const pixelMax = screenCenter + (domainX[1] - xCenter) * initialDecadeHeight;
+      xScale.range([pixelMin, pixelMax]);
     } else {
       xScale.range([fadeEnd, width - paddingRight]);
     }
@@ -1942,9 +1950,14 @@ d3.json('/data.json').then(rawData => {
     const legendY = height - legendHeight - 60;
     legend.attr("transform", `translate(${legendX}, ${legendY})`);
 
-    // Refresh zoom
-    const t = d3.zoomTransform(svg.node());
-    svg.call(zoom.transform, t);
+    // 2. Re-apply zoom to keep the same data point centered
+    // This recalculates the transform based on the new scale ranges
+    const newT = d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(t.k)
+      .translate(-xScale(dataX), -yScale(dataY));
+
+    svg.call(zoom.transform, newT);
   });
 
 });
