@@ -76,6 +76,11 @@ header {
   justify-content: flex-end;
 }
 
+.controls-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 #page-title {
   margin: 0;
   color: #00aaff;
@@ -329,6 +334,7 @@ svg {
   background-color: rgba(0, 170, 255, 0.2);
   border-color: #00aaff;
 }
+
 /* Mobile Layout */
 @media (max-width: 768px) {
   header {
