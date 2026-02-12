@@ -1,8 +1,12 @@
 import * as d3 from 'd3';
-import { paddingLeft, fadeEnd, fadeBottomHeight, paddingBottom, colors } from './constants.js';
-import { getUnit, getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData } from './utils.js';
+import { fadeEnd, fadeBottomHeight } from './constants.js';
+import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData } from './utils.js';
 import { updateItemAnnotations } from './annotations.js';
 import { createRuler } from './ruler.js';
+import { createSvgLayers } from './svgSetup.js';
+import { createGrid } from './grid.js';
+import { createLegend } from './legend.js';
+import { applyGrouping } from './grouping.js';
 
 export function createVisualization(container, config) {
     let width = container.clientWidth;
@@ -16,175 +20,30 @@ export function createVisualization(container, config) {
     let isInitialLoad = true;
     let callbacks = {};
 
-    const svg = d3.select(container)
-        .append('svg')
-        .attr('width', '100%')
-        .attr('height', '100%')
-        .attr('viewBox', [0, 0, width, height]);
+    // SVG setup (gradients, masks, layer groups)
+    const {
+        svg, gridGroup, xLabelGroup, yLabelGroup,
+        dataLayerOuter, g, gCombined, updateMask
+    } = createSvgLayers(container, width, height);
 
-    // Define Gradients and Masks
-    const defs = svg.append("defs");
-
-    const gradient = defs.append("linearGradient")
-        .attr("id", "fade-gradient")
-        .attr("gradientUnits", "userSpaceOnUse")
-        .attr("x1", 0)
-        .attr("x2", fadeEnd)
-        .attr("y1", 0)
-        .attr("y2", 0);
-
-    gradient.append("stop")
-        .attr("offset", paddingLeft / fadeEnd)
-        .attr("stop-color", "black");
-
-    gradient.append("stop")
-        .attr("offset", "1")
-        .attr("stop-color", "white");
-
-    const verticalGradient = defs.append("linearGradient")
-        .attr("id", "fade-gradient-vertical")
-        .attr("gradientUnits", "userSpaceOnUse")
-        .attr("x1", 0)
-        .attr("x2", 0)
-        .attr("y1", height)
-        .attr("y2", height - fadeBottomHeight);
-
-    verticalGradient.append("stop")
-        .attr("offset", 0)
-        .attr("stop-color", "black");
-
-    verticalGradient.append("stop")
-        .attr("offset", paddingBottom / fadeBottomHeight)
-        .attr("stop-color", "black");
-
-    verticalGradient.append("stop")
-        .attr("offset", "1")
-        .attr("stop-color", "white");
-
-    const maskLeft = defs.append("mask")
-        .attr("id", "fade-mask-left");
-
-    const maskBottom = defs.append("mask")
-        .attr("id", "fade-mask-bottom");
-
-    const createInequalityMask = (id, x1, y1, x2, y2) => {
-        const gradId = id + "-grad";
-        const grad = defs.append("linearGradient")
-            .attr("id", gradId)
-            .attr("x1", x1)
-            .attr("y1", y1)
-            .attr("x2", x2)
-            .attr("y2", y2);
-        grad.append("stop").attr("offset", "0%").attr("stop-color", "white").attr("stop-opacity", 1);
-        grad.append("stop").attr("offset", "10%").attr("stop-color", "white").attr("stop-opacity", 1);
-        grad.append("stop").attr("offset", "100%").attr("stop-color", "white").attr("stop-opacity", 0);
-
-        defs.append("mask")
-            .attr("id", id)
-            .attr("maskContentUnits", "objectBoundingBox")
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", 1)
-            .attr("height", 1)
-            .attr("fill", `url(#${gradId})`);
-    };
-
-    createInequalityMask("ineq-fade", "0%", "0%", "100%", "0%");
-
-    function updateMask() {
-        maskLeft.selectAll("rect").remove();
-        maskBottom.selectAll("rect").remove();
-
-        maskLeft.append("rect")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", fadeEnd)
-            .attr("height", height)
-            .attr("fill", "url(#fade-gradient)");
-
-        maskLeft.append("rect")
-            .attr("x", fadeEnd)
-            .attr("y", 0)
-            .attr("width", width - fadeEnd)
-            .attr("height", height)
-            .attr("fill", "white");
-
-        if (currentDimensionX !== "none") {
-            svg.select("#fade-gradient-vertical")
-                .attr("y1", height)
-                .attr("y2", height - fadeBottomHeight);
-
-            maskBottom.append("rect")
-                .attr("x", 0)
-                .attr("y", height - fadeBottomHeight)
-                .attr("width", width)
-                .attr("height", fadeBottomHeight)
-                .attr("fill", "url(#fade-gradient-vertical)");
-
-            maskBottom.append("rect")
-                .attr("x", 0)
-                .attr("y", 0)
-                .attr("width", width)
-                .attr("height", height - fadeBottomHeight)
-                .attr("fill", "white");
-        } else {
-            maskBottom.append("rect")
-                .attr("x", 0)
-                .attr("y", 0)
-                .attr("width", width)
-                .attr("height", height)
-                .attr("fill", "white");
-        }
-    }
-
-    updateMask();
+    updateMask(width, height, currentDimensionX);
 
     const ruler = createRuler(svg);
-
-    const gridGroup = svg.append("g").attr("class", "grid");
-    const xLabelGroup = svg.append("g")
-        .attr("class", "x-axis-labels")
-        .attr("mask", "url(#fade-mask-left)");
-    const yLabelGroup = svg.append("g")
-        .attr("class", "y-axis-labels")
-        .attr("mask", "url(#fade-mask-bottom)");
-
-    const dataLayerOuter = svg.append('g')
-        .attr("class", "data-layer-outer")
-        .attr("mask", "url(#fade-mask-left)");
-
-    const g = dataLayerOuter.append('g')
-        .attr("class", "data-layer")
-        .attr("mask", "url(#fade-mask-bottom)");
-
-    const gCombined = dataLayerOuter.append('g')
-        .attr("class", "combined-layer")
-        .attr("mask", "url(#fade-mask-bottom)");
+    const grid = createGrid(gridGroup, xLabelGroup, yLabelGroup);
+    const legend = createLegend(svg, g);
 
     // Scales
     let yScale = d3.scaleLog().range([height - 50, 50]);
     let xScale = d3.scaleLinear();
 
-    // Legend setup
-    const legendPadding = 15;
-    const legendItemHeight = 20;
-    const legend = svg.append("g").attr("class", "legend");
-    let legendWidth = 0;
-    let legendHeight = 0;
-
     // Zoom Setup
     const zoom = d3.zoom()
         .scaleExtent([1, 1000000])
         .on('zoom', (event) => {
-            // ... existing zoom logic ...
-            // Need access to colorScale and language from update context or state
-            // For now, let's assume they are available via closure or passed config.
-            // Refactoring strategy: Zoom handler needs access to current scales and state.
             handleZoom(event);
         });
 
-    // We need to store global state accessible to zoom handler
+    // Global state accessible to zoom handler
     let currentState = {
         colorScale: null,
         language: 'en-us',
@@ -205,7 +64,7 @@ export function createVisualization(container, config) {
 
         zoom.translateExtent([[extX0, extY0], [extX1, extY1]]);
 
-        updateGrid(t);
+        grid.updateGrid(t, { width, height, xScale, yScale, currentDimensionX, currentDimensionY });
 
         const newXScale = t.rescaleX(xScale);
         const newYScale = t.rescaleY(yScale);
@@ -227,32 +86,17 @@ export function createVisualization(container, config) {
 
         if (currentState.colorScale) {
             updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, newYScale, {
-                currentDimensionX,
-                currentDimensionY,
-                colorScale: currentState.colorScale,
-                language: currentState.language
+                currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language
             });
             updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, newYScale, {
-                currentDimensionX,
-                currentDimensionY,
-                colorScale: currentState.colorScale,
-                language: currentState.language
+                currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language
             });
         }
 
         if (event.sourceEvent) {
-            ruler.update({
-                width, height,
-                currentDimensionX, currentDimensionY,
-                xScale: newXScale, yScale: newYScale,
-                event: event.sourceEvent
-            });
+            ruler.update({ width, height, currentDimensionX, currentDimensionY, xScale: newXScale, yScale: newYScale, event: event.sourceEvent });
         } else {
-            ruler.update({
-                width, height,
-                currentDimensionX, currentDimensionY,
-                xScale: newXScale, yScale: newYScale
-            });
+            ruler.update({ width, height, currentDimensionX, currentDimensionY, xScale: newXScale, yScale: newYScale });
         }
     }
 
@@ -274,138 +118,6 @@ export function createVisualization(container, config) {
             }
         }
     }, { capture: true, passive: true });
-
-    const updateGrid = (transform) => {
-        const newYScale = transform.rescaleY(yScale);
-        const newXScale = transform.rescaleX(xScale);
-        const padding = 200;
-
-        xLabelGroup.selectAll(".x-label").remove();
-        yLabelGroup.selectAll(".y-label").remove();
-
-        // Y Axis Grid
-        const yStart = newYScale.invert(height + padding);
-        const yEnd = newYScale.invert(-padding);
-        const paddedYScale = newYScale.copy().domain([d3.min([yStart, yEnd]), d3.max([yStart, yEnd])]);
-        let yTickValues = paddedYScale.ticks(15, "~e");
-        const hasSubTenY = yTickValues.some(d => !Number.isInteger(Math.log10(d)));
-        const majorYDecades = new Set();
-        yTickValues.forEach(d => { if (Number.isInteger(Math.log10(d))) majorYDecades.add(d); });
-
-        if (!hasSubTenY) {
-            const logMin = Math.ceil(Math.log10(d3.min([yStart, yEnd])));
-            const logMax = Math.floor(Math.log10(d3.max([yStart, yEnd])));
-            const allYDecades = [];
-            for (let i = logMin; i <= logMax; i++) allYDecades.push(Math.pow(10, i));
-            yTickValues = Array.from(new Set([...yTickValues, ...allYDecades])).sort((a, b) => a - b);
-        }
-
-        gridGroup.selectAll(".horizontal-grid").data([null]).join("g")
-            .attr("class", "horizontal-grid")
-            .call(d3.axisRight(newYScale)
-                .tickValues(yTickValues)
-                .tickSize(width)
-                .tickFormat(d => {
-                    const log10 = Math.log10(d);
-                    if (majorYDecades.has(d)) return `10^${log10} ${getUnit(currentDimensionY)}`;
-                    return "";
-                })
-            );
-        gridGroup.select(".horizontal-grid .domain").remove();
-
-        // X Axis Grid
-        gridGroup.selectAll(".vertical-grid").data([null]).join("g").attr("class", "vertical-grid");
-
-        if (currentDimensionX === "none") {
-            const decadeHeight = Math.abs(newYScale(10) - newYScale(1));
-            const mainYTicks = yTickValues.filter(d => majorYDecades.has(d));
-            let stride = 1;
-            if (mainYTicks.length >= 2) {
-                stride = Math.abs(Math.round(Math.log10(mainYTicks[1])) - Math.round(Math.log10(mainYTicks[0])));
-            }
-            const xZero = newXScale.invert(0);
-            const xDist = newXScale.invert(decadeHeight) - xZero;
-            const spacing = Math.abs(xDist) * stride;
-            const xTicks = [];
-            const xMinPadded = newXScale.invert(-padding);
-            const xMaxPadded = newXScale.invert(width + padding);
-            if (spacing > 0 && isFinite(spacing)) {
-                const start = Math.ceil(xMinPadded / spacing) * spacing;
-                let current = start;
-                const safetyLimit = 1000;
-                let count = 0;
-                while (current <= xMaxPadded && count < safetyLimit) {
-                    xTicks.push(current);
-                    current += spacing;
-                    count++;
-                }
-            }
-            gridGroup.select(".vertical-grid")
-                .call(d3.axisBottom(newXScale).tickValues(xTicks).tickFormat("").tickSize(height));
-            gridGroup.selectAll(".vertical-grid .tick line")
-                .attr("stroke", "#00aaff").attr("stroke-opacity", 0.4).attr("stroke-dasharray", "2,2");
-            gridGroup.selectAll(".vertical-grid .tick text").remove();
-
-        } else {
-            const xStart = newXScale.invert(-padding);
-            const xEnd = newXScale.invert(width + padding);
-            const paddedXScale = newXScale.copy().domain([d3.min([xStart, xEnd]), d3.max([xStart, xEnd])]);
-            let xTickValues = paddedXScale.ticks(15, "~e");
-            const hasSubTenX = xTickValues.some(d => !Number.isInteger(Math.log10(d)));
-            const majorXDecades = new Set();
-            xTickValues.forEach(d => { if (Number.isInteger(Math.log10(d))) majorXDecades.add(d); });
-
-            if (!hasSubTenX) {
-                const logMin = Math.ceil(Math.log10(d3.min([xStart, xEnd])));
-                const logMax = Math.floor(Math.log10(d3.max([xStart, xEnd])));
-                const allXDecades = [];
-                for (let i = logMin; i <= logMax; i++) allXDecades.push(Math.pow(10, i));
-                xTickValues = Array.from(new Set([...xTickValues, ...allXDecades])).sort((a, b) => a - b);
-            }
-
-            gridGroup.select(".vertical-grid")
-                .call(d3.axisBottom(newXScale).tickValues(xTickValues).tickSize(height).tickFormat(d => {
-                    const log10 = Math.log10(d);
-                    if (majorXDecades.has(d)) return `10^${log10} ${getUnit(currentDimensionX)}`;
-                    return "";
-                }));
-
-            gridGroup.selectAll(".vertical-grid .tick line")
-                .attr("stroke", "#00aaff").attr("stroke-dasharray", "2,2")
-                .attr("stroke-opacity", d => (majorXDecades.has(d)) ? 0.4 : 0.25);
-
-            gridGroup.selectAll(".vertical-grid .tick text").each(function (d) {
-                const xPos = newXScale(d);
-                const log10 = Math.log10(d);
-                if (majorXDecades.has(d)) {
-                    xLabelGroup.append("text").attr("class", "x-label").attr("x", xPos).attr("y", height - 20)
-                        .attr("text-anchor", "middle").attr("fill", "#00aaff").style("font-family", "monospace").style("font-size", "12px")
-                        .text(`10^${log10} ${getUnit(currentDimensionX)}`);
-                }
-            });
-            gridGroup.selectAll(".vertical-grid .tick text").attr("opacity", 0);
-        }
-        gridGroup.select(".vertical-grid .domain").remove();
-        gridGroup.selectAll(".horizontal-grid .tick line")
-            .attr("stroke", "#00aaff").attr("stroke-dasharray", "2,2")
-            .attr("stroke-opacity", d => (majorYDecades.has(d)) ? 0.4 : 0.25);
-
-        if (currentDimensionX !== "none") {
-            gridGroup.selectAll(".horizontal-grid .tick text").each(function (d) {
-                const yPos = newYScale(d);
-                const log10 = Math.log10(d);
-                if (majorYDecades.has(d)) {
-                    yLabelGroup.append("text").attr("class", "y-label").attr("x", 10).attr("y", yPos - 4)
-                        .attr("fill", "#00aaff").style("font-family", "monospace").style("font-size", "12px")
-                        .text(`10^${log10} ${getUnit(currentDimensionY)}`);
-                }
-            });
-            gridGroup.selectAll(".horizontal-grid .tick text").attr("opacity", 0);
-        } else {
-            gridGroup.selectAll(".horizontal-grid .tick text").attr("x", 10).attr("dy", -4).attr("fill", "#00aaff")
-                .attr("opacity", d => majorYDecades.has(d) ? 1.0 : 0).style("font-family", "monospace").style("font-size", "12px");
-        }
-    };
 
     // Helper: Highlight
     function highlightItem(d) {
@@ -453,137 +165,55 @@ export function createVisualization(container, config) {
         }
     }
 
+    function zoomToCategory(cat) {
+        const data = currentState.data || [];
+        const language = currentState.language;
+        let categoryData;
+        if (currentDimensionX === "none") {
+            categoryData = data.filter(item => getLocalized(item.category, language) === cat && item.dimensions[currentDimensionY] !== undefined);
+        } else {
+            categoryData = data.filter(item => getLocalized(item.category, language) === cat && item.dimensions[currentDimensionY] !== undefined && item.dimensions[currentDimensionX] !== undefined);
+        }
+        if (categoryData.length === 0) return;
 
-    function applyGrouping() {
-        if (currentDimensionX !== prevDimensionX || currentDimensionY !== prevDimensionY || !currentState.data) return;
-        gCombined.selectAll(".item-group").remove();
+        const xValues = categoryData.map(d => xScale(getDimensionValueX(d, currentDimensionX, currentDimensionY)));
+        const yValues = categoryData.map(d => yScale(getDimensionValueY(d, currentDimensionY)));
 
-        const groups = new Map();
-        const filteredData = getFilteredData(currentState.data || [], currentDimensionX, currentDimensionY);
+        const minX = d3.min(xValues);
+        const maxX = d3.max(xValues);
+        const minY = d3.min(yValues);
+        const maxY = d3.max(yValues);
 
-        filteredData.forEach(d => {
-            let key = "";
-            if (currentDimensionX === "none") {
-                key = `y:${d._orig_dimensions[currentDimensionY]}|x:${d._orig_x_coordinates[currentDimensionY]}`;
-            } else {
-                key = `y:${d._orig_dimensions[currentDimensionY]}|x:${d._orig_dimensions[currentDimensionX]}`;
-            }
-            if (!groups.has(key)) groups.set(key, []);
-            groups.get(key).push(d);
-        });
+        const boundsWidth = maxX - minX;
+        const boundsHeight = maxY - minY;
+        const padLeft = 180, padRight = 460, padTop = 60, padBottom = 120;
+        const availWidth = width - padLeft - padRight;
+        const availHeight = height - padTop - padBottom;
 
-        groups.forEach((members, key) => {
-            if (members.length > 1) {
-                members.forEach(m => {
-                    g.selectAll(".item-group").filter(d => d.id === m.id).style("opacity", 0).style("pointer-events", "none");
-                });
+        let scaleX = boundsWidth > 0 ? availWidth / boundsWidth : 10000;
+        let scaleY = boundsHeight > 0 ? availHeight / boundsHeight : 10000;
+        let scale = Math.min(Math.max(Math.min(scaleX, scaleY), 1), 10000);
 
-                const first = members[0];
-                const combinedDisplayName = members.map(m => getLocalized(m.displayName, currentState.language)).join(" / ");
-                const combinedData = {
-                    ...first,
-                    id: `combined-${key}`,
-                    displayName: { [currentState.language]: combinedDisplayName },
-                    _isCombined: true,
-                    _members: members
-                };
+        const cx = (minX + maxX) / 2;
+        const cy = (minY + maxY) / 2;
+        const screenCX = padLeft + availWidth / 2;
+        const screenCY = padTop + availHeight / 2;
 
-                const t = d3.zoomTransform(svg.node());
-                const newXScale = t.rescaleX(xScale);
-                const newYScale = t.rescaleY(yScale);
-                const currentDecadeHeight = Math.abs(newYScale(10) - newYScale(1));
-                const currentFS = Math.min(12, currentDecadeHeight);
-                const currentRadius = currentFS / 2.4;
-
-                const grp = gCombined.append("g")
-                    .datum(combinedData)
-                    .attr("class", "item-group combined")
-                    .attr("transform", `translate(${newXScale(getDimensionValueX(first, currentDimensionX, currentDimensionY))}, ${newYScale(getDimensionValueY(first, currentDimensionY))})`);
-
-                grp.append('rect').attr('class', 'hit-area')
-                    .attr('fill', 'transparent').style('cursor', 'pointer')
-                    .attr('x', -currentRadius - 5).attr('y', -currentFS)
-                    .attr('height', currentFS * 2).attr('width', (combinedDisplayName.length * currentFS * 0.6 + currentRadius + 20));
-
-                grp.append('rect').attr('class', 'label-bg')
-                    .attr('rx', 4).attr('ry', 4).attr('fill', 'black').attr('opacity', 0)
-                    .attr('x', 8).attr('y', -currentFS * 0.7).attr('height', currentFS * 1.5).attr('width', (combinedDisplayName.length * currentFS * 0.6 + 6));
-
-                grp.append('rect').attr('class', 'inequality-rect').style('cursor', 'pointer').attr('opacity', 0);
-
-                grp.append('circle').attr('cx', 0).attr('cy', 0).attr('r', currentRadius)
-                    .attr('fill', currentState.colorScale(getLocalized(first.category, currentState.language)));
-
-                const textEl = grp.append('text').attr('class', 'label')
-                    .attr('x', 10).attr('y', 0).attr('dy', '.35em')
-                    .style('font-family', 'monospace').style('font-size', `${currentFS}px`);
-
-                members.forEach((m, i) => {
-                    const name = getLocalized(m.displayName, currentState.language);
-                    const cat = getLocalized(m.category, currentState.language);
-                    textEl.append('tspan').text(name).attr('fill', currentState.colorScale(cat));
-                    if (i < members.length - 1) {
-                        const nextCat = getLocalized(members[i + 1].category, currentState.language);
-                        textEl.append('tspan').text(' / ').attr('fill', currentState.colorScale(nextCat));
-                    }
-                });
-
-                grp.on("click", (event) => {
-                    ruler.update({
-                        width, height, currentDimensionX, currentDimensionY,
-                        xScale: d3.zoomTransform(svg.node()).rescaleX(xScale),
-                        yScale: d3.zoomTransform(svg.node()).rescaleY(yScale)
-                    });
-                    if (callbacks.onClick) callbacks.onClick(event, combinedData);
-                    event.stopPropagation();
-                });
-            }
-        });
+        const translate = [screenCX - cx * scale, screenCY - cy * scale];
+        svg.transition().duration(750)
+            .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
     }
 
-    function updateLegend(currentData) {
-        if (!currentState.categories) return; // Need categories list
-        const activeCats = currentState.categories.filter(cat =>
-            currentData.some(d => getLocalized(d.category, currentState.language) === cat)
-        );
-
-        legendHeight = activeCats.length * legendItemHeight + legendPadding * 2;
-        const texts = legend.selectAll("text").data(activeCats, d => d);
-        texts.exit().remove();
-
-        const textEnter = texts.enter().append("text")
-            .attr("x", legendPadding).attr("dy", "0.35em")
-            .style("font-family", "monospace").style("font-size", "12px").style("cursor", "pointer")
-            .attr("fill", d => currentState.colorScale ? currentState.colorScale(d) : 'black');
-
-        const textMerge = textEnter.merge(texts)
-            .attr("y", (d, i) => legendPadding + i * legendItemHeight + legendItemHeight / 2)
-            .text(d => d);
-
-        textEnter.on("mouseover", function (event, cat) {
-            g.selectAll(".item-group").transition().duration(200)
-                .attr("opacity", d => getLocalized(d.category, currentState.language) === cat ? 1 : 0.2);
-            g.selectAll(".item-group").filter(d => getLocalized(d.category, currentState.language) === cat).raise();
-        })
-            .on("mouseout", function () {
-                g.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
-                g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
-            });
-        // Click implementation for legend filtering would go here or be callback-based
-
-        let maxTextWidth = 0;
-        textMerge.each(function () {
-            const bbox = this.getComputedTextLength();
-            if (bbox > maxTextWidth) maxTextWidth = bbox;
+    function runGrouping() {
+        applyGrouping(g, gCombined, {
+            currentDimensionX, currentDimensionY,
+            prevDimensionX, prevDimensionY,
+            data: currentState.data,
+            colorScale: currentState.colorScale,
+            language: currentState.language,
+            xScale, yScale, svg, zoom,
+            ruler, width, height, callbacks
         });
-        legendWidth = maxTextWidth + legendPadding * 2;
-        let rect = legend.select("rect");
-        if (rect.empty()) rect = legend.insert("rect", "text").attr("fill", "black").attr("stroke", "#00aaff").attr("stroke-width", 1).attr("rx", 5).attr("ry", 5);
-        rect.attr("width", legendWidth).attr("height", legendHeight);
-
-        const legendX = width - legendWidth - 20;
-        const legendY = height - legendHeight - 60;
-        legend.attr("transform", `translate(${legendX}, ${legendY})`);
     }
 
     function update(data, state) {
@@ -593,7 +223,6 @@ export function createVisualization(container, config) {
             height = container.clientHeight;
             if (width > 0 && height > 0) {
                 svg.attr('viewBox', [0, 0, width, height]);
-                // Re-initialize any coordinate-dependent values
                 yScale.range([height - 50, 50]);
             }
         }
@@ -617,7 +246,7 @@ export function createVisualization(container, config) {
         const filteredData = getFilteredData(data, currentDimensionX, currentDimensionY);
         if (filteredData.length === 0) {
             g.selectAll('.item-group').remove();
-            updateLegend([]);
+            legend.updateLegend([], { ...currentState, width, height, onCategoryClick: zoomToCategory });
             return;
         }
 
@@ -710,12 +339,11 @@ export function createVisualization(container, config) {
                 exit => exit.remove()
             );
 
-
-        updateLegend(filteredData);
-        updateMask();
+        legend.updateLegend(filteredData, { ...currentState, width, height, onCategoryClick: zoomToCategory });
+        updateMask(width, height, currentDimensionX);
 
         if (dimChanged) {
-            d3.timeout(applyGrouping, 1100);
+            d3.timeout(runGrouping, 1100);
             d3.timeout(() => {
                 const t = d3.zoomTransform(svg.node());
                 const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
@@ -725,7 +353,7 @@ export function createVisualization(container, config) {
                 updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
             }, 1100);
         } else {
-            applyGrouping();
+            runGrouping();
             const t = d3.zoomTransform(svg.node());
             const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
             const currentFS = Math.min(12, currentDecadeHeight);
@@ -758,11 +386,6 @@ export function createVisualization(container, config) {
                 });
             }
         }
-
-        // Update Ruler
-        if (currentState.colorScale) { // Ensure state is ready
-            // Just trigger an update to sync lines
-        }
     }
 
     function setCallbacks(newCallbacks) {
@@ -781,16 +404,14 @@ export function createVisualization(container, config) {
         if (currentDimensionX !== "none") yScale.range([height - fadeBottomHeight, 50]);
         else yScale.range([height - 50, 50]);
 
-        updateMask();
-        const legendX = width - legendWidth - 20;
-        const legendY = height - legendHeight - 60;
-        legend.attr("transform", `translate(${legendX}, ${legendY})`);
+        updateMask(width, height, currentDimensionX);
+        legend.reposition(width, height);
 
         const newT = d3.zoomIdentity.translate(width / 2, height / 2).scale(t.k).translate(-xScale(dataX), -yScale(dataY));
         svg.call(zoom.transform, newT);
     }
 
-    // Event Listeners for Interaction (Hover/Mousemove handled via D3/zoom, but global mousemove/ruler needs listeners)
+    // Mouse/Touch Event Listeners
     svg.on("mousemove", (event) => {
         const t = d3.zoomTransform(svg.node());
         ruler.update({
@@ -867,10 +488,9 @@ export function createVisualization(container, config) {
 
             const rawDimY = matchItem.dimensions[currentDimensionY];
             const valY = Array.isArray(rawDimY)
-                ? Math.sqrt(Number(rawDimY[0]) * Number(rawDimY[1])) // Geometric mean for range center
+                ? Math.sqrt(Number(rawDimY[0]) * Number(rawDimY[1]))
                 : getDimensionValueY(matchItem, currentDimensionY);
 
-            // Re-calculate domainY based on current range (or just use yScale domain)
             const domainY = yScale.domain();
             const totalDecades = Math.log10(domainY[1]) - Math.log10(domainY[0]);
             const availableHeight = height - 100;
@@ -938,9 +558,7 @@ export function createVisualization(container, config) {
                 if (onEnd) onEnd();
             }
         },
-        // Expose scales helpers if needed? 
-        // Ideally logic stays internal.
-        getScales: () => { // Helper for external calculations if absolutely needed
+        getScales: () => {
             const t = d3.zoomTransform(svg.node());
             return { xScale: t.rescaleX(xScale), yScale: t.rescaleY(yScale), width, height };
         },
