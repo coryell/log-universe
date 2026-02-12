@@ -329,3 +329,91 @@ svg {
   background-color: rgba(0, 170, 255, 0.2);
   border-color: #00aaff;
 }
+/* Mobile Layout */
+@media (max-width: 768px) {
+  header {
+    padding: 10px;
+    position: relative;
+    /* For absolute positioning of dropdown */
+  }
+
+  #page-title {
+    font-size: 18px;
+    padding: 5px;
+  }
+
+  /* Search bar adjustments */
+  .header-center {
+    font-size: 14px;
+    margin: 0 10px;
+  }
+
+  #search-container {
+    width: 100%;
+    /* Full width of center container */
+  }
+
+  #search-input {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  /* Controls Drawer */
+  .controls-wrapper {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    background-color: black;
+    border-bottom: 1px solid #00aaff;
+    padding: 15px;
+    flex-direction: column;
+    align-items: flex-end;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
+
+  .controls-wrapper.active {
+    display: flex;
+  }
+
+  #mobile-menu-toggle {
+    display: block !important;
+    cursor: pointer;
+  }
+
+  .select-container {
+    margin-right: 0;
+    margin-bottom: 15px;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+  }
+
+  .select-container label {
+    margin-top: 10px;
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  .select-container select {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  #recenter-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  /* Infobox Mobile */
+  .infobox {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    max-width: none;
+    max-height: 40vh;
+  }
+}

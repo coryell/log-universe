@@ -1724,13 +1724,24 @@ d3.json('/data.json').then(rawData => {
 
   function updateRuler(event) {
     if (event) {
-      lastMousePos = d3.pointer(event, svg.node());
+      // Handle touch events explicitly if d3.pointer fails or returns NaN
+      // But typically d3.pointer should work. 
+      // The issue might be d3.pointer on a multi-touch event
+      try {
+        const p = d3.pointer(event, svg.node());
+        if (isFinite(p[0]) && isFinite(p[1])) {
+          lastMousePos = p;
+        }
+      } catch (e) {
+        // Ignore pointer errors
+      }
     }
     if (!lastMousePos) return;
 
     rulerGroup.style("display", null);
     const t = d3.zoomTransform(svg.node());
     const [mouseX, mouseY] = lastMousePos;
+    if (!isFinite(mouseX) || !isFinite(mouseY)) return;
 
     // Update Lines
     rulerLineX.attr("y1", mouseY).attr("y2", mouseY); // Horizontal line at Mouse Y
@@ -1958,6 +1969,94 @@ d3.json('/data.json').then(rawData => {
       .translate(-xScale(dataX), -yScale(dataY));
 
     svg.call(zoom.transform, newT);
+  });
+
+  // Mobile Menu Toggle
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const controlsWrapper = document.querySelector('.controls-wrapper');
+  if (mobileToggle && controlsWrapper) {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      controlsWrapper.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (controlsWrapper.classList.contains('active') &&
+        !controlsWrapper.contains(e.target) &&
+        e.target !== mobileToggle &&
+        !mobileToggle.contains(e.target)) {
+        controlsWrapper.classList.remove('active');
+      }
+    });
+  }
+
+  // Touch Events for Ruler Mark (Long Press)
+  let touchTimer = null;
+  const longPressDuration = 500;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isLongPress = false;
+
+  svg.node().addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      isLongPress = false;
+
+      touchTimer = setTimeout(() => {
+        isLongPress = true;
+        // Trigger setMark at touch position
+        // D3 zoom might interfere, but we can get client coords directly
+        const touch = e.touches[0];
+        // Create a mock event object for setMark if needed, or call logic directly
+        // setMark expects event.clientX/Y usually or d3.pointer
+        // We'll manually call setMark logic
+
+        // Calculate data coordinates
+        const rect = app.getBoundingClientRect();
+        const mouseX = touch.clientX - rect.left;
+        const mouseY = touch.clientY - rect.top;
+
+        const transform = d3.zoomTransform(svg.node());
+        const newXScale = transform.rescaleX(xScale);
+        const newYScale = transform.rescaleY(yScale);
+
+        const xVal = newXScale.invert(mouseX);
+        const yVal = newYScale.invert(mouseY);
+
+        setMark(xVal, yVal);
+
+        // Haptic feedback if available
+        if (navigator.vibrate) navigator.vibrate(50);
+
+      }, longPressDuration);
+    }
+  }, { passive: false });
+
+  svg.node().addEventListener('touchmove', (e) => {
+    if (touchTimer) {
+      const touch = e.touches[0];
+      const dx = Math.abs(touch.clientX - touchStartX);
+      const dy = Math.abs(touch.clientY - touchStartY);
+      if (dx > 10 || dy > 10) {
+        clearTimeout(touchTimer);
+        touchTimer = null;
+      }
+    }
+  }, { passive: false });
+
+  svg.node().addEventListener('touchend', () => {
+    if (touchTimer) {
+      clearTimeout(touchTimer);
+      touchTimer = null;
+    }
+    // If it was a long press, we can prevent default click behavior if needed, 
+    // but D3 zoom usually consumes clicks if we're dragging. 
+    // If we just set mark, we might want to stop propagation?
+    if (isLongPress) {
+      // Prevent other actions if we successfully marked
+    }
   });
 
 });

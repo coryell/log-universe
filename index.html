@@ -19,22 +19,33 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="select-container">
-        <label for="dimension-select-y">Y:</label>
-        <select id="dimension-select-y">
-          <option value="length">Length</option>
-          <option value="mass">Mass</option>
-          <option value="duration">Duration</option>
-        </select>
-        <label for="dimension-select-x" style="margin-left: 10px;">X:</label>
-        <select id="dimension-select-x">
-          <option value="none"></option>
-          <option value="length">Length</option>
-          <option value="mass">Mass</option>
-          <option value="duration">Duration</option>
-        </select>
+      <button id="mobile-menu-toggle" aria-label="Toggle Controls"
+        style="display: none; background: transparent; border: none; color: #00aaff; padding: 5px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <div class="controls-wrapper">
+        <div class="select-container">
+          <label for="dimension-select-y">Y:</label>
+          <select id="dimension-select-y">
+            <option value="length">Length</option>
+            <option value="mass">Mass</option>
+            <option value="duration">Duration</option>
+          </select>
+          <label for="dimension-select-x" style="margin-left: 10px;">X:</label>
+          <select id="dimension-select-x">
+            <option value="none"></option>
+            <option value="length">Length</option>
+            <option value="mass">Mass</option>
+            <option value="duration">Duration</option>
+          </select>
+        </div>
+        <button id="recenter-btn">Recenter</button>
       </div>
-      <button id="recenter-btn">Recenter</button>
     </div>
   </header>
   <div id="app"></div>
