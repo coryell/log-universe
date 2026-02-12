@@ -5,7 +5,7 @@
       "en-us": "SI Units"
     },
     "description": {
-      "en-us": "The base units of the International System of Units (SI), our best effort to redeem historical units of measurement using fancy physical constants."
+      "en-us": "The base units of the International System of Units (SI), our best effort to upgrade historical units of measurement using fancy physical constants."
     },
     "category": {
       "en-us": "Technology"
@@ -24,7 +24,8 @@
       "length": "https://en.wikipedia.org/wiki/Metre",
       "mass": "https://en.wikipedia.org/wiki/Kilogram",
       "duration": "https://en.wikipedia.org/wiki/Second"
-    }
+    },
+    "reviewed": true
   },
   {
     "id": "kilogram",
@@ -50,7 +51,8 @@
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Kilogram"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "meter",
@@ -76,7 +78,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Metre"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "second",
@@ -102,7 +105,8 @@
     },
     "sources": {
       "duration": "https://en.wikipedia.org/wiki/Second"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "planck_units",
@@ -129,7 +133,8 @@
       "length": "https://en.wikipedia.org/wiki/Planck_units",
       "duration": "https://en.wikipedia.org/wiki/Planck_units",
       "mass": "https://en.wikipedia.org/wiki/Planck_units"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "planck_length",
@@ -155,7 +160,8 @@
     },
     "description": {
       "en-us": "The \"natural\" unit of length, constructed from fundamental constants. Around this size, our ideas about space break down."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "planck_time",
@@ -181,7 +187,8 @@
     },
     "description": {
       "en-us": "The \"natural\" unit of time, constructed from fundamental constants. Around this timescale, our ideas about time break down."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "planck_mass",
@@ -207,7 +214,8 @@
     },
     "description": {
       "en-us": "The \"natural\" unit of mass, constructed from fundamental constants. Current theories can't describe particles of this mass."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "electron",
@@ -240,7 +248,8 @@
     },
     "description": {
       "en-us": "A subatomic particle that carries a negative charge and orbits the atomic nucleus."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "proton",
@@ -273,7 +282,8 @@
     },
     "description": {
       "en-us": "A positively charged subatomic particle that, along with neutrons, makes up the atomic nucleus."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "neutron",
@@ -306,7 +316,8 @@
     },
     "description": {
       "en-us": "An uncharged subatomic particle that helps bind protons together in the nucleus."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "range_of_weak_interaction",
@@ -333,7 +344,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Weak_interaction"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "range_of_strong_interaction",
@@ -360,7 +372,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Strong_interaction"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_nucleus_pb_208",
@@ -381,7 +394,8 @@
     },
     "sources": {
       "length": "https://www.chemlin.org/isotope/lead-208"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "most_energetic_photon_detected",
@@ -411,7 +425,8 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray",
       "duration": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray"
-    }
+    },
+    "reviewed": false
   },
   {
     "displayName": {
@@ -439,7 +454,8 @@
     "id": "gamma_ray_x_ray_boundary",
     "sources": {
       "length": "https://en.wikipedia.org/wiki/X-ray"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "x_ray_uv_boundary",
@@ -468,7 +484,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Extreme_ultraviolet"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "highest_energy_visible_violet",
@@ -497,7 +514,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Visible_spectrum"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lowest_energy_visible_red",
@@ -526,7 +544,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Visible_spectrum"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "infrared_microwave_boundary",
@@ -556,7 +575,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Microwave"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "microwave_radio_boundary",
@@ -585,7 +605,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Microwave"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "cell_phone_shortest_wavelength",
@@ -616,7 +637,8 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/5G",
       "duration": "https://en.wikipedia.org/wiki/5G"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "cell_phone_longest_wavelength",
@@ -647,7 +669,8 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Wireless_device_radiation_and_health",
       "duration": "https://en.wikipedia.org/wiki/5G"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "cosmic_microwave_background",
@@ -679,7 +702,8 @@
     "sources": {
       "length": "https://astro.kias.re.kr/CMBR/",
       "duration": "https://astro.kias.re.kr/CMBR/"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "longest_radio_possible_in_galaxy",
@@ -704,7 +728,8 @@
     },
     "description": {
       "en-us": "A theoretical limit set by the \"plasma frequency\" of ionized gas between stars."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "longest_radio_possible_in_solar_system",
@@ -729,7 +754,8 @@
     },
     "description": {
       "en-us": "Radio waves so long they are reflected by the thin plasma filling our solar system."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "longest_radio_that_penetrates_ionosphere",
@@ -754,7 +780,8 @@
     },
     "description": {
       "en-us": "The longest radio waves that can pass through Earth's atmosphere without being bounced back into space."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lyman_alpha",
@@ -781,7 +808,8 @@
     },
     "description": {
       "en-us": "A famous ultraviolet spectral line used by astronomers to map the distribution of hydrogen across the cosmos."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "ir_wavelength_of_human_body",
@@ -808,7 +836,8 @@
     },
     "description": {
       "en-us": "The specific infrared frequency at which you are glowing right now due to your body heat."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "ir_wavelength_of_red_hot_metal",
@@ -835,7 +864,8 @@
     },
     "description": {
       "en-us": "The infrared wavelength emitted by metal just before it begins to glow a visible red."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "hydrogen_line",
@@ -860,7 +890,8 @@
     },
     "description": {
       "en-us": "The 21-centimeter radio signal emitted by cold hydrogen that allows us to map the spiral arms of our galaxy."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_particles_ipm",
@@ -884,7 +915,8 @@
     },
     "description": {
       "en-us": "The vast average distance between the sparse particles of plasma that fill the space between planets."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_particles_ism",
@@ -908,7 +940,8 @@
     },
     "description": {
       "en-us": "The average separation between gas and dust particles in the interstellar medium of our galaxy."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_particles_igm",
@@ -932,7 +965,8 @@
     },
     "description": {
       "en-us": "The immense distance between the extremely sparse hydrogen ions that bridge the gap between galaxies."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_particles_in_best_artificial_vacuum",
@@ -950,7 +984,8 @@
     },
     "description": {
       "en-us": "Even in the highest-quality vacuums created by humans, millions of molecules remain in every cubic centimeter."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_air_molecules_at_sea_level",
@@ -968,7 +1003,8 @@
     },
     "description": {
       "en-us": "The average distance between molecules in the air you breathe is about 10 times their own size."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_particles_in_earth_core",
@@ -986,7 +1022,8 @@
     },
     "description": {
       "en-us": "Particles in the Earth's solid inner core are packed tightly under pressures millions of times higher than at the surface."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_ions_in_sun_core",
@@ -1004,7 +1041,8 @@
     },
     "description": {
       "en-us": "Ions in the suns core are crushed so closely together that nuclear fusion can ignite."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_ions_in_sun_corona",
@@ -1022,7 +1060,8 @@
     },
     "description": {
       "en-us": "The thin but incredibly hot plasma of the suns outer atmosphere has vastly more space between ions than the core."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_water_molecules",
@@ -1040,7 +1079,8 @@
     },
     "description": {
       "en-us": "The average distance between neighboring H2O molecules in liquid water at room temperature."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_neutrons_in_neutron_star",
@@ -1058,7 +1098,8 @@
     },
     "description": {
       "en-us": "Neutrons in these collapsed stellar remnants are packed as tightly as they are inside an atomic nucleus."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_ions_in_white_dwarf",
@@ -1076,7 +1117,8 @@
     },
     "description": {
       "en-us": "A state of degenerate matter where ions are squeezed into a space far smaller than in any normal solid."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_stars_in_milky_way",
@@ -1094,7 +1136,8 @@
     },
     "description": {
       "en-us": "The typical distance between star systems in our galaxy is measured in light-years, making collisions extremely rare."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "between_galaxies_in_local_supercluster",
@@ -1112,7 +1155,8 @@
     },
     "description": {
       "en-us": "The colossal separation between the islands of stars we call galaxies."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_molecule_h_2",
@@ -1141,7 +1185,8 @@
     },
     "description": {
       "en-us": "Molecular hydrogen consists of just two protons and two electrons, making it the simplest and smallest molecule."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_molecule_titin",
@@ -1159,7 +1204,8 @@
     },
     "description": {
       "en-us": "The largest known protein in the human body, serving as a molecular spring in our muscles."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "glucose_molecule",
@@ -1177,7 +1223,8 @@
     },
     "description": {
       "en-us": "A simple sugar that serves as the primary source of energy for most living organisms."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "water_molecule",
@@ -1195,7 +1242,8 @@
     },
     "description": {
       "en-us": "A polar molecule essential for all known forms of life, often described as the universal solvent."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "amino_acid",
@@ -1213,7 +1261,8 @@
     },
     "description": {
       "en-us": "The fundamental building blocks of proteins, which carry out most of the work inside your cells."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "dna_polymerase",
@@ -1238,7 +1287,8 @@
     },
     "description": {
       "en-us": "A sophisticated molecular machine that copies DNA with incredible speed and accuracy during cell division."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "collagen",
@@ -1262,7 +1312,8 @@
     },
     "description": {
       "en-us": "The most abundant protein in mammals, providing structural support to skin, bones, and connective tissues."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "dna_in_human_chromosome",
@@ -1287,7 +1338,8 @@
     },
     "description": {
       "en-us": "A single, long strand of DNA that is tightly coiled and packed into a structure visible under a microscope."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "chromosome_during_division",
@@ -1314,7 +1366,8 @@
     },
     "description": {
       "en-us": "DNA that has condensed into compact, X-shaped structures to ensure safe transport into new cells."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "cell_membrane_thickness",
@@ -1337,7 +1390,8 @@
     },
     "description": {
       "en-us": "The ultra-thin oily layer that protects the contents of a cell and controls what enters and exits."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_virus_aav",
@@ -1361,7 +1415,8 @@
     },
     "description": {
       "en-us": "Adeno-associated viruses are among the tiniest known, measuring only about 20 nanometers across."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_virus_tupanvirus",
@@ -1385,7 +1440,8 @@
     },
     "description": {
       "en-us": "A giant virus discovered in South America that possesses one of the most complex genetic toolkits of any virus."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_free_cell_mycoplasma",
@@ -1403,7 +1459,8 @@
     },
     "description": {
       "en-us": "The smallest known organisms capable of growing and reproducing without a host cell."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_cell_ostrich_egg",
@@ -1421,7 +1478,8 @@
     },
     "description": {
       "en-us": "While technically a single cell, its massive size is due to the large amount of stored yolk."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_human_cell_sperm",
@@ -1439,7 +1497,8 @@
     },
     "description": {
       "en-us": "The tiny male reproductive cell is specialized for one thing: swimming to an egg."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_human_cell_egg",
@@ -1457,7 +1516,8 @@
     },
     "description": {
       "en-us": "The female reproductive cell is large enough to be seen with the naked eye, about the size of a grain of sand."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "human_skin_cell",
@@ -1475,7 +1535,8 @@
     },
     "description": {
       "en-us": "The flat, protective cells that form the outermost barrier between your body and the environment."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "human_white_blood_cell",
@@ -1499,7 +1560,8 @@
     },
     "description": {
       "en-us": "The mobile defenders of your immune system that seek out and destroy invading pathogens."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "human_mitochondria",
@@ -1523,7 +1585,8 @@
     },
     "description": {
       "en-us": "Ancient bacteria-like structures that now live inside our cells to produce chemical energy."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_organelle_ribosome",
@@ -1546,7 +1609,8 @@
     },
     "description": {
       "en-us": "The tiny protein factories found in all living cells, translating genetic code into physical traits."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_organelle_nucleus",
@@ -1570,7 +1634,8 @@
     },
     "description": {
       "en-us": "The control center of the cell that houses the vast majority of our genetic information."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "longest_human_axon",
@@ -1588,7 +1653,8 @@
     },
     "description": {
       "en-us": "A single nerve fiber that can stretch from the base of your spine all the way down to your big toe."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "longest_axon_blue_whale",
@@ -1606,7 +1672,8 @@
     },
     "description": {
       "en-us": "Nerve fibers in the largest animal on Earth can reach lengths of over 25 meters."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "typical_human_axon",
@@ -1624,7 +1691,8 @@
     },
     "description": {
       "en-us": "The long, cable-like projections of neurons that carry electrical signals throughout your body."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "human_hair_thickness",
@@ -1642,7 +1710,8 @@
     },
     "description": {
       "en-us": "The width of a strand of hair, often used as a standard reference for measuring micro-scale objects."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "computer_transistor_size",
@@ -1665,7 +1734,8 @@
     },
     "description": {
       "en-us": "The size of the tiny electronic switches on modern computer chips, which can be just a few nanometers wide."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "highest_sounds_humans_hear",
@@ -1683,7 +1753,8 @@
     },
     "description": {
       "en-us": "The upper limit of human hearing, roughly 20,000 Hz, which gradually declines as we age."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lowest_sounds_humans_hear",
@@ -1701,7 +1772,8 @@
     },
     "description": {
       "en-us": "The deep, low-frequency rumble at 20 Hz that marks the bottom edge of human hearing."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lowest_sounds_animals_hear_pigeons",
@@ -1719,7 +1791,8 @@
     },
     "description": {
       "en-us": "Pigeons can detect incredibly low-frequency infrasound from distant storms or mountains."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "highest_sounds_animals_hear_greater_wax_moths",
@@ -1737,7 +1810,8 @@
     },
     "description": {
       "en-us": "These moths have the highest recorded hearing range of any animal, reaching frequencies of 300,000 Hz."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "highest_sound_produced_recorded",
@@ -1755,7 +1829,8 @@
     },
     "description": {
       "en-us": "The extreme limit of high-frequency sound waves generated in high-tech research laboratories."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "seismic_wave_shortest",
@@ -1773,7 +1848,8 @@
     },
     "description": {
       "en-us": "High-frequency tremors that are often the first to be felt near the epicenter of an earthquake."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "seismic_wave_longest",
@@ -1791,7 +1867,8 @@
     },
     "description": {
       "en-us": "Massive low-frequency waves that can ripple through the entire planet during a powerful earthquake."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "wind_wave",
@@ -1809,7 +1886,8 @@
     },
     "description": {
       "en-us": "Ripples and swells on the ocean surface generated by the friction of wind blowing across the water."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "tsunami_shortest",
@@ -1827,7 +1905,8 @@
     },
     "description": {
       "en-us": "The shorter-wavelength end of the massive sea waves triggered by underwater earthquakes or landslides."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "tsunami_longest",
@@ -1845,7 +1924,8 @@
     },
     "description": {
       "en-us": "Vast waves that can stretch over 100 kilometers from crest to crest as they race across the deep ocean."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "earth",
@@ -1869,7 +1949,8 @@
     },
     "description": {
       "en-us": "Our home planet, the only place in the universe known to harbor life."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "moon",
@@ -1894,7 +1975,8 @@
     },
     "description": {
       "en-us": "Earth's only natural satellite, which stabilizes our planets wobble and creates the tides."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "moon_orbit",
@@ -1912,7 +1994,8 @@
     },
     "description": {
       "en-us": "The elliptical path the Moon takes around Earth, averaging about 384,400 kilometers away."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "sun",
@@ -1942,7 +2025,8 @@
     },
     "description": {
       "en-us": "The massive star at the center of our solar system that provides the energy for life on Earth."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "earth_orbit_1_au",
@@ -1960,7 +2044,8 @@
     },
     "description": {
       "en-us": "The average distance from the Earth to the Sun, approximately 150 million kilometers."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "mercury_orbit",
@@ -1978,7 +2063,8 @@
     },
     "description": {
       "en-us": "The fastest orbital path in the solar system, keeping the scorched planet closest to the Sun."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "jupiter_orbit",
@@ -2002,7 +2088,8 @@
     },
     "description": {
       "en-us": "A vast path through the outer solar system taken by our solar systems largest planet."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "saturn_orbit",
@@ -2026,7 +2113,8 @@
     },
     "description": {
       "en-us": "The distant track taken by the ringed planet, nearly twice as far from the Sun as Jupiter."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "pluto_orbit",
@@ -2049,7 +2137,8 @@
     },
     "description": {
       "en-us": "A tilted, highly elliptical path that occasionally brings the dwarf planet closer to the Sun than Neptune."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "saturn",
@@ -2067,7 +2156,8 @@
     },
     "description": {
       "en-us": "A gas giant famous for its elaborate ring system and dozens of moons."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "saturn_s_rings_outer_radius",
@@ -2085,7 +2175,8 @@
     },
     "description": {
       "en-us": "The edge of Saturn's spectacular main rings, stretching far beyond the planets surface."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "brown_dwarf",
@@ -2103,7 +2194,8 @@
     },
     "description": {
       "en-us": "A failed star that is too large to be a planet but too small to ignite nuclear fusion in its core."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "saturn_s_ring_thickness",
@@ -2124,7 +2216,8 @@
     },
     "sources": {
       "length": "https://science.nasa.gov/mission/cassini/science/rings/"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "earth_s_inner_core",
@@ -2142,7 +2235,8 @@
     },
     "description": {
       "en-us": "A solid ball of iron and nickel at the center of the Earth, kept solid by immense pressure despite the heat."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "earth_s_outer_core",
@@ -2160,7 +2254,8 @@
     },
     "description": {
       "en-us": "A layer of liquid iron and nickel that generates Earth's protective magnetic field as it flows."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "earth_s_mantle_thickness",
@@ -2178,7 +2273,8 @@
     },
     "description": {
       "en-us": "The thick layer of hot, solid-ish rock that makes up the bulk of Earth's volume."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "earth_s_crust_continental_thickness",
@@ -2196,7 +2292,8 @@
     },
     "description": {
       "en-us": "The thick, lighter layer of rock that forms the continents we live on."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "earth_s_crust_oceanic_thickness",
@@ -2214,7 +2311,8 @@
     },
     "description": {
       "en-us": "The thinner, denser layer of volcanic rock that forms the floor of the worlds oceans."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_asteroid_ceres",
@@ -2232,7 +2330,8 @@
     },
     "description": {
       "en-us": "A dwarf planet in the asteroid belt that contains nearly a third of the belts total mass."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_asteroid_2015_t_c_25",
@@ -2250,7 +2349,8 @@
     },
     "description": {
       "en-us": "One of the smallest known asteroids, a tiny space rock only about 2 meters wide."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_known_star_sgr_1935_2154",
@@ -2268,7 +2368,8 @@
     },
     "description": {
       "en-us": "An incredibly dense neutron star that is among the smallest and most energetic stars known."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "neutron_star",
@@ -2286,7 +2387,8 @@
     },
     "description": {
       "en-us": "The collapsed core of a massive star, so dense that a teaspoon of its matter would weigh a billion tons."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_white_dwarf_hd_49798",
@@ -2304,7 +2406,8 @@
     },
     "description": {
       "en-us": "A tiny, hot remnant of a dead star that is part of a unique binary system."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "smallest_subdwarf",
@@ -2322,7 +2425,8 @@
     },
     "description": {
       "en-us": "A type of star that is cooler and smaller than typical main-sequence stars of the same brightness."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_white_dwarf_z_andromedae_b",
@@ -2340,7 +2444,8 @@
     },
     "description": {
       "en-us": "An unusually large white dwarf located in a complex symbiotic star system."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "red_dwarf",
@@ -2358,7 +2463,8 @@
     },
     "description": {
       "en-us": "Small, cool stars that are the most common type in the Milky Way and can live for trillions of years."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_main_sequence_star",
@@ -2376,7 +2482,8 @@
     },
     "description": {
       "en-us": "The most massive stars currently fusing hydrogen, pushing the physical limits of stellar stability."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "sirius",
@@ -2394,7 +2501,8 @@
     },
     "description": {
       "en-us": "The brightest star in Earth's night sky, also known as the Dog Star."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "maximum_future_sun_radius",
@@ -2412,7 +2520,8 @@
     },
     "description": {
       "en-us": "The vast size the Sun will reach as a red giant, likely swallowing the inner planets."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_known_star_uy_scuti",
@@ -2430,12 +2539,13 @@
     },
     "description": {
       "en-us": "An extreme red hypergiant so large that it could fit nearly 5 billion Suns inside it."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lightest_known_star_eblm_j0555_57ab",
     "displayName": {
-      "en-us": "Lightest Known Star (EBLM J0555−57Ab)"
+      "en-us": "EBLM J0555−57Ab"
     },
     "description": {
       "en-us": "The smallest known hydrogen-burning star, it lives in a triple star system."
@@ -2459,7 +2569,8 @@
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/EBLM_J0555%E2%88%9257",
       "length": "https://en.wikipedia.org/wiki/EBLM_J0555%E2%88%9257"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "heaviest_known_star_r136a1",
@@ -2491,7 +2602,8 @@
       "mass": "https://en.wikipedia.org/wiki/R136a1",
       "length": "https://en.wikipedia.org/wiki/R136a1",
       "duration": "https://en.wikipedia.org/wiki/R136a1"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "stars",
@@ -2513,11 +2625,12 @@
     },
     "x_coordinates": {
       "length": "5.8",
-      "mass": "0"
+      "mass": "-0.1"
     },
     "description": {
       "en-us": "Bright spheres of plasma in space, so large they are held together by gravity."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "kuiper_belt_outer_radius",
@@ -2535,7 +2648,8 @@
     },
     "description": {
       "en-us": "The outer edge of the icy region beyond Neptune where Pluto and many other dwarf planets reside."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "oort_cloud_outer_radius",
@@ -2553,7 +2667,8 @@
     },
     "description": {
       "en-us": "The theoretical outer boundary of our solar system, home to trillions of dormant comets."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "oort_cloud_inner_radius",
@@ -2571,7 +2686,8 @@
     },
     "description": {
       "en-us": "The beginning of the vast, spherical shell of icy objects that surrounds our solar system."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "heliopause",
@@ -2589,7 +2705,8 @@
     },
     "description": {
       "en-us": "The boundary where the solar wind from our Sun is finally pushed back by the winds of other stars."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "voyager_1_distance",
@@ -2607,7 +2724,8 @@
     },
     "description": {
       "en-us": "The current location of the furthest human-made object, now traveling through interstellar space."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "light_year",
@@ -2625,7 +2743,8 @@
     },
     "description": {
       "en-us": "The distance light travels in one year, approximately 9.46 trillion kilometers."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "parsec",
@@ -2643,7 +2762,8 @@
     },
     "description": {
       "en-us": "A unit of astronomical distance equal to about 3.26 light-years, used by professionals to map the stars."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "black_hole_1_solar_mass",
@@ -2671,7 +2791,8 @@
     },
     "description": {
       "en-us": "The theoretical size of a black hole with the same mass as our Sun."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "to_nearest_star_proxima_centauri",
@@ -2689,7 +2810,8 @@
     },
     "description": {
       "en-us": "The distance to the closest star system to our own, roughly 4.24 light-years away."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "to_farthest_known_star_earendel",
@@ -2710,7 +2832,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/List_of_most_distant_stars"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "to_sagittarius_a_star",
@@ -2735,7 +2858,8 @@
     },
     "description": {
       "en-us": "The distance from Earth to the supermassive black hole at the heart of the Milky Way."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "milky_way",
@@ -2759,7 +2883,8 @@
     },
     "description": {
       "en-us": "Our home galaxy, a barred spiral containing hundreds of billions of stars."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "magellanic_clouds_distance_from_galactic_center",
@@ -2782,7 +2907,8 @@
       "en-us": [
         "satellite galaxy"
       ]
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "to_closest_galaxy_andromeda",
@@ -2806,7 +2932,8 @@
     },
     "description": {
       "en-us": "The distance to our neighbor galaxy, which is currently on a collision course with the Milky Way."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_galaxy_eso_383_76",
@@ -2824,7 +2951,8 @@
     },
     "description": {
       "en-us": "One of the largest known galaxies, a supergiant elliptical that dwarfs our Milky Way."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "globular_cluster",
@@ -2842,7 +2970,8 @@
     },
     "description": {
       "en-us": "A dense, spherical collection of hundreds of thousands of ancient stars held together by gravity."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "simeis_147_supernova_remnant",
@@ -2860,7 +2989,8 @@
     },
     "description": {
       "en-us": "The expanding leftovers of a star that exploded in a violent supernova thousands of years ago."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "observable_universe",
@@ -2892,7 +3022,8 @@
     },
     "description": {
       "en-us": "The spherical region that contains all matter we can observe from Earth."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "to_cosmic_event_horizon",
@@ -2913,7 +3044,8 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Cosmological_horizon"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "local_group",
@@ -2931,7 +3063,8 @@
     },
     "description": {
       "en-us": "The small cluster of galaxies that includes the Milky Way, Andromeda, and about 50 other smaller galaxies."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "local_supercluster",
@@ -2949,7 +3082,8 @@
     },
     "description": {
       "en-us": "The vast collection of galaxy groups that includes our own Local Group."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "to_great_attractor",
@@ -2967,7 +3101,8 @@
     },
     "description": {
       "en-us": "A gravitational anomaly in intergalactic space that is pulling our galaxy and others toward it."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "sagittarius_a_star",
@@ -2992,7 +3127,8 @@
     },
     "description": {
       "en-us": "The supermassive black hole at the center of our galaxy, weighing as much as 4 million Suns."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_bh_found_by_ligo",
@@ -3015,7 +3151,8 @@
     },
     "description": {
       "en-us": "A massive black hole formed by the collision of two others, detected through ripples in spacetime."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "largest_bh",
@@ -3038,7 +3175,8 @@
     },
     "description": {
       "en-us": "The most massive black holes known, some weighing as much as 60 billion Suns."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "milky_way_dark_matter_halo",
@@ -3061,7 +3199,8 @@
     },
     "description": {
       "en-us": "The invisible cloud of dark matter that surrounds and outweighs the visible stars of our galaxy."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "longest_galactic_filament",
@@ -3075,11 +3214,12 @@
       "length": "9.26e+25"
     },
     "x_coordinates": {
-      "length": "30"
+      "length": "0"
     },
     "description": {
       "en-us": "One of the largest structures in the universe, a thread-like bridge of galaxies stretching over a billion light-years."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "neutral_atoms",
@@ -3103,7 +3243,8 @@
     },
     "x_coordinates": {
       "length": "-0.1"
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "hydrogen",
@@ -3134,7 +3275,8 @@
     },
     "description": {
       "en-us": "The lightest and most abundant element in the universe, fueling the stars through nuclear fusion."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "helium",
@@ -3166,7 +3308,8 @@
     },
     "description": {
       "en-us": "The second lightest element, first discovered in the Suns atmosphere before being found on Earth."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lithium",
@@ -3197,7 +3340,8 @@
     },
     "description": {
       "en-us": "A soft, silvery metal that is the lightest solid element and a critical component of modern batteries."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "beryllium",
@@ -3228,7 +3372,8 @@
     },
     "description": {
       "en-us": "A lightweight, high-melting-point metal often used in aerospace and X-ray windows."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "boron",
@@ -3259,7 +3404,8 @@
     },
     "description": {
       "en-us": "An essential nutrient for plants and a key ingredient in heat-resistant glassware."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "carbon",
@@ -3290,7 +3436,8 @@
     },
     "description": {
       "en-us": "The versatile building block of life that forms the basis of all organic chemistry."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "nitrogen",
@@ -3321,7 +3468,8 @@
     },
     "description": {
       "en-us": "The most abundant gas in Earth's atmosphere, essential for protein and DNA."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "oxygen",
@@ -3352,7 +3500,8 @@
     },
     "description": {
       "en-us": "The highly reactive gas that fuels cellular respiration and makes up about 21% of our air."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "fluorine",
@@ -3383,7 +3532,8 @@
     },
     "description": {
       "en-us": "The most reactive of all chemical elements, commonly used to prevent tooth decay."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "neon",
@@ -3414,7 +3564,8 @@
     },
     "description": {
       "en-us": "A noble gas famous for its vivid orange-red glow when used in advertising signs."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "sodium",
@@ -3445,7 +3596,8 @@
     },
     "description": {
       "en-us": "A soft, silvery metal that reacts explosively with water and is a key part of table salt."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "magnesium",
@@ -3476,7 +3628,8 @@
     },
     "description": {
       "en-us": "A lightweight metal that burns with a brilliant white light and is vital for photosynthesis."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "aluminium",
@@ -3507,7 +3660,8 @@
     },
     "description": {
       "en-us": "The most abundant metal in Earth's crust, prized for its low density and corrosion resistance."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "silicon",
@@ -3538,7 +3692,8 @@
     },
     "description": {
       "en-us": "The backbone of modern electronics and the primary component of sand and glass."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "phosphorus",
@@ -3569,7 +3724,8 @@
     },
     "description": {
       "en-us": "A highly reactive nonmetal essential for energy transfer in cells and the structure of bones."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "sulfur",
@@ -3600,7 +3756,8 @@
     },
     "description": {
       "en-us": "A bright yellow nonmetal often associated with the smell of rotten eggs and volcanic activity."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "chlorine",
@@ -3631,7 +3788,8 @@
     },
     "description": {
       "en-us": "A greenish-yellow gas frequently used to disinfect swimming pools and drinking water."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "argon",
@@ -3662,7 +3820,8 @@
     },
     "description": {
       "en-us": "The most common noble gas on Earth, often used to provide an inert atmosphere for welding."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "potassium",
@@ -3693,7 +3852,8 @@
     },
     "description": {
       "en-us": "A soft metal that helps regulate fluid balance and nerve signals in the human body."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "calcium",
@@ -3724,7 +3884,8 @@
     },
     "description": {
       "en-us": "A silvery-white metal that is the primary structural component of teeth, bones, and shells."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "scandium",
@@ -3755,7 +3916,8 @@
     },
     "description": {
       "en-us": "A rare-earth metal used in high-strength aluminum alloys for sports equipment and aerospace."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "titanium",
@@ -3786,7 +3948,8 @@
     },
     "description": {
       "en-us": "A strong, lightweight, and corrosion-resistant metal frequently used in médical implants."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "vanadium",
@@ -3817,7 +3980,8 @@
     },
     "description": {
       "en-us": "A hard, silvery-grey metal primarily used as an additive to strengthen steel alloys."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "chromium",
@@ -3848,7 +4012,8 @@
     },
     "description": {
       "en-us": "A shiny, hard metal that gives stainless steel its corrosion resistance and rubies their red color."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "manganese",
@@ -3879,7 +4044,8 @@
     },
     "description": {
       "en-us": "An essential mineral for bone health and a key component in the production of steel."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "iron",
@@ -3910,7 +4076,8 @@
     },
     "description": {
       "en-us": "The most common element on Earth by mass, forming the core of our planet and the basis of steel."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "cobalt",
@@ -3941,7 +4108,8 @@
     },
     "description": {
       "en-us": "A magnetic metal used in high-strength alloys and as a blue pigment in ceramics and glass."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "nickel",
@@ -3972,7 +4140,8 @@
     },
     "description": {
       "en-us": "A silvery-white metal used in coins, rechargeable batteries, and stainless steel."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "copper",
@@ -4003,7 +4172,8 @@
     },
     "description": {
       "en-us": "A reddish-orange metal prized for its excellent electrical conductivity and use in plumbing."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "zinc",
@@ -4034,7 +4204,8 @@
     },
     "description": {
       "en-us": "A bluish-white metal used to galvanize steel and as an essential micronutrient for the immune system."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "gallium",
@@ -4065,7 +4236,8 @@
     },
     "description": {
       "en-us": "A unique metal that melts in your hand and is widely used in high-speed electronics."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "germanium",
@@ -4096,7 +4268,8 @@
     },
     "description": {
       "en-us": "A semiconductor material that was used to create the first transistors."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "arsenic",
@@ -4127,7 +4300,8 @@
     },
     "description": {
       "en-us": "A notorious poison that also has historic uses in pigments and modern uses in semiconductors."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "selenium",
@@ -4158,7 +4332,8 @@
     },
     "description": {
       "en-us": "An essential trace element that also conducts electricity better when exposed to light."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "bromine",
@@ -4189,7 +4364,8 @@
     },
     "description": {
       "en-us": "The only nonmetallic element that exists as a liquid at room temperature."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "krypton",
@@ -4220,7 +4396,8 @@
     },
     "description": {
       "en-us": "A noble gas used alongside neon in high-efficiency fluorescent lamps and flashbulbs."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "rubidium",
@@ -4251,7 +4428,8 @@
     },
     "description": {
       "en-us": "An extremely reactive soft metal that is used in high-precision atomic clocks."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "strontium",
@@ -4282,7 +4460,8 @@
     },
     "description": {
       "en-us": "A metal that burns with a brilliant red flame, making it a staple in fireworks and flares."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "yttrium",
@@ -4313,7 +4492,8 @@
     },
     "description": {
       "en-us": "A silvery-white metal used to create the red phosphors in old television screens."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "zirconium",
@@ -4344,7 +4524,8 @@
     },
     "description": {
       "en-us": "A highly corrosion-resistant metal used in nuclear reactors and as a diamond-like gemstone."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "niobium",
@@ -4375,7 +4556,8 @@
     },
     "description": {
       "en-us": "A soft, grey metal used in superconducting magnets and high-strength alloys for jet engines."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "molybdenum",
@@ -4406,7 +4588,8 @@
     },
     "description": {
       "en-us": "A hard metal with a very high melting point, used to strengthen steel for extreme temperatures."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "technetium",
@@ -4437,7 +4620,8 @@
     },
     "description": {
       "en-us": "The first element to be produced artificially, widely used as a radioactive tracer in medicine."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "ruthenium",
@@ -4468,7 +4652,8 @@
     },
     "description": {
       "en-us": "A rare transition metal used to harden platinum and as a catalyst in chemical reactions."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "rhodium",
@@ -4499,7 +4684,8 @@
     },
     "description": {
       "en-us": "One of the rarest and most valuable precious metals, used primarily in catalytic converters."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "palladium",
@@ -4530,7 +4716,8 @@
     },
     "description": {
       "en-us": "A precious metal that can absorb 900 times its own volume in hydrogen gas."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "silver",
@@ -4561,7 +4748,8 @@
     },
     "description": {
       "en-us": "The element with the highest electrical and thermal conductivity of any known metal."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "cadmium",
@@ -4592,7 +4780,8 @@
     },
     "description": {
       "en-us": "A soft, bluish-white metal historically used in yellow pigments and rechargeable batteries."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "indium",
@@ -4623,7 +4812,8 @@
     },
     "description": {
       "en-us": "A very soft metal used to create the transparent conductive coatings on touchscreens."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "tin",
@@ -4654,7 +4844,8 @@
     },
     "description": {
       "en-us": "A silvery metal used for centuries to prevent corrosion in tin cans and as a component of bronze."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "antimony",
@@ -4685,7 +4876,8 @@
     },
     "description": {
       "en-us": "A semi-metal that expands as it freezes, often used to harden lead alloys."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "tellurium",
@@ -4716,7 +4908,8 @@
     },
     "description": {
       "en-us": "A rare semi-metal used to improve the machinability of steel and in solar panels."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "iodine",
@@ -4747,7 +4940,8 @@
     },
     "description": {
       "en-us": "A lustrous purple-black solid that is essential for the production of thyroid hormones."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "xenon",
@@ -4778,7 +4972,8 @@
     },
     "description": {
       "en-us": "A heavy noble gas used in specialized light sources like IMAX projectors and ion thrusters."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "caesium",
@@ -4810,7 +5005,8 @@
     },
     "description": {
       "en-us": "The most reactive of all metals, used to define the standard length of a second."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "barium",
@@ -4841,7 +5037,8 @@
     },
     "description": {
       "en-us": "A soft, silvery metal used in barium swallows to image the digestive system with X-rays."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lanthanum",
@@ -4872,7 +5069,8 @@
     },
     "description": {
       "en-us": "The first of the rare-earth elements, used in battery electrodes and high-quality camera lenses."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "cerium",
@@ -4903,7 +5101,8 @@
     },
     "description": {
       "en-us": "The most abundant rare-earth metal, famous for creating sparks when struck in lighter flints."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "praseodymium",
@@ -4934,7 +5133,8 @@
     },
     "description": {
       "en-us": "A soft, silvery metal that gives specialized glass a unique yellow tint."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "neodymium",
@@ -4965,7 +5165,8 @@
     },
     "description": {
       "en-us": "A rare-earth metal used to create the strongest known permanent magnets."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "promethium",
@@ -4996,7 +5197,8 @@
     },
     "description": {
       "en-us": "The only rare-earth element with no stable isotopes, often used in nuclear batteries."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "samarium",
@@ -5027,7 +5229,8 @@
     },
     "description": {
       "en-us": "A hard, silvery metal used in high-temperature magnets and as a neutron absorber."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "europium",
@@ -5058,7 +5261,8 @@
     },
     "description": {
       "en-us": "The most reactive rare-earth element, used to create the red and blue phosphors in displays."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "gadolinium",
@@ -5089,7 +5293,8 @@
     },
     "description": {
       "en-us": "A rare-earth metal used as a contrast agent in MRI scans and in specialized nuclear applications."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "terbium",
@@ -5120,7 +5325,8 @@
     },
     "description": {
       "en-us": "A silvery-grey metal used in the manufacture of electronic devices and high-efficiency lighting."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "dysprosium",
@@ -5151,7 +5357,8 @@
     },
     "description": {
       "en-us": "A metal with high magnetic strength used in laser materials and nuclear reactor control rods."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "holmium",
@@ -5182,7 +5389,8 @@
     },
     "description": {
       "en-us": "The element with the highest magnetic strength of any naturally occurring element."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "erbium",
@@ -5213,7 +5421,8 @@
     },
     "description": {
       "en-us": "A pinkish metal used to amplify signals in long-distance fiber optic cables."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "thulium",
@@ -5244,7 +5453,8 @@
     },
     "description": {
       "en-us": "The rarest naturally occurring rare-earth metal, used as a portable X-ray source."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "ytterbium",
@@ -5275,7 +5485,8 @@
     },
     "description": {
       "en-us": "A soft, silvery metal used in high-intensity lasers and as a doping agent in fiber optics."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lutetium",
@@ -5306,7 +5517,8 @@
     },
     "description": {
       "en-us": "The densest and hardest of the lanthanide elements, used as a catalyst in petroleum cracking."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "hafnium",
@@ -5337,7 +5549,8 @@
     },
     "description": {
       "en-us": "A corrosion-resistant metal with a high affinity for neutrons, used in nuclear control rods."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "tantalum",
@@ -5368,7 +5581,8 @@
     },
     "description": {
       "en-us": "A highly corrosion-resistant metal used to make tiny, high-performance capacitors for cell phones."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "tungsten",
@@ -5399,7 +5613,8 @@
     },
     "description": {
       "en-us": "The element with the highest melting point, traditionally used in incandescent light bulb filaments."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "rhenium",
@@ -5430,7 +5645,8 @@
     },
     "description": {
       "en-us": "One of the rarest elements in Earth's crust, used in high-temperature superalloys for jet engines."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "osmium",
@@ -5461,7 +5677,8 @@
     },
     "description": {
       "en-us": "The densest naturally occurring element, prized for its extreme hardness and durability."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "iridium",
@@ -5492,7 +5709,8 @@
     },
     "description": {
       "en-us": "One of the most corrosion-resistant metals known, often associated with the asteroid that killed the dinosaurs."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "platinum",
@@ -5523,7 +5741,8 @@
     },
     "description": {
       "en-us": "A dense, stable, and precious metal used in jewelry and as a vital industrial catalyst."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "gold",
@@ -5554,7 +5773,8 @@
     },
     "description": {
       "en-us": "A noble metal valued for its beauty, rarity, and exceptional resistance to chemical corrosion."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "mercury",
@@ -5585,7 +5805,8 @@
     },
     "description": {
       "en-us": "The only metal that exists as a liquid at room temperature, famous for its use in thermometers."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "thallium",
@@ -5616,7 +5837,8 @@
     },
     "description": {
       "en-us": "A soft, grey metal that is highly toxic and was once widely used as a rodenticide."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "lead",
@@ -5647,7 +5869,8 @@
     },
     "description": {
       "en-us": "A dense, soft metal that has been used for millennia but is now known to be a potent neurotoxin."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "bismuth",
@@ -5678,7 +5901,8 @@
     },
     "description": {
       "en-us": "A brittle, silvery-pink metal used in stomach medicines and as a non-toxic replacement for lead."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "polonium",
@@ -5709,7 +5933,8 @@
     },
     "description": {
       "en-us": "A highly radioactive and toxic element discovered by Marie Curie and named after her homeland."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "astatine",
@@ -5740,7 +5965,8 @@
     },
     "description": {
       "en-us": "The rarest naturally occurring element on Earth, with less than one gram present in the entire crust at any time."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "radon",
@@ -5771,7 +5997,8 @@
     },
     "description": {
       "en-us": "A colorless, odorless radioactive gas that can accumulate in buildings and pose a health risk."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "francium",
@@ -5802,7 +6029,8 @@
     },
     "description": {
       "en-us": "The second rarest naturally occurring element, so unstable that it has no practical uses."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "radium",
@@ -5832,7 +6060,8 @@
     },
     "description": {
       "en-us": "An intensely radioactive element once used in glow-in-the-dark watch dials before the health risks were known."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "actinium",
@@ -5862,7 +6091,8 @@
     },
     "description": {
       "en-us": "A silvery radioactive metal that glows in the dark with an eerie blue light."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "thorium",
@@ -5893,7 +6123,8 @@
     },
     "description": {
       "en-us": "A radioactive metal that is three times more abundant than uranium and a potential future nuclear fuel."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "protactinium",
@@ -5924,7 +6155,8 @@
     },
     "description": {
       "en-us": "A rare, dense, and highly toxic radioactive metal found in uranium ores."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "uranium",
@@ -5955,7 +6187,8 @@
     },
     "description": {
       "en-us": "The heaviest naturally occurring element found in significant quantities, vital for nuclear power and weapons."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "neptunium",
@@ -5985,7 +6218,8 @@
     },
     "description": {
       "en-us": "The first transuranic element ever produced, formed in nuclear reactors from uranium."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "plutonium",
@@ -6015,7 +6249,8 @@
     },
     "description": {
       "en-us": "A radioactive element used in nuclear weapons and as a long-term fuel source for space probes."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "americium",
@@ -6045,7 +6280,8 @@
     },
     "description": {
       "en-us": "A radioactive element used in most household smoke detectors to detect smoke particles."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "higgs_boson",
@@ -6072,7 +6308,8 @@
     },
     "description": {
       "en-us": "The fundamental particle discovered at the Large Hadron Collider that gives mass to other fundamental particles through its interaction with the Higgs field."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "muon",
@@ -6099,7 +6336,8 @@
     },
     "description": {
       "en-us": "A \"heavy electron\" that is about 200 times more massive and decays in just a few microseconds."
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "one_hour",
@@ -6122,7 +6360,8 @@
       "en-us": [
         "measurement unit"
       ]
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "one_year",
@@ -6145,7 +6384,8 @@
       "en-us": [
         "measurement unit"
       ]
-    }
+    },
+    "reviewed": false
   },
   {
     "id": "since_big_bang",
@@ -6166,6 +6406,7 @@
     },
     "description": {
       "en-us": "The estimated age of the universe, currently calculated to be roughly 13.8 billion years."
-    }
+    },
+    "reviewed": false
   }
 ]
