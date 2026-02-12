@@ -4,7 +4,7 @@ import { getLocalized } from './utils.js';
 /**
  * Creates a legend component that shows active categories with hover filtering.
  */
-export function createLegend(svg, g) {
+export function createLegend(svg, g, gCombined) {
     const legendPadding = 15;
     const legendItemHeight = 20;
     const legendGroup = svg.append("g").attr("class", "legend");
@@ -41,10 +41,14 @@ export function createLegend(svg, g) {
             g.selectAll(".item-group").transition().duration(200)
                 .attr("opacity", d => getLocalized(d.category, language) === cat ? 1 : 0.2);
             g.selectAll(".item-group").filter(d => getLocalized(d.category, language) === cat).raise();
+            gCombined.selectAll(".item-group").transition().duration(200)
+                .attr("opacity", d => d._members && d._members.some(m => getLocalized(m.category, language) === cat) ? 1 : 0.2);
+            gCombined.selectAll(".item-group").filter(d => d._members && d._members.some(m => getLocalized(m.category, language) === cat)).raise();
         })
             .on("mouseout", function () {
                 g.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
                 g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
+                gCombined.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
             })
             .on("click", function (event, cat) {
                 event.stopPropagation();

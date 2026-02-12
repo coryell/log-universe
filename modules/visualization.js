@@ -30,7 +30,7 @@ export function createVisualization(container, config) {
 
     const ruler = createRuler(svg);
     const grid = createGrid(gridGroup, xLabelGroup, yLabelGroup);
-    const legend = createLegend(svg, g);
+    const legend = createLegend(svg, g, gCombined);
 
     // Scales
     let yScale = d3.scaleLog().range([height - 50, 50]);
@@ -236,7 +236,7 @@ export function createVisualization(container, config) {
 
         if (dimChanged && !isInitialLoad) {
             gCombined.selectAll(".item-group").remove();
-            g.selectAll('.item-group').style("opacity", 1).style("pointer-events", "auto");
+            g.selectAll('.item-group').style("opacity", null).style("pointer-events", null);
             g.selectAll('.item-group').each(function (d) {
                 const tr = d3.select(this).attr('transform');
                 if (tr) prevPositions.set(d.id, tr);
