@@ -3,7 +3,8 @@
 // Run with: node search.test.js
 
 import assert from 'assert';
-import { isMatch, getMatches, getLocalized } from './search.js';
+import { isMatch, getMatches } from './search.js';
+import { getLocalized } from './utils.js';
 
 const LANGUAGE = "en-us";
 

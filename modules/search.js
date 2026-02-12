@@ -1,14 +1,11 @@
 
+import { getLocalized } from './utils.js';
+
 /**
  * Helper to get localized string from data.
  * Handles object (i18n) formats only.
  */
-export function getLocalized(val, language) {
-    if (val && typeof val === 'object' && language in val) {
-        return val[language];
-    }
-    return '';
-}
+// Removed local definition
 
 /**
  * Splits a string into tokens based on SPACES ONLY.
