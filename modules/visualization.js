@@ -186,7 +186,10 @@ export function createVisualization(container, config) {
 
         const boundsWidth = maxX - minX;
         const boundsHeight = maxY - minY;
-        const padLeft = 180, padRight = 460, padTop = 60, padBottom = 120;
+        const padLeft = Math.min(180, width * 0.1);
+        const padRight = Math.min(460, width * 0.1);
+        const padTop = Math.min(60, height * 0.05);
+        const padBottom = Math.min(120, height * 0.1);
         const availWidth = width - padLeft - padRight;
         const availHeight = height - padTop - padBottom;
 
