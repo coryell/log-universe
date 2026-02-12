@@ -4,15 +4,15 @@ import { getUnit } from './utils.js';
 /**
  * Creates a grid renderer that draws tick marks, grid lines, and axis labels.
  */
-export function createGrid(gridGroup, xLabelGroup, yLabelGroup) {
+export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
 
     /**
      * Renders the grid based on the current zoom transform.
      * @param {d3.ZoomTransform} transform - Current zoom transform
-     * @param {Object} state - { width, height, xScale, yScale, currentDimensionX, currentDimensionY }
+     * @param {Object} state - { width, height, xScale, yScale, currentDimensionX, currentDimensionY, isMobile }
      */
     function updateGrid(transform, state) {
-        const { width, height, xScale, yScale, currentDimensionX, currentDimensionY } = state;
+        const { width, height, xScale, yScale, currentDimensionX, currentDimensionY, isMobile } = state;
         const newYScale = transform.rescaleY(yScale);
         const newXScale = transform.rescaleX(xScale);
         const padding = 200;
@@ -145,6 +145,57 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup) {
         } else {
             gridGroup.selectAll(".horizontal-grid .tick text").attr("x", 10).attr("dy", -4).attr("fill", "#00aaff")
                 .attr("opacity", d => majorYDecades.has(d) ? 1.0 : 0).style("font-family", "monospace").style("font-size", "12px");
+        }
+
+        // Mobile: add black cutout rects to the data mask at label positions
+        // This hides data points behind labels without affecting grid lines
+        if (mobileMask && isMobile) {
+            // Remove only label cutout rects (keep the white base rect from updateMask)
+            mobileMask.selectAll(".label-cutout").remove();
+            const bgPad = 2;
+            if (currentDimensionX === "none") {
+                // 1D: Y labels are tick texts inside translated <g class="tick"> elements
+                gridGroup.selectAll(".horizontal-grid .tick")
+                    .filter(d => majorYDecades.has(d))
+                    .each(function () {
+                        const textEl = d3.select(this).select("text").node();
+                        if (!textEl) return;
+                        const bbox = textEl.getBBox();
+                        if (bbox.width > 0) {
+                            const tickTransform = d3.select(this).attr("transform");
+                            const match = tickTransform && tickTransform.match(/translate\(\s*([^,)]+)[,\s]+([^)]+)\)/);
+                            const tx = match ? parseFloat(match[1]) : 0;
+                            const ty = match ? parseFloat(match[2]) : 0;
+                            mobileMask.append("rect")
+                                .attr("class", "label-cutout")
+                                .attr("x", tx + bbox.x - bgPad).attr("y", ty + bbox.y - bgPad)
+                                .attr("width", bbox.width + bgPad * 2).attr("height", bbox.height + bgPad * 2)
+                                .attr("fill", "black");
+                        }
+                    });
+            } else {
+                // 2D: labels in yLabelGroup and xLabelGroup
+                yLabelGroup.selectAll(".y-label").each(function () {
+                    const bbox = this.getBBox();
+                    if (bbox.width > 0) {
+                        mobileMask.append("rect")
+                            .attr("class", "label-cutout")
+                            .attr("x", bbox.x - bgPad).attr("y", bbox.y - bgPad)
+                            .attr("width", bbox.width + bgPad * 2).attr("height", bbox.height + bgPad * 2)
+                            .attr("fill", "black");
+                    }
+                });
+                xLabelGroup.selectAll(".x-label").each(function () {
+                    const bbox = this.getBBox();
+                    if (bbox.width > 0) {
+                        mobileMask.append("rect")
+                            .attr("class", "label-cutout")
+                            .attr("x", bbox.x - bgPad).attr("y", bbox.y - bgPad)
+                            .attr("width", bbox.width + bgPad * 2).attr("height", bbox.height + bgPad * 2)
+                            .attr("fill", "black");
+                    }
+                });
+            }
         }
     }
 

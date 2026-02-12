@@ -22,14 +22,18 @@ export function createVisualization(container, config) {
 
     // SVG setup (gradients, masks, layer groups)
     const {
-        svg, gridGroup, xLabelGroup, yLabelGroup,
+        svg, gridGroup, xLabelGroup, yLabelGroup, mobileMask,
         dataLayerOuter, g, gCombined, updateMask
     } = createSvgLayers(container, width, height);
 
-    updateMask(width, height, currentDimensionX);
+    function checkMobile() {
+        return window.matchMedia('(max-width: 768px)').matches;
+    }
+
+    updateMask(width, height, currentDimensionX, checkMobile());
 
     const ruler = createRuler(svg);
-    const grid = createGrid(gridGroup, xLabelGroup, yLabelGroup);
+    const grid = createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask);
     const legend = createLegend(svg, g, gCombined);
 
     // Scales
@@ -64,7 +68,7 @@ export function createVisualization(container, config) {
 
         zoom.translateExtent([[extX0, extY0], [extX1, extY1]]);
 
-        grid.updateGrid(t, { width, height, xScale, yScale, currentDimensionX, currentDimensionY });
+        grid.updateGrid(t, { width, height, xScale, yScale, currentDimensionX, currentDimensionY, isMobile: checkMobile() });
 
         const newXScale = t.rescaleX(xScale);
         const newYScale = t.rescaleY(yScale);
@@ -348,7 +352,7 @@ export function createVisualization(container, config) {
             );
 
         legend.updateLegend(filteredData, { ...currentState, width, height, onCategoryClick: zoomToCategory });
-        updateMask(width, height, currentDimensionX);
+        updateMask(width, height, currentDimensionX, checkMobile());
 
         if (dimChanged && !isInitialLoad) {
             d3.timeout(runGrouping, 1100);
@@ -414,7 +418,7 @@ export function createVisualization(container, config) {
         if (currentDimensionX !== "none") yScale.range([height - fadeBottomHeight, 50]);
         else yScale.range([height - 50, 50]);
 
-        updateMask(width, height, currentDimensionX);
+        updateMask(width, height, currentDimensionX, checkMobile());
         legend.reposition(width, height);
 
         const newT = d3.zoomIdentity.translate(width / 2, height / 2).scale(t.k).translate(-xScale(dataX), -yScale(dataY));

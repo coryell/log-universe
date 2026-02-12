@@ -59,6 +59,10 @@ export function createSvgLayers(container, width, height) {
     const maskBottom = defs.append("mask")
         .attr("id", "fade-mask-bottom");
 
+    // Combined mask for mobile (single mask applied to dataLayerOuter)
+    const mobileMask = defs.append("mask")
+        .attr("id", "mobile-data-mask");
+
     // Inequality mask
     const createInequalityMask = (id, x1, y1, x2, y2) => {
         const gradId = id + "-grad";
@@ -87,12 +91,6 @@ export function createSvgLayers(container, width, height) {
 
     // SVG layer groups
     const gridGroup = svg.append("g").attr("class", "grid");
-    const xLabelGroup = svg.append("g")
-        .attr("class", "x-axis-labels")
-        .attr("mask", "url(#fade-mask-left)");
-    const yLabelGroup = svg.append("g")
-        .attr("class", "y-axis-labels")
-        .attr("mask", "url(#fade-mask-bottom)");
 
     const dataLayerOuter = svg.append('g')
         .attr("class", "data-layer-outer")
@@ -106,42 +104,73 @@ export function createSvgLayers(container, width, height) {
         .attr("class", "combined-layer")
         .attr("mask", "url(#fade-mask-bottom)");
 
+    const xLabelGroup = svg.append("g")
+        .attr("class", "x-axis-labels");
+    const yLabelGroup = svg.append("g")
+        .attr("class", "y-axis-labels");
+
     /**
      * Updates the left and bottom fade masks based on current dimensions.
+     * On mobile, uses a single combined mask with no gradient.
      */
-    function updateMask(w, h, currentDimensionX) {
-        maskLeft.selectAll("rect").remove();
-        maskBottom.selectAll("rect").remove();
+    function updateMask(w, h, currentDimensionX, isMobile) {
+        maskLeft.selectAll("*").remove();
+        maskBottom.selectAll("*").remove();
+        mobileMask.selectAll("*").remove();
 
-        maskLeft.append("rect")
-            .attr("x", 0).attr("y", 0)
-            .attr("width", fadeEnd).attr("height", h)
-            .attr("fill", "url(#fade-gradient)");
-
-        maskLeft.append("rect")
-            .attr("x", fadeEnd).attr("y", 0)
-            .attr("width", w - fadeEnd).attr("height", h)
-            .attr("fill", "white");
-
-        if (currentDimensionX !== "none") {
-            svg.select("#fade-gradient-vertical")
-                .attr("y1", h)
-                .attr("y2", h - fadeBottomHeight);
-
-            maskBottom.append("rect")
-                .attr("x", 0).attr("y", h - fadeBottomHeight)
-                .attr("width", w).attr("height", fadeBottomHeight)
-                .attr("fill", "url(#fade-gradient-vertical)");
-
-            maskBottom.append("rect")
-                .attr("x", 0).attr("y", 0)
-                .attr("width", w).attr("height", h - fadeBottomHeight)
-                .attr("fill", "white");
-        } else {
-            maskBottom.append("rect")
+        if (isMobile) {
+            // On mobile, use a single combined mask on dataLayerOuter
+            // Start with full white (all visible); grid.js will add black cutouts at label positions
+            mobileMask.append("rect")
                 .attr("x", 0).attr("y", 0)
                 .attr("width", w).attr("height", h)
                 .attr("fill", "white");
+
+            dataLayerOuter.attr("mask", "url(#mobile-data-mask)");
+            g.attr("mask", null);
+            gCombined.attr("mask", null);
+
+            xLabelGroup.attr("mask", null);
+            yLabelGroup.attr("mask", null);
+        } else {
+            // Desktop: gradient masks
+            dataLayerOuter.attr("mask", "url(#fade-mask-left)");
+            g.attr("mask", "url(#fade-mask-bottom)");
+            gCombined.attr("mask", "url(#fade-mask-bottom)");
+
+            maskLeft.append("rect")
+                .attr("x", 0).attr("y", 0)
+                .attr("width", fadeEnd).attr("height", h)
+                .attr("fill", "url(#fade-gradient)");
+
+            maskLeft.append("rect")
+                .attr("x", fadeEnd).attr("y", 0)
+                .attr("width", w - fadeEnd).attr("height", h)
+                .attr("fill", "white");
+
+            if (currentDimensionX !== "none") {
+                svg.select("#fade-gradient-vertical")
+                    .attr("y1", h)
+                    .attr("y2", h - fadeBottomHeight);
+
+                maskBottom.append("rect")
+                    .attr("x", 0).attr("y", h - fadeBottomHeight)
+                    .attr("width", w).attr("height", fadeBottomHeight)
+                    .attr("fill", "url(#fade-gradient-vertical)");
+
+                maskBottom.append("rect")
+                    .attr("x", 0).attr("y", 0)
+                    .attr("width", w).attr("height", h - fadeBottomHeight)
+                    .attr("fill", "white");
+            } else {
+                maskBottom.append("rect")
+                    .attr("x", 0).attr("y", 0)
+                    .attr("width", w).attr("height", h)
+                    .attr("fill", "white");
+            }
+
+            xLabelGroup.attr("mask", "url(#fade-mask-left)");
+            yLabelGroup.attr("mask", "url(#fade-mask-bottom)");
         }
     }
 
@@ -151,6 +180,7 @@ export function createSvgLayers(container, width, height) {
         gridGroup,
         xLabelGroup,
         yLabelGroup,
+        mobileMask,
         dataLayerOuter,
         g,
         gCombined,
