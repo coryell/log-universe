@@ -28,33 +28,6 @@
     "reviewed": true
   },
   {
-    "id": "kilogram",
-    "displayName": {
-      "en-us": "Kilogram"
-    },
-    "description": {
-      "en-us": "The base unit of mass in the International System of Units (SI), defined by the vibrations of a cesium atom."
-    },
-    "category": {
-      "en-us": "Technology"
-    },
-    "dimensions": {
-      "mass": "1e+0"
-    },
-    "tags": {
-      "en-us": [
-        "measurement unit"
-      ]
-    },
-    "x_coordinates": {
-      "mass": "0"
-    },
-    "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Kilogram"
-    },
-    "reviewed": false
-  },
-  {
     "id": "meter",
     "displayName": {
       "en-us": "Meter"
@@ -79,7 +52,34 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Metre"
     },
-    "reviewed": false
+    "reviewed": true
+  },
+  {
+    "id": "kilogram",
+    "displayName": {
+      "en-us": "Kilogram"
+    },
+    "description": {
+      "en-us": "The base unit of mass in the International System of Units (SI), defined by the vibrations of a cesium atom."
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "mass": "1e+0"
+    },
+    "tags": {
+      "en-us": [
+        "measurement unit"
+      ]
+    },
+    "x_coordinates": {
+      "mass": "0"
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Kilogram"
+    },
+    "reviewed": true
   },
   {
     "id": "second",
@@ -106,7 +106,7 @@
     "sources": {
       "duration": "https://en.wikipedia.org/wiki/Second"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "planck_units",
@@ -134,7 +134,7 @@
       "duration": "https://en.wikipedia.org/wiki/Planck_units",
       "mass": "https://en.wikipedia.org/wiki/Planck_units"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "planck_length",
@@ -161,34 +161,7 @@
     "description": {
       "en-us": "The \"natural\" unit of length, constructed from fundamental constants. Around this size, our ideas about space break down."
     },
-    "reviewed": false
-  },
-  {
-    "id": "planck_time",
-    "displayName": {
-      "en-us": "Planck Time"
-    },
-    "category": {
-      "en-us": "Fundamental / Nuclear"
-    },
-    "dimensions": {
-      "duration": "5.39e-44"
-    },
-    "x_coordinates": {
-      "duration": "0"
-    },
-    "sources": {
-      "duration": "https://en.wikipedia.org/wiki/Planck_units"
-    },
-    "tags": {
-      "en-us": [
-        "quantum"
-      ]
-    },
-    "description": {
-      "en-us": "The \"natural\" unit of time, constructed from fundamental constants. Around this timescale, our ideas about time break down."
-    },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "planck_mass",
@@ -215,7 +188,34 @@
     "description": {
       "en-us": "The \"natural\" unit of mass, constructed from fundamental constants. Current theories can't describe particles of this mass."
     },
-    "reviewed": false
+    "reviewed": true
+  },
+  {
+    "id": "planck_time",
+    "displayName": {
+      "en-us": "Planck Time"
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "duration": "5.39e-44"
+    },
+    "x_coordinates": {
+      "duration": "0"
+    },
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Planck_units"
+    },
+    "tags": {
+      "en-us": [
+        "quantum"
+      ]
+    },
+    "description": {
+      "en-us": "The \"natural\" unit of time, constructed from fundamental constants. Around this timescale, our ideas about time break down."
+    },
+    "reviewed": true
   },
   {
     "id": "electron",
@@ -247,9 +247,9 @@
       "duration": "https://en.wikipedia.org/wiki/Electron"
     },
     "description": {
-      "en-us": "A subatomic particle that carries a negative charge and orbits the atomic nucleus."
+      "en-us": "A subatomic particle that carries a negative charge and surrounds the atomic nucleus."
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "proton",
@@ -281,9 +281,9 @@
       "duration": "https://en.wikipedia.org/wiki/Proton_decay"
     },
     "description": {
-      "en-us": "A positively charged subatomic particle that, along with neutrons, makes up the atomic nucleus."
+      "en-us": "A positively charged subatomic particle that, along with the neutron, makes up the atomic nucleus."
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "neutron",
@@ -317,7 +317,7 @@
     "description": {
       "en-us": "An uncharged subatomic particle that helps bind protons together in the nucleus."
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "range_of_weak_interaction",
@@ -340,12 +340,12 @@
       "length": "5"
     },
     "description": {
-      "en-us": "Mediated by W+, W-, and Z bosons, the weak nuclear interaction is responsible for radioactive decay."
+      "en-us": "Mediated by W+, W-, and Z bosons, the weak nuclear interaction is responsible for the radioactive decay of neutrons."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Weak_interaction"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "range_of_strong_interaction",
@@ -373,18 +373,19 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Strong_interaction"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
-    "id": "largest_nucleus_pb_208",
+    "id": "largest_stable_nucleus",
     "displayName": {
-      "en-us": "Largest Nucleus (Pb-208)"
+      "en-us": "Largest Stable Nucleus"
     },
     "category": {
       "en-us": "Fundamental / Nuclear"
     },
     "dimensions": {
-      "length": "5.5e-15"
+      "length": "5.5e-15",
+      "mass": "3.45e-25"
     },
     "x_coordinates": {
       "length": "0"
@@ -393,9 +394,10 @@
       "en-us": "Lead-208 is the heaviest known stable nucleus, featuring a \"doubly magic\" number of protons and neutrons."
     },
     "sources": {
-      "length": "https://www.chemlin.org/isotope/lead-208"
+      "length": "https://www.chemlin.org/isotope/lead-208",
+      "mass": "https://www.chemlin.org/isotope/lead-208"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "most_energetic_photon_detected",
@@ -417,7 +419,8 @@
       "duration": "1.7e-30"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The record-holding gamma ray from space, detected by the Large High Altitude Air Shower Observatory."
@@ -426,7 +429,7 @@
       "length": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray",
       "duration": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "displayName": {
@@ -964,9 +967,9 @@
       "length": "40"
     },
     "description": {
-      "en-us": "The immense distance between the extremely sparse hydrogen ions that bridge the gap between galaxies."
+      "en-us": "The immense distance between the extremely sparse hydrogen ions that make up the Intergalactic Medium, the stuff in the gaps between galaxies."
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "between_particles_in_best_artificial_vacuum",
@@ -3274,7 +3277,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The lightest and most abundant element in the universe, fueling the stars through nuclear fusion."
+      "en-us": "Hydrogen: The lightest and most abundant element in the universe, fueling the stars through nuclear fusion."
     },
     "reviewed": false
   },
@@ -3307,7 +3310,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The second lightest element, first discovered in the Suns atmosphere before being found on Earth."
+      "en-us": "Helium: The second lightest element, first discovered in the Suns atmosphere before being found on Earth."
     },
     "reviewed": false
   },
@@ -3339,7 +3342,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft, silvery metal that is the lightest solid element and a critical component of modern batteries."
+      "en-us": "Lithium: A soft, silvery metal that is the lightest solid element and a critical component of modern batteries."
     },
     "reviewed": false
   },
@@ -3371,7 +3374,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A lightweight, high-melting-point metal often used in aerospace and X-ray windows."
+      "en-us": "Beryllium: A lightweight, high-melting-point metal often used in aerospace and X-ray windows."
     },
     "reviewed": false
   },
@@ -3403,7 +3406,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "An essential nutrient for plants and a key ingredient in heat-resistant glassware."
+      "en-us": "Boron: An essential nutrient for plants and a key ingredient in heat-resistant glassware."
     },
     "reviewed": false
   },
@@ -3435,7 +3438,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The versatile building block of life that forms the basis of all organic chemistry."
+      "en-us": "Carbon: The versatile building block of life that forms the basis of all organic chemistry."
     },
     "reviewed": false
   },
@@ -3467,7 +3470,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The most abundant gas in Earth's atmosphere, essential for protein and DNA."
+      "en-us": "Nitrogen: The most abundant gas in Earth's atmosphere, essential for protein and DNA."
     },
     "reviewed": false
   },
@@ -3499,7 +3502,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The highly reactive gas that fuels cellular respiration and makes up about 21% of our air."
+      "en-us": "Oxygen: The highly reactive gas that fuels cellular respiration and makes up about 21% of our air."
     },
     "reviewed": false
   },
@@ -3531,7 +3534,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The most reactive of all chemical elements, commonly used to prevent tooth decay."
+      "en-us": "Fluorine: The most reactive of all chemical elements, commonly used to prevent tooth decay."
     },
     "reviewed": false
   },
@@ -3563,7 +3566,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A noble gas famous for its vivid orange-red glow when used in advertising signs."
+      "en-us": "Neon: A noble gas famous for its vivid orange-red glow when used in advertising signs."
     },
     "reviewed": false
   },
@@ -3595,7 +3598,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft, silvery metal that reacts explosively with water and is a key part of table salt."
+      "en-us": "Sodium: A soft, silvery metal that reacts explosively with water and is a key part of table salt."
     },
     "reviewed": false
   },
@@ -3627,7 +3630,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A lightweight metal that burns with a brilliant white light and is vital for photosynthesis."
+      "en-us": "Magnesium: A lightweight metal that burns with a brilliant white light and is vital for photosynthesis."
     },
     "reviewed": false
   },
@@ -3659,7 +3662,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The most abundant metal in Earth's crust, prized for its low density and corrosion resistance."
+      "en-us": "Aluminium: The most abundant metal in Earth's crust, prized for its low density and corrosion resistance."
     },
     "reviewed": false
   },
@@ -3691,7 +3694,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The backbone of modern electronics and the primary component of sand and glass."
+      "en-us": "Silicon: The backbone of modern electronics and the primary component of sand and glass."
     },
     "reviewed": false
   },
@@ -3723,7 +3726,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A highly reactive nonmetal essential for energy transfer in cells and the structure of bones."
+      "en-us": "Phosphorus: A highly reactive nonmetal essential for energy transfer in cells and the structure of bones."
     },
     "reviewed": false
   },
@@ -3755,7 +3758,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A bright yellow nonmetal often associated with the smell of rotten eggs and volcanic activity."
+      "en-us": "Sulfur: A bright yellow nonmetal often associated with the smell of rotten eggs and volcanic activity."
     },
     "reviewed": false
   },
@@ -3787,7 +3790,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A greenish-yellow gas frequently used to disinfect swimming pools and drinking water."
+      "en-us": "Chlorine: A greenish-yellow gas frequently used to disinfect swimming pools and drinking water."
     },
     "reviewed": false
   },
@@ -3819,7 +3822,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The most common noble gas on Earth, often used to provide an inert atmosphere for welding."
+      "en-us": "Argon: The most common noble gas on Earth, often used to provide an inert atmosphere for welding."
     },
     "reviewed": false
   },
@@ -3851,7 +3854,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft metal that helps regulate fluid balance and nerve signals in the human body."
+      "en-us": "Potassium: A soft metal that helps regulate fluid balance and nerve signals in the human body."
     },
     "reviewed": false
   },
@@ -3883,7 +3886,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A silvery-white metal that is the primary structural component of teeth, bones, and shells."
+      "en-us": "Calcium: A silvery-white metal that is the primary structural component of teeth, bones, and shells."
     },
     "reviewed": false
   },
@@ -3915,7 +3918,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A rare-earth metal used in high-strength aluminum alloys for sports equipment and aerospace."
+      "en-us": "Scandium: A rare-earth metal used in high-strength aluminum alloys for sports equipment and aerospace."
     },
     "reviewed": false
   },
@@ -3947,7 +3950,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A strong, lightweight, and corrosion-resistant metal frequently used in médical implants."
+      "en-us": "Titanium: A strong, lightweight, and corrosion-resistant metal frequently used in médical implants."
     },
     "reviewed": false
   },
@@ -3979,7 +3982,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A hard, silvery-grey metal primarily used as an additive to strengthen steel alloys."
+      "en-us": "Vanadium: A hard, silvery-grey metal primarily used as an additive to strengthen steel alloys."
     },
     "reviewed": false
   },
@@ -4011,7 +4014,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A shiny, hard metal that gives stainless steel its corrosion resistance and rubies their red color."
+      "en-us": "Chromium: A shiny, hard metal that gives stainless steel its corrosion resistance and rubies their red color."
     },
     "reviewed": false
   },
@@ -4043,7 +4046,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "An essential mineral for bone health and a key component in the production of steel."
+      "en-us": "Manganese: An essential mineral for bone health and a key component in the production of steel."
     },
     "reviewed": false
   },
@@ -4075,7 +4078,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The most common element on Earth by mass, forming the core of our planet and the basis of steel."
+      "en-us": "Iron: The most common element on Earth by mass, forming the core of our planet and the basis of steel."
     },
     "reviewed": false
   },
@@ -4107,7 +4110,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A magnetic metal used in high-strength alloys and as a blue pigment in ceramics and glass."
+      "en-us": "Cobalt: A magnetic metal used in high-strength alloys and as a blue pigment in ceramics and glass."
     },
     "reviewed": false
   },
@@ -4139,7 +4142,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A silvery-white metal used in coins, rechargeable batteries, and stainless steel."
+      "en-us": "Nickel: A silvery-white metal used in coins, rechargeable batteries, and stainless steel."
     },
     "reviewed": false
   },
@@ -4171,7 +4174,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A reddish-orange metal prized for its excellent electrical conductivity and use in plumbing."
+      "en-us": "Copper: A reddish-orange metal prized for its excellent electrical conductivity and use in plumbing."
     },
     "reviewed": false
   },
@@ -4203,7 +4206,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A bluish-white metal used to galvanize steel and as an essential micronutrient for the immune system."
+      "en-us": "Zinc: A bluish-white metal used to galvanize steel and as an essential micronutrient for the immune system."
     },
     "reviewed": false
   },
@@ -4235,7 +4238,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A unique metal that melts in your hand and is widely used in high-speed electronics."
+      "en-us": "Gallium: A unique metal that melts in your hand and is widely used in high-speed electronics."
     },
     "reviewed": false
   },
@@ -4267,7 +4270,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A semiconductor material that was used to create the first transistors."
+      "en-us": "Germanium: A semiconductor material that was used to create the first transistors."
     },
     "reviewed": false
   },
@@ -4299,7 +4302,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A notorious poison that also has historic uses in pigments and modern uses in semiconductors."
+      "en-us": "Arsenic: A notorious poison that also has historic uses in pigments and modern uses in semiconductors."
     },
     "reviewed": false
   },
@@ -4331,7 +4334,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "An essential trace element that also conducts electricity better when exposed to light."
+      "en-us": "Selenium: An essential trace element that also conducts electricity better when exposed to light."
     },
     "reviewed": false
   },
@@ -4363,7 +4366,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The only nonmetallic element that exists as a liquid at room temperature."
+      "en-us": "Bromine: The only nonmetallic element that exists as a liquid at room temperature."
     },
     "reviewed": false
   },
@@ -4395,7 +4398,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A noble gas used alongside neon in high-efficiency fluorescent lamps and flashbulbs."
+      "en-us": "Krypton: A noble gas used alongside neon in high-efficiency fluorescent lamps and flashbulbs."
     },
     "reviewed": false
   },
@@ -4427,7 +4430,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "An extremely reactive soft metal that is used in high-precision atomic clocks."
+      "en-us": "Rubidium: An extremely reactive soft metal that is used in high-precision atomic clocks."
     },
     "reviewed": false
   },
@@ -4459,7 +4462,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A metal that burns with a brilliant red flame, making it a staple in fireworks and flares."
+      "en-us": "Strontium: A metal that burns with a brilliant red flame, making it a staple in fireworks and flares."
     },
     "reviewed": false
   },
@@ -4491,7 +4494,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A silvery-white metal used to create the red phosphors in old television screens."
+      "en-us": "Yttrium: A silvery-white metal used to create the red phosphors in old television screens."
     },
     "reviewed": false
   },
@@ -4523,7 +4526,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A highly corrosion-resistant metal used in nuclear reactors and as a diamond-like gemstone."
+      "en-us": "Zirconium: A highly corrosion-resistant metal used in nuclear reactors and as a diamond-like gemstone."
     },
     "reviewed": false
   },
@@ -4555,7 +4558,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft, grey metal used in superconducting magnets and high-strength alloys for jet engines."
+      "en-us": "Niobium: A soft, grey metal used in superconducting magnets and high-strength alloys for jet engines."
     },
     "reviewed": false
   },
@@ -4587,7 +4590,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A hard metal with a very high melting point, used to strengthen steel for extreme temperatures."
+      "en-us": "Molybdenum: A hard metal with a very high melting point, used to strengthen steel for extreme temperatures."
     },
     "reviewed": false
   },
@@ -4619,7 +4622,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The first element to be produced artificially, widely used as a radioactive tracer in medicine."
+      "en-us": "Technetium: The first element to be produced artificially, widely used as a radioactive tracer in medicine."
     },
     "reviewed": false
   },
@@ -4651,7 +4654,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A rare transition metal used to harden platinum and as a catalyst in chemical reactions."
+      "en-us": "Ruthenium: A rare transition metal used to harden platinum and as a catalyst in chemical reactions."
     },
     "reviewed": false
   },
@@ -4683,7 +4686,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "One of the rarest and most valuable precious metals, used primarily in catalytic converters."
+      "en-us": "Rhodium: One of the rarest and most valuable precious metals, used primarily in catalytic converters."
     },
     "reviewed": false
   },
@@ -4715,7 +4718,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A precious metal that can absorb 900 times its own volume in hydrogen gas."
+      "en-us": "Palladium: A precious metal that can absorb 900 times its own volume in hydrogen gas."
     },
     "reviewed": false
   },
@@ -4747,7 +4750,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The element with the highest electrical and thermal conductivity of any known metal."
+      "en-us": "Silver: The element with the highest electrical and thermal conductivity of any known metal."
     },
     "reviewed": false
   },
@@ -4779,7 +4782,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft, bluish-white metal historically used in yellow pigments and rechargeable batteries."
+      "en-us": "Cadmium: A soft, bluish-white metal historically used in yellow pigments and rechargeable batteries."
     },
     "reviewed": false
   },
@@ -4811,7 +4814,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A very soft metal used to create the transparent conductive coatings on touchscreens."
+      "en-us": "Indium: A very soft metal used to create the transparent conductive coatings on touchscreens."
     },
     "reviewed": false
   },
@@ -4843,7 +4846,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A silvery metal used for centuries to prevent corrosion in tin cans and as a component of bronze."
+      "en-us": "Tin: A silvery metal used for centuries to prevent corrosion in tin cans and as a component of bronze."
     },
     "reviewed": false
   },
@@ -4875,7 +4878,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A semi-metal that expands as it freezes, often used to harden lead alloys."
+      "en-us": "Antimony: A semi-metal that expands as it freezes, often used to harden lead alloys."
     },
     "reviewed": false
   },
@@ -4907,7 +4910,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A rare semi-metal used to improve the machinability of steel and in solar panels."
+      "en-us": "Tellurium: A rare semi-metal used to improve the machinability of steel and in solar panels."
     },
     "reviewed": false
   },
@@ -4939,7 +4942,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A lustrous purple-black solid that is essential for the production of thyroid hormones."
+      "en-us": "Iodine: A lustrous purple-black solid that is essential for the production of thyroid hormones."
     },
     "reviewed": false
   },
@@ -4971,7 +4974,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A heavy noble gas used in specialized light sources like IMAX projectors and ion thrusters."
+      "en-us": "Xenon: A heavy noble gas used in specialized light sources like IMAX projectors and ion thrusters."
     },
     "reviewed": false
   },
@@ -5004,7 +5007,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The most reactive of all metals, used to define the standard length of a second."
+      "en-us": "Caesium: The most reactive of all metals, used to define the standard length of a second."
     },
     "reviewed": false
   },
@@ -5036,7 +5039,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft, silvery metal used in barium swallows to image the digestive system with X-rays."
+      "en-us": "Barium: A soft, silvery metal used in barium swallows to image the digestive system with X-rays."
     },
     "reviewed": false
   },
@@ -5068,7 +5071,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The first of the rare-earth elements, used in battery electrodes and high-quality camera lenses."
+      "en-us": "Lanthanum: The first of the rare-earth elements, used in battery electrodes and high-quality camera lenses."
     },
     "reviewed": false
   },
@@ -5100,7 +5103,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The most abundant rare-earth metal, famous for creating sparks when struck in lighter flints."
+      "en-us": "Cerium: The most abundant rare-earth metal, famous for creating sparks when struck in lighter flints."
     },
     "reviewed": false
   },
@@ -5132,7 +5135,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft, silvery metal that gives specialized glass a unique yellow tint."
+      "en-us": "Praseodymium: A soft, silvery metal that gives specialized glass a unique yellow tint."
     },
     "reviewed": false
   },
@@ -5164,7 +5167,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A rare-earth metal used to create the strongest known permanent magnets."
+      "en-us": "Neodymium: A rare-earth metal used to create the strongest known permanent magnets."
     },
     "reviewed": false
   },
@@ -5196,7 +5199,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The only rare-earth element with no stable isotopes, often used in nuclear batteries."
+      "en-us": "Promethium: The only rare-earth element with no stable isotopes, often used in nuclear batteries."
     },
     "reviewed": false
   },
@@ -5228,7 +5231,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A hard, silvery metal used in high-temperature magnets and as a neutron absorber."
+      "en-us": "Samarium: A hard, silvery metal used in high-temperature magnets and as a neutron absorber."
     },
     "reviewed": false
   },
@@ -5260,7 +5263,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The most reactive rare-earth element, used to create the red and blue phosphors in displays."
+      "en-us": "Europium: The most reactive rare-earth element, used to create the red and blue phosphors in displays."
     },
     "reviewed": false
   },
@@ -5292,7 +5295,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A rare-earth metal used as a contrast agent in MRI scans and in specialized nuclear applications."
+      "en-us": "Gadolinium: A rare-earth metal used as a contrast agent in MRI scans and in specialized nuclear applications."
     },
     "reviewed": false
   },
@@ -5324,7 +5327,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A silvery-grey metal used in the manufacture of electronic devices and high-efficiency lighting."
+      "en-us": "Terbium: A silvery-grey metal used in the manufacture of electronic devices and high-efficiency lighting."
     },
     "reviewed": false
   },
@@ -5356,7 +5359,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A metal with high magnetic strength used in laser materials and nuclear reactor control rods."
+      "en-us": "Dysprosium: A metal with high magnetic strength used in laser materials and nuclear reactor control rods."
     },
     "reviewed": false
   },
@@ -5388,7 +5391,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The element with the highest magnetic strength of any naturally occurring element."
+      "en-us": "Holmium: The element with the highest magnetic strength of any naturally occurring element."
     },
     "reviewed": false
   },
@@ -5420,7 +5423,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A pinkish metal used to amplify signals in long-distance fiber optic cables."
+      "en-us": "Erbium: A pinkish metal used to amplify signals in long-distance fiber optic cables."
     },
     "reviewed": false
   },
@@ -5452,7 +5455,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The rarest naturally occurring rare-earth metal, used as a portable X-ray source."
+      "en-us": "Thulium: The rarest naturally occurring rare-earth metal, used as a portable X-ray source."
     },
     "reviewed": false
   },
@@ -5484,7 +5487,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft, silvery metal used in high-intensity lasers and as a doping agent in fiber optics."
+      "en-us": "Ytterbium: A soft, silvery metal used in high-intensity lasers and as a doping agent in fiber optics."
     },
     "reviewed": false
   },
@@ -5516,7 +5519,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The densest and hardest of the lanthanide elements, used as a catalyst in petroleum cracking."
+      "en-us": "Lutetium: The densest and hardest of the lanthanide elements, used as a catalyst in petroleum cracking."
     },
     "reviewed": false
   },
@@ -5548,7 +5551,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A corrosion-resistant metal with a high affinity for neutrons, used in nuclear control rods."
+      "en-us": "Hafnium: A corrosion-resistant metal with a high affinity for neutrons, used in nuclear control rods."
     },
     "reviewed": false
   },
@@ -5580,7 +5583,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A highly corrosion-resistant metal used to make tiny, high-performance capacitors for cell phones."
+      "en-us": "Tantalum: A highly corrosion-resistant metal used to make tiny, high-performance capacitors for cell phones."
     },
     "reviewed": false
   },
@@ -5612,7 +5615,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The element with the highest melting point, traditionally used in incandescent light bulb filaments."
+      "en-us": "Tungsten: The element with the highest melting point, traditionally used in incandescent light bulb filaments."
     },
     "reviewed": false
   },
@@ -5644,7 +5647,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "One of the rarest elements in Earth's crust, used in high-temperature superalloys for jet engines."
+      "en-us": "Rhenium: One of the rarest elements in Earth's crust, used in high-temperature superalloys for jet engines."
     },
     "reviewed": false
   },
@@ -5676,7 +5679,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The densest naturally occurring element, prized for its extreme hardness and durability."
+      "en-us": "Osmium: The densest naturally occurring element, prized for its extreme hardness and durability."
     },
     "reviewed": false
   },
@@ -5708,7 +5711,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "One of the most corrosion-resistant metals known, often associated with the asteroid that killed the dinosaurs."
+      "en-us": "Iridium: One of the most corrosion-resistant metals known, often associated with the asteroid that killed the dinosaurs."
     },
     "reviewed": false
   },
@@ -5740,7 +5743,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A dense, stable, and precious metal used in jewelry and as a vital industrial catalyst."
+      "en-us": "Platinum: A dense, stable, and precious metal used in jewelry and as a vital industrial catalyst."
     },
     "reviewed": false
   },
@@ -5772,7 +5775,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A noble metal valued for its beauty, rarity, and exceptional resistance to chemical corrosion."
+      "en-us": "Gold: A noble metal valued for its beauty, rarity, and exceptional resistance to chemical corrosion."
     },
     "reviewed": false
   },
@@ -5804,7 +5807,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The only metal that exists as a liquid at room temperature, famous for its use in thermometers."
+      "en-us": "Mercury: The only metal that exists as a liquid at room temperature, famous for its use in thermometers."
     },
     "reviewed": false
   },
@@ -5836,7 +5839,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A soft, grey metal that is highly toxic and was once widely used as a rodenticide."
+      "en-us": "Thallium: A soft, grey metal that is highly toxic and was once widely used as a rodenticide."
     },
     "reviewed": false
   },
@@ -5868,7 +5871,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A dense, soft metal that has been used for millennia but is now known to be a potent neurotoxin."
+      "en-us": "Lead: A dense, soft metal that has been used for millennia but is now known to be a potent neurotoxin."
     },
     "reviewed": false
   },
@@ -5900,7 +5903,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A brittle, silvery-pink metal used in stomach medicines and as a non-toxic replacement for lead."
+      "en-us": "Bismuth: A brittle, silvery-pink metal used in stomach medicines and as a non-toxic replacement for lead."
     },
     "reviewed": false
   },
@@ -5932,7 +5935,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A highly radioactive and toxic element discovered by Marie Curie and named after her homeland."
+      "en-us": "Polonium: A highly radioactive and toxic element discovered by Marie Curie and named after her homeland."
     },
     "reviewed": false
   },
@@ -5964,7 +5967,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The rarest naturally occurring element on Earth, with less than one gram present in the entire crust at any time."
+      "en-us": "Astatine: The rarest naturally occurring element on Earth, with less than one gram present in the entire crust at any time."
     },
     "reviewed": false
   },
@@ -5996,7 +5999,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A colorless, odorless radioactive gas that can accumulate in buildings and pose a health risk."
+      "en-us": "Radon: A colorless, odorless radioactive gas that can accumulate in buildings and pose a health risk."
     },
     "reviewed": false
   },
@@ -6028,7 +6031,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The second rarest naturally occurring element, so unstable that it has no practical uses."
+      "en-us": "Francium: The second rarest naturally occurring element, so unstable that it has no practical uses."
     },
     "reviewed": false
   },
@@ -6059,7 +6062,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "An intensely radioactive element once used in glow-in-the-dark watch dials before the health risks were known."
+      "en-us": "Radium: An intensely radioactive element once used in glow-in-the-dark watch dials before the health risks were known."
     },
     "reviewed": false
   },
@@ -6090,7 +6093,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A silvery radioactive metal that glows in the dark with an eerie blue light."
+      "en-us": "Actinium: A silvery radioactive metal that glows in the dark with an eerie blue light."
     },
     "reviewed": false
   },
@@ -6122,7 +6125,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A radioactive metal that is three times more abundant than uranium and a potential future nuclear fuel."
+      "en-us": "Thorium: A radioactive metal that is three times more abundant than uranium and a potential future nuclear fuel."
     },
     "reviewed": false
   },
@@ -6154,7 +6157,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A rare, dense, and highly toxic radioactive metal found in uranium ores."
+      "en-us": "Protactinium: A rare, dense, and highly toxic radioactive metal found in uranium ores."
     },
     "reviewed": false
   },
@@ -6186,7 +6189,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The heaviest naturally occurring element found in significant quantities, vital for nuclear power and weapons."
+      "en-us": "Uranium: The heaviest naturally occurring element found in significant quantities, vital for nuclear power and weapons."
     },
     "reviewed": false
   },
@@ -6217,7 +6220,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "The first transuranic element ever produced, formed in nuclear reactors from uranium."
+      "en-us": "Neptunium: The first transuranic element ever produced, formed in nuclear reactors from uranium."
     },
     "reviewed": false
   },
@@ -6248,7 +6251,7 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A radioactive element used in nuclear weapons and as a long-term fuel source for space probes."
+      "en-us": "Plutonium: A radioactive element used in nuclear weapons and as a long-term fuel source for space probes."
     },
     "reviewed": false
   },
@@ -6279,9 +6282,44 @@
       "mass": "0"
     },
     "description": {
-      "en-us": "A radioactive element used in most household smoke detectors to detect smoke particles."
+      "en-us": "Americium: A synthetic, radioactive element used in most household smoke detectors to detect smoke particles."
     },
     "reviewed": false
+  },
+  {
+    "id": "curium",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Cm"
+    },
+    "description": {
+      "en-us": "Curium: A synthetic, radioactive element used to make the Pu-238 for powering old pacemakers. Its most stable isotope is Cm-247, with 96 protons and 151 neutrons."
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "length": "1.74e-10",
+      "mass": "4.10e-25",
+      "duration": "4.92e14"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 96",
+        "element 96",
+        "curium",
+        "Cm-247"
+      ]
+    },
+    "x_coordinates": {
+      "length": "0.9",
+      "mass": "0"
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Curium",
+      "mass": "https://en.wikipedia.org/wiki/Curium",
+      "duration": "https://en.wikipedia.org/wiki/Curium"
+    }
   },
   {
     "id": "higgs_boson",
@@ -6361,7 +6399,7 @@
         "measurement unit"
       ]
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "one_year",
@@ -6378,14 +6416,14 @@
       "duration": "0"
     },
     "description": {
-      "en-us": "The time it takes for Earth to complete one full revolution around the Sun."
+      "en-us": "The time it takes for Earth to complete one full orbit around the Sun."
     },
     "tags": {
       "en-us": [
         "measurement unit"
       ]
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "since_big_bang",
@@ -6407,6 +6445,6 @@
     "description": {
       "en-us": "The estimated age of the universe, currently calculated to be roughly 13.8 billion years."
     },
-    "reviewed": false
+    "reviewed": true
   }
 ]
