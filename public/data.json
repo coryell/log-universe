@@ -320,6 +320,37 @@
     "reviewed": true
   },
   {
+    "id": "deuteron",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Deuteron"
+    },
+    "description": {
+      "en-us": "The nucleus of a deuterium atom. An isotope of hydrogen, it's just a single proton and neutron bound together by the strong force."
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "length": "2.13e-15",
+      "mass": "3.34e-27"
+    },
+    "tags": {
+      "en-us": [
+        "heavy hydrogen",
+        "hydrogen isotope"
+      ]
+    },
+    "x_coordinates": {
+      "length": "0",
+      "mass": "0"
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Deuterium",
+      "mass": "https://en.wikipedia.org/wiki/Deuterium"
+    }
+  },
+  {
     "id": "range_of_weak_interaction",
     "displayName": {
       "en-us": "Range of Weak Interaction"
@@ -446,19 +477,22 @@
       ]
     },
     "dimensions": {
-      "length": "1e-11"
+      "length": "1e-11",
+      "duration": "3e-20"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "Gamma rays are very high energy photons often produced by radioactive decay. X-rays are high energy photons, though not as high energy as gamma rays, often produced by the collisions of charged particles."
     },
     "id": "gamma_ray_x_ray_boundary",
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/X-ray"
+      "length": "https://en.wikipedia.org/wiki/X-ray",
+      "duration": "https://en.wikipedia.org/wiki/X-ray"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "x_ray_uv_boundary",
@@ -477,18 +511,21 @@
       ]
     },
     "dimensions": {
-      "length": "1e-8"
+      "length": "1e-8",
+      "duration": "3e-17"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The fuzzy transition point where ultraviolet light becomes ionizing X-ray radiation."
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Extreme_ultraviolet"
+      "length": "https://en.wikipedia.org/wiki/Extreme_ultraviolet",
+      "duration": "https://en.wikipedia.org/wiki/Extreme_ultraviolet"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "highest_energy_visible_violet",
@@ -507,18 +544,21 @@
       ]
     },
     "dimensions": {
-      "length": "3.80e-7"
+      "length": "3.80e-7",
+      "duration": "1.27e-15"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The shortest wavelength of light that the human eye can perceive."
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Visible_spectrum"
+      "length": "https://en.wikipedia.org/wiki/Visible_spectrum",
+      "duration": "https://en.wikipedia.org/wiki/Visible_spectrum"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "lowest_energy_visible_red",
@@ -537,18 +577,21 @@
       ]
     },
     "dimensions": {
-      "length": "7.50e-7"
+      "length": "7.50e-7",
+      "duration": "2.50e-15"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The longest wavelength of light that the human eye can perceive."
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Visible_spectrum"
+      "length": "https://en.wikipedia.org/wiki/Visible_spectrum",
+      "duration": "https://en.wikipedia.org/wiki/Visible_spectrum"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "infrared_microwave_boundary",
@@ -568,18 +611,21 @@
       ]
     },
     "dimensions": {
-      "length": "1e-3"
+      "length": "1e-3",
+      "duration": "3e-12"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The boundary near 1 millimeter where thermal infrared heat transitions into microwave radiation."
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Microwave"
+      "length": "https://en.wikipedia.org/wiki/Microwave",
+      "duration": "https://en.wikipedia.org/wiki/Microwave"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "microwave_radio_boundary",
@@ -598,18 +644,21 @@
       ]
     },
     "dimensions": {
-      "length": "1e+0"
+      "length": "1e+0",
+      "duration": "3e-9"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The 1-meter mark where shorter microwaves are categorized as longer radio waves."
     },
     "sources": {
-      "length": "https://en.wikipedia.org/wiki/Microwave"
+      "length": "https://en.wikipedia.org/wiki/Microwave",
+      "duration": "https://en.wikipedia.org/wiki/Microwave"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "cell_phone_shortest_wavelength",
@@ -632,7 +681,8 @@
       "duration": "1.4e-11"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "20"
     },
     "description": {
       "en-us": "The high-frequency signals used by mobile networks to transmit data at high speeds over short ranges."
@@ -641,7 +691,7 @@
       "length": "https://en.wikipedia.org/wiki/5G",
       "duration": "https://en.wikipedia.org/wiki/5G"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "cell_phone_longest_wavelength",
@@ -664,7 +714,8 @@
       "duration": "1.7e-9"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "20"
     },
     "description": {
       "en-us": "Lower frequency radio waves used by mobile phones for better range and penetration through obstacles."
@@ -673,7 +724,7 @@
       "length": "https://en.wikipedia.org/wiki/Wireless_device_radiation_and_health",
       "duration": "https://en.wikipedia.org/wiki/5G"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "cosmic_microwave_background",
@@ -693,20 +744,21 @@
       ]
     },
     "dimensions": {
-      "length": "1.8e-3",
-      "duration": "6.2e-12"
+      "length": "1.06e-3",
+      "duration": "3.55e-12"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The stretched-out light from the early universe that now permeates space as a microwave glow."
     },
     "sources": {
-      "length": "https://astro.kias.re.kr/CMBR/",
-      "duration": "https://astro.kias.re.kr/CMBR/"
+      "length": "https://en.wikipedia.org/wiki/Cosmic_microwave_background",
+      "duration": "https://en.wikipedia.org/wiki/Cosmic_microwave_background"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "longest_radio_possible_in_galaxy",
@@ -724,7 +776,8 @@
       ]
     },
     "dimensions": {
-      "length": "3e+5"
+      "length": "3e+5",
+      "duration": "1e-3"
     },
     "x_coordinates": {
       "length": "20"
@@ -750,7 +803,8 @@
       ]
     },
     "dimensions": {
-      "length": "3.3e+4"
+      "length": "3.3e+4",
+      "duration": "1.1e-4"
     },
     "x_coordinates": {
       "length": "20"
@@ -776,7 +830,8 @@
       ]
     },
     "dimensions": {
-      "length": "3e+1"
+      "length": "3e+1",
+      "duration": "1e-7"
     },
     "x_coordinates": {
       "length": "20"
@@ -804,7 +859,8 @@
       ]
     },
     "dimensions": {
-      "length": "1.2e-7"
+      "length": "1.2e-7",
+      "duration": "4.0e-16"
     },
     "x_coordinates": {
       "length": "20"
@@ -832,7 +888,8 @@
       ]
     },
     "dimensions": {
-      "length": "9.3e-6"
+      "length": "9.3e-6",
+      "duration": "3.1e-14"
     },
     "x_coordinates": {
       "length": "20"
@@ -860,7 +917,8 @@
       ]
     },
     "dimensions": {
-      "length": "4e-6"
+      "length": "4e-6",
+      "duration": "1e-14"
     },
     "x_coordinates": {
       "length": "20"
@@ -886,7 +944,8 @@
       ]
     },
     "dimensions": {
-      "length": "2.1e-1"
+      "length": "2.1e-1",
+      "duration": "7.0e-10"
     },
     "x_coordinates": {
       "length": "20"
@@ -1187,9 +1246,9 @@
       ]
     },
     "description": {
-      "en-us": "Molecular hydrogen consists of just two protons and two electrons, making it the simplest and smallest molecule."
+      "en-us": "Molecular hydrogen consists of just two protons and two electrons, making it the simplest, smallest, and lightest molecule."
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "largest_molecule_titin",
@@ -1200,15 +1259,26 @@
       "en-us": "Molecules"
     },
     "dimensions": {
-      "length": "1e-6"
+      "length": "1e-6",
+      "mass": "6.487e-21"
     },
     "x_coordinates": {
-      "length": "6"
+      "length": "6",
+      "mass": "16"
     },
     "description": {
-      "en-us": "The largest known protein in the human body, serving as a molecular spring in our muscles."
+      "en-us": "The largest known molecule, a protein that acts as a spring in muscles. Humans have it, but ironically, mouse titin is even bigger."
     },
-    "reviewed": false
+    "reviewed": false,
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Titin",
+      "length": "https://en.wikipedia.org/wiki/Titin"
+    },
+    "tags": {
+      "en-us": [
+        "protein"
+      ]
+    }
   },
   {
     "id": "glucose_molecule",
@@ -1219,15 +1289,28 @@
       "en-us": "Molecules"
     },
     "dimensions": {
-      "length": "1e-9"
+      "length": "1.5e-9",
+      "mass": "2.9916e-25"
     },
     "x_coordinates": {
-      "length": "6"
+      "length": "6",
+      "mass": "16"
     },
     "description": {
       "en-us": "A simple sugar that serves as the primary source of energy for most living organisms."
     },
-    "reviewed": false
+    "reviewed": false,
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Glucose",
+      "length": "https://bionumbers.hms.harvard.edu/bionumber.aspx?id=106979"
+    },
+    "tags": {
+      "en-us": [
+        "sugar",
+        "carbohydrate",
+        "monosaccharide"
+      ]
+    }
   },
   {
     "id": "water_molecule",
@@ -3239,15 +3322,20 @@
       "length": [
         "3.1e-11",
         "3.48e-10"
+      ],
+      "mass": [
+        "1.67e-27",
+        "4.88e-25"
       ]
     },
     "tags": {
       "en-us": []
     },
     "x_coordinates": {
-      "length": "-0.1"
+      "length": "-0.1",
+      "mass": "-0.1"
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "hydrogen",
@@ -6319,6 +6407,42 @@
       "length": "https://en.wikipedia.org/wiki/Curium",
       "mass": "https://en.wikipedia.org/wiki/Curium",
       "duration": "https://en.wikipedia.org/wiki/Curium"
+    }
+  },
+  {
+    "id": "oganesson",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Og"
+    },
+    "description": {
+      "en-us": "Oganesson: The synthetic, radioactive element with the highest atomic number and atomic mass of all known elements. Relativistic effects mean it may be a solid at room temperature rather than a noble gas."
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "length": "1.52e-10",
+      "mass": "4.88e-25",
+      "duration": "7e-4"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 118",
+        "element 118",
+        "oganesson",
+        "Og-294",
+        "heaviest atom"
+      ]
+    },
+    "x_coordinates": {
+      "length": "1.7",
+      "mass": "0"
+    },
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Oganesson",
+      "mass": "https://en.wikipedia.org/wiki/Oganesson",
+      "duration": "https://en.wikipedia.org/wiki/Oganesson"
     }
   },
   {
