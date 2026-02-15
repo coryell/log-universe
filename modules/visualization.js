@@ -65,7 +65,7 @@ export function createVisualization(container, config) {
      * Core Render Loop
      * Renders items and clusters that are visible within the current view.
      */
-    function render(t) {
+    function render(t, event) {
         // 1. Rescale Scales
         const newXScale = t.rescaleX(xScale);
         const newYScale = t.rescaleY(yScale);
@@ -311,12 +311,16 @@ export function createVisualization(container, config) {
         });
 
         // 9. Ruler Update
-        ruler.update({ width, height, currentDimensionX, currentDimensionY, xScale: newXScale, yScale: newYScale });
+        ruler.update({
+            width, height, currentDimensionX, currentDimensionY,
+            xScale: newXScale, yScale: newYScale,
+            event: checkMobile() ? undefined : event
+        });
     }
 
     function handleZoom(event) {
         const t = event.transform;
-        render(t);
+        render(t, event.sourceEvent);
     }
 
     svg.call(zoom)
