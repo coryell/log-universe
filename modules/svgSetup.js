@@ -118,9 +118,41 @@ export function createSvgLayers(container, width, height) {
         maskBottom.selectAll("*").remove();
         mobileMask.selectAll("*").remove();
 
+        // 1. Always populate gradient masks (useful for labels in both modes)
+        maskLeft.append("rect")
+            .attr("x", 0).attr("y", 0)
+            .attr("width", fadeEnd).attr("height", h)
+            .attr("fill", "url(#fade-gradient)");
+
+        maskLeft.append("rect")
+            .attr("x", fadeEnd).attr("y", 0)
+            .attr("width", w - fadeEnd).attr("height", h)
+            .attr("fill", "white");
+
+        if (currentDimensionX !== "none") {
+            svg.select("#fade-gradient-vertical")
+                .attr("y1", h)
+                .attr("y2", h - fadeBottomHeight);
+
+            maskBottom.append("rect")
+                .attr("x", 0).attr("y", h - fadeBottomHeight)
+                .attr("width", w).attr("height", fadeBottomHeight)
+                .attr("fill", "url(#fade-gradient-vertical)");
+
+            maskBottom.append("rect")
+                .attr("x", 0).attr("y", 0)
+                .attr("width", w).attr("height", h - fadeBottomHeight)
+                .attr("fill", "white");
+        } else {
+            maskBottom.append("rect")
+                .attr("x", 0).attr("y", 0)
+                .attr("width", w).attr("height", h)
+                .attr("fill", "white");
+        }
+
+        // 2. Apply masking based on mode
         if (isMobile) {
-            // On mobile, use a single combined mask on dataLayerOuter
-            // Start with full white (all visible); grid.js will add black cutouts at label positions
+            // Mobile: Data uses cutouts, labels use gradients
             mobileMask.append("rect")
                 .attr("x", 0).attr("y", 0)
                 .attr("width", w).attr("height", h)
@@ -130,44 +162,13 @@ export function createSvgLayers(container, width, height) {
             g.attr("mask", null);
             gCombined.attr("mask", null);
 
-            xLabelGroup.attr("mask", null);
-            yLabelGroup.attr("mask", null);
+            xLabelGroup.attr("mask", "url(#fade-mask-left)");
+            yLabelGroup.attr("mask", "url(#fade-mask-bottom)");
         } else {
-            // Desktop: gradient masks
+            // Desktop: Everything uses gradients
             dataLayerOuter.attr("mask", "url(#fade-mask-left)");
             g.attr("mask", "url(#fade-mask-bottom)");
             gCombined.attr("mask", "url(#fade-mask-bottom)");
-
-            maskLeft.append("rect")
-                .attr("x", 0).attr("y", 0)
-                .attr("width", fadeEnd).attr("height", h)
-                .attr("fill", "url(#fade-gradient)");
-
-            maskLeft.append("rect")
-                .attr("x", fadeEnd).attr("y", 0)
-                .attr("width", w - fadeEnd).attr("height", h)
-                .attr("fill", "white");
-
-            if (currentDimensionX !== "none") {
-                svg.select("#fade-gradient-vertical")
-                    .attr("y1", h)
-                    .attr("y2", h - fadeBottomHeight);
-
-                maskBottom.append("rect")
-                    .attr("x", 0).attr("y", h - fadeBottomHeight)
-                    .attr("width", w).attr("height", fadeBottomHeight)
-                    .attr("fill", "url(#fade-gradient-vertical)");
-
-                maskBottom.append("rect")
-                    .attr("x", 0).attr("y", 0)
-                    .attr("width", w).attr("height", h - fadeBottomHeight)
-                    .attr("fill", "white");
-            } else {
-                maskBottom.append("rect")
-                    .attr("x", 0).attr("y", 0)
-                    .attr("width", w).attr("height", h)
-                    .attr("fill", "white");
-            }
 
             xLabelGroup.attr("mask", "url(#fade-mask-left)");
             yLabelGroup.attr("mask", "url(#fade-mask-bottom)");

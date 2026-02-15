@@ -17,9 +17,6 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
         const newXScale = transform.rescaleX(xScale);
         const padding = 200;
 
-        xLabelGroup.selectAll(".x-label").remove();
-        yLabelGroup.selectAll(".y-label").remove();
-
         // Y Axis Grid
         const yStart = newYScale.invert(height + padding);
         const yEnd = newYScale.invert(-padding);
@@ -55,6 +52,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
         // X Axis Grid
         gridGroup.selectAll(".vertical-grid").data([null]).join("g").attr("class", "vertical-grid");
 
+        // 1D Mode Logic
         if (currentDimensionX === "none") {
             const decadeHeight = Math.abs(newYScale(10) - newYScale(1));
             const mainYTicks = yTickValues.filter(d => majorYDecades.has(d));
@@ -85,11 +83,22 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                 .attr("stroke", "#00aaff").attr("stroke-opacity", 0.4).attr("stroke-dasharray", "2,2");
             gridGroup.selectAll(".vertical-grid .tick text").remove();
 
+            // Y Labels (1D: Inside horizontal-grid tick text)
+            gridGroup.selectAll(".horizontal-grid .tick text")
+                .attr("x", 10).attr("dy", -4).attr("fill", "#00aaff")
+                .style("font-family", "monospace").style("font-size", "12px")
+                .attr("opacity", d => majorYDecades.has(d) ? 1.0 : 0);
+
+            // Clear 2D labels
+            xLabelGroup.selectAll(".x-label").remove();
+            yLabelGroup.selectAll(".y-label").remove();
+
         } else {
+            // 2D Mode Logic
             const xStart = newXScale.invert(-padding);
             const xEnd = newXScale.invert(width + padding);
             const paddedXScale = newXScale.copy().domain([d3.min([xStart, xEnd]), d3.max([xStart, xEnd])]);
-            let xTickValues = paddedXScale.ticks(15, "~e");
+            let xTickValues = paddedXScale.ticks(isMobile ? 8 : 15, "~e");
             const hasSubTenX = xTickValues.some(d => !Number.isInteger(Math.log10(d)));
             const majorXDecades = new Set();
             xTickValues.forEach(d => { if (Number.isInteger(Math.log10(d))) majorXDecades.add(d); });
@@ -115,87 +124,141 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                 .attr("stroke", "#00aaff").attr("stroke-dasharray", "2,2")
                 .attr("stroke-opacity", d => (majorXDecades.has(d)) ? 0.4 : 0.25);
 
-            gridGroup.selectAll(".vertical-grid .tick text").each(function (d) {
-                const xPos = newXScale(d);
-                const log10 = Math.log10(d);
-                if (majorXDecades.has(d)) {
-                    xLabelGroup.append("text").attr("class", "x-label").attr("x", xPos).attr("y", height - 20)
-                        .attr("text-anchor", "middle").attr("fill", "#00aaff").style("font-family", "monospace").style("font-size", "12px")
-                        .text(`10^${log10} ${getUnit(currentDimensionX)}`);
-                }
-            });
+            // Hide default axis text
             gridGroup.selectAll(".vertical-grid .tick text").attr("opacity", 0);
+            gridGroup.selectAll(".horizontal-grid .tick text").attr("opacity", 0);
+
+            // X Labels (Custom D3 Join)
+            let xTicksForLabels = xTickValues.filter(d => majorXDecades.has(d));
+
+            // Mobile: Filter labels to prevent squashing (min 80px gap)
+            if (isMobile && xTicksForLabels.length > 1) {
+                const minGap = 80;
+                const filtered = [];
+                let lastPos = -Infinity;
+                xTicksForLabels.forEach(d => {
+                    const pos = newXScale(d);
+                    if (Math.abs(pos - lastPos) >= minGap) {
+                        filtered.push(d);
+                        lastPos = pos;
+                    }
+                });
+                xTicksForLabels = filtered;
+            }
+
+            xLabelGroup.selectAll(".x-label")
+                .data(xTicksForLabels, d => d)
+                .join(
+                    enter => enter.append("text")
+                        .attr("class", "x-label")
+                        .attr("text-anchor", "middle")
+                        .attr("fill", "#00aaff")
+                        .style("font-family", "monospace")
+                        .style("font-size", "12px")
+                        .text(d => `10^${Math.log10(d)} ${getUnit(currentDimensionX)}`),
+                    update => update,
+                    exit => exit.remove()
+                )
+                .attr("x", d => newXScale(d))
+                .attr("y", isMobile ? height - 60 : height - 20);
+
+            // Y Labels (Custom D3 Join)
+            const yTicksForLabels = yTickValues.filter(d => majorYDecades.has(d));
+            yLabelGroup.selectAll(".y-label")
+                .data(yTicksForLabels, d => d)
+                .join(
+                    enter => enter.append("text")
+                        .attr("class", "y-label")
+                        .attr("x", 10)
+                        .attr("fill", "#00aaff")
+                        .style("font-family", "monospace")
+                        .style("font-size", "12px")
+                        .text(d => `10^${Math.log10(d)} ${getUnit(currentDimensionY)}`),
+                    update => update,
+                    exit => exit.remove()
+                )
+                .attr("y", d => newYScale(d) - 4);
         }
+
         gridGroup.select(".vertical-grid .domain").remove();
         gridGroup.selectAll(".horizontal-grid .tick line")
             .attr("stroke", "#00aaff").attr("stroke-dasharray", "2,2")
             .attr("stroke-opacity", d => (majorYDecades.has(d)) ? 0.4 : 0.25);
 
-        if (currentDimensionX !== "none") {
-            gridGroup.selectAll(".horizontal-grid .tick text").each(function (d) {
-                const yPos = newYScale(d);
-                const log10 = Math.log10(d);
-                if (majorYDecades.has(d)) {
-                    yLabelGroup.append("text").attr("class", "y-label").attr("x", 10).attr("y", yPos - 4)
-                        .attr("fill", "#00aaff").style("font-family", "monospace").style("font-size", "12px")
-                        .text(`10^${log10} ${getUnit(currentDimensionY)}`);
-                }
-            });
-            gridGroup.selectAll(".horizontal-grid .tick text").attr("opacity", 0);
-        } else {
-            gridGroup.selectAll(".horizontal-grid .tick text").attr("x", 10).attr("dy", -4).attr("fill", "#00aaff")
-                .attr("opacity", d => majorYDecades.has(d) ? 1.0 : 0).style("font-family", "monospace").style("font-size", "12px");
-        }
-
-        // Mobile: add black cutout rects to the data mask at label positions
-        // This hides data points behind labels without affecting grid lines
+        // Mobile Mask Logic (Extreme: No getBBox)
         if (mobileMask && isMobile) {
-            // Remove only label cutout rects (keep the white base rect from updateMask)
-            mobileMask.selectAll(".label-cutout").remove();
             const bgPad = 2;
+            const charRatio = 0.6;
+            const fs = 12;
+            const charWidth = fs * charRatio;
+            let labelRects = [];
+
             if (currentDimensionX === "none") {
-                // 1D: Y labels are tick texts inside translated <g class="tick"> elements
+                // 1D: Labels inside horizontal-grid ticks
                 gridGroup.selectAll(".horizontal-grid .tick")
                     .filter(d => majorYDecades.has(d))
-                    .each(function () {
-                        const textEl = d3.select(this).select("text").node();
-                        if (!textEl) return;
-                        const bbox = textEl.getBBox();
-                        if (bbox.width > 0) {
-                            const tickTransform = d3.select(this).attr("transform");
-                            const match = tickTransform && tickTransform.match(/translate\(\s*([^,)]+)[,\s]+([^)]+)\)/);
-                            const tx = match ? parseFloat(match[1]) : 0;
-                            const ty = match ? parseFloat(match[2]) : 0;
-                            mobileMask.append("rect")
-                                .attr("class", "label-cutout")
-                                .attr("x", tx + bbox.x - bgPad).attr("y", ty + bbox.y - bgPad)
-                                .attr("width", bbox.width + bgPad * 2).attr("height", bbox.height + bgPad * 2)
-                                .attr("fill", "black");
-                        }
+                    .each(function (d) {
+                        const text = `10^${Math.log10(d)} ${getUnit(currentDimensionY)}`;
+                        const textW = text.length * charWidth;
+                        const transform = d3.select(this).attr("transform");
+                        const match = transform && transform.match(/translate\(\s*([^,)]+)[,\s]+([^)]+)\)/);
+                        const ty = match ? parseFloat(match[2]) : 0;
+
+                        // Center background on text (baseline is ty - 4)
+                        labelRects.push({
+                            id: `y-${d}`,
+                            x: 10 - bgPad,
+                            y: ty - 4 - (fs * 1.0) - bgPad,
+                            width: textW + bgPad * 2,
+                            height: fs * 1.2 + bgPad * 2
+                        });
                     });
             } else {
-                // 2D: labels in yLabelGroup and xLabelGroup
-                yLabelGroup.selectAll(".y-label").each(function () {
-                    const bbox = this.getBBox();
-                    if (bbox.width > 0) {
-                        mobileMask.append("rect")
-                            .attr("class", "label-cutout")
-                            .attr("x", bbox.x - bgPad).attr("y", bbox.y - bgPad)
-                            .attr("width", bbox.width + bgPad * 2).attr("height", bbox.height + bgPad * 2)
-                            .attr("fill", "black");
-                    }
+                // 2D: Labels in custom groups
+                xLabelGroup.selectAll(".x-label").each(function (d) {
+                    const text = `10^${Math.log10(d)} ${getUnit(currentDimensionX)}`;
+                    const textW = text.length * charWidth;
+                    const x = parseFloat(d3.select(this).attr("x"));
+                    const y = parseFloat(d3.select(this).attr("y"));
+                    labelRects.push({
+                        id: `x-${d}`,
+                        x: x - (textW / 2) - bgPad,
+                        y: y - (fs * 0.9) - bgPad,
+                        width: textW + bgPad * 2,
+                        height: fs * 1.2 + bgPad * 2
+                    });
                 });
-                xLabelGroup.selectAll(".x-label").each(function () {
-                    const bbox = this.getBBox();
-                    if (bbox.width > 0) {
-                        mobileMask.append("rect")
-                            .attr("class", "label-cutout")
-                            .attr("x", bbox.x - bgPad).attr("y", bbox.y - bgPad)
-                            .attr("width", bbox.width + bgPad * 2).attr("height", bbox.height + bgPad * 2)
-                            .attr("fill", "black");
-                    }
+                yLabelGroup.selectAll(".y-label").each(function (d) {
+                    const text = `10^${Math.log10(d)} ${getUnit(currentDimensionY)}`;
+                    const textW = text.length * charWidth;
+                    const y = parseFloat(d3.select(this).attr("y"));
+                    labelRects.push({
+                        id: `y-${d}`,
+                        x: 10 - bgPad,
+                        y: y - (fs * 0.9) - bgPad,
+                        width: textW + bgPad * 2,
+                        height: fs * 1.2 + bgPad * 2
+                    });
                 });
             }
+
+            // JOIN mask rects
+            mobileMask.selectAll(".label-cutout")
+                .data(labelRects, d => d.id)
+                .join(
+                    enter => enter.append("rect")
+                        .attr("class", "label-cutout")
+                        .attr("fill", "black"),
+                    update => update,
+                    exit => exit.remove()
+                )
+                .attr("x", d => d.x)
+                .attr("y", d => d.y)
+                .attr("width", d => d.width)
+                .attr("height", d => d.height);
+
+        } else if (mobileMask) {
+            mobileMask.selectAll(".label-cutout").remove();
         }
     }
 

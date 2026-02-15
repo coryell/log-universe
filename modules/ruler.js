@@ -1,10 +1,12 @@
 import * as d3 from 'd3';
 import { getUnit, parseValue } from './utils.js';
 
-export function createRuler(svg) {
+export function createRuler(svg, checkMobile) {
     let markedYData = null;
     let markedXData = null;
     let lastMousePos = null;
+    let lastConfig = null;
+    let _isDragging = false;
 
     // Mark Ruler (the persistent mark)
     const markGroup = svg.append("g")
@@ -43,8 +45,14 @@ export function createRuler(svg) {
     const rulerLabelBackground = rulerGroup.append("rect")
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
 
+    const rulerLabelHitRect = rulerGroup.append("rect")
+        .attr("fill", "transparent").style("pointer-events", "all");
+
     const rulerLabel = rulerGroup.append("text")
         .attr("fill", "white").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+
+    const rulerLabelLine1 = rulerLabel.append("tspan");
+    const rulerLabelLine2 = rulerLabel.append("tspan");
 
     // Y-Interval Label
     const yIntervalBackground = rulerGroup.append("rect")
@@ -59,6 +67,145 @@ export function createRuler(svg) {
 
     const xIntervalLabel = rulerGroup.append("text")
         .attr("fill", "red").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+
+    // Invisible hit lines for mobile touch targets
+    const rulerHitLineX = rulerGroup.append("line")
+        .attr("stroke", "transparent").attr("stroke-width", 30)
+        .style("pointer-events", "stroke");
+
+    const rulerHitLineY = rulerGroup.append("line")
+        .attr("stroke", "transparent").attr("stroke-width", 30)
+        .style("pointer-events", "stroke");
+
+    // Touch drag handlers for mobile
+    let _dragOffset = [0, 0];
+    let _touchStartedOnLabel = false;
+    let _didMove = false;
+    let _rulerLongPressTimer = null;
+
+    rulerGroup.node().addEventListener('touchstart', (e) => {
+        if (!checkMobile || !checkMobile()) return;
+        e.stopPropagation();
+        e.preventDefault();
+        _isDragging = true;
+        _didMove = false;
+        // Check if touch started on the label or its background
+        const target = e.target;
+        const labelNode = rulerLabel.node();
+        const bgNode = rulerLabelBackground.node();
+        const hitNode = rulerLabelHitRect.node();
+        _touchStartedOnLabel = (target === labelNode || target === bgNode || target === hitNode || labelNode.contains(target));
+        // Record offset between touch position and current ruler position
+        const p = d3.pointer(e.touches[0], svg.node());
+        if (lastMousePos && isFinite(p[0]) && isFinite(p[1])) {
+            _dragOffset = [p[0] - lastMousePos[0], p[1] - lastMousePos[1]];
+        } else {
+            _dragOffset = [0, 0];
+        }
+        // Long-press: set mark at current ruler position after 500ms
+        _rulerLongPressTimer = setTimeout(() => {
+            if (lastMousePos && lastConfig) {
+                const t = d3.zoomTransform(svg.node());
+                const yVal = lastConfig.yScale.invert(lastMousePos[1]);
+                let xVal = null;
+                if (lastConfig.currentDimensionX !== "none") {
+                    xVal = lastConfig.xScale.invert(lastMousePos[0]);
+                }
+                setMark(xVal, yVal, lastConfig.currentDimensionX);
+                update(lastConfig);
+                if (navigator.vibrate) navigator.vibrate(50);
+            }
+        }, 500);
+    }, { passive: false });
+
+    rulerGroup.node().addEventListener('touchmove', (e) => {
+        if (!_isDragging || !lastConfig) return;
+        e.stopPropagation();
+        e.preventDefault();
+        _didMove = true;
+        if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
+        const touch = e.touches[0];
+        const p = d3.pointer(touch, svg.node());
+        if (isFinite(p[0]) && isFinite(p[1])) {
+            lastMousePos = [p[0] - _dragOffset[0], p[1] - _dragOffset[1]];
+        }
+        update(lastConfig);
+    }, { passive: false });
+
+    rulerGroup.node().addEventListener('touchend', (e) => {
+        _isDragging = false;
+        if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
+        if (_touchStartedOnLabel && !_didMove) {
+            hide();
+            lastMousePos = null;
+        } else if (!_didMove && lastMousePos) {
+            // Click-through logic: if it was a tap (not a drag), verify what's underneath
+            const touch = e.changedTouches[0];
+            const clientX = touch.clientX;
+            const clientY = touch.clientY;
+
+            // 1. Hide ruler temporarily so elementFromPoint sees what's under it
+            rulerGroup.style("display", "none");
+
+            // 2. Find the element at that point
+            const target = document.elementFromPoint(clientX, clientY);
+
+            // 3. Dispatch a click event to it
+            if (target) {
+                const clickEvent = new MouseEvent("click", {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window,
+                    clientX: clientX,
+                    clientY: clientY
+                });
+                target.dispatchEvent(clickEvent);
+            }
+
+            // 4. Restore ruler (if it wasn't supposed to be hidden by the click)
+            // Note: If the click triggered an action that moves the ruler (like selecting a point),
+            // the visualization update loop will handle showing it again or moving it.
+            // If we just restore it immediately, it might flicker or obscure the result.
+            // However, we must restore it if nothing happened.
+            // A safe bet is to restore it, relying on the fact that if the click
+            // caused a selection, 'update' will be called soon.
+            rulerGroup.style("display", null);
+        }
+    });
+    rulerGroup.node().addEventListener('touchcancel', () => {
+        _isDragging = false;
+        if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
+    });
+
+    // Fix for ruler intercepting clicks when it moves under the cursor/finger
+    rulerGroup.node().addEventListener('click', (e) => {
+        // Stop bubbling to prevent window click listener from deselecting
+        e.stopPropagation();
+        e.preventDefault();
+
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        // 1. Hide ruler temporarily
+        rulerGroup.style("display", "none");
+
+        // 2. Click-through logic
+        const target = document.elementFromPoint(clientX, clientY);
+
+        if (target) {
+            const clickEvent = new MouseEvent("click", {
+                bubbles: true,
+                cancelable: true,
+                view: window,
+                clientX: clientX,
+                clientY: clientY
+            });
+            target.dispatchEvent(clickEvent);
+        }
+
+        // 3. Restore ruler
+        rulerGroup.style("display", null);
+    });
 
     function setMark(dataX, dataY, currentDimensionX) {
         markedYData = dataY;
@@ -89,6 +236,13 @@ export function createRuler(svg) {
             event
         } = config;
 
+        // Cache config (without event) for drag self-updates
+        lastConfig = { ...config, event: undefined };
+
+        // Toggle pointer-events based on mobile state
+        const isMobile = checkMobile && checkMobile();
+        rulerGroup.style("pointer-events", isMobile ? "all" : "none");
+
         // We rely on main loop to pass event or just update if we have lastMousePos
         if (event) {
             // Handle touch events explicitly if d3.pointer fails or returns NaN
@@ -107,7 +261,8 @@ export function createRuler(svg) {
         rulerGroup.style("display", null);
 
         // Always fetch transform from SVG node as it's the source of truth
-        const t = d3.zoomTransform(svg.node());
+        // Always fetch transform from SVG node as it's the source of truth
+        // const t = d3.zoomTransform(svg.node()); // REMOVED: scales are already rescaled
         const [mouseX, mouseY] = lastMousePos;
         if (!isFinite(mouseX) || !isFinite(mouseY)) return;
 
@@ -119,16 +274,20 @@ export function createRuler(svg) {
 
         // Update Ruler Cursor Lines
         rulerLineX.attr("x1", 0).attr("y1", mouseY).attr("y2", mouseY); // Horizontal
+        rulerHitLineX.attr("x1", 0).attr("x2", width).attr("y1", mouseY).attr("y2", mouseY);
 
         if (currentDimensionX !== "none") {
             rulerLineY.style("display", null);
             rulerLineY.attr("x1", mouseX).attr("x2", mouseX).attr("y1", 0); // Vertical
+            rulerHitLineY.style("display", null);
+            rulerHitLineY.attr("x1", mouseX).attr("x2", mouseX).attr("y1", 0).attr("y2", height);
         } else {
             rulerLineY.style("display", "none");
+            rulerHitLineY.style("display", "none");
         }
 
-        const newYScale = t.rescaleY(yScale);
-        const valY = newYScale.invert(mouseY);
+        // const newYScale = t.rescaleY(yScale); // REMOVED
+        const valY = yScale.invert(mouseY); // Use passed rescaled scale
 
         // Format Y
         const formatVal = (v, unit) => {
@@ -138,44 +297,35 @@ export function createRuler(svg) {
             return `${mantissa} × 10^${expVal} ${unit}`;
         };
 
-        let labelText = "";
-        if (currentDimensionX !== "none") {
-            const newXScale = t.rescaleX(xScale);
-            const valX = newXScale.invert(mouseX);
-            const txtY = formatVal(valY, getUnit(currentDimensionY));
-            const txtX = formatVal(valX, getUnit(currentDimensionX));
-            labelText = `Y: ${txtY}, X: ${txtX}`;
-        } else {
-            labelText = formatVal(valY, getUnit(currentDimensionY));
-        }
-        let labelY = mouseY - 15;
+        let labelY = mouseY - (currentDimensionX !== "none" ? 22 : 10);
         // Move label below ruler if we are below a mark to avoid overlap with interval labels
-        if (markedYData !== null && mouseY > newYScale(markedYData) + 2) {
+        if (markedYData !== null && mouseY > yScale(markedYData) + 2) {
             labelY = mouseY + 15;
         }
 
-        rulerLabel.attr("x", mouseX + 15).attr("y", labelY).text(labelText);
+        const labelX = mouseX + (currentDimensionX !== "none" ? 5 : 15);
+        const fs = 12;
+        const charRatio = 0.6;
+        const charWidth = fs * charRatio;
 
-        const lbox = rulerLabel.node().getBBox();
+        const getEstBBox = (text, x, y, anchor = "start") => {
+            const lines = Array.isArray(text) ? text : [text];
+            const maxLen = d3.max(lines, l => l.length) || 0;
+            const w = maxLen * charWidth;
+            const h = lines.length * fs * 1.2;
+            let bx = x;
+            if (anchor === "middle") bx = x - w / 2;
+            else if (anchor === "end") bx = x - w;
+            return { x: bx, y: y - fs * 0.7, width: w, height: h };
+        };
+
+        const lText = currentDimensionX !== "none"
+            ? [`Y: ${formatVal(valY, getUnit(currentDimensionY))}`, `X: ${formatVal(xScale.invert(mouseX), getUnit(currentDimensionX))}`]
+            : [formatVal(valY, getUnit(currentDimensionY))];
+
+        const lbox = getEstBBox(lText, labelX, labelY);
         rulerLabelBackground.attr("x", lbox.x - 4).attr("y", lbox.y - 4).attr("width", lbox.width + 8).attr("height", lbox.height + 8);
-
-        // Common formatters
-        const formatAbsolute = (v, dim) => {
-            const sign = v > 0 ? "+" : "";
-            if (v === 0) return `0 ${getUnit(dim)}`;
-            const exp = v.toExponential(1);
-            const [mantissa, exponent] = exp.split('e');
-            return `${sign}${mantissa} × 10^${parseInt(exponent, 10)} ${getUnit(dim)}`;
-        };
-
-        const formatRelative = (v) => {
-            const log = Math.log10(v);
-            const exp = Math.floor(log);
-            const coeff = v / Math.pow(10, exp);
-            if (Math.abs(coeff - 1) < 0.001) return `10^${exp}`;
-            if (Math.abs(coeff - 10) < 0.001) return `10^${exp + 1}`;
-            return `${coeff.toFixed(1)} × 10^${exp}`;
-        };
+        rulerLabelHitRect.attr("x", lbox.x - 12).attr("y", lbox.y - 12).attr("width", lbox.width + 24).attr("height", lbox.height + 24);
 
         const updateIntervalUI = (label, bg, line, val, markVal, mousePos, markPos, isHorizontal, dim, orthoPos, orthoMarkPos) => {
             if (markVal === null || Math.abs(mousePos - markPos) < 2) {
@@ -189,58 +339,44 @@ export function createRuler(svg) {
             bg.style("display", null);
             line.style("display", null);
 
-            // 1. Initial positioning and styling
             let baseLabelX = 0;
             let isFlipped = false;
+            let anchor = "start";
 
             if (isHorizontal) {
                 const drawY = (orthoMarkPos !== null) ? orthoMarkPos : orthoPos;
                 line.attr("x1", markPos).attr("x2", mousePos).attr("y1", drawY).attr("y2", drawY);
-
                 isFlipped = (orthoMarkPos !== null && orthoPos > orthoMarkPos);
                 const labelY = isFlipped ? drawY - 20 : drawY + 20;
-
-                label.attr("y", labelY).attr("text-anchor", "start");
+                label.attr("y", labelY).attr("text-anchor", "middle");
                 baseLabelX = (mousePos + markPos) / 2;
+                anchor = "middle";
             } else {
                 const drawX = (orthoMarkPos !== null) ? orthoMarkPos : orthoPos;
                 line.attr("x1", drawX).attr("x2", drawX).attr("y1", markPos).attr("y2", mousePos);
-
                 isFlipped = (orthoMarkPos !== null && orthoPos > orthoMarkPos);
                 const labelX = isFlipped ? drawX - 15 : drawX + 15;
-                const anchor = isFlipped ? "end" : "start";
-
+                anchor = isFlipped ? "end" : "start";
                 label.attr("x", labelX).attr("y", (mousePos + markPos) / 2).attr("text-anchor", anchor);
                 baseLabelX = labelX;
             }
 
-            // 2. Build text content
             const relText = `x${formatRelative(val / markVal)}`;
             const absText = formatAbsolute(val - markVal, dim);
-
             const tspans = label.selectAll("tspan")
                 .data([relText, absText])
                 .join("tspan")
                 .attr("dy", (d, i) => i === 0 ? 0 : "1.2em")
                 .text(d => d);
 
-            // 3. Final alignment and coordinate adjustments
+            const box = getEstBBox([relText, absText], baseLabelX, parseFloat(label.attr("y")), anchor);
             if (isHorizontal) {
-                const bbox = label.node().getBBox();
-                const shiftedX = baseLabelX - bbox.width / 2;
-                label.attr("x", shiftedX);
-                tspans.attr("x", shiftedX);
-
-                // If flipped (above), adjust Y to account for whole height
-                if (isFlipped) {
-                    label.attr("y", parseFloat(label.attr("y")) - bbox.height + 15);
-                }
+                label.attr("x", baseLabelX);
+                tspans.attr("x", baseLabelX);
+                if (isFlipped) label.attr("y", parseFloat(label.attr("y")) - box.height + 15);
             } else {
                 tspans.attr("x", baseLabelX);
             }
-
-            // 4. Update background
-            const box = label.node().getBBox();
             bg.attr("x", box.x - 4).attr("y", box.y - 4).attr("width", box.width + 8).attr("height", box.height + 8);
         };
 
@@ -249,7 +385,7 @@ export function createRuler(svg) {
             markGroup.style("display", null);
             let my = null;
             if (markedYData !== null) {
-                my = newYScale(markedYData);
+                my = yScale(markedYData); // Use passed rescaled scale
                 markLineY.style("display", null).attr("y1", my).attr("y2", my).attr("x2", width);
             } else {
                 markLineY.style("display", "none");
@@ -257,7 +393,7 @@ export function createRuler(svg) {
 
             let mx = null;
             if (markedXData !== null && currentDimensionX !== "none") {
-                mx = t.rescaleX(xScale)(markedXData);
+                mx = xScale(markedXData); // Use passed rescaled scale
                 markLineX.style("display", null).attr("x1", mx).attr("x2", mx).attr("y2", height);
             } else {
                 markLineX.style("display", "none");
@@ -273,7 +409,7 @@ export function createRuler(svg) {
             }
 
             if (markedXData !== null && currentDimensionX !== "none") {
-                updateIntervalUI(xIntervalLabel, xIntervalBackground, intervalLineX, t.rescaleX(xScale).invert(mouseX), markedXData, mouseX, mx, true, currentDimensionX, mouseY, my);
+                updateIntervalUI(xIntervalLabel, xIntervalBackground, intervalLineX, xScale.invert(mouseX), markedXData, mouseX, mx, true, currentDimensionX, mouseY, my);
             } else {
                 xIntervalLabel.style("display", "none");
                 xIntervalBackground.style("display", "none");
@@ -298,6 +434,7 @@ export function createRuler(svg) {
         update,
         setMark,
         clearMark,
-        hide
+        hide,
+        get isDragging() { return _isDragging; }
     };
 }

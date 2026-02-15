@@ -78,7 +78,10 @@ export function createViewState({ viz, infobox, data }) {
         window.addEventListener("click", (event) => {
             if (event.button === 0) {
                 hideInfobox();
-                if (viz.ruler) viz.ruler.clearMark();
+                if (viz.ruler) {
+                    viz.ruler.hide();
+                    viz.ruler.clearMark();
+                }
             }
         });
 

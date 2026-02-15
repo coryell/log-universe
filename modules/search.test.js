@@ -39,7 +39,19 @@ assert.strictEqual(isMatch(xRay, "x-ray", LANGUAGE), true, "x-ray matches X-Ray"
 assert.strictEqual(isMatch({ displayName: { "en-us": "Red" } }, "(Red)", LANGUAGE), false, "(Red) query does NOT match Red target");
 assert.strictEqual(isMatch(parenthesizedRed, "Red", LANGUAGE), true, "Red query matches (Red) target");
 
-// 3. Multi-word Logic
+// 3. Distributed Matching (Name + Tags)
+const distributedItem = {
+    displayName: { "en-us": "foo biz" },
+    tags: { "en-us": ["bar", "baz"] }
+};
+
+assert.strictEqual(isMatch(distributedItem, "biz bar", LANGUAGE), true, "biz bar matches foo biz [tag: bar]");
+assert.strictEqual(isMatch(distributedItem, "foo bar", LANGUAGE), true, "foo bar matches foo biz [tag: bar]");
+assert.strictEqual(isMatch(distributedItem, "bi ba", LANGUAGE), false, "bi ba should NOT match (bi is not exact match for biz)");
+assert.strictEqual(isMatch(distributedItem, "biz b", LANGUAGE), true, "biz b matches foo biz [tag: bar] (b is prefix match for bar)");
+assert.strictEqual(isMatch(distributedItem, "biz qux", LANGUAGE), false, "biz qux should NOT match (qux missing)");
+
+// 4. Multi-word Logic
 assert.strictEqual(isMatch(redDwarf, "red dw", LANGUAGE), true, "red dw matches Red Dwarf");
 assert.strictEqual(isMatch(redDwarf, "re dw", LANGUAGE), false, "re dw should NOT match Red Dwarf (first token not exact)");
 assert.strictEqual(isMatch(redDwarf, "red d", LANGUAGE), true, "red d matches Red Dwarf");
@@ -61,6 +73,16 @@ const highlighted = getHighlightedText("Red Dwarf", "red");
 // If query is "red", tokens=["red"]. It's the last token, so prefix match.
 // "Red Dwarf" -> "Red" matches start boundary + "red".
 assert.match(highlighted, /<strong>Red<\/strong>/, "Highlighting 'Red' in 'Red Dwarf'");
+
+// Regression Test for "sun s" mangling HTML
+const sunHighlight = getHighlightedText("Sun", "sun s");
+// "sun" is exact (non-last). "s" is prefix (last).
+// Expect: "<strong>Sun</strong>" (since "Sun" matches "sun", and "s" is redundant or effectively same match).
+// Should NOT be "Sunstrong>".
+assert.strictEqual(sunHighlight, "<strong>Sun</strong>", "Highlight should ideally be merged to one tag");
+assert.doesNotMatch(sunHighlight, /Sunstrong/, "Output should not contain malformed 'Sunstrong'");
+console.log("Sun highlight:", sunHighlight); // Debug output
+
 
 const highlight2 = getHighlightedText("Highest Energy X-Ray", "ray");
 // "ray" is last token -> prefix match.

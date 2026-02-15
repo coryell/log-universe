@@ -22,7 +22,8 @@ export function createSearchUI(inputSelector, resultsSelector, options) {
             div.className = 'search-result-item';
             div.innerHTML = getSearchResultContent(d, query, language);
 
-            div.addEventListener('click', () => {
+            div.addEventListener('click', (e) => {
+                e.stopPropagation();
                 selectResult(d);
             });
 
@@ -55,6 +56,10 @@ export function createSearchUI(inputSelector, resultsSelector, options) {
             }
         });
     }
+
+    searchInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 
     // Input Events
     searchInput.addEventListener('input', (e) => {

@@ -1,12 +1,12 @@
 import * as d3 from 'd3';
 import { fadeEnd, fadeBottomHeight } from './constants.js';
 import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData } from './utils.js';
-import { updateItemAnnotations } from './annotations.js';
+import { setupItemAnnotations, updateAnnotationLayout } from './annotations.js';
 import { createRuler } from './ruler.js';
 import { createSvgLayers } from './svgSetup.js';
 import { createGrid } from './grid.js';
 import { createLegend } from './legend.js';
-import { applyGrouping } from './grouping.js';
+import { getClusters } from './grouping.js';
 
 export function createVisualization(container, config) {
     let width = container.clientWidth;
@@ -32,7 +32,7 @@ export function createVisualization(container, config) {
 
     updateMask(width, height, currentDimensionX, checkMobile());
 
-    const ruler = createRuler(svg);
+    const ruler = createRuler(svg, checkMobile);
     const grid = createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask);
     const legend = createLegend(svg, g, gCombined);
 
@@ -43,6 +43,9 @@ export function createVisualization(container, config) {
     // Zoom Setup
     const zoom = d3.zoom()
         .scaleExtent([1, 1000000])
+        .filter((event) => {
+            return !ruler.isDragging;
+        })
         .on('zoom', (event) => {
             handleZoom(event);
         });
@@ -51,60 +54,273 @@ export function createVisualization(container, config) {
     let currentState = {
         colorScale: null,
         language: 'en-us',
-        data: []
+        data: [],
+        filteredData: [], // Pre-computed filtered data
+        clusters: [], // Computed clusters
+        hiddenIds: new Set(), // IDs of items that should be hidden because they are in a cluster
+        layoutVersion: 0 // Incremented when dimensions/data layout changes
     };
 
-    function handleZoom(event) {
-        const t = event.transform;
-        const domainY = yScale.domain();
-        if (domainY[0] === domainY[1]) return;
-
-        const a = 0.5;
-        const domainX = xScale.domain();
-        const extX0 = xScale(domainX[0]) - (a * width) / t.k;
-        const extX1 = xScale(domainX[1]) + (a * width) / t.k;
-        const extY0 = yScale(domainY[1]) - (a * height) / t.k;
-        const extY1 = yScale(domainY[0]) + (a * height) / t.k;
-
-        zoom.translateExtent([[extX0, extY0], [extX1, extY1]]);
-
-        grid.updateGrid(t, { width, height, xScale, yScale, currentDimensionX, currentDimensionY, isMobile: checkMobile() });
-
+    /**
+     * Core Render Loop
+     * Renders items and clusters that are visible within the current view.
+     */
+    function render(t) {
+        // 1. Rescale Scales
         const newXScale = t.rescaleX(xScale);
         const newYScale = t.rescaleY(yScale);
 
+        // 2. Update Grid
+        grid.updateGrid(t, { width, height, xScale, yScale, currentDimensionX, currentDimensionY, isMobile: checkMobile() });
+
+        // 3. Viewport Culling Calculation (Extreme: O(log N))
+        const buffer = 300; // pixels
+        const visibleYInverted = [newYScale.invert(height + buffer), newYScale.invert(-buffer)];
+        const yMin = Math.min(visibleYInverted[0], visibleYInverted[1]);
+        const yMax = Math.max(visibleYInverted[0], visibleYInverted[1]);
+
+        const visibleXInverted = [newXScale.invert(-buffer), newXScale.invert(width + buffer)];
+        const xMin = Math.min(visibleXInverted[0], visibleXInverted[1]);
+        const xMax = Math.max(visibleXInverted[0], visibleXInverted[1]);
+
+        // Helper for binary search
+        const bisector = d3.bisector(d => d._cachedY).left;
+
+        const getVisibleSubset = (data) => {
+            if (data.length === 0) return [];
+            // Binary search for Y range since data is sorted by _cachedY in update()
+            const idxStart = bisector(data, yMin);
+            const idxEnd = bisector(data, yMax);
+            const yRange = data.slice(idxStart, idxEnd);
+
+            // X-visibility still O(K) where K is sub-array length
+            const result = [];
+            for (let i = 0; i < yRange.length; i++) {
+                const d = yRange[i];
+                if (d._cachedX >= xMin && d._cachedX <= xMax) {
+                    result.push(d);
+                }
+            }
+            return result;
+        };
+
+        // 4. Data Filtering
+        const visibleDataSubset = getVisibleSubset(currentState.filteredData);
+        const visibleClustersSubset = getVisibleSubset(currentState.clusters);
+
+        // 5. Proximity Hiding (Extreme Optimization)
+        // Hide points that are too close together at the current zoom level.
+        const ppd = Math.abs(newYScale(10) - newYScale(1));
+        const minPixelDist = 3;
+        const minDistDecades = minPixelDist / ppd;
+
+        const visibleData = visibleDataSubset.filter(d => (d._minDistHigher || Infinity) >= minDistDecades);
+        const visibleClusters = visibleClustersSubset.filter(d => (d._minDistHigher || Infinity) >= minDistDecades);
+
+        // 5. Rendering Constants
         const currentDecadeHeight = Math.abs(newYScale(10) - newYScale(1));
         const currentFS = Math.min(12, currentDecadeHeight);
         const currentRadius = currentFS / 2.4;
 
-        g.selectAll('.item-group')
-            .attr('transform', d => `translate(${newXScale(getDimensionValueX(d, currentDimensionX, currentDimensionY))}, ${newYScale(getDimensionValueY(d, currentDimensionY))})`);
-        gCombined.selectAll('.item-group')
-            .attr('transform', d => {
-                const first = d._members[0];
-                return `translate(${newXScale(getDimensionValueX(first, currentDimensionX, currentDimensionY))}, ${newYScale(getDimensionValueY(first, currentDimensionY))})`;
-            });
+        // 6. Join & Render - Individual Items (g)
+        g.selectAll('.item-group').data(visibleData, d => d.id)
+            .join(
+                enter => {
+                    const grp = enter.append('g').attr('class', 'item-group');
+                    grp.append('rect').attr('class', 'hit-area').attr('fill', 'transparent').style('cursor', 'pointer');
+                    grp.append('rect').attr('class', 'label-bg').attr('rx', 4).attr('ry', 4).attr('fill', 'black').attr('opacity', 0);
+                    grp.append('rect').attr('class', 'inequality-rect').style('cursor', 'pointer').attr('opacity', 0);
+                    grp.append('line').attr('class', 'range-line').style('cursor', 'pointer').attr('opacity', 0);
+                    grp.append('circle').attr('cx', 0).attr('cy', 0);
+                    grp.append('text').attr('class', 'label').attr('x', 10).attr('y', 0).attr('dy', '.35em')
+                        .style('font-family', 'monospace').style('font-weight', 'bold');
 
-        const allGroups = dataLayerOuter.selectAll('.item-group');
-        allGroups.selectAll('circle').attr('r', currentRadius);
+                    // Setup Annotations for new items
+                    setupItemAnnotations(grp, {
+                        currentDimensionX, currentDimensionY,
+                        colorScale: currentState.colorScale,
+                        language: currentState.language
+                    });
+                    grp.each(function () { this._layoutVersion = currentState.layoutVersion; });
 
-        if (currentState.colorScale) {
-            updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, newYScale, {
-                currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language
-            });
-            updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, newYScale, {
-                currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language
-            });
-        }
+                    grp.on("click", (event, d) => {
+                        ruler.update({
+                            width, height, currentDimensionX, currentDimensionY,
+                            xScale: d3.zoomTransform(svg.node()).rescaleX(xScale),
+                            yScale: d3.zoomTransform(svg.node()).rescaleY(yScale)
+                        });
+                        if (callbacks.onClick) callbacks.onClick(event, d);
+                        event.stopPropagation();
+                    })
+                        .on("dblclick", (event, d) => {
+                            if (callbacks.onDblClick) callbacks.onDblClick(event, d);
+                            event.stopPropagation();
+                        });
 
-        if (event.sourceEvent) {
-            ruler.update({ width, height, currentDimensionX, currentDimensionY, xScale: newXScale, yScale: newYScale, event: event.sourceEvent });
-        } else {
-            ruler.update({ width, height, currentDimensionX, currentDimensionY, xScale: newXScale, yScale: newYScale });
-        }
+                    return grp;
+                },
+                update => update,
+                exit => exit.remove()
+            )
+            .attr('transform', d => `translate(${newXScale(d._cachedX)}, ${newYScale(d._cachedY)})`)
+            .style('opacity', d => currentState.hiddenIds.has(d.id) ? 0 : null) // Hide clustered items
+            .style('pointer-events', d => currentState.hiddenIds.has(d.id) ? 'none' : null);
+
+        // Update annotation setup for existing items if layout changed (e.g. dimensions flipped)
+        // Optimization: Only run this on the subset that needs it. 
+        // We do this via .each check.
+        const itemSelection = g.selectAll('.item-group');
+        itemSelection.each(function (d) {
+            if (this._layoutVersion !== currentState.layoutVersion) {
+                setupItemAnnotations(d3.select(this), {
+                    currentDimensionX, currentDimensionY,
+                    colorScale: currentState.colorScale,
+                    language: currentState.language
+                });
+                this._layoutVersion = currentState.layoutVersion;
+            }
+        });
+
+        // Update Dynamic Layout (Scale/Radius dependent)
+        itemSelection.select('circle').attr('r', currentRadius);
+        updateAnnotationLayout(itemSelection, currentRadius, currentFS, newYScale);
+
+
+        // 7. Join & Render - Groups/Clusters (gCombined)
+        gCombined.selectAll('.item-group.combined').data(visibleClusters, d => d.id)
+            .join(
+                enter => {
+                    const grp = enter.append("g")
+                        .attr("class", "item-group combined");
+
+                    grp.append('rect').attr('class', 'hit-area')
+                        .attr('fill', 'transparent').style('cursor', 'pointer');
+
+                    grp.append('rect').attr('class', 'label-bg')
+                        .attr('rx', 4).attr('ry', 4).attr('fill', 'black').attr('opacity', 0);
+
+                    grp.append('rect').attr('class', 'inequality-rect').style('cursor', 'pointer').attr('opacity', 0);
+
+                    grp.append('circle').attr('cx', 0).attr('cy', 0);
+
+                    const textEl = grp.append('text').attr('class', 'label').attr('x', 10).attr('y', 0).attr('dy', '.35em')
+                        .style('font-family', 'monospace');
+
+                    // Build tspans ONCE on enter
+                    grp.each(function (d) {
+                        const el = d3.select(this);
+                        const textEl = el.select('.label');
+                        d._members.forEach((m, i) => {
+                            const name = getLocalized(m.displayName, currentState.language);
+                            const cat = getLocalized(m.category, currentState.language);
+                            textEl.append('tspan').text(name).attr('fill', currentState.colorScale(cat));
+                            if (i < d._members.length - 1) {
+                                const nextCat = getLocalized(d._members[i + 1].category, currentState.language);
+                                textEl.append('tspan').text(' / ').attr('fill', currentState.colorScale(nextCat));
+                            }
+                        });
+
+                        // Set initial circle color
+                        el.select('circle')
+                            .attr('fill', currentState.colorScale(getLocalized(d._members[0].category, currentState.language)));
+                    });
+
+                    // Setup Annotations for new clusters (mostly just default behavior)
+                    setupItemAnnotations(grp, {
+                        currentDimensionX, currentDimensionY,
+                        colorScale: currentState.colorScale,
+                        language: currentState.language
+                    });
+                    grp.each(function () { this._layoutVersion = currentState.layoutVersion; });
+
+                    grp.on("click", (event, d) => {
+                        ruler.update({
+                            width, height, currentDimensionX, currentDimensionY,
+                            xScale: d3.zoomTransform(svg.node()).rescaleX(xScale),
+                            yScale: d3.zoomTransform(svg.node()).rescaleY(yScale)
+                        });
+                        if (callbacks.onClick) callbacks.onClick(event, d);
+                        event.stopPropagation();
+                    });
+
+                    return grp;
+                },
+                update => update,
+                exit => exit.remove()
+            )
+            .attr('transform', d => `translate(${newXScale(d._cachedX)}, ${newYScale(d._cachedY)})`);
+
+        // Update content of groups... 
+        const clusterSelection = gCombined.selectAll('.item-group.combined');
+
+        // Check for layout updates needed on clusters
+        clusterSelection.each(function (d) {
+            if (this._layoutVersion !== currentState.layoutVersion) {
+                setupItemAnnotations(d3.select(this), {
+                    currentDimensionX, currentDimensionY,
+                    colorScale: currentState.colorScale,
+                    language: currentState.language
+                });
+                this._layoutVersion = currentState.layoutVersion;
+            }
+        });
+
+        // Optimization: Only update dynamic attributes (radius, hit area size driven by font size)
+        clusterSelection.select('circle')
+            .attr('r', currentRadius);
+
+        // Update hit area dimensions (Extreme: No getBBox)
+        clusterSelection.each(function (d) {
+            const sel = d3.select(this);
+            const estWidth = (d._estTextWidth || 0) * currentFS;
+
+            sel.select('.hit-area')
+                .attr('x', -currentRadius - 5).attr('y', -currentFS)
+                .attr('height', currentFS * 2)
+                .attr('width', estWidth + currentRadius + 20);
+
+            sel.select('.label-bg')
+                .attr('x', 8).attr('y', -currentFS * 0.7).attr('height', currentFS * 1.5)
+                .attr('width', estWidth + 6);
+
+            sel.select('text.label').style('font-size', `${currentFS}px`);
+        });
+
+        // 8. Annotations (Inequalities/Bars)
+        // Now handled by updateAnnotationLayout logic calling.
+        // We already called it for itemSelection.
+        // For clusters, we usually don't have ranges/inequalities if they were grouped.
+        // But if we did, we might want to call updateAnnotationLayout(clusterSelection...) too.
+        // The setupItemAnnotations WAS called for them.
+        // Let's call it to ensure fonts/colors update if needed, though we just manually sized bg/hit above.
+        // updateAnnotationLayout also sizes bg/hit for single items.
+        // To avoid conflict, we should probably NOT call updateAnnotationLayout for clusters if we do manual sizing above.
+        // OR we move manual sizing into updateAnnotationLayout specialized for clusters?
+        // Let's leave clusters as-is with manual sizing above (it works), and NOT call updateAnnotationLayout for them 
+        // unless we want to support range lines on clusters (unlikely).
+        // Actually, circle fill update happens in updateAnnotationLayout logic for single items.
+        // For clusters, we might need it if highlight changes?
+        // Clusters check 'highlighted' class?
+        // Let's manually handle cluster circle fill here to match single item logic if needed, 
+        // but setupItemAnnotations sets initial fill.
+        // If we highlight a cluster, we want it white.
+        clusterSelection.each(function (d) {
+            const isHighlighted = d3.select(this).classed('highlighted');
+            const cat = getLocalized(d._members[0].category, currentState.language);
+            d3.select(this).select('circle').attr('fill', isHighlighted ? 'white' : currentState.colorScale(cat));
+        });
+
+        // 9. Ruler Update
+        ruler.update({ width, height, currentDimensionX, currentDimensionY, xScale: newXScale, yScale: newYScale });
     }
 
-    svg.call(zoom);
+    function handleZoom(event) {
+        const t = event.transform;
+        render(t);
+    }
+
+    svg.call(zoom)
+        .on("dblclick.zoom", null); // Disable double-click to zoom
 
     // Recenter Wheel Logic
     let lastRecenterTime = 0;
@@ -124,49 +340,44 @@ export function createVisualization(container, config) {
     }, { capture: true, passive: true });
 
     // Helper: Highlight
+    // Needs to work even if item is not currently rendered (if possible)? 
+    // Actually, if we search for something and zoom to it, we render it.
+    // If we highlight something off screen, it won't exist.
+    // But typically we zoom to it first.
     function highlightItem(d) {
+        // We can only class existing items
         g.selectAll('.item-group').classed("highlighted", false);
         gCombined.selectAll('.item-group').classed("highlighted", false);
 
+        // If it's a combined item (from search result or internal logic)
         if (d._isCombined) {
-            gCombined.selectAll('.item-group').filter(cd => cd.id === d.id).classed("highlighted", true).raise();
+            gCombined.selectAll('.item-group.combined').filter(cd => cd.id === d.id).classed("highlighted", true).raise();
+            // Force re-render of layout for this item to pick up highlight color
+            render(d3.zoomTransform(svg.node()));
             return;
         }
 
-        let combined = null;
-        gCombined.selectAll('.item-group').each(function (cd) {
-            if (cd._members && cd._members.some(m => m.id === d.id)) combined = this;
-        });
+        // Check if item is inside a cluster
+        let parentClusterId = null;
+        // Search clusters to see if d is a member
+        const clusters = currentState.clusters;
+        const parent = clusters.find(c => c._members.some(m => m.id === d.id));
+        if (parent) parentClusterId = parent.id;
 
-        if (combined) {
-            d3.select(combined).classed("highlighted", true).raise();
+        if (parentClusterId) {
+            gCombined.selectAll('.item-group.combined').filter(cd => cd.id === parentClusterId).classed("highlighted", true).raise();
         } else {
             g.selectAll('.item-group').filter(item => item.id === d.id).classed("highlighted", true).raise();
         }
 
-        const t = d3.zoomTransform(svg.node());
-        const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
-        const currentFS = Math.min(12, currentDecadeHeight);
-        const currentRadius = currentFS / 2.4;
-
-        if (currentState.colorScale) {
-            updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
-            updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
-        }
+        // Re-render to apply color changes (highlight = white)
+        render(d3.zoomTransform(svg.node()));
     }
 
     function unhighlightItems() {
         g.selectAll('.item-group').classed("highlighted", false);
         gCombined.selectAll('.item-group').classed("highlighted", false);
-        const t = d3.zoomTransform(svg.node());
-        const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
-        const currentFS = Math.min(12, currentDecadeHeight);
-        const currentRadius = currentFS / 2.4;
-
-        if (currentState.colorScale) {
-            updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
-            updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
-        }
+        render(d3.zoomTransform(svg.node()));
     }
 
     function zoomToCategory(cat) {
@@ -211,20 +422,7 @@ export function createVisualization(container, config) {
             .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
     }
 
-    function runGrouping() {
-        applyGrouping(g, gCombined, {
-            currentDimensionX, currentDimensionY,
-            prevDimensionX, prevDimensionY,
-            data: currentState.data,
-            colorScale: currentState.colorScale,
-            language: currentState.language,
-            xScale, yScale, svg, zoom,
-            ruler, width, height, callbacks
-        });
-    }
-
     function update(data, state) {
-        // Refresh dimensions if they were 0 or on initial load
         if (width === 0 || height === 0 || isInitialLoad) {
             width = container.clientWidth;
             height = container.clientHeight;
@@ -239,27 +437,100 @@ export function createVisualization(container, config) {
         if (state.currentDimensionY) currentDimensionY = state.currentDimensionY;
 
         const dimChanged = (currentDimensionX !== prevDimensionX) || (currentDimensionY !== prevDimensionY);
-        const prevPositions = new Map();
 
-        if (dimChanged && !isInitialLoad) {
-            gCombined.selectAll(".item-group").remove();
-            g.selectAll('.item-group').style("opacity", null).style("pointer-events", null);
-            g.selectAll('.item-group').each(function (d) {
-                const tr = d3.select(this).attr('transform');
-                if (tr) prevPositions.set(d.id, tr);
-            });
-        }
+        // Optimization: Calculate filteredData, increment version, and CACHE VALUES
 
         const filteredData = getFilteredData(data, currentDimensionX, currentDimensionY);
+        const clusters = getClusters(currentState.data, currentDimensionX, currentDimensionY, currentState.language);
+
+        currentState.layoutVersion = (currentState.layoutVersion || 0) + 1;
+
+        // Cache coordinates and estimated text width
+        const charRatio = 0.6;
+        filteredData.forEach(d => {
+            d._cachedX = getDimensionValueX(d, currentDimensionX, currentDimensionY);
+            d._cachedY = getDimensionValueY(d, currentDimensionY);
+            const text = getLocalized(d.displayName, currentState.language) || "";
+            d._estTextWidth = text.length * charRatio;
+        });
+
+        clusters.forEach(c => {
+            const first = c._members[0];
+            c._cachedX = getDimensionValueX(first, currentDimensionX, currentDimensionY);
+            c._cachedY = getDimensionValueY(first, currentDimensionY);
+            const combinedName = getLocalized(c.displayName, currentState.language) || "";
+            c._estTextWidth = combinedName.length * charRatio;
+        });
+
+        // Binary search requires sorting by the cached Y coordinate
+        filteredData.sort((a, b) => a._cachedY - b._cachedY);
+        clusters.sort((a, b) => a._cachedY - b._cachedY);
+
+        // --- Proximity Pre-calculation ---
+        // For each point, find the distance to its nearest neighbor with a LOWER index (higher priority).
+        // This ensures at least one point in a dense cluster remains visible.
+        const calcMinDist = (list) => {
+            if (list.length === 0) return;
+
+            // Log coordinates for distance calculation (decades)
+            // Note: _cachedX and _cachedY are already in log space (decades) or 1D-linear-as-log
+            const quad = d3.quadtree()
+                .x(d => (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX))
+                .y(d => Math.log10(d._cachedY));
+
+            // We process in priority order (original index)
+            // But Quadtree search is for ALL points. We only want to find distance to "already processed" points.
+            // So we add points one by one.
+            list.forEach((d, i) => {
+                const x = (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX);
+                const y = Math.log10(d._cachedY);
+
+                let minD = Infinity;
+                if (i > 0) {
+                    // Find nearest in quadtree (which only contains points 0 to i-1)
+                    const nearest = quad.find(x, y);
+                    if (nearest) {
+                        const nx = (currentDimensionX === "none") ? nearest._cachedX : Math.log10(nearest._cachedX);
+                        const ny = Math.log10(nearest._cachedY);
+                        minD = Math.sqrt(Math.pow(x - nx, 2) + Math.pow(y - ny, 2));
+                    }
+                }
+                d._minDistHigher = minD;
+                quad.add(d);
+            });
+        };
+
+        // We use the original filtered data order (by index/priority) for this calculation
+        // Create a copy to sort back to original if needed, or just work on the sorted lists 
+        // IF we ensure they were created from the same base.
+        // Actually, filteredData and clusters were just sorted by _cachedY.
+        // Let's re-sort by priority for distance calc.
+        const prioritySort = (a, b) => {
+            const idxA = data.indexOf(a);
+            const idxB = data.indexOf(b);
+            return idxA - idxB;
+        };
+
+        const filteredDataPriority = [...filteredData].sort(prioritySort);
+        calcMinDist(filteredDataPriority);
+
+        const clustersPriority = [...clusters].sort(prioritySort);
+        calcMinDist(clustersPriority);
+
+        currentState.filteredData = filteredData;
+        currentState.clusters = clusters;
+
         if (filteredData.length === 0) {
             g.selectAll('.item-group').remove();
+            gCombined.selectAll('.item-group').remove();
             legend.updateLegend([], { ...currentState, width, height, onCategoryClick: zoomToCategory });
             return;
         }
 
-        // Y Scale
-        let minDimY = d3.min(filteredData, d => getDimensionValueY(d, currentDimensionY));
-        let maxDimY = d3.max(filteredData, d => getDimensionValueY(d, currentDimensionY));
+        // Y Scale Domain calculation
+        let minDimY = filteredData[0]._cachedY;
+        let maxDimY = filteredData[filteredData.length - 1]._cachedY;
+
         if (minDimY === maxDimY) {
             if (minDimY <= 0) { minDimY = 0.1; maxDimY = 10; }
             else { minDimY = minDimY / 10; maxDimY = maxDimY * 10; }
@@ -271,8 +542,8 @@ export function createVisualization(container, config) {
         // X Scale
         if (currentDimensionX === "none") {
             xScale = d3.scaleLinear();
-            const minX = d3.min(filteredData, d => getDimensionValueX(d, currentDimensionX, currentDimensionY));
-            const maxX = d3.max(filteredData, d => getDimensionValueX(d, currentDimensionX, currentDimensionY));
+            const minX = d3.min(filteredData, d => d._cachedX);
+            const maxX = d3.max(filteredData, d => d._cachedX);
 
             const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
             const screenCenter = width / 2;
@@ -287,14 +558,14 @@ export function createVisualization(container, config) {
             }
         } else {
             xScale = d3.scaleLog();
-            const minDimX = d3.min(filteredData, d => getDimensionValueX(d, currentDimensionX, currentDimensionY));
-            const maxDimX = d3.max(filteredData, d => getDimensionValueX(d, currentDimensionX, currentDimensionY));
+            const minDimX = d3.min(filteredData, d => d._cachedX);
+            const maxDimX = d3.max(filteredData, d => d._cachedX);
             xScale.domain([minDimX, maxDimX]);
 
             const maxCharCount = d3.max(filteredData, d => getLocalized(d.displayName, currentState.language).length) || 10;
             paddingRight = Math.max(100, maxCharCount * 12 * 0.6 + 40);
 
-            // Clamp padding for small viewports
+            // Clamp padding
             const effectiveFadeEnd = Math.min(fadeEnd, width * 0.15);
             const effectivePadRight = Math.min(paddingRight, width * 0.15);
             const effectiveFadeBotH = Math.min(fadeBottomHeight, height * 0.15);
@@ -317,95 +588,33 @@ export function createVisualization(container, config) {
             yScale.range([bottomPixel, topPixel]);
         }
 
-        // Join
-        const items = g.selectAll('.item-group').data(filteredData, d => d.id)
-            .join(
-                enter => {
-                    const grp = enter.append('g').attr('class', 'item-group');
-                    grp.append('rect').attr('class', 'hit-area').attr('fill', 'transparent').style('cursor', 'pointer');
-                    grp.append('rect').attr('class', 'label-bg').attr('rx', 4).attr('ry', 4).attr('fill', 'black').attr('opacity', 0);
-                    grp.append('rect').attr('class', 'inequality-rect').style('cursor', 'pointer').attr('opacity', 0);
-                    grp.append('line').attr('class', 'range-line').style('cursor', 'pointer').attr('opacity', 0);
-                    grp.append('circle').attr('cx', 0).attr('cy', 0).attr('fill', d => currentState.colorScale(getLocalized(d.category, currentState.language)));
-                    grp.append('text').attr('class', 'label').attr('x', 10).attr('y', 0).attr('dy', '.35em')
-                        .text(d => getLocalized(d.displayName, currentState.language))
-                        .attr('fill', d => currentState.colorScale(getLocalized(d.category, currentState.language)))
-                        .style('font-family', 'monospace').style('font-weight', 'bold');
-
-                    grp.on("click", (event, d) => {
-                        ruler.update({
-                            width, height, currentDimensionX, currentDimensionY,
-                            xScale: d3.zoomTransform(svg.node()).rescaleX(xScale),
-                            yScale: d3.zoomTransform(svg.node()).rescaleY(yScale)
-                        });
-                        if (callbacks.onClick) callbacks.onClick(event, d);
-                        event.stopPropagation();
-                    })
-                        .on("dblclick", (event, d) => {
-                            if (callbacks.onDblClick) callbacks.onDblClick(event, d);
-                            event.stopPropagation();
-                        });
-                    return grp;
-                },
-                update => update,
-                exit => exit.remove()
-            );
+        // Calculate Hidden IDs
+        const hiddenIds = new Set();
+        clusters.forEach(c => {
+            c._members.forEach(m => hiddenIds.add(m.id));
+        });
+        currentState.hiddenIds = hiddenIds;
 
         legend.updateLegend(filteredData, { ...currentState, width, height, onCategoryClick: zoomToCategory });
         updateMask(width, height, currentDimensionX, checkMobile());
-
-        if (dimChanged && !isInitialLoad) {
-            d3.timeout(runGrouping, 1100);
-            d3.timeout(() => {
-                const t = d3.zoomTransform(svg.node());
-                const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
-                const currentFS = Math.min(12, currentDecadeHeight);
-                const currentRadius = currentFS / 2.4;
-                updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
-                updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
-            }, 1100);
-        } else {
-            prevDimensionX = currentDimensionX;
-            prevDimensionY = currentDimensionY;
-            runGrouping();
-            const t = d3.zoomTransform(svg.node());
-            const currentDecadeHeight = Math.abs(t.rescaleY(yScale)(10) - t.rescaleY(yScale)(1));
-            const currentFS = Math.min(12, currentDecadeHeight);
-            const currentRadius = currentFS / 2.4;
-            updateItemAnnotations(g.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
-            updateItemAnnotations(gCombined.selectAll('.item-group'), currentRadius, currentFS, t.rescaleY(yScale), { currentDimensionX, currentDimensionY, colorScale: currentState.colorScale, language: currentState.language });
-        }
 
         isInitialLoad = false;
         prevDimensionX = currentDimensionX;
         prevDimensionY = currentDimensionY;
 
-        // Initial Zoom
         const initialTransform = currentDimensionX === "none" ? d3.zoomIdentity.translate(-width * 0.05, 0) : d3.zoomIdentity;
+
         if (dimChanged) {
             svg.call(zoom.transform, initialTransform);
-
-            // Re-apply transitions from old positions to new zoom-interpolated positions
-            if (prevPositions.size > 0) {
-                items.each(function (d) {
-                    const prevTransform = prevPositions.get(d.id);
-                    if (prevTransform) {
-                        const currentTransform = d3.select(this).attr('transform');
-                        if (currentTransform && currentTransform !== prevTransform) {
-                            d3.select(this).attr('transform', prevTransform)
-                                .transition().duration(1000).ease(d3.easeCubicOut)
-                                .attr('transform', currentTransform);
-                        }
-                    }
-                });
-            }
+        } else {
+            render(d3.zoomTransform(svg.node()));
         }
     }
 
-    function setCallbacks(newCallbacks) {
-        callbacks = { ...callbacks, ...newCallbacks };
-    }
+    // ... (rest of function remains same structure, just updated content above covers it) ...
+    // Note: The previous logic for resize/setCallbacks/listeners was included in the replacement content block above.
 
+    function setCallbacks(newCallbacks) { callbacks = { ...callbacks, ...newCallbacks }; }
     function resize() {
         const t = d3.zoomTransform(svg.node());
         const dataX = t.rescaleX(xScale).invert(width / 2);
@@ -425,8 +634,8 @@ export function createVisualization(container, config) {
         svg.call(zoom.transform, newT);
     }
 
-    // Mouse/Touch Event Listeners
     svg.on("mousemove", (event) => {
+        if (checkMobile()) return;
         const t = d3.zoomTransform(svg.node());
         ruler.update({
             width, height, currentDimensionX, currentDimensionY,
@@ -454,41 +663,68 @@ export function createVisualization(container, config) {
         });
     });
 
-    // Touch logic (Long press)
     let touchTimer = null;
-    let touchStartX = 0, touchStartY = 0, isLongPress = false;
+    let touchStartX = 0, touchStartY = 0;
+    let isRulerActiveForTouch = false;
+
     svg.node().addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) {
-            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; isLongPress = false;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            isRulerActiveForTouch = false;
+
             touchTimer = setTimeout(() => {
-                isLongPress = true;
-                const rect = container.getBoundingClientRect();
-                const mouseX = e.touches[0].clientX - rect.left;
-                const mouseY = e.touches[0].clientY - rect.top;
+                isRulerActiveForTouch = true;
                 const t = d3.zoomTransform(svg.node());
-                const newXScale = t.rescaleX(xScale);
-                const newYScale = t.rescaleY(yScale);
-                const xVal = newXScale.invert(mouseX);
-                const yVal = newYScale.invert(mouseY);
-                ruler.setMark(xVal, yVal, currentDimensionX);
+                // Use explicit object rather than d3.pointer since d3.pointer requires event
+                // But we can construct a mock event or use touches directly
+                const mockEvent = {
+                    sourceEvent: e.touches[0],
+                    clientX: e.touches[0].clientX,
+                    clientY: e.touches[0].clientY,
+                    target: svg.node()
+                };
+
                 ruler.update({
                     width, height, currentDimensionX, currentDimensionY,
-                    xScale: newXScale, yScale: newYScale
+                    xScale: t.rescaleX(xScale), yScale: t.rescaleY(yScale),
+                    event: mockEvent
                 });
+
                 if (navigator.vibrate) navigator.vibrate(50);
             }, 500);
         }
     }, { passive: false });
 
     svg.node().addEventListener('touchmove', (e) => {
-        if (touchTimer) {
+        if (isRulerActiveForTouch) {
+            e.preventDefault();
+            e.stopPropagation();
+            const t = d3.zoomTransform(svg.node());
+            const mockEvent = {
+                sourceEvent: e.touches[0],
+                clientX: e.touches[0].clientX,
+                clientY: e.touches[0].clientY,
+                target: svg.node()
+            };
+            ruler.update({
+                width, height, currentDimensionX, currentDimensionY,
+                xScale: t.rescaleX(xScale), yScale: t.rescaleY(yScale),
+                event: mockEvent
+            });
+        } else {
             const dx = Math.abs(e.touches[0].clientX - touchStartX);
             const dy = Math.abs(e.touches[0].clientY - touchStartY);
-            if (dx > 10 || dy > 10) { clearTimeout(touchTimer); touchTimer = null; }
+            if (dx > 10 || dy > 10) {
+                if (touchTimer) { clearTimeout(touchTimer); touchTimer = null; }
+            }
         }
     }, { passive: false });
 
-    svg.node().addEventListener('touchend', () => { if (touchTimer) clearTimeout(touchTimer); });
+    svg.node().addEventListener('touchend', () => {
+        if (touchTimer) { clearTimeout(touchTimer); touchTimer = null; }
+        isRulerActiveForTouch = false;
+    });
 
     return {
         update,
@@ -511,7 +747,6 @@ export function createVisualization(container, config) {
 
             let targetScale = (height * totalDecades) / (3 * availableHeight);
 
-            // Dynamic Zoom Constraint based on neighbors
             const filteredData = getFilteredData(currentState.data || []);
             const neighbors = filteredData.filter(d => Math.abs(getDimensionValueY(d, currentDimensionY) - valY) < valY * 2);
 
@@ -531,7 +766,6 @@ export function createVisualization(container, config) {
                 targetScale = Math.min(targetScale, maxScaleForNeighbor);
             }
 
-            // Constraint for ranges
             if (Array.isArray(rawDimY)) {
                 const y1_raw = yScale(Number(rawDimY[0]));
                 const y2_raw = yScale(Number(rawDimY[1]));

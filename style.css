@@ -25,6 +25,10 @@ body {
   background-color: #000000;
   color: #00aaff;
   font-family: monospace;
+  cursor: pointer;
+  /* Fix for iOS Safari event bubbling */
+  -webkit-tap-highlight-color: transparent;
+  /* Remove tap highlight */
 }
 
 #app {
@@ -37,6 +41,11 @@ body {
   padding: 0;
   overflow: hidden;
   position: relative;
+  touch-action: none;
+  /* Disable browser zooming/panning to let d3.zoom handle it */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 /* Header Styling */
@@ -219,6 +228,10 @@ svg {
   flex-grow: 1;
   /* Take up remaining height */
   display: block;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 
@@ -449,5 +462,18 @@ svg {
     bottom: 10px;
     max-width: none;
     max-height: 40vh;
+    overflow-wrap: break-word;
+  }
+
+  .infobox .infobox-row {
+    white-space: normal;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .infobox .infobox-label {
+    white-space: nowrap;
+    font-size: 0.85em;
+    flex-shrink: 0;
   }
 }

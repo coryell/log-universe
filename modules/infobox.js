@@ -4,7 +4,10 @@ import { getLocalized, getUnit } from './utils.js';
 export function createInfobox(selection) {
     const infobox = selection.append("div")
         .attr("class", "infobox")
-        .style("display", "none");
+        .style("display", "none")
+        .on("click", (event) => {
+            event.stopPropagation();
+        });
 
     function show(d, config) {
         const {
@@ -75,8 +78,8 @@ export function createInfobox(selection) {
 
             // Always show Y dimension
             dimsContent += addDimRow(currentDimensionY);
-            // Show X dimension if selected
-            if (currentDimensionX !== "none") {
+            // Show X dimension if selected and DIFFERENT from Y
+            if (currentDimensionX !== "none" && currentDimensionX !== currentDimensionY) {
                 dimsContent += addDimRow(currentDimensionX);
             }
 
