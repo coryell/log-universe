@@ -25,6 +25,7 @@ export function createViewState({ viz, infobox, data }) {
             language: LANGUAGE,
             categories
         });
+        viz.resetZoom(); // Default view: Center on content
     }
 
     // --- Selection / Infobox ---

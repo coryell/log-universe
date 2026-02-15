@@ -64,6 +64,41 @@ export function createVisualization(container, config) {
         layoutVersion: 0 // Incremented when dimensions/data layout changes
     };
 
+    function getDynamicBounds(k) {
+        if (!currentState.boundsHulls) return null;
+        const { minX, maxX, minY, maxY, baseDecadeHeight } = currentState.boundsHulls;
+
+        // visual_fs = min(12, baseDecadeHeight * k) but enforce min 4px
+        const baseFS = baseDecadeHeight * k;
+        const visualFS = Math.max(4, Math.min(12, baseFS));
+        const scalingFactorS = visualFS / (12 * k); // Scalable part (text, radius)
+        const scalingFactorC = 1 / k; // Constant part (fixed screen pixel offsets)
+
+        const getBound = (list, sign, keyPos, keyExt) => {
+            let best = (sign < 0) ? Infinity : -Infinity;
+            for (const p of list) {
+                // Split extent into constant and scalable components
+                const extC = p[keyExt + 'c'] || 0;
+                const extS = p[keyExt + 's'] || p[keyExt] || 0; // Fallback to full extent as scalable if split missing
+
+                const worldExt = (extC * scalingFactorC) + (extS * scalingFactorS);
+                const val = p[keyPos] + (sign * worldExt);
+                if (sign < 0) best = Math.min(best, val);
+                else best = Math.max(best, val);
+            }
+            return best;
+        };
+
+        if (!minX || minX.length === 0) return null;
+
+        return {
+            minX: getBound(minX, -1, 'x', 'l'),
+            maxX: getBound(maxX, 1, 'x', 'r'),
+            minY: getBound(minY, -1, 'y', 'u'),
+            maxY: getBound(maxY, 1, 'y', 'd')
+        };
+    }
+
     /**
      * Core Render Loop
      * Renders items and clusters that are visible within the current view.
@@ -407,6 +442,11 @@ export function createVisualization(container, config) {
             d3.select(this).select('circle').attr('fill', isHighlighted ? 'white' : currentState.colorScale(cat));
         });
 
+        // Debug Box Update
+        // Debug Box Update
+        // Debug Box Update - Visuals disabled
+        g.selectAll('.debug-box').remove();
+
         // 9. Ruler Update
         ruler.update({
             width, height, currentDimensionX, currentDimensionY,
@@ -416,7 +456,32 @@ export function createVisualization(container, config) {
     }
 
     function handleZoom(event) {
-        const t = event.transform;
+        let t = event.transform;
+
+        // Manual Pan Clamping
+        // Manual Pan Clamping
+        const bounds = getDynamicBounds(t.k);
+        if (bounds) {
+            const { minX, maxX, minY, maxY } = bounds;
+            const margin = 50; // Allow panning 50px past data edge
+
+            // Calculate Clamping Limits
+            const minTx = -maxX * t.k - margin;
+            const maxTx = width - minX * t.k + margin;
+            const minTy = -maxY * t.k - margin;
+            const maxTy = height - minY * t.k + margin;
+
+            // Apply Clamp
+            const tx = Math.min(Math.max(t.x, minTx), maxTx);
+            const ty = Math.min(Math.max(t.y, minTy), maxTy);
+
+            if (tx !== t.x || ty !== t.y) {
+                t = new d3.ZoomTransform(t.k, tx, ty);
+                // Update D3 internal state to prevent jumping on next gesture
+                svg.node().__zoom = t;
+            }
+        }
+
         render(t, event.sourceEvent);
     }
 
@@ -497,8 +562,8 @@ export function createVisualization(container, config) {
 
         const minX = d3.min(xValues);
         const maxX = d3.max(xValues);
-        const minY = d3.min(yValues);
-        const maxY = d3.max(yValues);
+        const minY = d3.max(yValues); // Note: Y-axis is inverted, so max Y value is min pixel value
+        const maxY = d3.min(yValues); // Note: Y-axis is inverted, so min Y value is max pixel value
 
         const boundsWidth = maxX - minX;
         const boundsHeight = maxY - minY;
@@ -647,29 +712,262 @@ export function createVisualization(container, config) {
         // Calculate dynamic zoom-out limit (including label widths)
         const allPoints = filteredData.concat(clusters);
         if (allPoints.length > 0) {
-            // Font size at zoom=1: min(12, basDecadeHeight)
+            // Font size at zoom=1 reference
             const baseDecadeHeight = Math.abs(yScale(10) - yScale(1));
-            const baseFS = Math.min(12, baseDecadeHeight);
-            const labelGap = 10; // gap between point and label
 
-            let dataMinX = Infinity, dataMaxX = -Infinity;
-            let dataMinY = Infinity, dataMaxY = -Infinity;
+            // Pre-calculate Convex Hulls for Dynamic Bounds
+            const boundsCandidates = []; // {x, y, l, r, u, d}
+            const precisionFS = 12; // Max font size (capped at 12)
+
             for (const d of allPoints) {
                 const px = xScale(d._cachedX);
-                const py = yScale(d._cachedY);
-                const labelW = labelGap + (d._estTextWidth || 0) * baseFS;
-                if (px < dataMinX) dataMinX = px;
-                if (px + labelW > dataMaxX) dataMaxX = px + labelW;
-                if (py < dataMinY) dataMinY = py;
-                if (py > dataMaxY) dataMaxY = py;
+                const rawY = d.dimensions ? d.dimensions[currentDimensionY] : undefined;
+                let v1 = d._cachedY;
+                let v2 = d._cachedY;
+                let isRange = Array.isArray(rawY);
+                let yType = "equal";
+                if (isRange) {
+                    yType = "range";
+                    v2 = Number(rawY[1]);
+                } else if (typeof rawY === 'string') {
+                    if (rawY.startsWith('>')) yType = 'greater';
+                    else if (rawY.startsWith('<')) yType = 'less';
+                }
+
+                const py1 = yScale(v1);
+
+                // Calculate Screen Extents (at fs=12)
+                let l = 0, r = 0, u = 0, dExt = 0;
+                let lc = 0, ls = 0, rc = 0, rs = 0, uc = 0, us = 0, dc = 0, ds = 0;
+
+                if (yType === 'range') {
+                    const py2 = yScale(v2);
+                    const rangeFS = precisionFS * 1.75;
+                    const radius = precisionFS / 2.4;
+                    const thickness = 0.75 * radius;
+
+                    const textLen = ((d._estTextWidth || 0) * rangeFS) + 6;
+                    const midY = (py1 + py2) / 2;
+
+                    const diff = Math.abs(py1 - py2) / 2; // Geometry (Scalable with Zoom - wait, World Units?)
+                    // Diff is in SCREEN pixels at current yScale. It scales perfectly with K. 
+                    // So in getDynamicBounds, diff * 1/k * k = diff. It is invariant in World Space?
+                    // No. Diff is 'baseDecadeHeight * decades'. 
+                    // baseDecadeHeight scales with K. So diff (pixels) scales with K.
+                    // So diff is Scalable? Or Constant?
+                    // If diff is 100px at k=1. At k=0.1, diff is 10px.
+                    // My logic applies 'ScalingFactor'. If ScalingFactorS (~1) -> 100px.
+                    // If ScalingFactorC (1/k) -> 1000px?
+                    // WE NEED SCALABLE logic for Geometry.
+                    // Geometry scales with k. So it uses ScalingFactorC? No.
+                    // World = Screen / k.
+                    // If Screen = 100. World = 100.
+                    // If k=0.1. Screen = 10. World = 100.
+                    // So World is Constant.
+                    // My logic calculates WorldExt from ScreenExt.
+                    // ScreenExt (p.u) is at fs=12 (ref).
+                    // Ref k=1.
+                    // So WorldExt = p.u * 1/1 = p.u.
+                    // So diff should use ScalingFactorC (1/k)!
+                    // Wait. diff is purely geometric. It should correspond to World Distance.
+                    // So it should be Constant in World Space.
+                    // So in 'getDynamicBounds', it should result in constant World Size.
+                    // S_factorC = 1/k. World = p.u * 1/k. 
+                    // This creates Constant World Size. Correct.
+                    // Text Size (halfLen) shrinks. Should use S_factorS.
+
+                    const halfLen = textLen / 2;
+                    // u = max(diff, halfLen). d = max(diff, halfLen).
+                    // Problem: max is taken before splitting.
+                    // Any geometric part is 'Constant' (1/k scaling). Text part is 'Scalable'.
+                    // If diff > halfLen, use diff (Constant). If halfLen > diff, use halfLen (Scalable).
+                    // But which wins depends on zoom!
+                    // At low zoom, halfLen shrinks (Scalable). diff stays large (Constant World)?
+                    // No. diff (screen pixels) shrinks with K. 
+                    // So World Size is constant.
+                    // halfLen (screen pixels) shrinks with FS.
+                    // If FS hits floor, halfLen stays constant screen pixels.
+                    // So halfLen World Size GROWS.
+                    // So halfLen dominates at Low Zoom.
+                    // So we should track them separately and take MAX in getDynamicBounds?
+                    // No, getDynamicBounds takes sum? No.
+                    // I need uc, us.
+                    // But u is single value.
+                    // I will conservatively add them? No.
+                    // taking max(diff_c, halfLen_s) in getDynamicBounds?
+
+                    // Pragmatic: For `u/d` (Vertical), it's `max`.
+                    // For `l/r` (Horizontal), it's `sum`.
+                    // I'll use `u_sum_c`, `u_sum_s`?
+                    // No.
+
+                    // Let's assume for Range `u/d`: Text length (halfLen) is the problem.
+                    // `diff` is handled by data points being spread out?
+                    // No, single range item.
+                    // I'll put `diff` in `uc` and `halfLen` in `us`.
+                    // And in `getDynamicBounds`, for `y`, I'll use MAX?
+                    // No.
+                    // I'll just use SUM for now, but set `uc` = `diff` only if `diff > halfLen`? No.
+
+                    // Actually, at Low Zoom, `diff` (Screen Pixels) -> 0.
+                    // `uc * Fc` -> `diff * 1/k`. World Size of Diff. Constant.
+                    // `halfLen` (Screen Pixels) -> Constant (Floor).
+                    // `us * Fs` -> `halfLen * (4/12k)`. World Size -> Large.
+                    // So `us * Fs` dominates `uc * Fc`.
+                    // So SUM is `Large + Constant`.
+                    // `Max` is `Large`.
+                    // Difference is `Constant`.
+                    // If usage is `Bounds`, `Large + Constant` is safer.
+                    // I'll use SUM.
+                    uc = diff; us = halfLen;
+                    dc = diff; ds = halfLen;
+
+                    const labelHalfWidth = (rangeFS * 1.5) / 2;
+                    const labelCenterX = -thickness - 20; // -thick - 20
+                    // l = -(labelCenterX - labelHalfWidth) = thick + 20 + halfW
+                    // Constant part: 20. Scalable part: thick + halfW.
+                    // thick (radius) scales with Zoom (Geometry). So it is C-like (1/k)?
+                    // No. radius logic in render: `max(2, min(..., k))`.
+                    // It scales with K (mostly).
+                    // So `thick * Fc` -> Constant World Size.
+                    // `halfW` (font width) scales with Fs.
+                    // So `lc = 20 + thick`. `ls = halfW`.
+                    // Wait. `thick` is 0.75 * radius. Radius ~ 5px.
+                    // 20 is constant screen pixels.
+                    // So `lc = 20`. `ls = thick + halfW`.
+                    lc = 20;
+                    ls = thickness + labelHalfWidth;
+
+                    // r = thickness / 2.
+                    // thick is Geometric.
+                    rc = thickness / 2; rs = 0;
+
+                    l = lc + ls; r = rc + rs; u = uc + us; dExt = dc + ds;
+
+                    boundsCandidates.push({ x: px, y: midY, l, r, u, d: dExt, lc, ls, rc, rs, uc, us, dc, ds });
+
+                } else {
+                    const radius = precisionFS / 2.4;
+                    const labelGap = 10;
+                    const labelW = labelGap + (d._estTextWidth || 0) * precisionFS;
+
+                    // l = radius. Scalable (text-like? no, geometric).
+                    // radius logic is hybrid.
+                    // Treat as Scalable S (follows visualFS roughly)?
+                    // Or Constant C (follows k)?
+                    // If I treat as C. World Size is constant. Screen Size shrinks with k.
+                    // If radius has floor 2px. Screen Size constant.
+                    // So C matches "Shrink with K" (normal geometry).
+                    // S matches "Floor behavior".
+                    // Best to put radius in S?
+                    // If radius is in S. `radius * Fs`.
+                    // `5 * (4/12k) = 1.6 / k`.
+                    // World size Grows.
+                    // Screen size `1.6`. Matches floor 2px.
+                    // So S is good for radius.
+
+                    l = radius;
+                    lc = 0; ls = radius;
+
+                    // r = labelW = 10 + text.
+                    // 10 is Constant C (gap). Text is S.
+                    rc = 10;
+                    rs = (d._estTextWidth || 0) * precisionFS + radius;
+                    r = rc + rs;
+
+                    let yUp = radius;
+                    let yDown = radius;
+
+                    // Label vertical
+                    yUp = Math.max(yUp, precisionFS * 0.7);
+                    yDown = Math.max(yDown, precisionFS * 0.8);
+
+                    if (currentDimensionX === "none") {
+                        const arrowLen = 20 * radius;
+                        if (yType === 'greater') yUp = Math.max(yUp, arrowLen);
+                        else if (yType === 'less') yDown = Math.max(yDown, arrowLen);
+                    }
+
+                    // u, d logic similar to range (sum).
+                    // yUp contains radius (S), text height (S), arrow (S/C?).
+                    // Treat all as S for safety.
+                    uc = 0; us = yUp;
+                    dc = 0; ds = yDown;
+                    u = yUp; dExt = yDown;
+
+                    boundsCandidates.push({ x: px, y: py1, l, r, u: yUp, d: yDown, lc, ls, rc, rs, uc, us, dc, ds });
+                }
             }
+
+            // Build Hulls
+            const filterHull = (list, keyPos, keyExt, isMin) => {
+                list.sort((a, b) => isMin ? a[keyPos] - b[keyPos] : b[keyPos] - a[keyPos]);
+                const hull = [];
+                let maxExt = -Infinity;
+                for (const p of list) {
+                    if (p[keyExt] > maxExt) {
+                        hull.push(p);
+                        maxExt = p[keyExt];
+                    }
+                }
+                return hull;
+            };
+
+            const hulls = {
+                minX: filterHull([...boundsCandidates], 'x', 'l', true),
+                maxX: filterHull([...boundsCandidates], 'x', 'r', false),
+                minY: filterHull([...boundsCandidates], 'y', 'u', true),
+                maxY: filterHull([...boundsCandidates], 'y', 'd', false),
+                baseDecadeHeight: baseDecadeHeight
+            };
+            currentState.boundsHulls = hulls;
+
+
+
+
+            // Calculate Initial Bounds (Low Zoom assumption)
+            // Use k=0.1 equiv
+            let dataMinX = Infinity, dataMaxX = -Infinity, dataMinY = Infinity, dataMaxY = -Infinity;
+            // worldExt = (p.ext / 12) * baseDecadeHeight (since k is low, fs scales with k, ext/k constant)
+            // Wait. fs = baseDH * k. ext = ext12 * (fs/12). 
+            // worldExt = ext/k = ext12 * (baseDH*k/12) / k = ext12 * baseDH / 12.
+            // This constant worldExt applies when `baseDH * k < 12`.
+
+            const getLowZoomBound = (list, sign, keyPos, keyExt) => {
+                let best = (sign < 0) ? Infinity : -Infinity;
+                for (const p of list) {
+                    const worldExt = (p[keyExt] / 12) * baseDecadeHeight;
+                    const val = p[keyPos] + (sign * worldExt); // min: x - ext. max: x + ext.
+                    if (sign < 0) best = Math.min(best, val);
+                    else best = Math.max(best, val);
+                }
+                return best;
+            };
+
+            if (boundsCandidates.length > 0) {
+                dataMinX = getLowZoomBound(hulls.minX, -1, 'x', 'l');
+                dataMaxX = getLowZoomBound(hulls.maxX, 1, 'x', 'r');
+                dataMinY = getLowZoomBound(hulls.minY, -1, 'y', 'u');
+                dataMaxY = getLowZoomBound(hulls.maxY, 1, 'y', 'd');
+            } else {
+                dataMinX = 0; dataMaxX = 1; dataMinY = 0; dataMaxY = 1;
+            }
+
             const dataW = dataMaxX - dataMinX || 1;
             const dataH = dataMaxY - dataMinY || 1;
-            const padding = 0.8; // data should fill at most 80% of viewport when fully zoomed out
+            const padding = 0.8;
             const fitScaleX = (width * padding) / dataW;
             const fitScaleY = (height * padding) / dataH;
             minZoom = Math.max(0.01, Math.min(fitScaleX, fitScaleY, 1));
             zoom.scaleExtent([minZoom, 1000000]);
+
+            currentState.dataBounds = { minX: dataMinX, maxX: dataMaxX, minY: dataMinY, maxY: dataMaxY };
+            zoom.translateExtent([[-Infinity, -Infinity], [Infinity, Infinity]]);
+        } else {
+            minZoom = 1;
+            zoom.scaleExtent([1, 1000000]);
+            currentState.dataBounds = null;
+            zoom.translateExtent([[-Infinity, -Infinity], [Infinity, Infinity]]);
         }
 
         // Calculate Hidden IDs
@@ -955,12 +1253,32 @@ export function createVisualization(container, config) {
                 .call(zoom.transform, targetTransform)
                 .on("end", () => highlightItem(matchItem));
         },
-        resetZoom: () => {
-            if (currentDimensionX === "none") {
-                svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
-            } else {
-                svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+        resetZoom: (duration = 750) => {
+            if (!currentState.boundsHulls) {
+                if (currentDimensionX === "none") {
+                    svg.transition().duration(duration).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
+                } else {
+                    svg.transition().duration(duration).call(zoom.transform, d3.zoomIdentity);
+                }
+                return;
             }
+
+            const targetK = minZoom;
+            const bounds = getDynamicBounds(targetK);
+
+            if (!bounds) return;
+
+            // Center in base coordinates (including label extents)
+            const centerX = (bounds.minX + bounds.maxX) / 2;
+            const centerY = (bounds.minY + bounds.maxY) / 2;
+
+            // Calculate translation to center the bounding box
+            const tx = (width / 2) - (centerX * targetK);
+            const ty = (height / 2) - (centerY * targetK);
+
+            const transform = d3.zoomIdentity.translate(tx, ty).scale(targetK);
+
+            svg.transition().duration(duration).call(zoom.transform, transform);
         },
         zoomTo: (transform, duration = 750, onEnd) => {
             if (duration > 0) {
