@@ -669,20 +669,27 @@ export function createVisualization(container, config) {
 
     svg.node().addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
             isRulerActiveForTouch = false;
+
+            // Capture coordinates for the timer callback
+            const cx = touch.clientX;
+            const cy = touch.clientY;
 
             touchTimer = setTimeout(() => {
                 isRulerActiveForTouch = true;
                 const t = d3.zoomTransform(svg.node());
-                // Use explicit object rather than d3.pointer since d3.pointer requires event
-                // But we can construct a mock event or use touches directly
+
+                // Construct mock event manually to avoid accessing revoked event or changed touches
                 const mockEvent = {
-                    sourceEvent: e.touches[0],
-                    clientX: e.touches[0].clientX,
-                    clientY: e.touches[0].clientY,
-                    target: svg.node()
+                    type: 'touch',
+                    sourceEvent: null, // Don't hold onto the original event
+                    clientX: cx,
+                    clientY: cy,
+                    target: svg.node(),
+                    view: window
                 };
 
                 ruler.update({
@@ -692,20 +699,23 @@ export function createVisualization(container, config) {
                 });
 
                 if (navigator.vibrate) navigator.vibrate(50);
-            }, 500);
+            }, 400);
         }
-    }, { passive: false });
+    }, { passive: false, capture: true });
 
     svg.node().addEventListener('touchmove', (e) => {
         if (isRulerActiveForTouch) {
             e.preventDefault();
             e.stopPropagation();
             const t = d3.zoomTransform(svg.node());
+            const touch = e.touches[0];
             const mockEvent = {
-                sourceEvent: e.touches[0],
-                clientX: e.touches[0].clientX,
-                clientY: e.touches[0].clientY,
-                target: svg.node()
+                type: 'touch',
+                sourceEvent: null,
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                target: svg.node(),
+                view: window
             };
             ruler.update({
                 width, height, currentDimensionX, currentDimensionY,
@@ -715,16 +725,19 @@ export function createVisualization(container, config) {
         } else {
             const dx = Math.abs(e.touches[0].clientX - touchStartX);
             const dy = Math.abs(e.touches[0].clientY - touchStartY);
-            if (dx > 10 || dy > 10) {
+            if (dx > 20 || dy > 20) {
                 if (touchTimer) { clearTimeout(touchTimer); touchTimer = null; }
             }
         }
-    }, { passive: false });
+    }, { passive: false, capture: true });
 
-    svg.node().addEventListener('touchend', () => {
+    const endTouch = () => {
         if (touchTimer) { clearTimeout(touchTimer); touchTimer = null; }
         isRulerActiveForTouch = false;
-    });
+    };
+
+    svg.node().addEventListener('touchend', endTouch, { capture: true });
+    svg.node().addEventListener('touchcancel', endTouch, { capture: true });
 
     return {
         update,

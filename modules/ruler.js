@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { getUnit, parseValue } from './utils.js';
+import { getUnit, parseValue, formatRelative, formatAbsolute } from './utils.js';
 
 export function createRuler(svg, checkMobile) {
     let markedYData = null;

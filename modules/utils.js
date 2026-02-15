@@ -52,3 +52,17 @@ export const getFilteredData = (dataList, currentDimensionX, currentDimensionY) 
         });
     }
 };
+
+export const formatRelative = (ratio) => {
+    if (Math.abs(ratio - 1) < 0.001) return "1.00";
+    if (ratio < 0.01 || ratio > 100) return ratio.toExponential(2);
+    return ratio.toPrecision(3);
+};
+
+export const formatAbsolute = (diff, dim) => {
+    const unit = getUnit(dim);
+    if (Math.abs(diff) === 0) return `0 ${unit}`;
+    const exp = diff.toExponential(2);
+    const [mantissa, exponent] = exp.split('e');
+    return `${mantissa} × 10^${parseInt(exponent, 10)} ${unit}`;
+};
