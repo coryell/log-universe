@@ -55,4 +55,34 @@ assert.strictEqual(cInCluster, undefined, "Item C should not be in cluster");
 const clustersUnique = getClusters([data[0], data[2]], "none", "length", "en-us");
 assert.strictEqual(clustersUnique.length, 0, "Should find 0 clusters for unique points");
 
+console.log("Testing getClusters - Normalization...");
+
+// Test Case 3: Grouping with Normalization
+// Should group 1.50e+2 and 1.5e2 together
+const dataNormalization = [
+    {
+        id: "n1",
+        displayName: { "en-us": "N1" },
+        // x coord trailing zeros in 1D view
+        _orig_dimensions: { length: "1.50e+2" },
+        _orig_x_coordinates: { length: "5.0" },
+        dimensions: { length: 150 },
+        x_coordinates: { length: 5 },
+        category: { "en-us": "Cat1" }
+    },
+    {
+        id: "n2",
+        displayName: { "en-us": "N2" },
+        _orig_dimensions: { length: "1.5e2" },
+        _orig_x_coordinates: { length: "5" },
+        dimensions: { length: 150 },
+        x_coordinates: { length: 5 },
+        category: { "en-us": "Cat1" }
+    }
+];
+
+const clustersNorm = getClusters(dataNormalization, "none", "length", "en-us");
+assert.strictEqual(clustersNorm.length, 1, "Should group points despite formatting differences");
+assert.strictEqual(clustersNorm[0]._members.length, 2, "Cluster should have 2 members");
+
 console.log("grouping.test.js passed!");

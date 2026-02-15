@@ -4,6 +4,43 @@ import { getDimensionValueX, getDimensionValueY, getLocalized, getFilteredData }
  * Identifies groups of data points that share the same coordinates.
  * Returns an array of "combined" data objects representing these groups.
  */
+/**
+ * Normalizes numerical strings for grouping comparison.
+ * - Removes trailing mantissa zeros.
+ * - Removes '+' from exponent.
+ * - Removes trailing zeros from standard numbers.
+ */
+function normalizeValue(val) {
+    if (val === undefined || val === null) return val;
+    let s = String(val);
+
+    // Handle scientific notation
+    if (s.includes('e') || s.includes('E')) {
+        let parts = s.toLowerCase().split('e');
+        let mantissa = parts[0];
+        let exponent = parts[1];
+
+        // Remove trailing zeros from mantissa
+        if (mantissa.includes('.')) {
+            mantissa = mantissa.replace(/0+$/, '').replace(/\.$/, '');
+        }
+
+        // Remove plus sign from exponent
+        if (exponent.startsWith('+')) {
+            exponent = exponent.substring(1);
+        }
+
+        return `${mantissa}e${exponent}`;
+    }
+
+    // Handle standard numbers (like x coords in 1D view)
+    if (s.includes('.')) {
+        s = s.replace(/0+$/, '').replace(/\.$/, '');
+    }
+
+    return s;
+}
+
 export function getClusters(data, currentDimensionX, currentDimensionY, language) {
     if (!data) return [];
 
@@ -11,13 +48,18 @@ export function getClusters(data, currentDimensionX, currentDimensionY, language
     const filteredData = getFilteredData(data, currentDimensionX, currentDimensionY);
 
     filteredData.forEach(d => {
-        let key = "";
-        // Use original dimensions to group by exact values before numerical coercion/rounding might occur
+        // Use original dimensions to group by exact values, but normalized
+        const valY = normalizeValue(d._orig_dimensions && d._orig_dimensions[currentDimensionY]);
+        let valX;
+
         if (currentDimensionX === "none") {
-            key = `y:${d._orig_dimensions[currentDimensionY]}|x:${d._orig_x_coordinates[currentDimensionY]}`;
+            valX = normalizeValue(d._orig_x_coordinates && d._orig_x_coordinates[currentDimensionY]);
         } else {
-            key = `y:${d._orig_dimensions[currentDimensionY]}|x:${d._orig_dimensions[currentDimensionX]}`;
+            valX = normalizeValue(d._orig_dimensions && d._orig_dimensions[currentDimensionX]);
         }
+
+        const key = `y:${valY}|x:${valX}`;
+
         if (!groups.has(key)) groups.set(key, []);
         groups.get(key).push(d);
     });
