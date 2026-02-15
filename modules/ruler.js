@@ -7,6 +7,10 @@ export function createRuler(svg, checkMobile) {
     let lastMousePos = null;
     let lastConfig = null;
     let _isDragging = false;
+    let _isMarkDragging = false;
+    let _markDragOffset = [0, 0];
+    let _markStartData = { x: null, y: null };
+    let _startCursorPos = null; // Track cursor pos at drag start for 1D delta
 
     // Cursor Ruler (Create FIRST so it is below the Mark)
     const rulerGroup = svg.append("g")
@@ -34,14 +38,35 @@ export function createRuler(svg, checkMobile) {
     const markLineX = markGroup.append("line") // Vertical line at fixed X
         .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
-    // Interval connecting lines
-    const intervalLineY = rulerGroup.append("line") // Vertical segment
+    // Invisible hit lines for dragging the mark (Mobile only)
+    const markHitLineY = markGroup.append("line")
+        .attr("stroke", "transparent").attr("stroke-width", 30)
+        .style("cursor", "move")
+        .style("pointer-events", "stroke");
+
+    const markHitLineX = markGroup.append("line")
+        .attr("stroke", "transparent").attr("stroke-width", 30)
+        .style("cursor", "move")
+        .style("pointer-events", "stroke");
+
+    // Interval connecting lines (Moved to markGroup for dragging)
+    const intervalLineY = markGroup.append("line") // Vertical segment
         .attr("class", "interval-line-y")
         .attr("stroke", "green").attr("stroke-width", 1);
 
-    const intervalLineX = rulerGroup.append("line") // Horizontal segment
+    const intervalHitLineY = markGroup.append("line")
+        .attr("stroke", "transparent").attr("stroke-width", 30)
+        .style("cursor", "move")
+        .style("pointer-events", "stroke");
+
+    const intervalLineX = markGroup.append("line") // Horizontal segment
         .attr("class", "interval-line-x")
         .attr("stroke", "green").attr("stroke-width", 1);
+
+    const intervalHitLineX = markGroup.append("line")
+        .attr("stroke", "transparent").attr("stroke-width", 30)
+        .style("cursor", "move")
+        .style("pointer-events", "stroke");
 
     const rulerLabelBackground = rulerGroup.append("rect")
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
@@ -55,21 +80,25 @@ export function createRuler(svg, checkMobile) {
     const rulerLabelLine1 = rulerLabel.append("tspan");
     const rulerLabelLine2 = rulerLabel.append("tspan");
 
-    // Y-Interval Label
-    const yIntervalBackground = rulerGroup.append("rect")
-        .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
+    // Y-Interval Label (Moved to markGroup)
+    const yIntervalBackground = markGroup.append("rect")
+        .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7)
+        .style("pointer-events", "all");
 
-    const yIntervalLabel = rulerGroup.append("text")
-        .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+    const yIntervalLabel = markGroup.append("text")
+        .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start")
+        .style("pointer-events", "none"); // Let background capture events
 
-    // X-Interval Label
-    const xIntervalBackground = rulerGroup.append("rect")
-        .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
+    // X-Interval Label (Moved to markGroup)
+    const xIntervalBackground = markGroup.append("rect")
+        .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7)
+        .style("pointer-events", "all");
 
-    const xIntervalLabel = rulerGroup.append("text")
-        .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+    const xIntervalLabel = markGroup.append("text")
+        .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start")
+        .style("pointer-events", "none");
 
-    // Invisible hit lines for mobile touch targets
+    // Invisible hit lines for mobile touch targets (Red Ruler)
     const rulerHitLineX = rulerGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
         .style("pointer-events", "stroke");
@@ -177,10 +206,71 @@ export function createRuler(svg, checkMobile) {
             rulerGroup.style("display", null);
         }
     });
-    rulerGroup.node().addEventListener('touchcancel', () => {
-        _isDragging = false;
-        if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
-    });
+    // Mark Drag Handlers (Mobile Only)
+    const handleMarkDragStart = (e) => {
+        if (!checkMobile || !checkMobile()) return;
+        e.stopPropagation();
+        e.preventDefault();
+        _isMarkDragging = true;
+        const p = d3.pointer(e.touches[0], svg.node());
+        _markDragOffset = [p[0], p[1]]; // Store initial touch pos
+        _markStartData = { x: markedXData, y: markedYData };
+        if (lastMousePos) {
+            _startCursorPos = [...lastMousePos];
+        } else {
+            _startCursorPos = null;
+        }
+    };
+
+    const handleMarkDragMove = (e) => {
+        if (!_isMarkDragging || !lastConfig) return;
+        e.stopPropagation(); // Prevent red ruler from moving
+        e.preventDefault();
+
+        const touch = e.touches[0];
+        const p = d3.pointer(touch, svg.node());
+        const dx = p[0] - _markDragOffset[0];
+        const dy = p[1] - _markDragOffset[1];
+
+        // 1D Specific Behavior: Horizontal drag moves the cursor (red ruler position) using DELTA
+        if (lastConfig.currentDimensionX === "none" && lastMousePos && _startCursorPos) {
+            lastMousePos[0] = _startCursorPos[0] + dx;
+        }
+
+        // Delta is in pixels. Convert start pixel + delta -> data
+        // We need to re-calculate the PIXEL position of the start data first
+        // effectively: currentPixel = scale(startData) + delta
+        // newData = scale.invert(currentPixel)
+
+        if (_markStartData.y !== null) {
+            const startYPix = lastConfig.yScale(_markStartData.y);
+            const newYPix = startYPix + dy;
+            const newYData = lastConfig.yScale.invert(newYPix);
+            markedYData = newYData;
+        }
+
+        if (_markStartData.x !== null && lastConfig.currentDimensionX !== "none") {
+            const startXPix = lastConfig.xScale(_markStartData.x);
+            const newXPix = startXPix + dx;
+            const newXData = lastConfig.xScale.invert(newXPix);
+            markedXData = newXData;
+        }
+
+        update(lastConfig);
+    };
+
+    const handleMarkDragEnd = (e) => {
+        if (_isMarkDragging) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        _isMarkDragging = false;
+    };
+
+    markGroup.node().addEventListener('touchstart', handleMarkDragStart, { passive: false });
+    markGroup.node().addEventListener('touchmove', handleMarkDragMove, { passive: false });
+    markGroup.node().addEventListener('touchend', handleMarkDragEnd, { passive: false });
+    markGroup.node().addEventListener('touchcancel', handleMarkDragEnd, { passive: false });
 
     // Fix for ruler intercepting clicks when it moves under the cursor/finger
     rulerGroup.node().addEventListener('click', (e) => {
@@ -228,9 +318,11 @@ export function createRuler(svg, checkMobile) {
         yIntervalLabel.style("display", "none");
         yIntervalBackground.style("display", "none");
         intervalLineY.style("display", "none");
+        intervalHitLineY.style("display", "none");
         xIntervalLabel.style("display", "none");
         xIntervalBackground.style("display", "none");
         intervalLineX.style("display", "none");
+        intervalHitLineX.style("display", "none");
     }
 
     function update(config) {
@@ -350,17 +442,19 @@ export function createRuler(svg, checkMobile) {
         rulerLabelBackground.attr("x", lbox.x - 4).attr("y", lbox.y - 4).attr("width", lbox.width + 8).attr("height", lbox.height + 8);
         rulerLabelHitRect.attr("x", lbox.x - 12).attr("y", lbox.y - 12).attr("width", lbox.width + 24).attr("height", lbox.height + 24);
 
-        const updateIntervalUI = (label, bg, line, val, markVal, mousePos, markPos, isHorizontal, dim, orthoPos, orthoMarkPos) => {
+        const updateIntervalUI = (label, bg, line, hitLine, val, markVal, mousePos, markPos, isHorizontal, dim, orthoPos, orthoMarkPos) => {
             if (markVal === null || Math.abs(mousePos - markPos) < 2) {
                 label.style("display", "none");
                 bg.style("display", "none");
                 line.style("display", "none");
+                hitLine.style("display", "none");
                 return;
             }
 
             label.style("display", null);
             bg.style("display", null);
             line.style("display", null);
+            hitLine.style("display", null);
 
             let baseLabelX = 0;
             let isFlipped = false;
@@ -369,6 +463,7 @@ export function createRuler(svg, checkMobile) {
             if (isHorizontal) {
                 const drawY = (orthoMarkPos !== null) ? orthoMarkPos : orthoPos;
                 line.attr("x1", markPos).attr("x2", mousePos).attr("y1", drawY).attr("y2", drawY);
+                hitLine.attr("x1", markPos).attr("x2", mousePos).attr("y1", drawY).attr("y2", drawY);
                 isFlipped = (orthoMarkPos !== null && orthoPos > orthoMarkPos);
                 const labelY = isFlipped ? drawY - 20 : drawY + 20;
                 label.attr("y", labelY).attr("text-anchor", "middle");
@@ -377,6 +472,7 @@ export function createRuler(svg, checkMobile) {
             } else {
                 const drawX = (orthoMarkPos !== null) ? orthoMarkPos : orthoPos;
                 line.attr("x1", drawX).attr("x2", drawX).attr("y1", markPos).attr("y2", mousePos);
+                hitLine.attr("x1", drawX).attr("x2", drawX).attr("y1", markPos).attr("y2", mousePos);
                 isFlipped = (orthoMarkPos !== null && orthoPos > orthoMarkPos);
                 const labelX = isFlipped ? drawX - 15 : drawX + 15;
                 anchor = isFlipped ? "end" : "start";
@@ -410,42 +506,50 @@ export function createRuler(svg, checkMobile) {
             if (markedYData !== null) {
                 my = yScale(markedYData); // Use passed rescaled scale
                 markLineY.style("display", null).attr("y1", my).attr("y2", my).attr("x2", width);
+                markHitLineY.style("display", null).attr("y1", my).attr("y2", my).attr("x2", width);
             } else {
                 markLineY.style("display", "none");
+                markHitLineY.style("display", "none");
             }
 
             let mx = null;
             if (markedXData !== null && currentDimensionX !== "none") {
                 mx = xScale(markedXData); // Use passed rescaled scale
                 markLineX.style("display", null).attr("x1", mx).attr("x2", mx).attr("y2", height);
+                markHitLineX.style("display", null).attr("x1", mx).attr("x2", mx).attr("y2", height);
             } else {
                 markLineX.style("display", "none");
+                markHitLineX.style("display", "none");
             }
 
             // Update Interval UI
             if (markedYData !== null) {
-                updateIntervalUI(yIntervalLabel, yIntervalBackground, intervalLineY, valY, markedYData, mouseY, my, false, currentDimensionY, mouseX, mx);
+                updateIntervalUI(yIntervalLabel, yIntervalBackground, intervalLineY, intervalHitLineY, valY, markedYData, mouseY, my, false, currentDimensionY, mouseX, mx);
             } else {
                 yIntervalLabel.style("display", "none");
                 yIntervalBackground.style("display", "none");
                 intervalLineY.style("display", "none");
+                intervalHitLineY.style("display", "none");
             }
 
             if (markedXData !== null && currentDimensionX !== "none") {
-                updateIntervalUI(xIntervalLabel, xIntervalBackground, intervalLineX, xScale.invert(mouseX), markedXData, mouseX, mx, true, currentDimensionX, mouseY, my);
+                updateIntervalUI(xIntervalLabel, xIntervalBackground, intervalLineX, intervalHitLineX, xScale.invert(mouseX), markedXData, mouseX, mx, true, currentDimensionX, mouseY, my);
             } else {
                 xIntervalLabel.style("display", "none");
                 xIntervalBackground.style("display", "none");
                 intervalLineX.style("display", "none");
+                intervalHitLineX.style("display", "none");
             }
         } else {
             markGroup.style("display", "none");
             yIntervalLabel.style("display", "none");
             yIntervalBackground.style("display", "none");
             intervalLineY.style("display", "none");
+            intervalHitLineY.style("display", "none");
             xIntervalLabel.style("display", "none");
             xIntervalBackground.style("display", "none");
             intervalLineX.style("display", "none");
+            intervalHitLineX.style("display", "none");
         }
     }
 
@@ -458,6 +562,7 @@ export function createRuler(svg, checkMobile) {
         setMark,
         clearMark,
         hide,
-        get isDragging() { return _isDragging; }
+        hide,
+        get isDragging() { return _isDragging || _isMarkDragging; }
     };
 }
