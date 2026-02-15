@@ -305,6 +305,7 @@ export function createRuler(svg, checkMobile) {
 
         const labelX = mouseX + (currentDimensionX !== "none" ? 5 : 15);
         const fs = 12;
+
         const charRatio = 0.6;
         const charWidth = fs * charRatio;
 
@@ -319,11 +320,19 @@ export function createRuler(svg, checkMobile) {
             return { x: bx, y: y - fs * 0.7, width: w, height: h };
         };
 
-        const lText = currentDimensionX !== "none"
+        const labelText = currentDimensionX !== "none"
             ? [`Y: ${formatVal(valY, getUnit(currentDimensionY))}`, `X: ${formatVal(xScale.invert(mouseX), getUnit(currentDimensionX))}`]
             : [formatVal(valY, getUnit(currentDimensionY))];
 
-        const lbox = getEstBBox(lText, labelX, labelY);
+        rulerLabel.attr("x", labelX).attr("y", labelY);
+        rulerLabel.selectAll("tspan")
+            .data(labelText)
+            .join("tspan")
+            .attr("x", labelX)
+            .attr("dy", (d, i) => i === 0 ? 0 : "1.2em")
+            .text(d => d);
+
+        const lbox = getEstBBox(labelText, labelX, labelY);
         rulerLabelBackground.attr("x", lbox.x - 4).attr("y", lbox.y - 4).attr("width", lbox.width + 8).attr("height", lbox.height + 8);
         rulerLabelHitRect.attr("x", lbox.x - 12).attr("y", lbox.y - 12).attr("width", lbox.width + 24).attr("height", lbox.height + 24);
 
