@@ -93,7 +93,7 @@
       "duration": "1e+0"
     },
     "x_coordinates": {
-      "duration": "0"
+      "duration": "10"
     },
     "description": {
       "en-us": "The base unit of time in the International System of Units (SI), defined by the vibrations of a cesium atom."
@@ -782,7 +782,7 @@
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "20"
     },
     "description": {
       "en-us": "A theoretical limit set by the \"plasma frequency\" of ionized gas between stars."
@@ -810,7 +810,7 @@
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "20"
     },
     "description": {
       "en-us": "Radio waves so long they are reflected by the thin plasma filling our solar system."
@@ -2690,7 +2690,7 @@
     "x_coordinates": {
       "length": "6",
       "mass": "0",
-      "duration": "0"
+      "duration": "10"
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/R136a1",
@@ -7337,7 +7337,7 @@
       "duration": "3.6e+3"
     },
     "x_coordinates": {
-      "duration": "0"
+      "duration": "10"
     },
     "description": {
       "en-us": "A span of 3,600 seconds, originally based on dividing the day into 24 equal parts."
@@ -7361,7 +7361,7 @@
       "duration": "3.154e+7"
     },
     "x_coordinates": {
-      "duration": "0"
+      "duration": "10"
     },
     "description": {
       "en-us": "The time it takes for Earth to complete one full orbit around the Sun."
@@ -7385,7 +7385,7 @@
       "duration": "4.35e+17"
     },
     "x_coordinates": {
-      "duration": "0"
+      "duration": "10"
     },
     "sources": {
       "duration": "https://en.wikipedia.org/wiki/Age_of_the_universe"
