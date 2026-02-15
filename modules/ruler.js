@@ -555,6 +555,7 @@ export function createRuler(svg, checkMobile) {
 
     function hide() {
         rulerGroup.style("display", "none");
+        lastMousePos = null;
     }
 
     return {
