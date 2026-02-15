@@ -41,8 +41,9 @@ export function createVisualization(container, config) {
     let xScale = d3.scaleLinear();
 
     // Zoom Setup
+    let minZoom = 1;
     const zoom = d3.zoom()
-        .scaleExtent([1, 1000000])
+        .scaleExtent([minZoom, 1000000])
         .filter((event) => {
             // Prevent zoom on right-click (button === 2)
             if (event.button === 2) return false;
@@ -421,7 +422,7 @@ export function createVisualization(container, config) {
     let lastRecenterTime = 0;
     svg.node().addEventListener('wheel', (event) => {
         const t = d3.zoomTransform(svg.node());
-        if (t.k <= 1.05 && event.deltaY > 0) {
+        if (t.k <= minZoom * 1.05 && event.deltaY > 0) {
             const now = Date.now();
             if (now - lastRecenterTime > 1500) {
                 lastRecenterTime = now;
@@ -636,6 +637,34 @@ export function createVisualization(container, config) {
             const topPixel = 50 + yOffset;
             const bottomPixel = topPixel + newHeight;
             yScale.range([bottomPixel, topPixel]);
+        }
+
+        // Calculate dynamic zoom-out limit (including label widths)
+        const allPoints = filteredData.concat(clusters);
+        if (allPoints.length > 0) {
+            // Font size at zoom=1: min(12, basDecadeHeight)
+            const baseDecadeHeight = Math.abs(yScale(10) - yScale(1));
+            const baseFS = Math.min(12, baseDecadeHeight);
+            const labelGap = 10; // gap between point and label
+
+            let dataMinX = Infinity, dataMaxX = -Infinity;
+            let dataMinY = Infinity, dataMaxY = -Infinity;
+            for (const d of allPoints) {
+                const px = xScale(d._cachedX);
+                const py = yScale(d._cachedY);
+                const labelW = labelGap + (d._estTextWidth || 0) * baseFS;
+                if (px < dataMinX) dataMinX = px;
+                if (px + labelW > dataMaxX) dataMaxX = px + labelW;
+                if (py < dataMinY) dataMinY = py;
+                if (py > dataMaxY) dataMaxY = py;
+            }
+            const dataW = dataMaxX - dataMinX || 1;
+            const dataH = dataMaxY - dataMinY || 1;
+            const padding = 0.8; // data should fill at most 80% of viewport when fully zoomed out
+            const fitScaleX = (width * padding) / dataW;
+            const fitScaleY = (height * padding) / dataH;
+            minZoom = Math.max(0.01, Math.min(fitScaleX, fitScaleY, 1));
+            zoom.scaleExtent([minZoom, 1000000]);
         }
 
         // Calculate Hidden IDs
