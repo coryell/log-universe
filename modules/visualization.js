@@ -190,6 +190,11 @@ export function createVisualization(container, config) {
         const currentFS = Math.min(12, currentDecadeHeight);
         const currentRadius = currentFS / 2.4;
 
+        // Dynamically cap max zoom: prevent zooming in when nothing is visible
+        const hasVisibleItems = visibleData.length > 0 || visibleClusters.length > 0;
+        const maxZoom = hasVisibleItems ? 1000000 : t.k;
+        zoom.scaleExtent([minZoom, maxZoom]);
+
         // 6. Join & Render - Individual Items (g)
         g.selectAll('.item-group').data(visibleData, d => d.id)
             .join(
