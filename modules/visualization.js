@@ -676,6 +676,11 @@ export function createVisualization(container, config) {
     let isRulerActiveForTouch = false;
 
     svg.node().addEventListener('touchstart', (e) => {
+        // Prevent background logic if touching the ruler itself
+        if (e.target.closest && e.target.closest('.cursor-ruler')) {
+            return;
+        }
+
         if (e.touches.length === 1) {
             const touch = e.touches[0];
             touchStartX = touch.clientX;

@@ -8,21 +8,15 @@ export function createRuler(svg, checkMobile) {
     let lastConfig = null;
     let _isDragging = false;
 
-    // Mark Ruler (the persistent mark)
-    const markGroup = svg.append("g")
-        .attr("class", "mark-ruler")
+    // Cursor Ruler (Create FIRST so it is below the Mark)
+    const rulerGroup = svg.append("g")
+        .attr("class", "cursor-ruler")
         .style("pointer-events", "none")
         .style("display", "none");
 
-    const markLineY = markGroup.append("line") // Horizontal line at fixed Y
-        .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
-
-    const markLineX = markGroup.append("line") // Vertical line at fixed X
-        .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
-
-    // Cursor Ruler
-    const rulerGroup = svg.append("g")
-        .attr("class", "cursor-ruler")
+    // Mark Ruler (the persistent mark - Create SECOND so it is ON TOP)
+    const markGroup = svg.append("g")
+        .attr("class", "mark-ruler")
         .style("pointer-events", "none")
         .style("display", "none");
 
@@ -32,6 +26,13 @@ export function createRuler(svg, checkMobile) {
 
     const rulerLineY = rulerGroup.append("line") // This will be the vertical line tracking X
         .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
+
+    // Mark Lines (Append to markGroup)
+    const markLineY = markGroup.append("line") // Horizontal line at fixed Y
+        .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
+
+    const markLineX = markGroup.append("line") // Vertical line at fixed X
+        .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
     // Interval connecting lines
     const intervalLineY = rulerGroup.append("line") // Vertical segment
@@ -102,14 +103,18 @@ export function createRuler(svg, checkMobile) {
         } else {
             _dragOffset = [0, 0];
         }
+        // Capture position at start of touch for stable marking
+        const startMousePos = lastMousePos ? [...lastMousePos] : null;
+
         // Long-press: set mark at current ruler position after 500ms
         _rulerLongPressTimer = setTimeout(() => {
-            if (lastMousePos && lastConfig) {
+            if (startMousePos && lastConfig) {
                 const t = d3.zoomTransform(svg.node());
-                const yVal = lastConfig.yScale.invert(lastMousePos[1]);
+                // Use startMousePos instead of lastMousePos to avoid drift/jumps
+                const yVal = lastConfig.yScale.invert(startMousePos[1]);
                 let xVal = null;
                 if (lastConfig.currentDimensionX !== "none") {
-                    xVal = lastConfig.xScale.invert(lastMousePos[0]);
+                    xVal = lastConfig.xScale.invert(startMousePos[0]);
                 }
                 setMark(xVal, yVal, lastConfig.currentDimensionX);
                 update(lastConfig);
