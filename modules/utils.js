@@ -55,8 +55,13 @@ export const getFilteredData = (dataList, currentDimensionX, currentDimensionY) 
 
 export const formatRelative = (ratio) => {
     if (Math.abs(ratio - 1) < 0.001) return "1.00";
-    if (ratio < 0.01 || ratio > 100) return ratio.toExponential(2);
-    return ratio.toPrecision(3);
+    // Always use scientific notation for consistency with absolute values
+    const exp = ratio.toExponential(2);
+    const [mantissa, exponent] = exp.split('e');
+    const expVal = parseInt(exponent, 10);
+    // If exponent is 0, just show the number (e.g. 5.12 instead of 5.12 × 10^0)
+    if (expVal === 0) return mantissa;
+    return `${mantissa} × 10^${expVal}`;
 };
 
 export const formatAbsolute = (diff, dim) => {
@@ -64,5 +69,6 @@ export const formatAbsolute = (diff, dim) => {
     if (Math.abs(diff) === 0) return `0 ${unit}`;
     const exp = diff.toExponential(2);
     const [mantissa, exponent] = exp.split('e');
-    return `${mantissa} × 10^${parseInt(exponent, 10)} ${unit}`;
+    const sign = diff > 0 ? "+" : "";
+    return `${sign}${mantissa} × 10^${parseInt(exponent, 10)} ${unit}`;
 };

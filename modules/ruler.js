@@ -480,7 +480,7 @@ export function createRuler(svg, checkMobile) {
                 baseLabelX = labelX;
             }
 
-            const relText = `x${formatRelative(val / markVal)}`;
+            const relText = `×${formatRelative(val / markVal)}`;
             const absText = formatAbsolute(val - markVal, dim);
             const tspans = label.selectAll("tspan")
                 .data([relText, absText])
