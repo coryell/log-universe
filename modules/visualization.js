@@ -106,7 +106,12 @@ export function createVisualization(container, config) {
             return result;
         };
 
-        // 4. Data Filtering
+        if (currentState.lastClickId === undefined) {
+            currentState.lastClickId = null;
+            currentState.lastClickTime = 0;
+        }
+
+        // --- Data Filtering based on Axis ---
         const visibleDataSubset = getVisibleSubset(currentState.filteredData);
         const visibleClustersSubset = getVisibleSubset(currentState.clusters);
 
@@ -206,18 +211,29 @@ export function createVisualization(container, config) {
                     grp.each(function () { this._layoutVersion = currentState.layoutVersion; });
 
                     grp.on("click", (event, d) => {
+                        const now = new Date().getTime();
+                        const isDoubleClick = (d.id === currentState.lastClickId) && ((now - currentState.lastClickTime) < 300);
+
+                        currentState.lastClickId = d.id;
+                        currentState.lastClickTime = now;
+
                         ruler.update({
                             width, height, currentDimensionX, currentDimensionY,
                             xScale: d3.zoomTransform(svg.node()).rescaleX(xScale),
                             yScale: d3.zoomTransform(svg.node()).rescaleY(yScale)
                         });
+
+                        // Always trigger click (highlight)
                         if (callbacks.onClick) callbacks.onClick(event, d);
-                        event.stopPropagation();
-                    })
-                        .on("dblclick", (event, d) => {
+
+                        if (isDoubleClick) {
                             if (callbacks.onDblClick) callbacks.onDblClick(event, d);
-                            event.stopPropagation();
-                        });
+                            // Reset to prevent triple-click triggering another double-click
+                            currentState.lastClickId = null;
+                            currentState.lastClickTime = 0;
+                        }
+                        event.stopPropagation();
+                    });
 
                     return grp;
                 },
@@ -296,12 +312,25 @@ export function createVisualization(container, config) {
                     grp.each(function () { this._layoutVersion = currentState.layoutVersion; });
 
                     grp.on("click", (event, d) => {
+                        const now = new Date().getTime();
+                        const isDoubleClick = (d.id === currentState.lastClickId) && ((now - currentState.lastClickTime) < 300);
+
+                        currentState.lastClickId = d.id;
+                        currentState.lastClickTime = now;
+
                         ruler.update({
                             width, height, currentDimensionX, currentDimensionY,
                             xScale: d3.zoomTransform(svg.node()).rescaleX(xScale),
                             yScale: d3.zoomTransform(svg.node()).rescaleY(yScale)
                         });
+
                         if (callbacks.onClick) callbacks.onClick(event, d);
+
+                        if (isDoubleClick) {
+                            if (callbacks.onDblClick) callbacks.onDblClick(event, d);
+                            currentState.lastClickId = null;
+                            currentState.lastClickTime = 0;
+                        }
                         event.stopPropagation();
                     });
 
@@ -792,48 +821,98 @@ export function createVisualization(container, config) {
                 ? Math.sqrt(Number(rawDimY[0]) * Number(rawDimY[1]))
                 : getDimensionValueY(matchItem, currentDimensionY);
 
-            const domainY = yScale.domain();
-            const totalDecades = Math.log10(domainY[1]) - Math.log10(domainY[0]);
             const availableHeight = height - 100;
-
-            let targetScale = (height * totalDecades) / (3 * availableHeight);
-
-            const filteredData = getFilteredData(currentState.data || []);
-            const neighbors = filteredData.filter(d => Math.abs(getDimensionValueY(d, currentDimensionY) - valY) < valY * 2);
-
-            let minDiff = Infinity;
-            const y1 = yScale(valY);
-
-            neighbors.forEach(p => {
-                if (p.id === matchItem.id) return;
-                const y2 = yScale(getDimensionValueY(p, currentDimensionY));
-                const diff = Math.abs(y1 - y2);
-                if (diff < minDiff) minDiff = diff;
-            });
-
-            if (minDiff !== Infinity) {
-                const safeRadius = Math.min(width, height) / 2.2;
-                const maxScaleForNeighbor = safeRadius / minDiff;
-                targetScale = Math.min(targetScale, maxScaleForNeighbor);
-            }
+            const availableWidth = width - 100;
+            let targetScale = 1;
 
             if (Array.isArray(rawDimY)) {
+                // Range Item: Zoom to fit the range
                 const y1_raw = yScale(Number(rawDimY[0]));
                 const y2_raw = yScale(Number(rawDimY[1]));
                 const deltaY = Math.abs(y1_raw - y2_raw);
                 if (deltaY > 0) {
-                    const rangeScale = (availableHeight * 0.7) / deltaY;
-                    targetScale = Math.min(targetScale, rangeScale);
+                    // Fit range into 70% of available height
+                    const currentZoom = d3.zoomTransform(svg.node()).k;
+                    // deltaY is in *pixels* at current zoom.
+                    // We want deltaY * (targetScale / currentZoom) = availableHeight * 0.7
+                    // So targetScale = (availableHeight * 0.7 * d3.zoomTransform(svg.node()).k) / deltaY
+                    targetScale = (availableHeight * 0.7 * d3.zoomTransform(svg.node()).k) / deltaY;
+                } else {
+                    targetScale = 1000; // Fallback
                 }
             }
+            targetScale = Math.max(1, Math.min(targetScale, 1000)); // Lower cap for ranges
 
-            targetScale = Math.max(1, Math.min(targetScale, 1000));
+            if (!Array.isArray(rawDimY)) {
+                // Single Point: Zoom until nearest neighbor is ~30px away
+                // NOTE: We must pass currentDimensionX/Y to filter correctly!
+                const filteredData = getFilteredData(currentState.data || [], currentDimensionX, currentDimensionY);
+
+                // Calculate distance in "decades" (log space) to find nearest neighbor
+                const cx = (currentDimensionX === "none") ? matchItem._cachedX : Math.log10(matchItem._cachedX);
+                const cy = Math.log10(matchItem._cachedY);
+
+                let minDistSq = Infinity;
+                let nearestItem = null;
+
+                filteredData.forEach((d, i) => {
+                    if (d.id === matchItem.id) return;
+                    const dx = (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX);
+                    const dy = Math.log10(d._cachedY);
+                    const distSq = (dx - cx) ** 2 + (dy - cy) ** 2;
+
+                    // Ignore effectively coincident points (duplicates) to prevent infinite zoom
+                    if (distSq > 0.00000001 && distSq < minDistSq) {
+                        minDistSq = distSq;
+                        nearestItem = d;
+                    }
+                });
+
+                if (minDistSq !== Infinity) {
+                    const nearestDistDecades = Math.sqrt(minDistSq);
+
+                    const currentTransform = d3.zoomTransform(svg.node());
+                    // Assume yScale is the rescaled scale (current zoom applied)
+
+                    const basePPD = Math.abs(yScale(10) - yScale(1));
+                    const currentPPD = basePPD * currentTransform.k;
+                    const currentPixelDist = currentPPD * nearestDistDecades;
+
+                    targetScale = currentTransform.k * (30 / currentPixelDist);
+                } else {
+                    targetScale = 1000;
+                }
+
+                targetScale = Math.max(1, Math.min(targetScale, 100000));
+            }
 
             const x = xScale(getDimensionValueX(matchItem, currentDimensionX, currentDimensionY));
             const y = yScale(valY);
 
+            // Shift X center to the left to account for label
+            // The label is to the right of the point. To center "point + label", we need to shift the Viewport Center LEFT relative to the point.
+
+            // Calculate expected font size at target zoom (capped at 12px, matching render logic)
+            const basePPD = Math.abs(yScale(10) - yScale(1));
+            const targetPPD = basePPD * targetScale;
+            const targetFS = Math.min(12, targetPPD);
+
+            // _estTextWidth is a factor (char count * 0.6), need to multiply by Font Size to get pixels
+            const estTextWidthFactor = matchItem._estTextWidth || 5;
+            const labelWidth = estTextWidthFactor * targetFS;
+            const labelGap = 10;
+
+
+            const centerOffsetX = (labelGap + labelWidth) / 2;
+
+            // Vertical Centering: User wants center of SCREEN, not center of container.
+            // Calculate center relative to the container.
+            const screenCenterY = window.innerHeight / 2;
+            const containerTop = container.getBoundingClientRect().top;
+            const targetCenterY = screenCenterY - containerTop;
+
             const targetTransform = d3.zoomIdentity
-                .translate(width / 2, height / 2)
+                .translate(width / 2 - centerOffsetX, targetCenterY)
                 .scale(targetScale)
                 .translate(-x, -y);
 
