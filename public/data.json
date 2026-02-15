@@ -6410,6 +6410,581 @@
     }
   },
   {
+    "id": "berkelium",
+    "displayName": {
+      "en-us": "Bk"
+    },
+    "description": {
+      "en-us": "Berkelium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.10e-25",
+      "length": "1.70e-10",
+      "duration": "4.35e10"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 97",
+        "element 97",
+        "berkelium",
+        "Bk-247"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Berkelium",
+      "length": "https://en.wikipedia.org/wiki/Berkelium",
+      "duration": "https://en.wikipedia.org/wiki/Berkelium"
+    },
+    "reviewed": false,
+    "x_coordinates": {
+      "mass": "0"
+    }
+  },
+  {
+    "id": "californium",
+    "displayName": {
+      "en-us": "Cf"
+    },
+    "description": {
+      "en-us": "Californium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.17e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 98",
+        "element 98",
+        "californium",
+        "Cf-251"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Californium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "einsteinium",
+    "displayName": {
+      "en-us": "Es"
+    },
+    "description": {
+      "en-us": "Einsteinium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.18e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 99",
+        "element 99",
+        "einsteinium",
+        "Es-252"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Einsteinium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "fermium",
+    "displayName": {
+      "en-us": "Fm"
+    },
+    "description": {
+      "en-us": "Fermium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.27e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 100",
+        "element 100",
+        "fermium",
+        "Fm-257"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Fermium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "mendelevium",
+    "displayName": {
+      "en-us": "Md"
+    },
+    "description": {
+      "en-us": "Mendelevium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.28e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 101",
+        "element 101",
+        "mendelevium",
+        "Md-258"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Mendelevium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "nobelium",
+    "displayName": {
+      "en-us": "No"
+    },
+    "description": {
+      "en-us": "Nobelium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.3e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 102",
+        "element 102",
+        "nobelium",
+        "No-259"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Nobelium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "lawrencium",
+    "displayName": {
+      "en-us": "Lr"
+    },
+    "description": {
+      "en-us": "Lawrencium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.42e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 103",
+        "element 103",
+        "lawrencium",
+        "Lr-266"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Lawrencium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "rutherfordium",
+    "displayName": {
+      "en-us": "Rf"
+    },
+    "description": {
+      "en-us": "Rutherfordium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.43e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 104",
+        "element 104",
+        "rutherfordium",
+        "Rf-267"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Rutherfordium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "dubnium",
+    "displayName": {
+      "en-us": "Db"
+    },
+    "description": {
+      "en-us": "Dubnium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.45e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 105",
+        "element 105",
+        "dubnium",
+        "Db-268"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Dubnium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "seaborgium",
+    "displayName": {
+      "en-us": "Sg"
+    },
+    "description": {
+      "en-us": "Seaborgium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.43e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 106",
+        "element 106",
+        "seaborgium",
+        "Sg-267"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Seaborgium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "bohrium",
+    "displayName": {
+      "en-us": "Bh"
+    },
+    "description": {
+      "en-us": "Bohrium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.48e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 107",
+        "element 107",
+        "bohrium",
+        "Bh-270"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Bohrium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "hassium",
+    "displayName": {
+      "en-us": "Hs"
+    },
+    "description": {
+      "en-us": "Hassium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.5e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 108",
+        "element 108",
+        "hassium",
+        "Hs-271"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Hassium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "meitnerium",
+    "displayName": {
+      "en-us": "Mt"
+    },
+    "description": {
+      "en-us": "Meitnerium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.62e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 109",
+        "element 109",
+        "meitnerium",
+        "Mt-278"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Meitnerium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "darmstadtium",
+    "displayName": {
+      "en-us": "Ds"
+    },
+    "description": {
+      "en-us": "Darmstadtium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.67e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 110",
+        "element 110",
+        "darmstadtium",
+        "Ds-281"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Darmstadtium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "roentgenium",
+    "displayName": {
+      "en-us": "Rg"
+    },
+    "description": {
+      "en-us": "Roentgenium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.68e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 111",
+        "element 111",
+        "roentgenium",
+        "Rg-282"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Roentgenium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "copernicium",
+    "displayName": {
+      "en-us": "Cn"
+    },
+    "description": {
+      "en-us": "Copernicium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.73e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 112",
+        "element 112",
+        "copernicium",
+        "Cn-285"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Copernicium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "nihonium",
+    "displayName": {
+      "en-us": "Nh"
+    },
+    "description": {
+      "en-us": "Nihonium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.75e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 113",
+        "element 113",
+        "nihonium",
+        "Nh-286"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Nihonium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "flerovium",
+    "displayName": {
+      "en-us": "Fl"
+    },
+    "description": {
+      "en-us": "Flerovium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.8e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 114",
+        "element 114",
+        "flerovium",
+        "Fl-289"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Flerovium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "moscovium",
+    "displayName": {
+      "en-us": "Mc"
+    },
+    "description": {
+      "en-us": "Moscovium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.82e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 115",
+        "element 115",
+        "moscovium",
+        "Mc-290"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Moscovium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "livermorium",
+    "displayName": {
+      "en-us": "Lv"
+    },
+    "description": {
+      "en-us": "Livermorium"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.87e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 116",
+        "element 116",
+        "livermorium",
+        "Lv-293"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Livermorium"
+    },
+    "reviewed": false
+  },
+  {
+    "id": "tennessine",
+    "displayName": {
+      "en-us": "Ts"
+    },
+    "description": {
+      "en-us": "Tennessine"
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "mass": "4.88e-25"
+    },
+    "tags": {
+      "en-us": [
+        "atomic number 117",
+        "element 117",
+        "tennessine",
+        "Ts-294",
+        "heaviest atom"
+      ]
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Tennessine"
+    },
+    "reviewed": false
+  },
+  {
     "id": "oganesson",
     "reviewed": true,
     "displayName": {
