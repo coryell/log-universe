@@ -54,28 +54,77 @@ export function createViewState({ viz, infobox, data }) {
         showInfobox(result);
     }
 
+    // --- Hash Management ---
+    function updateHash() {
+        if (currentDimensionX === "none") {
+            window.location.hash = currentDimensionY;
+        } else {
+            window.location.hash = `${currentDimensionY}-${currentDimensionX}`;
+        }
+    }
+
+    function readHash() {
+        const hash = window.location.hash.substring(1); // remove '#'
+        if (!hash) return;
+
+        const parts = hash.split('-');
+        if (parts.length >= 2) {
+            // Handle cases like "length-mass" -> Y=length, X=mass
+            // But what if a dimension name has a hyphen? Assuming not for now.
+            // If we have > 2 parts, it might be ambiguous, but let's assume simple split.
+            // safely separate last part as X?
+            // Actually, dimensions are clean single words usually (length, mass, duration, etc).
+            currentDimensionY = parts[0];
+            currentDimensionX = parts[1];
+        } else if (parts.length === 1 && parts[0]) {
+            currentDimensionY = parts[0];
+            currentDimensionX = "none";
+        }
+    }
+
     // --- Dropdown Initialization ---
     function initDropdowns() {
+        // Initialize from Hash checks first
+        readHash();
+
         d3.select('#dimension-select-y').property('value', currentDimensionY);
         d3.select('#dimension-select-x').property('value', currentDimensionX);
 
         d3.select('#dimension-select-y').on('change', function () {
             currentDimensionY = this.value;
+            updateHash();
             updatePlot();
         });
 
         d3.select('#dimension-select-x').on('change', function () {
             currentDimensionX = this.value;
+            updateHash();
             updatePlot();
         });
 
         d3.select('#recenter-btn').on('click', () => {
             viz.resetZoom();
         });
+
+        // Also update hash immediately in case we loaded defaults but URL was empty?
+        // Or only on change? User asked to "add a # part", implies reflecting current state.
+        // If URL is empty, we might want to set Default.
+        if (!window.location.hash) {
+            updateHash();
+        }
     }
 
     // --- Global Event Listeners ---
     function initEventListeners() {
+        // Listen for hash changes (e.g. back button)
+        window.addEventListener("hashchange", () => {
+            readHash();
+            // Update dropdowns to match new state
+            d3.select('#dimension-select-y').property('value', currentDimensionY);
+            d3.select('#dimension-select-x').property('value', currentDimensionX);
+            updatePlot();
+        });
+
         window.addEventListener("click", (event) => {
             if (event.button === 0) {
                 hideInfobox();
