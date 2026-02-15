@@ -79,8 +79,12 @@ export function createViewState({ viz, infobox, data }) {
             if (event.button === 0) {
                 hideInfobox();
                 if (viz.ruler) {
-                    viz.ruler.hide();
-                    viz.ruler.clearMark();
+                    viz.ruler.clearMark(); // Always clear mark on click
+
+                    // Only hide the ruler cursor itself on mobile
+                    if (window.matchMedia('(max-width: 768px)').matches) {
+                        viz.ruler.hide();
+                    }
                 }
             }
         });

@@ -44,6 +44,8 @@ export function createVisualization(container, config) {
     const zoom = d3.zoom()
         .scaleExtent([1, 1000000])
         .filter((event) => {
+            // Prevent zoom on right-click (button === 2)
+            if (event.button === 2) return false;
             return !ruler.isDragging;
         })
         .on('zoom', (event) => {
@@ -648,10 +650,14 @@ export function createVisualization(container, config) {
     });
 
     svg.on("mouseleave", () => {
-        if (!checkMobile()) ruler.hide();
+        const isMobile = checkMobile();
+        if (!isMobile) ruler.hide();
     });
 
-    svg.on("click", () => ruler.hide()); // Hide ruler on background click/tap
+    svg.on("click", (e) => {
+        const isMobile = checkMobile();
+        if (isMobile) ruler.hide();
+    }); // Hide ruler on background click/tap (mobile only)
 
     svg.on("contextmenu", (event) => {
         event.preventDefault();
