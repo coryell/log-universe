@@ -419,7 +419,8 @@
       "mass": "3.45e-25"
     },
     "x_coordinates": {
-      "length": "0"
+      "length": "0",
+      "mass": "0"
     },
     "description": {
       "en-us": "Lead-208 is the heaviest known stable nucleus, featuring a \"doubly magic\" number of protons and neutrons."
@@ -780,7 +781,8 @@
       "duration": "1e-3"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "A theoretical limit set by the \"plasma frequency\" of ionized gas between stars."
@@ -807,7 +809,8 @@
       "duration": "1.1e-4"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "Radio waves so long they are reflected by the thin plasma filling our solar system."
@@ -834,7 +837,8 @@
       "duration": "1e-7"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The longest radio waves that can pass through Earth's atmosphere without being bounced back into space."
@@ -863,7 +867,8 @@
       "duration": "4.0e-16"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "A famous ultraviolet spectral line used by astronomers to map the distribution of hydrogen across the cosmos."
@@ -892,7 +897,8 @@
       "duration": "3.1e-14"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The specific infrared frequency at which you are glowing right now due to your body heat."
@@ -921,7 +927,8 @@
       "duration": "1e-14"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The infrared wavelength emitted by metal just before it begins to glow a visible red."
@@ -948,7 +955,8 @@
       "duration": "7.0e-10"
     },
     "x_coordinates": {
-      "length": "20"
+      "length": "20",
+      "duration": "0"
     },
     "description": {
       "en-us": "The 21-centimeter radio signal emitted by cold hydrogen that allows us to map the spiral arms of our galaxy."
@@ -3109,7 +3117,7 @@
     "description": {
       "en-us": "The spherical region that contains all matter we can observe from Earth."
     },
-    "reviewed": false
+    "reviewed": true
   },
   {
     "id": "to_cosmic_event_horizon",
@@ -3131,7 +3139,10 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Cosmological_horizon"
     },
-    "reviewed": false
+    "reviewed": true,
+    "x_coordinates": {
+      "length": "0"
+    }
   },
   {
     "id": "local_group",
@@ -4694,20 +4705,24 @@
       "en-us": [
         "atomic number 43",
         "element 43",
-        "technetium"
+        "technetium",
+        "Tc-97"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Technetium"
+      "mass": "https://en.wikipedia.org/wiki/Technetium",
+      "duration": "https://en.wikipedia.org/wiki/Technetium"
     },
     "dimensions": {
       "length": "1.35e-10",
-      "mass": "1.6e-25"
+      "mass": "1.6e-25",
+      "duration": "1.33e14"
     },
     "x_coordinates": {
       "length": "0.58",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Technetium: The first element to be produced artificially, widely used as a radioactive tracer in medicine."
@@ -5271,20 +5286,24 @@
       "en-us": [
         "atomic number 61",
         "element 61",
-        "promethium"
+        "promethium",
+        "Pm-145"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Promethium"
+      "mass": "https://en.wikipedia.org/wiki/Promethium",
+      "duration": "https://en.wikipedia.org/wiki/Promethium"
     },
     "dimensions": {
       "length": "1.85e-10",
-      "mass": "2.41e-25"
+      "mass": "2.41e-25",
+      "duration": "5.58e8"
     },
     "x_coordinates": {
       "length": "0.6",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Promethium: The only rare-earth element with no stable isotopes, often used in nuclear batteries."
@@ -5975,20 +5994,24 @@
       "en-us": [
         "atomic number 83",
         "element 83",
-        "bismuth"
+        "bismuth",
+        "Bi-209"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight",
+      "duration": "https://en.wikipedia.org/wiki/Bismuth"
     },
     "dimensions": {
       "length": "1.60e-10",
-      "mass": "3.47e-25"
+      "mass": "3.47e-25",
+      "duration": "6.34e26"
     },
     "x_coordinates": {
       "length": "1.4",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Bismuth: A brittle, silvery-pink metal used in stomach medicines and as a non-toxic replacement for lead."
@@ -6007,20 +6030,24 @@
       "en-us": [
         "atomic number 84",
         "element 84",
-        "polonium"
+        "polonium",
+        "Po-209"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Polonium"
+      "mass": "https://en.wikipedia.org/wiki/Polonium",
+      "duration": "https://en.wikipedia.org/wiki/Polonium"
     },
     "dimensions": {
       "length": "1.90e-10",
-      "mass": "3.47e-25"
+      "mass": "3.47e-25",
+      "duration": "3.91e9"
     },
     "x_coordinates": {
       "length": "1.5",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Polonium: A highly radioactive and toxic element discovered by Marie Curie and named after her homeland."
@@ -6039,20 +6066,24 @@
       "en-us": [
         "atomic number 85",
         "element 85",
-        "astatine"
+        "astatine",
+        "At-210"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Astatine"
+      "mass": "https://en.wikipedia.org/wiki/Astatine",
+      "duration": "https://en.wikipedia.org/wiki/Astatine"
     },
     "dimensions": {
       "length": "1.27e-10",
-      "mass": "3.49e-25"
+      "mass": "3.49e-25",
+      "duration": "2.9e4"
     },
     "x_coordinates": {
       "length": "1.6",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Astatine: The rarest naturally occurring element on Earth, with less than one gram present in the entire crust at any time."
@@ -6071,20 +6102,24 @@
       "en-us": [
         "atomic number 86",
         "element 86",
-        "radon"
+        "radon",
+        "Rn-222"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Radon"
+      "mass": "https://en.wikipedia.org/wiki/Radon",
+      "duration": "https://en.wikipedia.org/wiki/Radon"
     },
     "dimensions": {
       "length": "1.20e-10",
-      "mass": "3.69e-25"
+      "mass": "3.69e-25",
+      "duration": "3.30e5"
     },
     "x_coordinates": {
       "length": "1.7",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Radon: A colorless, odorless radioactive gas that can accumulate in buildings and pose a health risk."
@@ -6109,14 +6144,18 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Francium",
+      "duration": "https://en.wikipedia.org/wiki/Francium"
     },
     "dimensions": {
-      "length": "3.48e-10"
+      "length": "3.48e-10",
+      "mass": "3.70e-25",
+      "duration": "1.32e3"
     },
     "x_coordinates": {
       "length": "0",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Francium: The second rarest naturally occurring element, so unstable that it has no practical uses."
@@ -6140,14 +6179,18 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Radium",
+      "duration": "https://en.wikipedia.org/wiki/Radium"
     },
     "dimensions": {
-      "length": "2.15e-10"
+      "length": "2.15e-10",
+      "mass": "3.75e-25",
+      "duration": "5.05e10"
     },
     "x_coordinates": {
       "length": "0.12",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Radium: An intensely radioactive element once used in glow-in-the-dark watch dials before the health risks were known."
@@ -6171,14 +6214,18 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Actinium",
+      "duration": "https://en.wikipedia.org/wiki/Actinium"
     },
     "dimensions": {
-      "length": "1.95e-10"
+      "length": "1.95e-10",
+      "mass": "3.77e-25",
+      "duration": "6.87e8"
     },
     "x_coordinates": {
       "length": "0.22",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Actinium: A silvery radioactive metal that glows in the dark with an eerie blue light."
@@ -6197,20 +6244,24 @@
       "en-us": [
         "atomic number 90",
         "element 90",
-        "thorium"
+        "thorium",
+        "Th-232"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight",
+      "duration": "https://en.wikipedia.org/wiki/Thorium"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "3.85e-25"
+      "mass": "3.85e-25",
+      "duration": "4.42e17"
     },
     "x_coordinates": {
       "length": "0.3",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Thorium: A radioactive metal that is three times more abundant than uranium and a potential future nuclear fuel."
@@ -6229,20 +6280,24 @@
       "en-us": [
         "atomic number 91",
         "element 91",
-        "protactinium"
+        "protactinium",
+        "Pa-231"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight",
+      "duration": "https://en.wikipedia.org/wiki/Protactinium"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "3.84e-25"
+      "mass": "3.84e-25",
+      "duration": "1.03e12"
     },
     "x_coordinates": {
       "length": "0.4",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Protactinium: A rare, dense, and highly toxic radioactive metal found in uranium ores."
@@ -6261,20 +6316,24 @@
       "en-us": [
         "atomic number 92",
         "element 92",
-        "uranium"
+        "uranium",
+        "U-238"
       ]
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight",
+      "duration": "https://en.wikipedia.org/wiki/Uranium"
     },
     "dimensions": {
       "length": "1.75e-10",
-      "mass": "3.95e-25"
+      "mass": "3.95e-25",
+      "duration": "1.41e17"
     },
     "x_coordinates": {
       "length": "0.5",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Uranium: The heaviest naturally occurring element found in significant quantities, vital for nuclear power and weapons."
@@ -6298,14 +6357,18 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Neptunium",
+      "duration": "https://en.wikipedia.org/wiki/Neptunium"
     },
     "dimensions": {
-      "length": "1.75e-10"
+      "length": "1.75e-10",
+      "mass": "3.94e-25",
+      "duration": "6.76e13"
     },
     "x_coordinates": {
       "length": "0.6",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Neptunium: The first transuranic element ever produced, formed in nuclear reactors from uranium."
@@ -6329,14 +6392,18 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Plutonium",
+      "duration": "https://en.wikipedia.org/wiki/Plutonium"
     },
     "dimensions": {
-      "length": "1.75e-10"
+      "length": "1.75e-10",
+      "mass": "4.05e-25",
+      "duration": "2.56e15"
     },
     "x_coordinates": {
       "length": "0.7",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Plutonium: A radioactive element used in nuclear weapons and as a long-term fuel source for space probes."
@@ -6360,14 +6427,18 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://en.wikipedia.org/wiki/Americium",
+      "duration": "https://en.wikipedia.org/wiki/Americium"
     },
     "dimensions": {
-      "length": "1.75e-10"
+      "length": "1.75e-10",
+      "mass": "4.04e-25",
+      "duration": "2.32e11"
     },
     "x_coordinates": {
       "length": "0.8",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "description": {
       "en-us": "Americium: A synthetic, radioactive element used in most household smoke detectors to detect smoke particles."
@@ -6401,7 +6472,8 @@
     },
     "x_coordinates": {
       "length": "0.9",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Curium",
@@ -6440,7 +6512,9 @@
     },
     "reviewed": false,
     "x_coordinates": {
-      "mass": "0"
+      "mass": "0",
+      "length": "1.0",
+      "duration": "0"
     }
   },
   {
@@ -6455,7 +6529,8 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.17e-25"
+      "mass": "4.17e-25",
+      "duration": "2.83e10"
     },
     "tags": {
       "en-us": [
@@ -6466,9 +6541,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Californium"
+      "mass": "https://en.wikipedia.org/wiki/Californium",
+      "length": "https://pubchem.ncbi.nlm.nih.gov/element/Californium",
+      "duration": "https://en.wikipedia.org/wiki/Californium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.1",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "einsteinium",
@@ -6482,7 +6564,8 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.18e-25"
+      "mass": "4.18e-25",
+      "duration": "4.08e7"
     },
     "tags": {
       "en-us": [
@@ -6493,9 +6576,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Einsteinium"
+      "mass": "https://en.wikipedia.org/wiki/Einsteinium",
+      "length": "https://pubchem.ncbi.nlm.nih.gov/element/Einsteinium#section=Properties",
+      "duration": "https://en.wikipedia.org/wiki/Einsteinium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.2",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "fermium",
@@ -6509,7 +6599,8 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.27e-25"
+      "mass": "4.27e-25",
+      "duration": "8.68e6"
     },
     "tags": {
       "en-us": [
@@ -6520,9 +6611,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Fermium"
+      "mass": "https://en.wikipedia.org/wiki/Fermium",
+      "length": "https://www.osti.gov/biblio/4553157",
+      "duration": "https://en.wikipedia.org/wiki/Fermium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.3",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "mendelevium",
@@ -6536,7 +6634,8 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.28e-25"
+      "mass": "4.28e-25",
+      "duration": "4.46e6"
     },
     "tags": {
       "en-us": [
@@ -6547,9 +6646,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Mendelevium"
+      "mass": "https://en.wikipedia.org/wiki/Mendelevium",
+      "length": "https://en.wikipedia.org/wiki/Mendelevium",
+      "duration": "https://en.wikipedia.org/wiki/Mendelevium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.4",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "nobelium",
@@ -6563,7 +6669,8 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.3e-25"
+      "mass": "4.3e-25",
+      "duration": "3.48e3"
     },
     "tags": {
       "en-us": [
@@ -6574,9 +6681,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Nobelium"
+      "mass": "https://en.wikipedia.org/wiki/Nobelium",
+      "length": "https://en.wikipedia.org/wiki/Nobelium",
+      "duration": "https://en.wikipedia.org/wiki/Nobelium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.5",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "lawrencium",
@@ -6590,7 +6704,8 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.42e-25"
+      "mass": "4.42e-25",
+      "duration": "3.96e4"
     },
     "tags": {
       "en-us": [
@@ -6601,9 +6716,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Lawrencium"
+      "mass": "https://en.wikipedia.org/wiki/Lawrencium",
+      "duration": "https://en.wikipedia.org/wiki/Lawrencium",
+      "length": "https://en.wikipedia.org/wiki/Lawrencium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.6",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "rutherfordium",
@@ -6617,7 +6739,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.43e-25"
+      "mass": "4.43e-25",
+      "length": "1.50e-10",
+      "duration": "2.88e3"
     },
     "tags": {
       "en-us": [
@@ -6628,9 +6752,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Rutherfordium"
+      "mass": "https://en.wikipedia.org/wiki/Rutherfordium",
+      "length": "https://en.wikipedia.org/wiki/Rutherfordium",
+      "duration": "https://en.wikipedia.org/wiki/Rutherfordium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "0.3",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "dubnium",
@@ -6644,7 +6775,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.45e-25"
+      "mass": "4.45e-25",
+      "length": "1.39e-10",
+      "duration": "2.32e7"
     },
     "tags": {
       "en-us": [
@@ -6655,9 +6788,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Dubnium"
+      "mass": "https://en.wikipedia.org/wiki/Dubnium",
+      "length": "https://en.wikipedia.org/wiki/Dubnium",
+      "duration": "https://en.wikipedia.org/wiki/Dubnium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "0.4",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "seaborgium",
@@ -6671,7 +6811,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.43e-25"
+      "mass": "4.43e-25",
+      "length": "1.32e-10",
+      "duration": "2.67e2"
     },
     "tags": {
       "en-us": [
@@ -6682,9 +6824,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Seaborgium"
+      "mass": "https://en.wikipedia.org/wiki/Seaborgium",
+      "length": "https://en.wikipedia.org/wiki/Seaborgium",
+      "duration": "https://en.wikipedia.org/wiki/Seaborgium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "0.5",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "bohrium",
@@ -6698,7 +6847,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.48e-25"
+      "mass": "4.48e-25",
+      "duration": "2.90e0",
+      "length": "1.28e-10"
     },
     "tags": {
       "en-us": [
@@ -6709,9 +6860,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Bohrium"
+      "mass": "https://en.wikipedia.org/wiki/Bohrium",
+      "duration": "https://en.wikipedia.org/wiki/Bohrium",
+      "length": "https://en.wikipedia.org/wiki/Bohrium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "0.6",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "hassium",
@@ -6725,7 +6883,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.5e-25"
+      "mass": "4.5e-25",
+      "length": "1.26e-10",
+      "duration": "9.76e5"
     },
     "tags": {
       "en-us": [
@@ -6736,9 +6896,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Hassium"
+      "mass": "https://en.wikipedia.org/wiki/Hassium",
+      "length": "https://en.wikipedia.org/wiki/Hassium",
+      "duration": "https://en.wikipedia.org/wiki/Hassium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "0.7",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "meitnerium",
@@ -6752,7 +6919,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.62e-25"
+      "mass": "4.62e-25",
+      "length": "1.28e-10",
+      "duration": "4.50e0"
     },
     "tags": {
       "en-us": [
@@ -6763,9 +6932,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Meitnerium"
+      "mass": "https://en.wikipedia.org/wiki/Meitnerium",
+      "length": "https://en.wikipedia.org/wiki/Meitnerium",
+      "duration": "https://en.wikipedia.org/wiki/Meitnerium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "0.8",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "darmstadtium",
@@ -6779,7 +6955,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.67e-25"
+      "mass": "4.67e-25",
+      "length": "1.32e-10",
+      "duration": "2.43e7"
     },
     "tags": {
       "en-us": [
@@ -6790,9 +6968,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Darmstadtium"
+      "mass": "https://en.wikipedia.org/wiki/Darmstadtium",
+      "length": "https://en.wikipedia.org/wiki/Darmstadtium",
+      "duration": "https://en.wikipedia.org/wiki/Darmstadtium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "0.9",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "roentgenium",
@@ -6806,7 +6991,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.68e-25"
+      "mass": "4.68e-25",
+      "length": "1.14e-10",
+      "duration": "1.00e2"
     },
     "tags": {
       "en-us": [
@@ -6817,9 +7004,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Roentgenium"
+      "mass": "https://en.wikipedia.org/wiki/Roentgenium",
+      "length": "https://en.wikipedia.org/wiki/Roentgenium",
+      "duration": "https://en.wikipedia.org/wiki/Roentgenium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.0",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "copernicium",
@@ -6833,7 +7027,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.73e-25"
+      "mass": "4.73e-25",
+      "length": "1.47e-10",
+      "duration": "2.80e1"
     },
     "tags": {
       "en-us": [
@@ -6844,9 +7040,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Copernicium"
+      "mass": "https://en.wikipedia.org/wiki/Copernicium",
+      "length": "https://en.wikipedia.org/wiki/Copernicium",
+      "duration": "https://en.wikipedia.org/wiki/Copernicium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.1",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "nihonium",
@@ -6860,7 +7063,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.75e-25"
+      "mass": "4.75e-25",
+      "length": "1.70e-10",
+      "duration": "9.50e0"
     },
     "tags": {
       "en-us": [
@@ -6871,9 +7076,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Nihonium"
+      "mass": "https://en.wikipedia.org/wiki/Nihonium",
+      "length": "https://en.wikipedia.org/wiki/Nihonium",
+      "duration": "https://en.wikipedia.org/wiki/Nihonium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.2",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "flerovium",
@@ -6887,7 +7099,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.8e-25"
+      "mass": "4.8e-25",
+      "length": "1.80e-10",
+      "duration": "1.90e0"
     },
     "tags": {
       "en-us": [
@@ -6898,9 +7112,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Flerovium"
+      "mass": "https://en.wikipedia.org/wiki/Flerovium",
+      "length": "https://en.wikipedia.org/wiki/Flerovium",
+      "duration": "https://en.wikipedia.org/wiki/Flerovium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.3",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "moscovium",
@@ -6914,7 +7135,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.82e-25"
+      "mass": "4.82e-25",
+      "length": "1.87e-10",
+      "duration": "6.50e-1"
     },
     "tags": {
       "en-us": [
@@ -6925,9 +7148,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Moscovium"
+      "mass": "https://en.wikipedia.org/wiki/Moscovium",
+      "length": "https://en.wikipedia.org/wiki/Moscovium",
+      "duration": "https://en.wikipedia.org/wiki/Moscovium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.4",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "livermorium",
@@ -6941,7 +7171,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.87e-25"
+      "mass": "4.87e-25",
+      "length": "1.83e-10",
+      "duration": "5.70e-2"
     },
     "tags": {
       "en-us": [
@@ -6952,9 +7184,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Livermorium"
+      "mass": "https://en.wikipedia.org/wiki/Livermorium",
+      "length": "https://en.wikipedia.org/wiki/Livermorium",
+      "duration": "https://en.wikipedia.org/wiki/Livermorium"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.5",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "tennessine",
@@ -6968,7 +7207,9 @@
       "en-us": "Atoms / Elements"
     },
     "dimensions": {
-      "mass": "4.88e-25"
+      "mass": "4.88e-25",
+      "length": "1.38e-10",
+      "duration": "5.10e-2"
     },
     "tags": {
       "en-us": [
@@ -6980,9 +7221,16 @@
       ]
     },
     "sources": {
-      "mass": "https://en.wikipedia.org/wiki/Tennessine"
+      "mass": "https://en.wikipedia.org/wiki/Tennessine",
+      "length": "https://en.wikipedia.org/wiki/Tennessine",
+      "duration": "https://en.wikipedia.org/wiki/Tennessine"
     },
-    "reviewed": false
+    "reviewed": false,
+    "x_coordinates": {
+      "length": "1.6",
+      "duration": "0",
+      "mass": "0"
+    }
   },
   {
     "id": "oganesson",
@@ -7012,7 +7260,8 @@
     },
     "x_coordinates": {
       "length": "1.7",
-      "mass": "0"
+      "mass": "0",
+      "duration": "0"
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Oganesson",
