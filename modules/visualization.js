@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { fadeEnd, fadeBottomHeight } from './constants.js';
+import { fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD } from './constants.js';
 import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData } from './utils.js';
 import { setupItemAnnotations, updateAnnotationLayout } from './annotations.js';
 import { createRuler } from './ruler.js';
@@ -313,7 +313,7 @@ export function createVisualization(container, config) {
 
                     grp.on("click", (event, d) => {
                         const now = new Date().getTime();
-                        const isDoubleClick = (d.id === currentState.lastClickId) && ((now - currentState.lastClickTime) < 300);
+                        const isDoubleClick = (d.id === currentState.lastClickId) && ((now - currentState.lastClickTime) < DOUBLE_CLICK_THRESHOLD);
 
                         currentState.lastClickId = d.id;
                         currentState.lastClickTime = now;

@@ -2,7 +2,8 @@ export const LANGUAGE = "en-us";
 
 export const paddingLeft = 80;
 export const fadeEnd = 160;
-export const fadeBottomHeight = 100;
+export const fadeBottomHeight = 50;
+export const DOUBLE_CLICK_THRESHOLD = 300; // ms0;
 export const paddingBottom = 50;
 
 export const categories = [

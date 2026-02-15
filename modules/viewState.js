@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { LANGUAGE, categories, colors } from './constants.js';
+import { LANGUAGE, categories, colors, DOUBLE_CLICK_THRESHOLD } from './constants.js';
 import { getLocalized, getFilteredData } from './utils.js';
 
 /**
@@ -105,9 +105,43 @@ export function createViewState({ viz, infobox, data }) {
     initDropdowns();
     initEventListeners();
 
+    let infoboxTimeout = null;
+
     viz.setCallbacks({
-        onClick: (event, d) => showInfobox(d),
-        onDblClick: (event, d) => selectResult(d)
+        onClick: (event, d) => {
+            // Visual feedback is immediate
+            viz.highlightItem(d);
+
+            // On mobile, if click is in bottom 40% of screen (where infobox appears), delay showing it
+            // to allow for double-click to register first.
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+            // Note: event might be a D3 event or native event. 
+            // Visualization passes 'event' which is the D3 event wrapper, event.clientY should exist on sourceEvent or directly?
+            // D3 v6+ passes standard PointerEvent as first arg, or specific D3 event?
+            // In visualization.js: callbacks.onClick(event, d). 'event' is the DOM event usually.
+            const clientY = event.clientY || (event.sourceEvent ? event.sourceEvent.clientY : 0);
+            const isBottomRegion = clientY > window.innerHeight * 0.6;
+
+            if (isMobile && isBottomRegion) {
+                // Clear any existing timeout
+                if (infoboxTimeout) clearTimeout(infoboxTimeout);
+
+                infoboxTimeout = setTimeout(() => {
+                    showInfobox(d);
+                    infoboxTimeout = null;
+                }, DOUBLE_CLICK_THRESHOLD + 50); // Slight buffer over threshold
+            } else {
+                showInfobox(d);
+            }
+        },
+        onDblClick: (event, d) => {
+            if (infoboxTimeout) {
+                clearTimeout(infoboxTimeout);
+                infoboxTimeout = null;
+            }
+            selectResult(d);
+        }
     });
 
     updatePlot();
