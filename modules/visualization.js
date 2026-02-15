@@ -643,7 +643,11 @@ export function createVisualization(container, config) {
         });
     });
 
-    svg.on("mouseleave", () => ruler.hide());
+    svg.on("mouseleave", () => {
+        if (!checkMobile()) ruler.hide();
+    });
+
+    svg.on("click", () => ruler.hide()); // Hide ruler on background click/tap
 
     svg.on("contextmenu", (event) => {
         event.preventDefault();
@@ -731,8 +735,12 @@ export function createVisualization(container, config) {
         }
     }, { passive: false, capture: true });
 
-    const endTouch = () => {
+    const endTouch = (e) => {
         if (touchTimer) { clearTimeout(touchTimer); touchTimer = null; }
+        if (isRulerActiveForTouch) {
+            if (e && e.cancelable) e.preventDefault();
+            e.stopPropagation();
+        }
         isRulerActiveForTouch = false;
     };
 

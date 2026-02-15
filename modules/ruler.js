@@ -15,10 +15,10 @@ export function createRuler(svg, checkMobile) {
         .style("display", "none");
 
     const markLineY = markGroup.append("line") // Horizontal line at fixed Y
-        .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
+        .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
     const markLineX = markGroup.append("line") // Vertical line at fixed X
-        .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
+        .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
     // Cursor Ruler
     const rulerGroup = svg.append("g")
@@ -36,11 +36,11 @@ export function createRuler(svg, checkMobile) {
     // Interval connecting lines
     const intervalLineY = rulerGroup.append("line") // Vertical segment
         .attr("class", "interval-line-y")
-        .attr("stroke", "red").attr("stroke-width", 1);
+        .attr("stroke", "green").attr("stroke-width", 1);
 
     const intervalLineX = rulerGroup.append("line") // Horizontal segment
         .attr("class", "interval-line-x")
-        .attr("stroke", "red").attr("stroke-width", 1);
+        .attr("stroke", "green").attr("stroke-width", 1);
 
     const rulerLabelBackground = rulerGroup.append("rect")
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
@@ -59,14 +59,14 @@ export function createRuler(svg, checkMobile) {
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
 
     const yIntervalLabel = rulerGroup.append("text")
-        .attr("fill", "red").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+        .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
 
     // X-Interval Label
     const xIntervalBackground = rulerGroup.append("rect")
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
 
     const xIntervalLabel = rulerGroup.append("text")
-        .attr("fill", "red").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+        .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
 
     // Invisible hit lines for mobile touch targets
     const rulerHitLineX = rulerGroup.append("line")
@@ -298,14 +298,23 @@ export function createRuler(svg, checkMobile) {
         };
 
         let labelY = mouseY - (currentDimensionX !== "none" ? 22 : 10);
+
         // Move label below ruler if we are below a mark to avoid overlap with interval labels
         if (markedYData !== null && mouseY > yScale(markedYData) + 2) {
             labelY = mouseY + 15;
         }
 
-        const labelX = mouseX + (currentDimensionX !== "none" ? 5 : 15);
-        const fs = 12;
+        // On mobile 2D, force label much higher up to avoid finger occlusion
+        if (isMobile && currentDimensionX !== "none") {
+            labelY = mouseY - 80;
+        }
 
+        const anchor = isMobile ? "middle" : "start";
+        const labelX = isMobile ? mouseX : (mouseX + (currentDimensionX !== "none" ? 5 : 15));
+
+        // ... (labelY calculation remains) ...
+
+        const fs = 12;
         const charRatio = 0.6;
         const charWidth = fs * charRatio;
 
@@ -324,7 +333,7 @@ export function createRuler(svg, checkMobile) {
             ? [`Y: ${formatVal(valY, getUnit(currentDimensionY))}`, `X: ${formatVal(xScale.invert(mouseX), getUnit(currentDimensionX))}`]
             : [formatVal(valY, getUnit(currentDimensionY))];
 
-        rulerLabel.attr("x", labelX).attr("y", labelY);
+        rulerLabel.attr("x", labelX).attr("y", labelY).attr("text-anchor", anchor);
         rulerLabel.selectAll("tspan")
             .data(labelText)
             .join("tspan")
@@ -332,7 +341,7 @@ export function createRuler(svg, checkMobile) {
             .attr("dy", (d, i) => i === 0 ? 0 : "1.2em")
             .text(d => d);
 
-        const lbox = getEstBBox(labelText, labelX, labelY);
+        const lbox = getEstBBox(labelText, labelX, labelY, anchor);
         rulerLabelBackground.attr("x", lbox.x - 4).attr("y", lbox.y - 4).attr("width", lbox.width + 8).attr("height", lbox.height + 8);
         rulerLabelHitRect.attr("x", lbox.x - 12).attr("y", lbox.y - 12).attr("width", lbox.width + 24).attr("height", lbox.height + 24);
 
