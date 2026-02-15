@@ -110,14 +110,74 @@ export function createVisualization(container, config) {
         const visibleDataSubset = getVisibleSubset(currentState.filteredData);
         const visibleClustersSubset = getVisibleSubset(currentState.clusters);
 
-        // 5. Proximity Hiding (Extreme Optimization)
-        // Hide points that are too close together at the current zoom level.
+        // 5. Proximity Hiding (Greedy Selection)
+        // Hide points that are too close to *already visible* points.
         const ppd = Math.abs(newYScale(10) - newYScale(1));
-        const minPixelDist = 3;
+        const minPixelDist = 5; // Reduced from 20 to allows more points
         const minDistDecades = minPixelDist / ppd;
 
-        const visibleData = visibleDataSubset.filter(d => (d._minDistHigher || Infinity) >= minDistDecades);
-        const visibleClusters = visibleClustersSubset.filter(d => (d._minDistHigher || Infinity) >= minDistDecades);
+        // Quadtree for currently rendered points (in log/linear-log space)
+        const visibleQuad = d3.quadtree()
+            .x(d => (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX))
+            .y(d => Math.log10(d._cachedY));
+
+        const greedyFilter = (list) => {
+            // Sort by stable priority index so higher priority items are placed first
+            // This ensures that if A and B are close, A (higher priority) always wins and B is hidden.
+            const sorted = [...list].sort((a, b) => a._priorityIndex - b._priorityIndex);
+
+            const result = [];
+            sorted.forEach(d => {
+                const x = (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX);
+                const y = Math.log10(d._cachedY);
+
+                // Range items should NEVER be hidden by proximity
+                // Check original dimension value for array (range)
+                // Note: 'd' might be a cluster or a single item.
+                // Single item: d.dimensions[dim]
+                // Cluster: d.dimensions[dim] (inherited from first member)
+                const rawDimY = d.dimensions ? d.dimensions[currentDimensionY] : undefined;
+                const isRange = Array.isArray(rawDimY);
+
+                if (isRange) {
+                    // Always show range items
+                    // Add to quadtree so they can act as blockers for other items
+                    visibleQuad.add(d);
+                    result.push(d);
+                    return;
+                }
+
+                // Check if any *already placed* point is too close
+                const nearest = visibleQuad.find(x, y, minDistDecades);
+                if (!nearest) {
+                    // No conflict, place it
+                    visibleQuad.add(d);
+                    result.push(d);
+                }
+            });
+            return result;
+        };
+
+        // Combine lists? No, we probably want to prioritize clusters over single items?
+        // Or process them independently? 
+        // If a cluster and a single item are close, who wins?
+        // Let's process them as one group to prevent overlap between clusters and items?
+        // Or keep separate?
+        // Original logic filtered them separately. Let's keep separate for now to minimize change,
+        // but typically you'd want a shared quadtree.
+        // Actually, if we use a shared `visibleQuad`, they will cull each other! 
+        // Let's use the shared `visibleQuad` defined above for both.
+
+        // Prioritize clusters first (usually more important aggregate info)
+        let visibleClusters, visibleData;
+
+        if (checkMobile()) {
+            visibleClusters = greedyFilter(visibleClustersSubset);
+            visibleData = greedyFilter(visibleDataSubset);
+        } else {
+            visibleClusters = visibleClustersSubset;
+            visibleData = visibleDataSubset;
+        }
 
         // 5. Rendering Constants
         const currentDecadeHeight = Math.abs(newYScale(10) - newYScale(1));
@@ -472,56 +532,11 @@ export function createVisualization(container, config) {
         filteredData.sort((a, b) => a._cachedY - b._cachedY);
         clusters.sort((a, b) => a._cachedY - b._cachedY);
 
-        // --- Proximity Pre-calculation ---
-        // For each point, find the distance to its nearest neighbor with a LOWER index (higher priority).
-        // This ensures at least one point in a dense cluster remains visible.
-        const calcMinDist = (list) => {
-            if (list.length === 0) return;
+        // Initialize stable sort index for consistent culling
+        filteredData.forEach((d, i) => d._priorityIndex = i);
+        clusters.forEach((d, i) => d._priorityIndex = i);
 
-            // Log coordinates for distance calculation (decades)
-            // Note: _cachedX and _cachedY are already in log space (decades) or 1D-linear-as-log
-            const quad = d3.quadtree()
-                .x(d => (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX))
-                .y(d => Math.log10(d._cachedY));
-
-            // We process in priority order (original index)
-            // But Quadtree search is for ALL points. We only want to find distance to "already processed" points.
-            // So we add points one by one.
-            list.forEach((d, i) => {
-                const x = (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX);
-                const y = Math.log10(d._cachedY);
-
-                let minD = Infinity;
-                if (i > 0) {
-                    // Find nearest in quadtree (which only contains points 0 to i-1)
-                    const nearest = quad.find(x, y);
-                    if (nearest) {
-                        const nx = (currentDimensionX === "none") ? nearest._cachedX : Math.log10(nearest._cachedX);
-                        const ny = Math.log10(nearest._cachedY);
-                        minD = Math.sqrt(Math.pow(x - nx, 2) + Math.pow(y - ny, 2));
-                    }
-                }
-                d._minDistHigher = minD;
-                quad.add(d);
-            });
-        };
-
-        // We use the original filtered data order (by index/priority) for this calculation
-        // Create a copy to sort back to original if needed, or just work on the sorted lists 
-        // IF we ensure they were created from the same base.
-        // Actually, filteredData and clusters were just sorted by _cachedY.
-        // Let's re-sort by priority for distance calc.
-        const prioritySort = (a, b) => {
-            const idxA = data.indexOf(a);
-            const idxB = data.indexOf(b);
-            return idxA - idxB;
-        };
-
-        const filteredDataPriority = [...filteredData].sort(prioritySort);
-        calcMinDist(filteredDataPriority);
-
-        const clustersPriority = [...clusters].sort(prioritySort);
-        calcMinDist(clustersPriority);
+        // Pre-calculation removed: Proximity culling now happens in render() on visible subset
 
         currentState.filteredData = filteredData;
         currentState.clusters = clusters;
