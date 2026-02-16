@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { paddingLeft, fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD, paddingBottom, DEBUG_SHOW_BOUNDS } from './constants.js';
-import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData } from './utils.js';
+import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData, parseValue } from './utils.js';
 import { setupItemAnnotations, updateAnnotationLayout } from './annotations.js';
 import { createRuler } from './ruler.js';
 import { createSvgLayers } from './svgSetup.js';
@@ -104,6 +104,18 @@ export function createVisualization(container, config) {
     let isInitialLoad = true;
     let callbacks = {};
 
+    // Transition State
+    let prevXScale = null;
+    let prevYScale = null;
+    let transitionStartTime = 0;
+    let isTransitioning = false;
+    let transitionDuration = 750;
+    let transitionExitingItems = [];
+    let prevTransform = null;
+    let transitionPrevDimX = null;
+    let transitionPrevDimY = null;
+
+
     // SVG setup (gradients, masks, layer groups)
     const {
         svg, gridGroup, xLabelGroup, yLabelGroup, mobileMask,
@@ -191,6 +203,61 @@ export function createVisualization(container, config) {
         // 1. Rescale Scales
         const newXScale = t.rescaleX(xScale);
         const newYScale = t.rescaleY(yScale);
+
+        // Transition Logic
+        let renderXScale = newXScale;
+        let renderYScale = newYScale;
+        let useStandardRender = true;
+        let p = 1;
+
+        if (isTransitioning) {
+            const now = Date.now();
+            const elapsed = now - transitionStartTime;
+            const progress = Math.min(1, elapsed / transitionDuration);
+
+            // Match d3.transition() default easing (cubic-in-out)
+            p = d3.easeCubicInOut(progress);
+
+            if (p < 1) {
+                useStandardRender = false;
+                // We need to interpolate between (prevXScale(d._prevX)) and (newXScale(d._cachedX))
+                // effectively:
+                // oldScreenX = t_zoom.applyX(prevXScale(d._prevX)) ?? No.
+                // The zoom transform 't' changes DURING transition (due to resetZoom calling zoom.transform).
+                // So 't' is the CURRENT zoom state.
+                // We want the point to move from [OldWorld -> OldScreen] to [NewWorld -> NewScreen]
+                // But wait, the 'resetZoom' animation moves the Camera (t).
+                // The points themselves change World Coordinates (xScale / yScale definitions change).
+                //
+                // If we use `newXScale` (which comes from `t.rescaleX(xScale)`), it represents "Current World projected to Screen".
+                // `xScale` is the NEW base scale.
+                // `prevXScale` was the OLD base scale.
+                //
+                // We want d to slide from `prevXScale(d._prevX)` to `xScale(d._cachedX)` in BASE PIXELS?
+                // Then apply `t`?
+                // Yes, because `t` is applied via `t.rescaleX`.
+                // RescaleX roughly means: domain is same, range is t-transformed.
+                // Actually `t.rescaleX(s)` returns a scale where `s'(x) = t.applyX(s(x))`.
+                //
+                // So, interpolatedBaseX = prevXScale(d._prevX) * (1-p) + xScale(d._cachedX) * p.
+                // finalScreenX = t.applyX(interpolatedBaseX).
+                //
+                // HOWEVER, prevXScale might be log and xScale linear (or vice versa).
+                // prevXScale(val) returns the pixel value in the OLD "World" (base zoom).
+                // So we interpolate in PIXEL space (World Pixels). Good.
+
+                // Override scales is hard because we need per-point interpolation.
+                // We will handle this in the Enter/Update logic below by modifying the transform function.
+            } else {
+                isTransitioning = false;
+                prevXScale = null;
+                prevYScale = null;
+                prevTransform = null;
+            }
+        }
+
+
+
 
         // 2. Update Grid
         grid.updateGrid(t, { width, height, xScale, yScale, currentDimensionX, currentDimensionY, isMobile: checkMobile() });
@@ -314,8 +381,15 @@ export function createVisualization(container, config) {
         const maxZoom = hasVisibleItems ? 1000000 : t.k;
         zoom.scaleExtent([minZoom, maxZoom]);
 
+        // Transition: Fade Exiting Items
+        let renderData = visibleData;
+        if (isTransitioning && transitionExitingItems.length > 0) {
+            renderData = renderData.concat(transitionExitingItems);
+        }
+
+
         // 6. Join & Render - Individual Items (g)
-        g.selectAll('.item-group').data(visibleData, d => d.id)
+        g.selectAll('.item-group').data(renderData, d => d.id)
             .join(
                 enter => {
                     const grp = enter.append('g').attr('class', 'item-group');
@@ -365,9 +439,85 @@ export function createVisualization(container, config) {
                 update => update,
                 exit => exit.remove()
             )
-            .attr('transform', d => `translate(${newXScale(d._cachedX)}, ${newYScale(d._cachedY)})`)
-            .style('opacity', d => currentState.hiddenIds.has(d.id) ? 0 : null) // Hide clustered items
+            .attr('transform', d => {
+                let x, y;
+
+                if (!useStandardRender && d._prevX !== undefined && d._prevX !== null && prevXScale && prevYScale) {
+
+
+                    if (d._isExiting) {
+                        // Fade Out at OLD world position, but view (t) might have jumped.
+                        // To keep it smooth, we interpolate its screen position:
+                        // Start: exactly where it was (prevTransform + prevScale)
+                        // End: where it SHOULD be in the new world context if it stayed at its old world pos?
+                        // If it's exiting, it's NOT in the new world. 
+                        // We want it to "stick" to its old screen spot and then move with the NEW camera.
+
+                        const oldScreenX = prevTransform.applyX(prevXScale(d._prevX));
+                        const oldScreenY = prevTransform.applyY(prevYScale(d._prevY));
+
+                        const newScreenX = t.applyX(prevXScale(d._prevX));
+                        const newScreenY = t.applyY(prevYScale(d._prevY));
+
+                        x = oldScreenX + (newScreenX - oldScreenX) * p;
+                        y = oldScreenY + (newScreenY - oldScreenY) * p;
+
+                    } else {
+                        // Persistent or Entering Item
+                        // For Persistent:
+                        // Start: prevTransform.applyX(prevXScale(d._prevX))
+                        // End: t.applyX(xScale(d._cachedX))
+
+                        // For Entering (d._prevX is undefined):
+                        // Start: prevTransform.applyX(xScale(d._cachedX)) 
+                        // End: t.applyX(xScale(d._cachedX))
+
+                        let oldX, oldY;
+                        if (d._prevX !== undefined && d._prevX !== null) {
+                            oldX = prevTransform.applyX(prevXScale(d._prevX));
+                            oldY = prevTransform.applyY(prevYScale(d._prevY));
+                        } else {
+                            oldX = prevTransform.applyX(xScale(d._cachedX));
+                            oldY = prevTransform.applyY(yScale(d._cachedY));
+                        }
+
+                        const newX = t.applyX(xScale(d._cachedX));
+                        const newY = t.applyY(yScale(d._cachedY));
+
+                        if (Number.isFinite(oldX) && Number.isFinite(newX)) {
+                            x = oldX + (newX - oldX) * p;
+                        } else {
+                            x = newX;
+                        }
+
+                        if (Number.isFinite(oldY) && Number.isFinite(newY)) {
+                            y = oldY + (newY - oldY) * p;
+                        } else {
+                            y = newY;
+                        }
+                    }
+
+                } else {
+                    x = newXScale(d._cachedX);
+                    y = newYScale(d._cachedY);
+                }
+                return `translate(${x}, ${y})`;
+            })
+            .style('opacity', d => {
+                if (currentState.hiddenIds.has(d.id)) return 0;
+
+                if (isTransitioning) {
+                    if (d._isExiting) return 1 - p;
+
+                    // Entering: Has NO _prevX
+                    // d._prevX is set in update() for things present BEFORE.
+                    // So if d._prevX is missing/invalid, it's new.
+                    if (d._prevX === undefined || d._prevX === null) return p;
+                }
+                return null; // Default opacity (1)
+            })
             .style('pointer-events', d => currentState.hiddenIds.has(d.id) ? 'none' : null);
+
 
         // Update annotation setup for existing items if layout changed (e.g. dimensions flipped)
         // Optimization: Only run this on the subset that needs it. 
@@ -375,8 +525,13 @@ export function createVisualization(container, config) {
         const itemSelection = g.selectAll('.item-group');
         itemSelection.each(function (d) {
             if (this._layoutVersion !== currentState.layoutVersion) {
+                // If item is exiting, use dimensions from where it came from to avoid layout jump
+                const setupDimX = d._isExiting ? transitionPrevDimX : currentDimensionX;
+                const setupDimY = d._isExiting ? transitionPrevDimY : currentDimensionY;
+
                 setupItemAnnotations(d3.select(this), {
-                    currentDimensionX, currentDimensionY,
+                    currentDimensionX: setupDimX,
+                    currentDimensionY: setupDimY,
                     colorScale: currentState.colorScale,
                     language: currentState.language
                 });
@@ -386,7 +541,10 @@ export function createVisualization(container, config) {
 
         // Update Dynamic Layout (Scale/Radius dependent)
         itemSelection.select('circle').attr('r', currentRadius);
-        updateAnnotationLayout(itemSelection, currentRadius, currentFS, newYScale);
+
+        const prevScreenYScale = (isTransitioning && prevTransform && prevYScale) ? prevTransform.rescaleY(prevYScale) : null;
+        updateAnnotationLayout(itemSelection, currentRadius, currentFS, newYScale, prevScreenYScale, p);
+
 
 
         // 7. Join & Render - Groups/Clusters (gCombined)
@@ -477,14 +635,18 @@ export function createVisualization(container, config) {
                 update => update,
                 exit => exit.remove()
             )
-            .attr('transform', d => `translate(${newXScale(d._cachedX)}, ${newYScale(d._cachedY)})`)
+            .attr('transform', d => {
+                // Clusters are re-generated on dimension change, so IDs change.
+                // It is hard to animate clusters smoothly between dimensions because they regroup.
+                // For now, let's just snap clusters.
+                return `translate(${newXScale(d._cachedX)}, ${newYScale(d._cachedY)})`;
+            })
             .style('opacity', d => currentState.hiddenIds.has(d.id) ? 0 : null)
             .style('pointer-events', d => currentState.hiddenIds.has(d.id) ? 'none' : null);
 
         // Update content of groups... 
         const clusterSelection = gCombined.selectAll('.item-group.combined');
 
-        // Check for layout updates needed on clusters
         clusterSelection.each(function (d) {
             if (this._layoutVersion !== currentState.layoutVersion) {
                 setupItemAnnotations(d3.select(this), {
@@ -565,6 +727,13 @@ export function createVisualization(container, config) {
             xScale: newXScale, yScale: newYScale,
             event: checkMobile() ? undefined : event
         });
+
+        if (isTransitioning) {
+            requestAnimationFrame(() => {
+                const currentT = d3.zoomTransform(svg.node());
+                render(currentT, event);
+            });
+        }
     }
 
     function handleZoom(event) {
@@ -800,9 +969,56 @@ export function createVisualization(container, config) {
 
         const dimChanged = (currentDimensionX !== prevDimensionX) || (currentDimensionY !== prevDimensionY);
 
+        if (dimChanged && !isInitialLoad) {
+            // Capture State for Transition
+            prevTransform = d3.zoomTransform(svg.node());
+            transitionPrevDimX = prevDimensionX;
+            transitionPrevDimY = prevDimensionY;
+
+            prevXScale = xScale.copy();
+            prevYScale = yScale.copy();
+
+            // Cache previous coordinates on data objects
+            currentState.data.forEach(d => {
+                d._prevX = getDimensionValueX(d, prevDimensionX, prevDimensionY);
+                d._prevY = getDimensionValueY(d, prevDimensionY);
+
+                // Also capture range endpoints in OLD world space
+                const oldValY = parseValue(d.dimensions[prevDimensionY]);
+                if (oldValY.type === "range") {
+                    d._prevRangeV1 = oldValY.value;
+                    d._prevRangeV2 = oldValY.value2;
+                } else {
+                    d._prevRangeV1 = d._prevRangeV2 = undefined;
+                }
+            });
+
+
+            transitionStartTime = Date.now();
+            isTransitioning = true;
+        }
+
         // Optimization: Calculate filteredData, increment version, and CACHE VALUES
 
         const filteredData = getFilteredData(data, currentDimensionX, currentDimensionY);
+
+        if (dimChanged) {
+            // Identify Exiting Items (Was Visible -> No longer Visible)
+            // Optimization: Only animate items that were actually rendered
+            // properties `d` are the objects.
+            const previouslyRendered = g.selectAll('.item-group').data();
+            const newIds = new Set(filteredData.map(d => d.id));
+
+            transitionExitingItems = previouslyRendered.filter(d => !newIds.has(d.id));
+
+            // Mark them as exiting for render loop
+            transitionExitingItems.forEach(d => d._isExiting = true);
+
+            // Clean flags on new items
+            filteredData.forEach(d => d._isExiting = false);
+        } else if (!isTransitioning) {
+            transitionExitingItems = [];
+        }
         const clusters = getClusters(currentState.data, currentDimensionX, currentDimensionY, currentState.language);
 
         currentState.layoutVersion = (currentState.layoutVersion || 0) + 1;
@@ -832,6 +1048,9 @@ export function createVisualization(container, config) {
         filteredData.forEach((d, i) => d._priorityIndex = i);
         clusters.forEach((d, i) => d._priorityIndex = i);
 
+        prevDimensionX = currentDimensionX;
+        prevDimensionY = currentDimensionY;
+        isInitialLoad = false;
         // Pre-calculation removed: Proximity culling now happens in render() on visible subset
 
         currentState.filteredData = filteredData;

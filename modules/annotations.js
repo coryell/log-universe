@@ -83,7 +83,7 @@ export const setupItemAnnotations = (selection, { currentDimensionX, currentDime
 
 // Layout phase: updates positions, sizes, and highlight states. 
 // Called every render frame.
-export const updateAnnotationLayout = (selection, radius, fs, currentYScale) => {
+export const updateAnnotationLayout = (selection, radius, fs, currentYScale, prevYScale, p) => {
     const charWidth = fs * 0.6;
 
     selection.each(function (d) {
@@ -110,7 +110,16 @@ export const updateAnnotationLayout = (selection, radius, fs, currentYScale) => 
             const thickness = (0.75 * radius);
             const y1 = currentYScale(yInfo.value);
             const y2 = currentYScale(yInfo.value2);
-            const y2_rel = y2 - y1;
+            let y2_rel = y2 - y1;
+
+            // Interpolate range length if transitioning
+            if (prevYScale && d._prevRangeV1 !== undefined && p !== undefined) {
+                const oldY1 = prevYScale(d._prevRangeV1);
+                const oldY2 = prevYScale(d._prevRangeV2);
+                const oldY2_rel = oldY2 - oldY1;
+                y2_rel = oldY2_rel + (y2_rel - oldY2_rel) * p;
+            }
+
             const yMid_rel = y2_rel / 2;
 
             const rangeLine = group.select('.range-line');
