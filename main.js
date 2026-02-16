@@ -77,7 +77,11 @@ d3.json('/data.json').then(rawData => {
 
   // internally in the visualization module, while standard item clicks/taps
   // are relayed via callbacks through the viewState.
+
+  // Reveal the body now that initialization is complete
+  document.body.style.opacity = '1';
 });
+
 
 // Global Prevention of Browser-Level Zooming (Desktop Pinch)
 window.addEventListener('wheel', (e) => {
