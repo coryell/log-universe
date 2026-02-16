@@ -15,111 +15,98 @@ export function createRuler(svg, checkMobile) {
     let _startCursorPos = null;
 
 
-    // 4 DISTINCT GROUPS to control Z-Order: Labels below, Lines on top
-    // 1. Red Ruler Labels
-    const rulerLabelsGroup = svg.append("g")
-        .attr("class", "ruler-labels")
+    // Cursor Ruler (Create FIRST so it is below the Mark)
+    const rulerGroup = svg.append("g")
+        .attr("class", "cursor-ruler")
         .style("pointer-events", "none")
         .style("display", "none");
 
-    // 2. Green Mark Labels
-    const markLabelsGroup = svg.append("g")
-        .attr("class", "mark-labels")
-        .style("pointer-events", "none")
-        .style("display", "none");
-
-    // 3. Red Ruler Lines
-    const rulerLinesGroup = svg.append("g")
-        .attr("class", "ruler-lines")
-        .style("pointer-events", "none")
-        .style("display", "none");
-
-    // 4. Green Mark Lines
-    const markLinesGroup = svg.append("g")
-        .attr("class", "mark-lines")
+    // Mark Ruler (the persistent mark - Create SECOND so it is ON TOP)
+    const markGroup = svg.append("g")
+        .attr("class", "mark-ruler")
         .style("pointer-events", "none")
         .style("display", "none");
 
     // Vertical line (tracks X position)
-    const rulerLineX = rulerLinesGroup.append("line")
+    const rulerLineX = rulerGroup.append("line")
         .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
-    const rulerLineY = rulerLinesGroup.append("line") // This will be the vertical line tracking X
+    const rulerLineY = rulerGroup.append("line") // This will be the vertical line tracking X
         .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
-    // Mark Lines (Append to markLinesGroup)
-    const markLineY = markLinesGroup.append("line") // Horizontal line at fixed Y
+    // Mark Lines (Append to markGroup)
+    const markLineY = markGroup.append("line") // Horizontal line at fixed Y
         .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
-    const markLineX = markLinesGroup.append("line") // Vertical line at fixed X
+    const markLineX = markGroup.append("line") // Vertical line at fixed X
         .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
     // Invisible hit lines for dragging the mark (Mobile only)
-    const markHitLineY = markLinesGroup.append("line")
+    const markHitLineY = markGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
         .style("cursor", "move")
         .style("pointer-events", "stroke");
 
-    const markHitLineX = markLinesGroup.append("line")
+    const markHitLineX = markGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
         .style("cursor", "move")
         .style("pointer-events", "stroke");
 
-    // Interval connecting lines (Moved to markLinesGroup for dragging)
-    const intervalLineY = markLinesGroup.append("line") // Vertical segment
+    // Interval connecting lines (Moved to markGroup for dragging)
+    const intervalLineY = markGroup.append("line") // Vertical segment
         .attr("class", "interval-line-y")
         .attr("stroke", "green").attr("stroke-width", 1);
 
-    const intervalHitLineY = markLinesGroup.append("line")
+    const intervalHitLineY = markGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
         .style("cursor", "move")
         .style("pointer-events", "stroke");
 
-    const intervalLineX = markLinesGroup.append("line") // Horizontal segment
+    const intervalLineX = markGroup.append("line") // Horizontal segment
         .attr("class", "interval-line-x")
         .attr("stroke", "green").attr("stroke-width", 1);
 
-    const intervalHitLineX = markLinesGroup.append("line")
+    const intervalHitLineX = markGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
         .style("cursor", "move")
         .style("pointer-events", "stroke");
 
-    const rulerLabelBackground = rulerLabelsGroup.append("rect")
+    const rulerLabelBackground = rulerGroup.append("rect")
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
 
-    const rulerLabelHitRect = rulerLabelsGroup.append("rect")
+    const rulerLabelHitRect = rulerGroup.append("rect")
         .attr("fill", "transparent").style("pointer-events", "all");
 
-    const rulerLabel = rulerLabelsGroup.append("text")
+    const rulerLabel = rulerGroup.append("text")
         .attr("fill", "white").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
 
     const rulerLabelLine1 = rulerLabel.append("tspan");
     const rulerLabelLine2 = rulerLabel.append("tspan");
 
-    // Y-Interval Label (Moved to markLabelsGroup)
-    const yIntervalBackground = markLabelsGroup.append("rect")
+    // Y-Interval Label (Moved to markGroup)
+    const yIntervalBackground = markGroup.append("rect")
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7)
         .style("pointer-events", "all");
 
-    const yIntervalLabel = markLabelsGroup.append("text")
+    const yIntervalLabel = markGroup.append("text")
         .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start")
         .style("pointer-events", "none"); // Let background capture events
 
-    // X-Interval Label (Moved to markLabelsGroup)
-    const xIntervalBackground = markLabelsGroup.append("rect")
+    // X-Interval Label (Moved to markGroup)
+    const xIntervalBackground = markGroup.append("rect")
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7)
         .style("pointer-events", "all");
 
-    const xIntervalLabel = markLabelsGroup.append("text")
+    const xIntervalLabel = markGroup.append("text")
         .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start")
         .style("pointer-events", "none");
 
     // Invisible hit lines for mobile touch targets (Red Ruler)
-    const rulerHitLineX = rulerLinesGroup.append("line")
+    const rulerHitLineX = rulerGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
         .style("pointer-events", "stroke");
 
-    const rulerHitLineY = rulerLinesGroup.append("line")
+    const rulerHitLineY = rulerGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
         .style("pointer-events", "stroke");
 
@@ -129,113 +116,78 @@ export function createRuler(svg, checkMobile) {
     let _didMove = false;
     let _rulerLongPressTimer = null;
 
-    // Use rulerLabelsGroup and rulerLinesGroup for touch interaction
-    const setupRulerEvents = (node) => {
-        node.addEventListener('touchstart', (e) => {
-            if (!checkMobile || !checkMobile()) return;
-            e.stopPropagation();
-            e.preventDefault();
-            _isDragging = true;
-            _didMove = false;
-            // Check if touch started on the label or its background
-            const target = e.target;
-            const labelNode = rulerLabel.node();
-            const bgNode = rulerLabelBackground.node();
-            const hitNode = rulerLabelHitRect.node();
-            _touchStartedOnLabel = (target === labelNode || target === bgNode || target === hitNode || labelNode.contains(target));
-            // Record offset between touch position and current ruler position
-            const p = d3.pointer(e.touches[0], svg.node());
-            if (lastMousePos && isFinite(p[0]) && isFinite(p[1])) {
-                _dragOffset = [p[0] - lastMousePos[0], p[1] - lastMousePos[1]];
-            } else {
-                _dragOffset = [0, 0];
-            }
-            // Capture position at start of touch for stable marking
-            const startMousePos = lastMousePos ? [...lastMousePos] : null;
+    rulerGroup.node().addEventListener('touchstart', (e) => {
+        if (!checkMobile || !checkMobile()) return;
+        e.stopPropagation();
+        e.preventDefault();
+        _isDragging = true;
+        _didMove = false;
+        // Check if touch started on the label or its background
+        const target = e.target;
+        const labelNode = rulerLabel.node();
+        const bgNode = rulerLabelBackground.node();
+        const hitNode = rulerLabelHitRect.node();
+        _touchStartedOnLabel = (target === labelNode || target === bgNode || target === hitNode || labelNode.contains(target));
+        // Record offset between touch position and current ruler position
+        const p = d3.pointer(e.touches[0], svg.node());
+        if (lastMousePos && isFinite(p[0]) && isFinite(p[1])) {
+            _dragOffset = [p[0] - lastMousePos[0], p[1] - lastMousePos[1]];
+        } else {
+            _dragOffset = [0, 0];
+        }
+        // Capture position at start of touch for stable marking
+        const startMousePos = lastMousePos ? [...lastMousePos] : null;
 
-            // Long-press: set mark at current ruler position after 500ms
-            _rulerLongPressTimer = setTimeout(() => {
-                if (startMousePos && lastConfig) {
-                    const t = d3.zoomTransform(svg.node());
-                    // Use startMousePos instead of lastMousePos to avoid drift/jumps
-                    const yVal = lastConfig.yScale.invert(startMousePos[1]);
-                    let xVal = null;
-                    if (lastConfig.currentDimensionX !== "none") {
-                        xVal = lastConfig.xScale.invert(startMousePos[0]);
-                    }
-                    setMark(xVal, yVal, lastConfig.currentDimensionX);
-                    update(lastConfig);
-                    if (navigator.vibrate) navigator.vibrate(50);
+        // Long-press: set mark at current ruler position after 500ms
+        _rulerLongPressTimer = setTimeout(() => {
+            if (startMousePos && lastConfig) {
+                const t = d3.zoomTransform(svg.node());
+                // Use startMousePos instead of lastMousePos to avoid drift/jumps
+                const yVal = lastConfig.yScale.invert(startMousePos[1]);
+                let xVal = null;
+                if (lastConfig.currentDimensionX !== "none") {
+                    xVal = lastConfig.xScale.invert(startMousePos[0]);
                 }
-            }, 500);
-        }, { passive: false });
-
-        node.addEventListener('touchmove', (e) => {
-            if (!_isDragging || !lastConfig) return;
-            e.stopPropagation();
-            e.preventDefault();
-            _didMove = true;
-            if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
-            const touch = e.touches[0];
-            const p = d3.pointer(touch, svg.node());
-            if (isFinite(p[0]) && isFinite(p[1])) {
-                lastMousePos = [p[0] - _dragOffset[0], p[1] - _dragOffset[1]];
+                setMark(xVal, yVal, lastConfig.currentDimensionX);
+                update(lastConfig);
+                if (navigator.vibrate) navigator.vibrate(50);
             }
-            update(lastConfig);
-        }, { passive: false });
+        }, 500);
+    }, { passive: false });
 
-        node.addEventListener('touchend', (e) => {
-            _isDragging = false;
-            if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
-            if (_touchStartedOnLabel && !_didMove) {
-                hide();
-                lastMousePos = null;
-            } else if (!_didMove && lastMousePos) {
-                // Click-through logic: if it was a tap (not a drag), verify what's underneath
-                const touch = e.changedTouches[0];
-                const clientX = touch.clientX;
-                const clientY = touch.clientY;
+    rulerGroup.node().addEventListener('touchmove', (e) => {
+        if (!_isDragging || !lastConfig) return;
+        e.stopPropagation();
+        e.preventDefault();
+        _didMove = true;
+        if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
+        const touch = e.touches[0];
+        const p = d3.pointer(touch, svg.node());
+        if (isFinite(p[0]) && isFinite(p[1])) {
+            lastMousePos = [p[0] - _dragOffset[0], p[1] - _dragOffset[1]];
+        }
+        update(lastConfig);
+    }, { passive: false });
 
-                // 1. Hide groups temporarily so elementFromPoint sees what's under them
-                rulerLabelsGroup.style("display", "none");
-                rulerLinesGroup.style("display", "none");
+    rulerGroup.node().addEventListener('touchend', (e) => {
+        _isDragging = false;
+        if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
+        if (_touchStartedOnLabel && !_didMove) {
+            hide();
+            lastMousePos = null;
+        } else if (!_didMove && lastMousePos) {
+            // Click-through logic: if it was a tap (not a drag), verify what's underneath
+            const touch = e.changedTouches[0];
+            const clientX = touch.clientX;
+            const clientY = touch.clientY;
 
-                // 2. Find the element at that point
-                const target = document.elementFromPoint(clientX, clientY);
+            // 1. Hide ruler temporarily so elementFromPoint sees what's under it
+            rulerGroup.style("display", "none");
 
-                // 3. Dispatch a click event to it
-                if (target) {
-                    const clickEvent = new MouseEvent("click", {
-                        bubbles: true,
-                        cancelable: true,
-                        view: window,
-                        clientX: clientX,
-                        clientY: clientY
-                    });
-                    target.dispatchEvent(clickEvent);
-                }
-
-                // 4. Restore groups
-                rulerLabelsGroup.style("display", null);
-                rulerLinesGroup.style("display", null);
-            }
-        });
-
-        node.addEventListener('click', (e) => {
-            // Stop bubbling to prevent window click listener from deselecting
-            e.stopPropagation();
-            e.preventDefault();
-
-            const clientX = e.clientX;
-            const clientY = e.clientY;
-
-            // 1. Hide groups temporarily
-            rulerLabelsGroup.style("display", "none");
-            rulerLinesGroup.style("display", "none");
-
-            // 2. Click-through logic
+            // 2. Find the element at that point
             const target = document.elementFromPoint(clientX, clientY);
 
+            // 3. Dispatch a click event to it
             if (target) {
                 const clickEvent = new MouseEvent("click", {
                     bubbles: true,
@@ -247,15 +199,16 @@ export function createRuler(svg, checkMobile) {
                 target.dispatchEvent(clickEvent);
             }
 
-            // 3. Restore groups
-            rulerLabelsGroup.style("display", null);
-            rulerLinesGroup.style("display", null);
-        });
-    };
-
-    // Attach events to BOTH groups to ensure reliability
-    setupRulerEvents(rulerLabelsGroup.node());
-    setupRulerEvents(rulerLinesGroup.node());
+            // 4. Restore ruler (if it wasn't supposed to be hidden by the click)
+            // Note: If the click triggered an action that moves the ruler (like selecting a point),
+            // the visualization update loop will handle showing it again or moving it.
+            // If we just restore it immediately, it might flicker or obscure the result.
+            // However, we must restore it if nothing happened.
+            // A safe bet is to restore it, relying on the fact that if the click
+            // caused a selection, 'update' will be called soon.
+            rulerGroup.style("display", null);
+        }
+    });
     // Mark Drag Handlers (Mobile Only)
     const handleMarkDragStart = (e) => {
         if (!checkMobile || !checkMobile()) return;
@@ -317,16 +270,40 @@ export function createRuler(svg, checkMobile) {
         _isMarkDragging = false;
     };
 
-    markLabelsGroup.node().addEventListener('touchstart', handleMarkDragStart, { passive: false });
-    markLabelsGroup.node().addEventListener('touchmove', handleMarkDragMove, { passive: false });
-    markLabelsGroup.node().addEventListener('touchend', handleMarkDragEnd, { passive: false });
-    markLabelsGroup.node().addEventListener('touchcancel', handleMarkDragEnd, { passive: false });
+    markGroup.node().addEventListener('touchstart', handleMarkDragStart, { passive: false });
+    markGroup.node().addEventListener('touchmove', handleMarkDragMove, { passive: false });
+    markGroup.node().addEventListener('touchend', handleMarkDragEnd, { passive: false });
+    markGroup.node().addEventListener('touchcancel', handleMarkDragEnd, { passive: false });
 
-    markLinesGroup.node().addEventListener('touchstart', handleMarkDragStart, { passive: false });
-    markLinesGroup.node().addEventListener('touchmove', handleMarkDragMove, { passive: false });
-    markLinesGroup.node().addEventListener('touchend', handleMarkDragEnd, { passive: false });
-    markLinesGroup.node().addEventListener('touchcancel', handleMarkDragEnd, { passive: false });
+    // Fix for ruler intercepting clicks when it moves under the cursor/finger
+    rulerGroup.node().addEventListener('click', (e) => {
+        // Stop bubbling to prevent window click listener from deselecting
+        e.stopPropagation();
+        e.preventDefault();
 
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        // 1. Hide ruler temporarily
+        rulerGroup.style("display", "none");
+
+        // 2. Click-through logic
+        const target = document.elementFromPoint(clientX, clientY);
+
+        if (target) {
+            const clickEvent = new MouseEvent("click", {
+                bubbles: true,
+                cancelable: true,
+                view: window,
+                clientX: clientX,
+                clientY: clientY
+            });
+            target.dispatchEvent(clickEvent);
+        }
+
+        // 3. Restore ruler
+        rulerGroup.style("display", null);
+    });
 
     function setMark(dataX, dataY, currentDimensionX) {
         markedYData = dataY;
@@ -340,8 +317,7 @@ export function createRuler(svg, checkMobile) {
     function clearMark() {
         markedYData = null;
         markedXData = null;
-        markLabelsGroup.style("display", "none");
-        markLinesGroup.style("display", "none");
+        markGroup.style("display", "none");
         yIntervalLabel.style("display", "none");
         yIntervalBackground.style("display", "none");
         intervalLineY.style("display", "none");
@@ -365,8 +341,7 @@ export function createRuler(svg, checkMobile) {
 
         // Toggle pointer-events based on mobile state
         const isMobile = checkMobile && checkMobile();
-        rulerLabelsGroup.style("pointer-events", isMobile ? "all" : "none");
-        rulerLinesGroup.style("pointer-events", isMobile ? "all" : "none");
+        rulerGroup.style("pointer-events", isMobile ? "all" : "none");
 
         // We rely on main loop to pass event or just update if we have lastMousePos
         if (event) {
@@ -396,8 +371,7 @@ export function createRuler(svg, checkMobile) {
 
         if (!lastMousePos) return;
 
-        rulerLabelsGroup.style("display", null);
-        rulerLinesGroup.style("display", null);
+        rulerGroup.style("display", null);
 
         // Always fetch transform from SVG node as it's the source of truth
         // Always fetch transform from SVG node as it's the source of truth
@@ -543,8 +517,7 @@ export function createRuler(svg, checkMobile) {
 
         // Update Marks
         if (markedYData !== null || markedXData !== null) {
-            markLabelsGroup.style("display", null);
-            markLinesGroup.style("display", null);
+            markGroup.style("display", null);
             let my = null;
             if (markedYData !== null) {
                 my = yScale(markedYData); // Use passed rescaled scale
@@ -584,8 +557,7 @@ export function createRuler(svg, checkMobile) {
                 intervalHitLineX.style("display", "none");
             }
         } else {
-            markLabelsGroup.style("display", "none");
-            markLinesGroup.style("display", "none");
+            markGroup.style("display", "none");
             yIntervalLabel.style("display", "none");
             yIntervalBackground.style("display", "none");
             intervalLineY.style("display", "none");
@@ -598,8 +570,7 @@ export function createRuler(svg, checkMobile) {
     }
 
     function hide() {
-        rulerLabelsGroup.style("display", "none");
-        rulerLinesGroup.style("display", "none");
+        rulerGroup.style("display", "none");
         lastMousePos = null;
     }
 
