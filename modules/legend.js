@@ -8,7 +8,8 @@ import { FADE_OPACITY } from './constants.js';
  */
 export function createLegend(svg, g, gCombined) {
     const legendPadding = 15;
-    const legendItemHeight = 20;
+    const legendItemHeight = 25; // Increased for button padding
+    const legendItemGap = 8;
     const legendGroup = svg.append("g").attr("class", "legend svg-legend");
     let legendWidth = 0;
     let legendHeight = 0;
@@ -24,9 +25,13 @@ export function createLegend(svg, g, gCombined) {
         gCombined.selectAll(".item-group").filter(d => d._members && d._members.some(m => getLocalized(m.category, language) === cat)).raise();
 
         // Update SVG Legend
-        legendGroup.selectAll("text").transition().duration(200)
+        legendGroup.selectAll(".legend-item-text").transition().duration(200)
             .style("font-weight", d => d === cat ? "bold" : "normal")
             .attr("opacity", d => d === cat ? 1 : FADE_OPACITY);
+
+        legendGroup.selectAll(".legend-item-rect").transition().duration(200)
+            .attr("opacity", d => d === cat ? 1 : FADE_OPACITY)
+            .attr("stroke", d => d === cat ? "#00aaff" : "#333");
 
         // Update Mobile Legend
         if (mobileLegend) {
@@ -34,9 +39,11 @@ export function createLegend(svg, g, gCombined) {
                 if (span.textContent.trim() === cat) {
                     span.style.fontWeight = 'bold';
                     span.style.opacity = '1';
+                    span.style.borderColor = '#00aaff';
                 } else {
                     span.style.fontWeight = 'normal';
                     span.style.opacity = String(FADE_OPACITY);
+                    span.style.borderColor = '#333';
                 }
             });
         }
@@ -48,15 +55,20 @@ export function createLegend(svg, g, gCombined) {
         gCombined.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
 
         // Reset SVG Legend
-        legendGroup.selectAll("text").transition().duration(200)
-            .style("font-weight", "normal")
+        legendGroup.selectAll(".legend-item-text").transition().duration(200)
+            .style("font-weight", "bold")
             .attr("opacity", 1);
+
+        legendGroup.selectAll(".legend-item-rect").transition().duration(200)
+            .attr("opacity", 1)
+            .attr("stroke", "#333");
 
         // Reset Mobile Legend
         if (mobileLegend) {
             Array.from(mobileLegend.querySelectorAll('.mobile-legend-item')).forEach(span => {
-                span.style.fontWeight = 'normal';
+                span.style.fontWeight = 'bold';
                 span.style.opacity = '1';
+                span.style.borderColor = '#333';
             });
         }
     }
@@ -75,36 +87,83 @@ export function createLegend(svg, g, gCombined) {
         );
 
         // --- SVG Legend (desktop) ---
-        legendHeight = activeCats.length * legendItemHeight + legendPadding * 2;
-        const texts = legendGroup.selectAll("text").data(activeCats, d => d);
-        texts.exit().remove();
+        const items = legendGroup.selectAll(".legend-item").data(activeCats, d => d);
+        items.exit().remove();
 
-        const textEnter = texts.enter().append("text")
-            .attr("x", legendPadding).attr("dy", "0.35em")
-            .style("font-family", "monospace").style("font-size", "12px").style("cursor", "pointer")
-            .attr("fill", d => colorScale ? colorScale(d) : 'black');
+        const itemEnter = items.enter().append("g")
+            .attr("class", "legend-item")
+            .style("cursor", "pointer");
 
-        const textMerge = textEnter.merge(texts)
-            .attr("y", (d, i) => legendPadding + i * legendItemHeight + legendItemHeight / 2)
-            .text(d => d);
+        itemEnter.append("rect")
+            .attr("class", "legend-item-rect")
+            .attr("fill", "black")
+            .attr("stroke", "#333")
+            .attr("stroke-width", 1)
+            .attr("rx", 4).attr("ry", 4);
 
-        textEnter
+        itemEnter.append("text")
+            .attr("class", "legend-item-text")
+            .attr("dy", "0.35em")
+            .style("font-family", "monospace")
+            .style("font-size", "12px")
+            .style("font-weight", "bold");
+
+        const itemMerge = itemEnter.merge(items);
+
+        // Update positions and text content
+        itemMerge.select(".legend-item-text")
+            .text(d => d)
+            .attr("fill", d => colorScale ? colorScale(d) : 'white');
+
+        // Calculate dimensions
+        let maxTextWidth = 0;
+        itemMerge.each(function (d) {
+            const text = d3.select(this).select("text");
+            const textWidth = text.node().getComputedTextLength();
+            if (textWidth > maxTextWidth) maxTextWidth = textWidth;
+        });
+
+        const buttonWidth = maxTextWidth + 16; // 8px padding on each side
+        legendWidth = buttonWidth + legendPadding * 2;
+        legendHeight = activeCats.length * (20 + legendItemGap) + legendPadding * 2;
+
+        // Apply uniform width to all button rectangles
+        itemMerge.each(function (d) {
+            d3.select(this).select("rect")
+                .attr("width", buttonWidth)
+                .attr("height", 20)
+                .attr("y", -10);
+
+            d3.select(this).select("text")
+                .attr("x", buttonWidth / 2)
+                .style("text-anchor", "middle");
+        });
+
+
+        // Restore main legend bounding box
+        let mainRect = legendGroup.select(".legend-bg");
+        if (mainRect.empty()) {
+            mainRect = legendGroup.insert("rect", ":first-child")
+                .attr("class", "legend-bg")
+                .attr("fill", "black")
+                .attr("stroke", "#00aaff")
+                .attr("stroke-width", 1)
+                .attr("rx", 5).attr("ry", 5);
+        }
+        mainRect.attr("width", legendWidth).attr("height", legendHeight);
+
+
+        itemMerge.attr("transform", (d, i) =>
+            `translate(${legendPadding}, ${legendPadding + i * (20 + legendItemGap) + 10})`
+        );
+
+        itemMerge
             .on("mouseover", (event, cat) => fadeToCategory(cat, language))
             .on("mouseout", () => unfade())
             .on("click", function (event, cat) {
                 event.stopPropagation();
                 if (state.onCategoryClick) state.onCategoryClick(cat);
             });
-
-        let maxTextWidth = 0;
-        textMerge.each(function () {
-            const bbox = this.getComputedTextLength();
-            if (bbox > maxTextWidth) maxTextWidth = bbox;
-        });
-        legendWidth = maxTextWidth + legendPadding * 2;
-        let rect = legendGroup.select("rect");
-        if (rect.empty()) rect = legendGroup.insert("rect", "text").attr("fill", "black").attr("stroke", "#00aaff").attr("stroke-width", 1).attr("rx", 5).attr("ry", 5);
-        rect.attr("width", legendWidth).attr("height", legendHeight);
 
         const legendX = width - legendWidth - 20;
         const legendY = height - legendHeight - 60;
