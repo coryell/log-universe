@@ -1509,8 +1509,12 @@ export function createVisualization(container, config) {
         setCallbacks,
         resize,
         zoomToItem: (item) => {
-            const matchItem = currentState.data.find(d => d.id === item.id);
+            let matchItem = currentState.data.find(d => d.id === item.id);
+            if (!matchItem && currentState.clusters) {
+                matchItem = currentState.clusters.find(c => c.id === item.id);
+            }
             if (!matchItem) return;
+
 
             const rawDimY = matchItem.dimensions[currentDimensionY];
             const valY = Array.isArray(rawDimY)
