@@ -1292,9 +1292,9 @@ export function createVisualization(container, config) {
         }
 
         if (isInitialLoad) {
-            // Initial Load: Set view to 10x zoom immediately
-            // We'll center on the data bounds if possible, but at scale=10
-            const startK = 2;
+            // Initial Load: Set view to 10x REALTIVE zoom immediately
+            // startK is 10x the final "fit to screen" zoom (minZoom)
+            const startK = minZoom * 10;
 
             const bounds = getDynamicBounds(startK);
             if (bounds) {
@@ -1308,6 +1308,7 @@ export function createVisualization(container, config) {
             }
             isInitialLoad = false;
         }
+
         else if (dimChanged) {
             // Dimension change (not initial): Animate to fit all data
             const bounds = getDynamicBounds(minZoom);
