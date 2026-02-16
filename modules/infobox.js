@@ -121,16 +121,50 @@ export function createInfobox(selection) {
             event.stopPropagation(); // Stop propagation to prevent closing
             const textToCopy = d3.select(this).attr("data-copy-text");
             if (!textToCopy) return; // Skip Source buttons if handled inline
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                const btn = d3.select(this);
+
+            // Fallback function for iOS/older browsers
+            const copyToClipboardFallback = (text) => {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                // Avoid scrolling to bottom
+                textArea.style.top = "0";
+                textArea.style.left = "0";
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        showCopyFeedback(d3.select(this));
+                    } else {
+                        console.error('Fallback: Copying text command was unsuccessful');
+                    }
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            };
+
+            const showCopyFeedback = (btn) => {
                 const originalText = btn.text();
                 btn.text("Copied!");
                 setTimeout(() => {
                     btn.text(originalText);
                 }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showCopyFeedback(d3.select(this));
+                }).catch(err => {
+                    console.warn('Clipboard API failed, trying fallback:', err);
+                    copyToClipboardFallback(textToCopy);
+                });
+            } else {
+                copyToClipboardFallback(textToCopy);
+            }
         });
     }
 
