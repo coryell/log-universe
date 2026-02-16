@@ -8,6 +8,88 @@ import { createGrid } from './grid.js';
 import { createLegend } from './legend.js';
 import { getClusters } from './grouping.js';
 
+// Helper to calculate visual extents for a point
+function computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimensionY, precisionFS) {
+    const px = xScale(d._cachedX);
+    const rawY = d.dimensions ? d.dimensions[currentDimensionY] : undefined;
+    let v1 = d._cachedY;
+    let v2 = d._cachedY;
+    let isRange = Array.isArray(rawY);
+    let yType = "equal";
+    if (isRange) {
+        yType = "range";
+        v2 = Number(rawY[1]);
+    } else if (typeof rawY === 'string') {
+        if (rawY.startsWith('>')) yType = 'greater';
+        else if (rawY.startsWith('<')) yType = 'less';
+    }
+
+    const py1 = yScale(v1);
+
+    // Calculate Screen Extents (at fs=12)
+    let l = 0, r = 0, u = 0, dExt = 0;
+    let lc = 0, ls = 0, rc = 0, rs = 0, uc = 0, us = 0, dc = 0, ds = 0;
+
+    if (yType === 'range') {
+        const py2 = yScale(v2);
+        const rangeFS = precisionFS * 1.75;
+        const radius = precisionFS / 2.4;
+        const thickness = 0.75 * radius;
+
+        const textLen = ((d._estTextWidth || 0) * rangeFS) + 6;
+        const midY = (py1 + py2) / 2;
+
+        const diff = Math.abs(py1 - py2) / 2;
+        const halfLen = textLen / 2;
+
+        uc = diff; us = halfLen;
+        dc = diff; ds = halfLen;
+
+        const labelHalfWidth = (rangeFS * 1.5) / 2;
+        // lc = 20. ls = thick + halfW
+        lc = 20;
+        ls = thickness + labelHalfWidth;
+
+        // r = thickness / 2.
+        rc = thickness / 2; rs = 0;
+
+        l = lc + ls; r = rc + rs; u = uc + us; dExt = dc + ds;
+
+        return { x: px, y: midY, l, r, u, d: dExt, lc, ls, rc, rs, uc, us, dc, ds };
+    } else {
+        const radius = precisionFS / 2.4;
+        const labelGap = 10;
+        // l = radius (S)
+        lc = 0; ls = radius;
+
+        // r = 10 (C) + text (S)
+        rc = 10;
+        rs = (d._estTextWidth || 0) * precisionFS + radius;
+
+        l = ls; // lc=0
+        r = rc + rs;
+
+        let yUp = radius;
+        let yDown = radius;
+
+        // Label vertical
+        yUp = Math.max(yUp, precisionFS * 0.7);
+        yDown = Math.max(yDown, precisionFS * 0.8);
+
+        if (currentDimensionX === "none") {
+            const arrowLen = 20 * radius;
+            if (yType === 'greater') yUp = Math.max(yUp, arrowLen);
+            else if (yType === 'less') yDown = Math.max(yDown, arrowLen);
+        }
+
+        uc = 0; us = yUp;
+        dc = 0; ds = yDown;
+        u = yUp; dExt = yDown;
+
+        return { x: px, y: py1, l, r, u: yUp, d: yDown, lc, ls, rc, rs, uc, us, dc, ds };
+    }
+}
+
 export function createVisualization(container, config) {
     let width = container.clientWidth;
     let height = container.clientHeight;
@@ -547,26 +629,25 @@ export function createVisualization(container, config) {
     }
 
     function zoomToCategory(cat) {
-        const data = currentState.data || [];
+        // Use pre-filtered data (guarantees valid coordinates and visibility logic consistency)
+        const data = currentState.filteredData || [];
         const language = currentState.language;
-        let categoryData;
-        if (currentDimensionX === "none") {
-            categoryData = data.filter(item => getLocalized(item.category, language) === cat && item.dimensions[currentDimensionY] !== undefined);
-        } else {
-            categoryData = data.filter(item => getLocalized(item.category, language) === cat && item.dimensions[currentDimensionY] !== undefined && item.dimensions[currentDimensionX] !== undefined);
-        }
+
+        const categoryData = data.filter(item => getLocalized(item.category, language) === cat);
+
         if (categoryData.length === 0) return;
 
-        const xValues = categoryData.map(d => xScale(getDimensionValueX(d, currentDimensionX, currentDimensionY)));
-        const yValues = categoryData.map(d => yScale(getDimensionValueY(d, currentDimensionY)));
+        // Calculate "Base" extents (at Zoom=1 equivalent, used for inputs)
+        const candidates = categoryData.map(d => computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimensionY, 12));
 
-        const minX = d3.min(xValues);
-        const maxX = d3.max(xValues);
-        const minY = d3.max(yValues); // Note: Y-axis is inverted, so max Y value is min pixel value
-        const maxY = d3.min(yValues); // Note: Y-axis is inverted, so min Y value is max pixel value
+        // Iterative solving for K
+        // We want to fit [minX_scr, maxX_scr] into Width and [minY_scr, maxY_scr] into Height.
+        // ScreenPos = WorldPos * k + trans.
+        // WorldPos is what we have in `candidates` (x, y) assuming x/yScale are base scales.
+        // ScreenExt = extC + extS * (visualFS / 12).
+        // visualFS = max(4, min(12, baseDecadeHeight * k)).
 
-        const boundsWidth = maxX - minX;
-        const boundsHeight = maxY - minY;
+        const baseDecadeHeight = Math.abs(yScale(10) - yScale(1));
         const padLeft = Math.min(180, width * 0.1);
         const padRight = Math.min(460, width * 0.1);
         const padTop = Math.min(60, height * 0.05);
@@ -574,18 +655,103 @@ export function createVisualization(container, config) {
         const availWidth = width - padLeft - padRight;
         const availHeight = height - padTop - padBottom;
 
-        let scaleX = boundsWidth > 0 ? availWidth / boundsWidth : 10000;
-        let scaleY = boundsHeight > 0 ? availHeight / boundsHeight : 10000;
-        let scale = Math.min(Math.max(Math.min(scaleX, scaleY), 1), 10000);
+        // Initial guess (ignoring extents)
+        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        candidates.forEach(c => {
+            minX = Math.min(minX, c.x); maxX = Math.max(maxX, c.x);
+            minY = Math.min(minY, c.y); maxY = Math.max(maxY, c.y);
+        });
 
-        const cx = (minX + maxX) / 2;
-        const cy = (minY + maxY) / 2;
+        let targetK = 1;
+        if (minX !== Infinity) {
+            const dw = maxX - minX || 1;
+            const dh = maxY - minY || 1;
+            targetK = Math.min(availWidth / dw, availHeight / dh);
+        }
+        targetK = Math.min(Math.max(targetK, 0.001), 100000);
+
+        // Iterative refinement (3 passes usually enough)
+        for (let pass = 0; pass < 3; pass++) {
+            const visualFS = Math.max(4, Math.min(12, baseDecadeHeight * targetK));
+            const scalingFactorS = visualFS / 12;
+            // Screen extent = extC + extS * scalingFactorS.
+            // Note: This is pure screen pixels *around the point center*.
+            // Screen_Left = (x * k) - (lc + ls * scalingFactorS)
+
+            let sMinX = Infinity, sMaxX = -Infinity, sMinY = Infinity, sMaxY = -Infinity;
+
+            candidates.forEach(c => {
+                const l = c.lc + c.ls * scalingFactorS;
+                const r = c.rc + c.rs * scalingFactorS;
+                const u = c.uc + c.us * scalingFactorS;
+                const d = c.dc + c.ds * scalingFactorS;
+
+                // We calculate bounds in "Scaled World Space" relative to arbitrary origin
+                // x_scr = x * k. 
+                const sx = c.x * targetK;
+                const sy = c.y * targetK;
+
+                sMinX = Math.min(sMinX, sx - l);
+                sMaxX = Math.max(sMaxX, sx + r);
+                sMinY = Math.min(sMinY, sy - u);
+                sMaxY = Math.max(sMaxY, sy + d);
+            });
+
+            const reqW = sMaxX - sMinX;
+            const reqH = sMaxY - sMinY;
+
+            // reqW should fit in availWidth.
+            // current w = reqW. desired = availWidth.
+            // factor = availWidth / reqW.
+            // But reqW has non-linear usage of K (in l/r).
+            // Approximate update.
+            const factorX = availWidth / reqW;
+            const factorY = availHeight / reqH;
+            const factor = Math.min(factorX, factorY);
+
+            targetK = targetK * factor;
+            targetK = Math.min(Math.max(targetK, 0.0001), 100000);
+        }
+
+        // Final calculation for Center
+        const visualFS = Math.max(4, Math.min(12, baseDecadeHeight * targetK));
+        const scalingFactorS = visualFS / 12;
+
+        let sMinX = Infinity, sMaxX = -Infinity, sMinY = Infinity, sMaxY = -Infinity;
+        candidates.forEach(c => {
+            const l = c.lc + c.ls * scalingFactorS;
+            const r = c.rc + c.rs * scalingFactorS;
+            const u = c.uc + c.us * scalingFactorS;
+            const d = c.dc + c.ds * scalingFactorS;
+            const sx = c.x * targetK;
+            const sy = c.y * targetK;
+            sMinX = Math.min(sMinX, sx - l);
+            sMaxX = Math.max(sMaxX, sx + r);
+            sMinY = Math.min(sMinY, sy - u);
+            sMaxY = Math.max(sMaxY, sy + d);
+        });
+
         const screenCX = padLeft + availWidth / 2;
         const screenCY = padTop + availHeight / 2;
 
-        const translate = [screenCX - cx * scale, screenCY - cy * scale];
+        const contentCX = (sMinX + sMaxX) / 2; // In scaled space
+        const contentCY = (sMinY + sMaxY) / 2;
+
+        // translate = screenCenter - contentCenter
+        // contentCenter = worldCenter * k + trans? No.
+        // We want: world * k + trans = screen.
+        // scale(k).translate(tx, ty)? No. d3 Identity.translate(tx, ty).scale(k).
+        // x_final = (x_world * k) + tx.
+        // We want centre of bounding box to be at screenCX.
+        // contentCX is center of (x_world * k).
+        // So contentCX + tx = screenCX.
+        // tx = screenCX - contentCX.
+
+        const tx = screenCX - contentCX;
+        const ty = screenCY - contentCY;
+
         svg.transition().duration(750)
-            .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+            .call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(targetK));
     }
 
     function update(data, state) {
@@ -719,185 +885,10 @@ export function createVisualization(container, config) {
             const boundsCandidates = []; // {x, y, l, r, u, d}
             const precisionFS = 12; // Max font size (capped at 12)
 
-            for (const d of allPoints) {
-                const px = xScale(d._cachedX);
-                const rawY = d.dimensions ? d.dimensions[currentDimensionY] : undefined;
-                let v1 = d._cachedY;
-                let v2 = d._cachedY;
-                let isRange = Array.isArray(rawY);
-                let yType = "equal";
-                if (isRange) {
-                    yType = "range";
-                    v2 = Number(rawY[1]);
-                } else if (typeof rawY === 'string') {
-                    if (rawY.startsWith('>')) yType = 'greater';
-                    else if (rawY.startsWith('<')) yType = 'less';
-                }
-
-                const py1 = yScale(v1);
-
-                // Calculate Screen Extents (at fs=12)
-                let l = 0, r = 0, u = 0, dExt = 0;
-                let lc = 0, ls = 0, rc = 0, rs = 0, uc = 0, us = 0, dc = 0, ds = 0;
-
-                if (yType === 'range') {
-                    const py2 = yScale(v2);
-                    const rangeFS = precisionFS * 1.75;
-                    const radius = precisionFS / 2.4;
-                    const thickness = 0.75 * radius;
-
-                    const textLen = ((d._estTextWidth || 0) * rangeFS) + 6;
-                    const midY = (py1 + py2) / 2;
-
-                    const diff = Math.abs(py1 - py2) / 2; // Geometry (Scalable with Zoom - wait, World Units?)
-                    // Diff is in SCREEN pixels at current yScale. It scales perfectly with K. 
-                    // So in getDynamicBounds, diff * 1/k * k = diff. It is invariant in World Space?
-                    // No. Diff is 'baseDecadeHeight * decades'. 
-                    // baseDecadeHeight scales with K. So diff (pixels) scales with K.
-                    // So diff is Scalable? Or Constant?
-                    // If diff is 100px at k=1. At k=0.1, diff is 10px.
-                    // My logic applies 'ScalingFactor'. If ScalingFactorS (~1) -> 100px.
-                    // If ScalingFactorC (1/k) -> 1000px?
-                    // WE NEED SCALABLE logic for Geometry.
-                    // Geometry scales with k. So it uses ScalingFactorC? No.
-                    // World = Screen / k.
-                    // If Screen = 100. World = 100.
-                    // If k=0.1. Screen = 10. World = 100.
-                    // So World is Constant.
-                    // My logic calculates WorldExt from ScreenExt.
-                    // ScreenExt (p.u) is at fs=12 (ref).
-                    // Ref k=1.
-                    // So WorldExt = p.u * 1/1 = p.u.
-                    // So diff should use ScalingFactorC (1/k)!
-                    // Wait. diff is purely geometric. It should correspond to World Distance.
-                    // So it should be Constant in World Space.
-                    // So in 'getDynamicBounds', it should result in constant World Size.
-                    // S_factorC = 1/k. World = p.u * 1/k. 
-                    // This creates Constant World Size. Correct.
-                    // Text Size (halfLen) shrinks. Should use S_factorS.
-
-                    const halfLen = textLen / 2;
-                    // u = max(diff, halfLen). d = max(diff, halfLen).
-                    // Problem: max is taken before splitting.
-                    // Any geometric part is 'Constant' (1/k scaling). Text part is 'Scalable'.
-                    // If diff > halfLen, use diff (Constant). If halfLen > diff, use halfLen (Scalable).
-                    // But which wins depends on zoom!
-                    // At low zoom, halfLen shrinks (Scalable). diff stays large (Constant World)?
-                    // No. diff (screen pixels) shrinks with K. 
-                    // So World Size is constant.
-                    // halfLen (screen pixels) shrinks with FS.
-                    // If FS hits floor, halfLen stays constant screen pixels.
-                    // So halfLen World Size GROWS.
-                    // So halfLen dominates at Low Zoom.
-                    // So we should track them separately and take MAX in getDynamicBounds?
-                    // No, getDynamicBounds takes sum? No.
-                    // I need uc, us.
-                    // But u is single value.
-                    // I will conservatively add them? No.
-                    // taking max(diff_c, halfLen_s) in getDynamicBounds?
-
-                    // Pragmatic: For `u/d` (Vertical), it's `max`.
-                    // For `l/r` (Horizontal), it's `sum`.
-                    // I'll use `u_sum_c`, `u_sum_s`?
-                    // No.
-
-                    // Let's assume for Range `u/d`: Text length (halfLen) is the problem.
-                    // `diff` is handled by data points being spread out?
-                    // No, single range item.
-                    // I'll put `diff` in `uc` and `halfLen` in `us`.
-                    // And in `getDynamicBounds`, for `y`, I'll use MAX?
-                    // No.
-                    // I'll just use SUM for now, but set `uc` = `diff` only if `diff > halfLen`? No.
-
-                    // Actually, at Low Zoom, `diff` (Screen Pixels) -> 0.
-                    // `uc * Fc` -> `diff * 1/k`. World Size of Diff. Constant.
-                    // `halfLen` (Screen Pixels) -> Constant (Floor).
-                    // `us * Fs` -> `halfLen * (4/12k)`. World Size -> Large.
-                    // So `us * Fs` dominates `uc * Fc`.
-                    // So SUM is `Large + Constant`.
-                    // `Max` is `Large`.
-                    // Difference is `Constant`.
-                    // If usage is `Bounds`, `Large + Constant` is safer.
-                    // I'll use SUM.
-                    uc = diff; us = halfLen;
-                    dc = diff; ds = halfLen;
-
-                    const labelHalfWidth = (rangeFS * 1.5) / 2;
-                    const labelCenterX = -thickness - 20; // -thick - 20
-                    // l = -(labelCenterX - labelHalfWidth) = thick + 20 + halfW
-                    // Constant part: 20. Scalable part: thick + halfW.
-                    // thick (radius) scales with Zoom (Geometry). So it is C-like (1/k)?
-                    // No. radius logic in render: `max(2, min(..., k))`.
-                    // It scales with K (mostly).
-                    // So `thick * Fc` -> Constant World Size.
-                    // `halfW` (font width) scales with Fs.
-                    // So `lc = 20 + thick`. `ls = halfW`.
-                    // Wait. `thick` is 0.75 * radius. Radius ~ 5px.
-                    // 20 is constant screen pixels.
-                    // So `lc = 20`. `ls = thick + halfW`.
-                    lc = 20;
-                    ls = thickness + labelHalfWidth;
-
-                    // r = thickness / 2.
-                    // thick is Geometric.
-                    rc = thickness / 2; rs = 0;
-
-                    l = lc + ls; r = rc + rs; u = uc + us; dExt = dc + ds;
-
-                    boundsCandidates.push({ x: px, y: midY, l, r, u, d: dExt, lc, ls, rc, rs, uc, us, dc, ds });
-
-                } else {
-                    const radius = precisionFS / 2.4;
-                    const labelGap = 10;
-                    const labelW = labelGap + (d._estTextWidth || 0) * precisionFS;
-
-                    // l = radius. Scalable (text-like? no, geometric).
-                    // radius logic is hybrid.
-                    // Treat as Scalable S (follows visualFS roughly)?
-                    // Or Constant C (follows k)?
-                    // If I treat as C. World Size is constant. Screen Size shrinks with k.
-                    // If radius has floor 2px. Screen Size constant.
-                    // So C matches "Shrink with K" (normal geometry).
-                    // S matches "Floor behavior".
-                    // Best to put radius in S?
-                    // If radius is in S. `radius * Fs`.
-                    // `5 * (4/12k) = 1.6 / k`.
-                    // World size Grows.
-                    // Screen size `1.6`. Matches floor 2px.
-                    // So S is good for radius.
-
-                    l = radius;
-                    lc = 0; ls = radius;
-
-                    // r = labelW = 10 + text.
-                    // 10 is Constant C (gap). Text is S.
-                    rc = 10;
-                    rs = (d._estTextWidth || 0) * precisionFS + radius;
-                    r = rc + rs;
-
-                    let yUp = radius;
-                    let yDown = radius;
-
-                    // Label vertical
-                    yUp = Math.max(yUp, precisionFS * 0.7);
-                    yDown = Math.max(yDown, precisionFS * 0.8);
-
-                    if (currentDimensionX === "none") {
-                        const arrowLen = 20 * radius;
-                        if (yType === 'greater') yUp = Math.max(yUp, arrowLen);
-                        else if (yType === 'less') yDown = Math.max(yDown, arrowLen);
-                    }
-
-                    // u, d logic similar to range (sum).
-                    // yUp contains radius (S), text height (S), arrow (S/C?).
-                    // Treat all as S for safety.
-                    uc = 0; us = yUp;
-                    dc = 0; ds = yDown;
-                    u = yUp; dExt = yDown;
-
-                    boundsCandidates.push({ x: px, y: py1, l, r, u: yUp, d: yDown, lc, ls, rc, rs, uc, us, dc, ds });
-                }
-            }
+            allPoints.forEach(d => {
+                const visuals = computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimensionY, precisionFS);
+                boundsCandidates.push(visuals);
+            });
 
             // Build Hulls
             const filterHull = (list, keyPos, keyExt, isMin) => {
