@@ -17,35 +17,110 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
         const newXScale = transform.rescaleX(xScale);
         const padding = 200;
 
-        // Y Axis Grid
+        // X and Y Tick Values (Padded)
         const yStart = newYScale.invert(height + padding);
         const yEnd = newYScale.invert(-padding);
         const paddedYScale = newYScale.copy().domain([d3.min([yStart, yEnd]), d3.max([yStart, yEnd])]);
         let yTickValues = paddedYScale.ticks(15, "~e");
-        const hasSubTenY = yTickValues.some(d => !Number.isInteger(Math.log10(d)));
-        const majorYDecades = new Set();
-        yTickValues.forEach(d => { if (Number.isInteger(Math.log10(d))) majorYDecades.add(d); });
 
-        if (!hasSubTenY) {
-            const logMin = Math.ceil(Math.log10(d3.min([yStart, yEnd])));
-            const logMax = Math.floor(Math.log10(d3.max([yStart, yEnd])));
-            if (isFinite(logMin) && isFinite(logMax) && logMax - logMin < 200) {
-                const allYDecades = [];
-                for (let i = logMin; i <= logMax; i++) allYDecades.push(Math.pow(10, i));
-                yTickValues = Array.from(new Set([...yTickValues, ...allYDecades])).sort((a, b) => a - b);
-            }
+        const xStart = newXScale.invert(-padding);
+        const xEnd = newXScale.invert(width + padding);
+        const paddedXScale = newXScale.copy().domain([d3.min([xStart, xEnd]), d3.max([xStart, xEnd])]);
+        let xTickValues = paddedXScale.ticks(isMobile ? 8 : 15, "~e");
+
+
+
+
+        // Determine minor label visibility early
+        // Threshold: Show minor/sub-decade labels if <= 1 major decade LABELS are on screen.
+        const allVisibleXTicks = xTickValues.filter(d => {
+            const pos = newXScale(d);
+            return pos >= 0 && pos <= width;
+        });
+
+        const decadesXOnScreen = allVisibleXTicks.filter(d => Number.isInteger(parseFloat(Math.log10(d).toFixed(10))));
+        let majorXLabelsOnScreen = decadesXOnScreen;
+
+        // Account for mobile gap filtering in the threshold
+        if (isMobile && decadesXOnScreen.length > 1) {
+            const minGap = 80;
+            const filtered = [];
+            let lastPos = -Infinity;
+            decadesXOnScreen.forEach(d => {
+                const pos = newXScale(d);
+                if (Math.abs(pos - lastPos) >= minGap) {
+                    filtered.push(d);
+                    lastPos = pos;
+                }
+            });
+            majorXLabelsOnScreen = filtered;
         }
+        const showMinorXLabels = majorXLabelsOnScreen.length <= 1;
+
+        const majorYLabelsOnScreen = yTickValues.filter(d => {
+            if (!Number.isInteger(parseFloat(Math.log10(d).toFixed(10)))) return false;
+            const pos = newYScale(d);
+            return pos >= 0 && pos <= height;
+        });
+        // Y labels don't currently have a gap filter, so labels == visible lines
+        const showMinorYLabels = majorYLabelsOnScreen.length <= 1;
+
+
+        // Label Formatter Helpers
+        const formatYTick = (d, showMinor) => {
+            const log10 = Math.log10(d);
+            const isMajor = Number.isInteger(parseFloat(log10.toFixed(10)));
+            if (isMajor) return `10^${Math.round(log10)} ${getUnit(currentDimensionY)}`;
+            if (showMinor) {
+                const exp = Math.floor(log10);
+                const rawCoeff = d / Math.pow(10, exp);
+                // Use toFixed(2) but strip trailing zeros; + converts back to number for clean string
+                const coeff = +rawCoeff.toFixed(3);
+                return `${coeff} × 10^${exp} ${getUnit(currentDimensionY)}`;
+            }
+            return "";
+        };
+
+        const formatXTick = (d, showMinor) => {
+            const log10 = Math.log10(d);
+            const isMajor = Number.isInteger(parseFloat(log10.toFixed(10)));
+            if (isMajor) return `10^${Math.round(log10)} ${getUnit(currentDimensionX)}`;
+
+            if (!showMinor) return "";
+
+            // User's specific relative logic for sub-decades
+            if (majorXLabelsOnScreen.length === 1) {
+                const V = majorXLabelsOnScreen[0];
+                const ratio = d / V;
+                // Preserve precision for the multiplier
+                const label = +ratio.toFixed(3);
+                return `${label} ×`;
+            } else if (majorXLabelsOnScreen.length === 0) {
+                const firstVisible = allVisibleXTicks[0];
+                const exp = Math.floor(log10);
+                const rawCoeff = d / Math.pow(10, exp);
+                const coeff = +rawCoeff.toFixed(3);
+
+                if (d === firstVisible) {
+                    return `${coeff} × 10^${exp} ${getUnit(currentDimensionX)}`;
+                } else {
+                    return `${coeff} ×`;
+                }
+            }
+            return "";
+        };
+
+        // Y Axis Grid
+        const majorYDecades = new Set();
+        yTickValues.forEach(d => { if (Number.isInteger(parseFloat(Math.log10(d).toFixed(10)))) majorYDecades.add(d); });
+
 
         gridGroup.selectAll(".horizontal-grid").data([null]).join("g")
             .attr("class", "horizontal-grid")
             .call(d3.axisRight(newYScale)
                 .tickValues(yTickValues)
                 .tickSize(width)
-                .tickFormat(d => {
-                    const log10 = Math.log10(d);
-                    if (majorYDecades.has(d)) return `10^${log10} ${getUnit(currentDimensionY)}`;
-                    return "";
-                })
+                .tickFormat(d => formatYTick(d, showMinorYLabels))
             );
         gridGroup.select(".horizontal-grid .domain").remove();
 
@@ -87,7 +162,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
             gridGroup.selectAll(".horizontal-grid .tick text")
                 .attr("x", 10).attr("dy", -4).attr("fill", "#00aaff")
                 .style("font-family", "monospace").style("font-size", "12px")
-                .attr("opacity", d => majorYDecades.has(d) ? 1.0 : 0);
+                .attr("opacity", d => (majorYDecades.has(d) || showMinorYLabels) ? 1.0 : 0);
 
             // Clear 2D labels
             xLabelGroup.selectAll(".x-label").remove();
@@ -95,30 +170,12 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
 
         } else {
             // 2D Mode Logic
-            const xStart = newXScale.invert(-padding);
-            const xEnd = newXScale.invert(width + padding);
-            const paddedXScale = newXScale.copy().domain([d3.min([xStart, xEnd]), d3.max([xStart, xEnd])]);
-            let xTickValues = paddedXScale.ticks(isMobile ? 8 : 15, "~e");
-            const hasSubTenX = xTickValues.some(d => !Number.isInteger(Math.log10(d)));
             const majorXDecades = new Set();
-            xTickValues.forEach(d => { if (Number.isInteger(Math.log10(d))) majorXDecades.add(d); });
+            xTickValues.forEach(d => { if (Number.isInteger(parseFloat(Math.log10(d).toFixed(10)))) majorXDecades.add(d); });
 
-            if (!hasSubTenX) {
-                const logMin = Math.ceil(Math.log10(d3.min([xStart, xEnd])));
-                const logMax = Math.floor(Math.log10(d3.max([xStart, xEnd])));
-                if (isFinite(logMin) && isFinite(logMax) && logMax - logMin < 200) {
-                    const allXDecades = [];
-                    for (let i = logMin; i <= logMax; i++) allXDecades.push(Math.pow(10, i));
-                    xTickValues = Array.from(new Set([...xTickValues, ...allXDecades])).sort((a, b) => a - b);
-                }
-            }
 
             gridGroup.select(".vertical-grid")
-                .call(d3.axisBottom(newXScale).tickValues(xTickValues).tickSize(height).tickFormat(d => {
-                    const log10 = Math.log10(d);
-                    if (majorXDecades.has(d)) return `10^${log10} ${getUnit(currentDimensionX)}`;
-                    return "";
-                }));
+                .call(d3.axisBottom(newXScale).tickValues(xTickValues).tickSize(height).tickFormat(d => formatXTick(d, showMinorXLabels)));
 
             gridGroup.selectAll(".vertical-grid .tick line")
                 .attr("stroke", "#00aaff").attr("stroke-dasharray", "2,2")
@@ -129,7 +186,9 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
             gridGroup.selectAll(".horizontal-grid .tick text").attr("opacity", 0);
 
             // X Labels (Custom D3 Join)
-            let xTicksForLabels = xTickValues.filter(d => majorXDecades.has(d));
+            // Use allVisibleXTicks strictly to sync with threshold logic
+            let xTicksForLabels = allVisibleXTicks.filter(d => majorXDecades.has(d) || showMinorXLabels);
+
 
             // Mobile: Filter labels to prevent squashing (min 80px gap)
             if (isMobile && xTicksForLabels.length > 1) {
@@ -154,16 +213,22 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                         .attr("text-anchor", "middle")
                         .attr("fill", "#00aaff")
                         .style("font-family", "monospace")
-                        .style("font-size", "12px")
-                        .text(d => `10^${Math.log10(d)} ${getUnit(currentDimensionX)}`),
+                        .style("font-size", "12px"),
                     update => update,
                     exit => exit.remove()
                 )
+                .text(d => formatXTick(d, showMinorXLabels))
                 .attr("x", d => newXScale(d))
                 .attr("y", isMobile ? height - 60 : height - 20);
 
             // Y Labels (Custom D3 Join)
-            const yTicksForLabels = yTickValues.filter(d => majorYDecades.has(d));
+            // Use majorYLabelsOnScreen for decades, and filter minor ticks strictly by height
+            const yTicksForLabels = yTickValues.filter(d => {
+                const pos = newYScale(d);
+                const isOnScreen = pos >= 0 && pos <= height;
+                return isOnScreen && (majorYDecades.has(d) || showMinorYLabels);
+            });
+
             yLabelGroup.selectAll(".y-label")
                 .data(yTicksForLabels, d => d)
                 .join(
@@ -172,13 +237,14 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                         .attr("x", 10)
                         .attr("fill", "#00aaff")
                         .style("font-family", "monospace")
-                        .style("font-size", "12px")
-                        .text(d => `10^${Math.log10(d)} ${getUnit(currentDimensionY)}`),
+                        .style("font-size", "12px"),
                     update => update,
                     exit => exit.remove()
                 )
+                .text(d => formatYTick(d, showMinorYLabels))
                 .attr("y", d => newYScale(d) - 4);
         }
+
 
         gridGroup.select(".vertical-grid .domain").remove();
         gridGroup.selectAll(".horizontal-grid .tick line")
@@ -196,9 +262,9 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
             if (currentDimensionX === "none") {
                 // 1D: Labels inside horizontal-grid ticks
                 gridGroup.selectAll(".horizontal-grid .tick")
-                    .filter(d => majorYDecades.has(d))
+                    .filter(d => majorYDecades.has(d) || showMinorYLabels)
                     .each(function (d) {
-                        const text = `10^${Math.log10(d)} ${getUnit(currentDimensionY)}`;
+                        const text = formatYTick(d, showMinorYLabels);
                         const textW = text.length * charWidth;
                         const transform = d3.select(this).attr("transform");
                         const match = transform && transform.match(/translate\(\s*([^,)]+)[,\s]+([^)]+)\)/);
@@ -216,7 +282,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
             } else {
                 // 2D: Labels in custom groups
                 xLabelGroup.selectAll(".x-label").each(function (d) {
-                    const text = `10^${Math.log10(d)} ${getUnit(currentDimensionX)}`;
+                    const text = formatXTick(d, showMinorXLabels);
                     const textW = text.length * charWidth;
                     const x = parseFloat(d3.select(this).attr("x"));
                     const y = parseFloat(d3.select(this).attr("y"));
@@ -229,7 +295,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                     });
                 });
                 yLabelGroup.selectAll(".y-label").each(function (d) {
-                    const text = `10^${Math.log10(d)} ${getUnit(currentDimensionY)}`;
+                    const text = formatYTick(d, showMinorYLabels);
                     const textW = text.length * charWidth;
                     const y = parseFloat(d3.select(this).attr("y"));
                     labelRects.push({
@@ -241,6 +307,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                     });
                 });
             }
+
 
             // JOIN mask rects
             mobileMask.selectAll(".label-cutout")
@@ -261,6 +328,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
             mobileMask.selectAll(".label-cutout").remove();
         }
     }
+
 
     return { updateGrid };
 }

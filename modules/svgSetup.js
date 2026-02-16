@@ -162,16 +162,18 @@ export function createSvgLayers(container, width, height) {
             g.attr("mask", null);
             gCombined.attr("mask", null);
 
-            xLabelGroup.attr("mask", "url(#fade-mask-left)");
+            xLabelGroup.attr("mask", null);
             yLabelGroup.attr("mask", "url(#fade-mask-bottom)");
+
         } else {
             // Desktop: Everything uses gradients
             dataLayerOuter.attr("mask", "url(#fade-mask-left)");
             g.attr("mask", "url(#fade-mask-bottom)");
             gCombined.attr("mask", "url(#fade-mask-bottom)");
 
-            xLabelGroup.attr("mask", "url(#fade-mask-left)");
+            xLabelGroup.attr("mask", null);
             yLabelGroup.attr("mask", "url(#fade-mask-bottom)");
+
         }
     }
 
