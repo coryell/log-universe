@@ -39,16 +39,29 @@ export const getDimensionValueX = (d, currentDimensionX, currentDimensionY) => {
 export const getFilteredData = (dataList, currentDimensionX, currentDimensionY) => {
     if (currentDimensionX === "none") {
         // 1D Mode: Show items that have the Y dimension AND valid x_coordinates for that dimension
-        return dataList.filter(d => d.dimensions[currentDimensionY] !== undefined && d.x_coordinates[currentDimensionY] !== undefined);
+        return dataList.filter(d =>
+            d.dimensions[currentDimensionY] !== undefined &&
+            d.x_coordinates[currentDimensionY] !== undefined
+        );
     } else {
         // 2D Mode: Strictly no ranges. Exclude if either X or Y is an array.
         return dataList.filter(d => {
             const valY = d.dimensions[currentDimensionY];
             const valX = d.dimensions[currentDimensionX];
-            return (
+
+            const passes2D = (
                 valY !== undefined && !Array.isArray(valY) &&
                 valX !== undefined && !Array.isArray(valX)
             );
+
+            if (!passes2D) return false;
+
+            // Further approach: If X and Y are the same, also require x_coordinates for visual consistency with 1D
+            if (currentDimensionX === currentDimensionY) {
+                return d.x_coordinates[currentDimensionY] !== undefined;
+            }
+
+            return true;
         });
     }
 };
