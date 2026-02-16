@@ -1532,12 +1532,11 @@ export function createVisualization(container, config) {
                 const deltaY = Math.abs(y1_raw - y2_raw);
                 if (deltaY > 0) {
                     // Fit range into 70% of available height
-                    const currentZoom = d3.zoomTransform(svg.node()).k;
-                    // deltaY is in *pixels* at current zoom.
-                    // We want deltaY * (targetScale / currentZoom) = availableHeight * 0.7
-                    // So targetScale = (availableHeight * 0.7 * d3.zoomTransform(svg.node()).k) / deltaY
-                    targetScale = (availableHeight * 0.7 * d3.zoomTransform(svg.node()).k) / deltaY;
+                    // deltaY is in BASE pixels (zoom=1).
+                    // We want deltaY * targetScale = availableHeight * 0.7
+                    targetScale = (availableHeight * 0.7) / deltaY;
                 } else {
+
                     targetScale = 1000; // Fallback
                 }
             }
@@ -1592,18 +1591,23 @@ export function createVisualization(container, config) {
             // Shift X center to the left to account for label
             // The label is to the right of the point. To center "point + label", we need to shift the Viewport Center LEFT relative to the point.
 
-            // Calculate expected font size at target zoom (capped at 12px, matching render logic)
+            const isRange = Array.isArray(rawDimY);
             const basePPD = Math.abs(yScale(10) - yScale(1));
             const targetPPD = basePPD * targetScale;
-            const targetFS = Math.min(12, targetPPD);
+            // Match annotations.js: fs is capped at 12, rangeFS is fs * 1.75
+            const baseFS = Math.min(12, targetPPD);
+            const targetFS = isRange ? baseFS * 1.75 : baseFS;
+
+
 
             // _estTextWidth is a factor (char count * 0.6), need to multiply by Font Size to get pixels
             const estTextWidthFactor = matchItem._estTextWidth || 5;
             const labelWidth = estTextWidthFactor * targetFS;
-            const labelGap = 10;
+            const labelGap = isRange ? 20 : 10; // Match annotations.js labelX = -thickness - 20
 
+            // For ranges, label is on the LEFT. We shift viewport center RIGHT to accommodate.
+            const centerOffsetX = isRange ? -(labelGap + labelWidth) / 2 : (labelGap + labelWidth) / 2;
 
-            const centerOffsetX = (labelGap + labelWidth) / 2;
 
             // Vertical Centering: User wants center of SCREEN, not center of container.
             // Calculate center relative to the container.
