@@ -11,6 +11,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Global prevention of browser-level zooming/gestures */
+  touch-action: none;
 }
 
 body {
@@ -29,7 +32,13 @@ body {
   /* Fix for iOS Safari event bubbling */
   -webkit-tap-highlight-color: transparent;
   /* Remove tap highlight */
+
+  /* Global prevention of browser-level zooming/gestures */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
+
 
 #app {
   width: 100%;
@@ -65,7 +74,9 @@ header {
   border-bottom: 1px solid #00aaff;
   flex-shrink: 0;
   /* Prevent header from shrinking */
+  touch-action: none;
 }
+
 
 .header-left,
 .header-right {

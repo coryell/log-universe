@@ -73,7 +73,32 @@ d3.json('/data.json').then(rawData => {
     }
   }
 
-  // Gesture-based interactions (zoom, pan, long-press for ruler) are handled 
   // internally in the visualization module, while standard item clicks/taps
   // are relayed via callbacks through the viewState.
 });
+
+// Global Prevention of Browser-Level Zooming (Desktop Pinch)
+window.addEventListener('wheel', (e) => {
+  if (e.ctrlKey) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+// Prevent multi-touch gestures on the window that might trigger browser zoom
+window.addEventListener('touchstart', (e) => {
+  if (e.touches.length > 1) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+// Prevent double-tap to zoom
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    e.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
+
