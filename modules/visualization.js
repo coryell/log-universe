@@ -600,22 +600,22 @@ export function createVisualization(container, config) {
     svg.call(zoom)
         .on("dblclick.zoom", null); // Disable double-click to zoom
 
-    // Recenter Wheel Logic
+
+    // Recenter Wheel Logic (Desktop Only)
     let lastRecenterTime = 0;
     svg.node().addEventListener('wheel', (event) => {
+        if (checkMobile()) return;
+
         const t = d3.zoomTransform(svg.node());
         if (t.k <= minZoom * 1.05 && event.deltaY > 0) {
             const now = Date.now();
             if (now - lastRecenterTime > 1500) {
                 lastRecenterTime = now;
-                if (currentDimensionX === "none") {
-                    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
-                } else {
-                    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
-                }
+                resetZoom(750);
             }
         }
     }, { capture: true, passive: true });
+
 
     // Helper: Highlight
     // Needs to work even if item is not currently rendered (if possible)? 
@@ -1242,6 +1242,46 @@ export function createVisualization(container, config) {
 
     svg.node().addEventListener('touchend', endTouch, { capture: true });
     svg.node().addEventListener('touchcancel', endTouch, { capture: true });
+    function resetZoom(duration = 750) {
+        if (!currentState.boundsHulls) {
+            if (currentDimensionX === "none") {
+                svg.transition().duration(duration).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
+            } else {
+                svg.transition().duration(duration).call(zoom.transform, d3.zoomIdentity);
+            }
+            return;
+        }
+
+        const targetK = minZoom;
+        const bounds = getDynamicBounds(targetK);
+
+        if (!bounds) return;
+
+        // Align with axis layout logic
+        const isMobile = checkMobile();
+        const leftMargin = isMobile ? paddingLeft : fadeEnd;
+        const bottomMargin = isMobile ? 80 : fadeBottomHeight;
+
+        const safeLeft = leftMargin;
+        const safeRight = width;
+        const safeTop = 0;
+        const safeBottom = (currentDimensionX !== "none") ? height - bottomMargin : height;
+
+        // Center in safe area
+        const safeCenterX = (safeLeft + safeRight) / 2;
+        const safeCenterY = (safeTop + safeBottom) / 2;
+
+        const centerX = (bounds.minX + bounds.maxX) / 2;
+        const centerY = (bounds.minY + bounds.maxY) / 2;
+
+        // Calculate translation to center the bounding box in the safe area
+        const tx = safeCenterX - (centerX * targetK);
+        const ty = safeCenterY - (centerY * targetK);
+
+        const transform = d3.zoomIdentity.translate(tx, ty).scale(targetK);
+
+        svg.transition().duration(duration).call(zoom.transform, transform);
+    }
 
     return {
         update,
@@ -1358,46 +1398,7 @@ export function createVisualization(container, config) {
                 .call(zoom.transform, targetTransform)
                 .on("end", () => highlightItem(matchItem));
         },
-        resetZoom: (duration = 750) => {
-            if (!currentState.boundsHulls) {
-                if (currentDimensionX === "none") {
-                    svg.transition().duration(duration).call(zoom.transform, d3.zoomIdentity.translate(-width * 0.05, 0));
-                } else {
-                    svg.transition().duration(duration).call(zoom.transform, d3.zoomIdentity);
-                }
-                return;
-            }
-
-            const targetK = minZoom;
-            const bounds = getDynamicBounds(targetK);
-
-            if (!bounds) return;
-
-            // Align with axis layout logic
-            const isMobile = checkMobile();
-            const leftMargin = isMobile ? paddingLeft : fadeEnd;
-            const bottomMargin = isMobile ? 80 : fadeBottomHeight;
-
-            const safeLeft = leftMargin;
-            const safeRight = width;
-            const safeTop = 0;
-            const safeBottom = (currentDimensionX !== "none") ? height - bottomMargin : height;
-
-            // Center in safe area
-            const safeCenterX = (safeLeft + safeRight) / 2;
-            const safeCenterY = (safeTop + safeBottom) / 2;
-
-            const centerX = (bounds.minX + bounds.maxX) / 2;
-            const centerY = (bounds.minY + bounds.maxY) / 2;
-
-            // Calculate translation to center the bounding box in the safe area
-            const tx = safeCenterX - (centerX * targetK);
-            const ty = safeCenterY - (centerY * targetK);
-
-            const transform = d3.zoomIdentity.translate(tx, ty).scale(targetK);
-
-            svg.transition().duration(duration).call(zoom.transform, transform);
-        },
+        resetZoom,
         zoomTo: (transform, duration = 750, onEnd) => {
             if (duration > 0) {
                 svg.transition().duration(duration).call(zoom.transform, transform).on("end", onEnd);
