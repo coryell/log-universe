@@ -13,6 +13,7 @@ export function createViewState({ viz, infobox, data }) {
     let currentDimensionX = "none";
     let currentDimensionY = "length";
     let selectedItem = null;
+    let currentPositionMode = 'bottom'; // Track position mode
 
     const colorScale = d3.scaleOrdinal().domain(categories).range(colors);
 
@@ -32,14 +33,19 @@ export function createViewState({ viz, infobox, data }) {
 
 
     // --- Selection / Infobox ---
-    function showInfobox(d) {
+    function showInfobox(d, options = {}) {
         selectedItem = d;
+        if (options.positionMode) {
+            currentPositionMode = options.positionMode;
+        }
+
         viz.highlightItem(d);
         infobox.show(d, {
             currentDimensionX,
             currentDimensionY,
             colorScale,
-            language: LANGUAGE
+            language: LANGUAGE,
+            positionMode: currentPositionMode
         });
     }
 
@@ -49,12 +55,16 @@ export function createViewState({ viz, infobox, data }) {
         selectedItem = null;
     }
 
-    function selectResult(result) {
+    function selectResult(result, options = {}) {
         if (result.dimensions[currentDimensionY] === undefined) return;
         if (currentDimensionX !== "none" && result.dimensions[currentDimensionX] === undefined) return;
 
         viz.zoomToItem(result);
-        showInfobox(result);
+        if (options.preservePosition) {
+            showInfobox(result); // Use currentPositionMode
+        } else {
+            showInfobox(result, { positionMode: 'bottom' }); // Reset to bottom for search/default
+        }
     }
 
     // --- Hash Management ---
@@ -158,42 +168,24 @@ export function createViewState({ viz, infobox, data }) {
     initDropdowns();
     initEventListeners();
 
-    let infoboxTimeout = null;
-
     viz.setCallbacks({
         onClick: (event, d) => {
             // Visual feedback is immediate
             viz.highlightItem(d);
 
             // On mobile, if click is in bottom 40% of screen (where infobox appears), delay showing it
-            // to allow for double-click to register first.
-            const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
+            // but now that it repositions to top, we don't need delay.
             // Note: event might be a D3 event or native event. 
             // Visualization passes 'event' which is the D3 event wrapper, event.clientY should exist on sourceEvent or directly?
-            // D3 v6+ passes standard PointerEvent as first arg, or specific D3 event?
             // In visualization.js: callbacks.onClick(event, d). 'event' is the DOM event usually.
             const clientY = event.clientY || (event.sourceEvent ? event.sourceEvent.clientY : 0);
-            const isBottomRegion = clientY > window.innerHeight * 0.6;
+            // Determine position mode: if click is in bottom half (approx), show info at top
+            const positionMode = clientY > window.innerHeight * 0.5 ? 'top' : 'bottom';
 
-            if (isMobile && isBottomRegion) {
-                // Clear any existing timeout
-                if (infoboxTimeout) clearTimeout(infoboxTimeout);
-
-                infoboxTimeout = setTimeout(() => {
-                    showInfobox(d);
-                    infoboxTimeout = null;
-                }, DOUBLE_CLICK_THRESHOLD + 50); // Slight buffer over threshold
-            } else {
-                showInfobox(d);
-            }
+            showInfobox(d, { positionMode });
         },
         onDblClick: (event, d) => {
-            if (infoboxTimeout) {
-                clearTimeout(infoboxTimeout);
-                infoboxTimeout = null;
-            }
-            selectResult(d);
+            selectResult(d, { preservePosition: true });
         }
     });
 

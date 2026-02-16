@@ -14,8 +14,23 @@ export function createInfobox(selection) {
             currentDimensionX,
             currentDimensionY,
             colorScale,
-            language
+            language,
+            positionMode = 'bottom' // 'top' or 'bottom'
         } = config;
+
+        // Smart Positioning (Mobile Only)
+        // We use matchMedia here to stay consistent with CSS
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            if (positionMode === 'top') {
+                const headerHeight = document.querySelector('header') ? document.querySelector('header').offsetHeight : 60;
+                infobox.style("bottom", "auto").style("top", (headerHeight + 10) + "px");
+            } else {
+                infobox.style("top", "auto").style("bottom", "10px");
+            }
+        } else {
+            // Reset to default CSS for desktop (bottom-left)
+            infobox.style("top", null).style("bottom", null);
+        }
 
         const members = d._isCombined ? d._members : [d];
         let fullContent = "";
