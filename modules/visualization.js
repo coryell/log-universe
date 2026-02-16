@@ -1196,8 +1196,8 @@ export function createVisualization(container, config) {
             // On mobile, safe area excludes the tick labels. 
             // 80px (paddingLeft) matches the axis layout padding.
             const leftMargin = isMobile ? paddingLeft : fadeEnd;
-            // Mobile needs more bottom padding for X-axis labels in 2D view
-            const bottomMargin = isMobile ? 80 : fadeBottomHeight;
+            // Mobile needs standard bottom padding
+            const bottomMargin = isMobile ? paddingBottom : fadeBottomHeight;
 
             // Always apply left margin to avoid Y-axis labels (present in both 1D and 2D)
             const safeLeft = leftMargin;
@@ -1271,7 +1271,7 @@ export function createVisualization(container, config) {
         const isMobile = checkMobile();
         const leftMargin = isMobile ? paddingLeft : fadeEnd;
         // Mobile needs more bottom padding for X-axis labels
-        const bottomMargin = isMobile ? 80 : fadeBottomHeight;
+        const bottomMargin = isMobile ? paddingBottom : fadeBottomHeight;
 
         let initialTransform;
         if (currentDimensionX === "none") {
@@ -1351,7 +1351,7 @@ export function createVisualization(container, config) {
 
             const effectiveFadeEnd = Math.min(fadeEnd, width * 0.15);
             const effectivePadRight = Math.min(paddingRight, width * 0.15);
-            const effectiveFadeBotH = Math.min(fadeBottomHeight, height * 0.15);
+            const effectiveFadeBotH = Math.min(checkMobile() ? paddingBottom : fadeBottomHeight, height * 0.15);
 
             const availW = Math.max(1, width - effectivePadRight - effectiveFadeEnd);
             const availH = Math.max(1, (height - effectiveFadeBotH) - 50);
@@ -1528,7 +1528,7 @@ export function createVisualization(container, config) {
         // Align with axis layout logic
         const isMobile = checkMobile();
         const leftMargin = isMobile ? paddingLeft : fadeEnd;
-        const bottomMargin = isMobile ? 80 : fadeBottomHeight;
+        const bottomMargin = isMobile ? paddingBottom : fadeBottomHeight;
 
         const safeLeft = leftMargin;
         const safeRight = width;

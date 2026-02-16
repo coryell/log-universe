@@ -23,7 +23,11 @@ body {
   /* Stack header and app vertically */
   min-width: 320px;
   height: 100vh;
-  /* Body takes full viewport height */
+  /* Fallback */
+  height: 100dvh;
+  /* Body takes full visible viewport height */
+  padding-bottom: env(safe-area-inset-bottom);
+  /* Respect safe area */
   overflow: hidden;
   background-color: #000000;
   color: #00aaff;

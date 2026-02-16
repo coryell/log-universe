@@ -131,8 +131,8 @@ export function createSvgLayers(container, width, height) {
 
         if (currentDimensionX !== "none") {
             // Dynamic vertical fade parameters
-            const mPaddingBottom = isMobile ? 75 : paddingBottom;
-            const mFadeHeight = isMobile ? 125 : fadeBottomHeight;
+            const mPaddingBottom = isMobile ? paddingBottom : paddingBottom; // Use standard padding
+            const mFadeHeight = isMobile ? fadeBottomHeight : fadeBottomHeight; // Use standard fade height
 
             const vGrad = svg.select("#fade-gradient-vertical");
             vGrad.attr("y1", h).attr("y2", h - mFadeHeight);

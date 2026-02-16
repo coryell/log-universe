@@ -249,7 +249,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                 .text((d, i) => formatXTick(d, showMinorXLabels, i === 0))
                 .attr("x", d => newXScale(d))
 
-                .attr("y", isMobile ? height - 60 : height - 20);
+                .attr("y", height - 20);
 
             // Y Labels (Custom D3 Join)
             // Use majorYLabelsOnScreen for decades, and filter minor ticks strictly by height
