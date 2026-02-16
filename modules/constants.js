@@ -5,6 +5,8 @@ export const fadeEnd = 160;
 export const fadeBottomHeight = 50;
 export const DOUBLE_CLICK_THRESHOLD = 300; // ms0;
 export const paddingBottom = 50;
+export const DEBUG_SHOW_BOUNDS = false; // Toggle debug bounding box
+
 
 export const categories = [
     "Atoms / Elements", "Astronomy", "Biology", "Electromagnetic", "Fundamental / Nuclear",

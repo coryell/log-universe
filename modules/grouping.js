@@ -68,7 +68,29 @@ export function getClusters(data, currentDimensionX, currentDimensionY, language
     groups.forEach((members, key) => {
         if (members.length > 1) {
             const first = members[0];
-            const combinedDisplayName = members.map(m => getLocalized(m.displayName, language)).join(" / ");
+            // Truncation Logic (Limit ~30 chars)
+            const charLimit = 30;
+            let currentLen = 0;
+            const labelMembers = [];
+
+            for (const m of members) {
+                const name = getLocalized(m.displayName, language);
+                // Always include at least one
+                if (labelMembers.length === 0 || (currentLen + name.length + 3) <= charLimit) {
+                    labelMembers.push(m);
+                    currentLen += name.length + (labelMembers.length > 1 ? 3 : 0); // +3 for " / "
+                } else {
+                    break;
+                }
+            }
+
+            const hiddenCount = members.length - labelMembers.length;
+
+            // Construct display string for text width estimation
+            let combinedDisplayName = labelMembers.map(m => getLocalized(m.displayName, language)).join(" / ");
+            if (hiddenCount > 0) {
+                combinedDisplayName += ` (+ ${hiddenCount} ${hiddenCount === 1 ? 'other' : 'others'})`;
+            }
 
             // Create a combined data object
             const combinedData = {
@@ -76,7 +98,9 @@ export function getClusters(data, currentDimensionX, currentDimensionY, language
                 id: `combined-${key}`,
                 displayName: { [language]: combinedDisplayName },
                 _isCombined: true,
-                _members: members // Store original members for drill-down/reference
+                _members: members, // Store all original members (for infobox)
+                _labelMembers: labelMembers, // Store only visible members (for label rendering)
+                _hiddenCount: hiddenCount // Store count of hidden members
             };
             clusters.push(combinedData);
         }

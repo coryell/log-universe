@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD } from './constants.js';
+import { paddingLeft, fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD, paddingBottom, DEBUG_SHOW_BOUNDS } from './constants.js';
 import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData } from './utils.js';
 import { setupItemAnnotations, updateAnnotationLayout } from './annotations.js';
 import { createRuler } from './ruler.js';
@@ -25,6 +25,8 @@ function computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimens
     }
 
     const py1 = yScale(v1);
+
+    if (!Number.isFinite(px) || !Number.isFinite(py1)) return null;
 
     // Calculate Screen Extents (at fs=12)
     let l = 0, r = 0, u = 0, dExt = 0;
@@ -407,19 +409,32 @@ export function createVisualization(container, config) {
                     const textEl = grp.append('text').attr('class', 'label').attr('x', 10).attr('y', 0).attr('dy', '.35em')
                         .style('font-family', 'monospace');
 
-                    // Build tspans ONCE on enter
+                    // Build tspans ONCE on enter using pre-calculated groups
                     grp.each(function (d) {
                         const el = d3.select(this);
                         const textEl = el.select('.label');
-                        d._members.forEach((m, i) => {
-                            const name = getLocalized(m.displayName, currentState.language);
-                            const cat = getLocalized(m.category, currentState.language);
-                            textEl.append('tspan').text(name).attr('fill', currentState.colorScale(cat));
-                            if (i < d._members.length - 1) {
-                                const nextCat = getLocalized(d._members[i + 1].category, currentState.language);
-                                textEl.append('tspan').text(' / ').attr('fill', currentState.colorScale(nextCat));
+
+                        // Use members determined by grouping.js to fit in limit
+                        if (d._labelMembers) {
+                            d._labelMembers.forEach((m, i) => {
+                                const name = getLocalized(m.displayName, currentState.language);
+                                const cat = getLocalized(m.category, currentState.language);
+                                textEl.append('tspan').text(name).attr('fill', currentState.colorScale(cat));
+
+                                if (i < d._labelMembers.length - 1) {
+                                    // Use separator styling
+                                    textEl.append('tspan').text(' / ').attr('fill', currentState.colorScale(cat));
+                                }
+                            });
+
+                            if (d._hiddenCount > 0) {
+                                textEl.append('tspan').text(` (+ ${d._hiddenCount} ${d._hiddenCount === 1 ? 'other' : 'others'})`).attr('fill', '#888');
                             }
-                        });
+                        } else {
+                            // Fallback for safety (though _labelMembers should always exist)
+                            const name = getLocalized(d.displayName, currentState.language);
+                            textEl.text(name);
+                        }
 
                         // Set initial circle color
                         el.select('circle')
@@ -462,7 +477,9 @@ export function createVisualization(container, config) {
                 update => update,
                 exit => exit.remove()
             )
-            .attr('transform', d => `translate(${newXScale(d._cachedX)}, ${newYScale(d._cachedY)})`);
+            .attr('transform', d => `translate(${newXScale(d._cachedX)}, ${newYScale(d._cachedY)})`)
+            .style('opacity', d => currentState.hiddenIds.has(d.id) ? 0 : null)
+            .style('pointer-events', d => currentState.hiddenIds.has(d.id) ? 'none' : null);
 
         // Update content of groups... 
         const clusterSelection = gCombined.selectAll('.item-group.combined');
@@ -525,9 +542,22 @@ export function createVisualization(container, config) {
         });
 
         // Debug Box Update
-        // Debug Box Update
-        // Debug Box Update - Visuals disabled
-        g.selectAll('.debug-box').remove();
+        const debugBounds = getDynamicBounds(t.k);
+        if (DEBUG_SHOW_BOUNDS && debugBounds) {
+            const { minX, maxX, minY, maxY } = debugBounds;
+            g.selectAll('.debug-box').data([debugBounds])
+                .join('rect')
+                .attr('class', 'debug-box')
+                .attr('x', minX * t.k + t.x)
+                .attr('y', minY * t.k + t.y)
+                .attr('width', (maxX - minX) * t.k)
+                .attr('height', (maxY - minY) * t.k)
+                .attr('fill', 'none')
+                .attr('stroke', 'red')
+                .attr('stroke-width', 2);
+        } else {
+            g.selectAll('.debug-box').remove();
+        }
 
         // 9. Ruler Update
         ruler.update({
@@ -887,7 +917,9 @@ export function createVisualization(container, config) {
 
             allPoints.forEach(d => {
                 const visuals = computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimensionY, precisionFS);
-                boundsCandidates.push(visuals);
+                if (visuals) {
+                    boundsCandidates.push(visuals);
+                }
             });
 
             // Build Hulls
@@ -944,12 +976,58 @@ export function createVisualization(container, config) {
                 dataMinX = 0; dataMaxX = 1; dataMinY = 0; dataMaxY = 1;
             }
 
-            const dataW = dataMaxX - dataMinX || 1;
-            const dataH = dataMaxY - dataMinY || 1;
-            const padding = 0.8;
-            const fitScaleX = (width * padding) / dataW;
-            const fitScaleY = (height * padding) / dataH;
-            minZoom = Math.max(0.01, Math.min(fitScaleX, fitScaleY, 1));
+            // Perform 'Reset Zoom' equivalent calculation using minZoom
+
+            // Align with axis layout logic (lines 856+)
+            const isMobile = checkMobile();
+            // On mobile, safe area excludes the tick labels. 
+            // 80px (paddingLeft) matches the axis layout padding.
+            const leftMargin = isMobile ? paddingLeft : fadeEnd;
+            // Mobile needs more bottom padding for X-axis labels in 2D view
+            const bottomMargin = isMobile ? 80 : fadeBottomHeight;
+
+            // Always apply left margin to avoid Y-axis labels (present in both 1D and 2D)
+            const safeLeft = leftMargin;
+            const safeRight = width;
+            const safeTop = 0;
+            const safeBottom = (currentDimensionX !== "none") ? height - bottomMargin : height;
+
+            const availWidth = Math.max(1, safeRight - safeLeft);
+            const availHeight = Math.max(1, safeBottom - safeTop);
+
+            // Start with a reasonable guess
+            let bestK = 0.001;
+
+            // Previous heuristic was:
+            const dataW = (dataMaxX - dataMinX) || 1;
+            const dataH = (dataMaxY - dataMinY) || 1;
+            // fitScale is approximate because it ignores label widths scaling non-linearly
+            let approxK = Math.min(availWidth / dataW, availHeight / dataH);
+            approxK = Math.min(Math.max(approxK, 0.00001), 100000);
+
+            // Refine K using iterative solver to ensure labels fit logic
+            bestK = approxK;
+            for (let i = 0; i < 5; i++) {
+                const b = getDynamicBounds(bestK);
+                if (!b) break; // Should not happen given we have hulls
+                const w = (b.maxX - b.minX) * bestK;
+                const h = (b.maxY - b.minY) * bestK;
+                if (w <= 0 || h <= 0) break;
+
+                const fX = availWidth / w;
+                const fY = availHeight / h;
+                const factor = Math.min(fX, fY);
+
+                if (Math.abs(factor - 1) < 0.01) break;
+
+                bestK = bestK * factor;
+            }
+
+            const extraPadding = 0.95;
+            bestK = bestK * extraPadding;
+
+            minZoom = Math.max(0.000001, Math.min(bestK, 1)); // Cap at 1 to avoid zooming IN to single points too much
+
             zoom.scaleExtent([minZoom, 1000000]);
 
             currentState.dataBounds = { minX: dataMinX, maxX: dataMaxX, minY: dataMinY, maxY: dataMaxY };
@@ -975,10 +1053,46 @@ export function createVisualization(container, config) {
         prevDimensionX = currentDimensionX;
         prevDimensionY = currentDimensionY;
 
-        const initialTransform = currentDimensionX === "none" ? d3.zoomIdentity.translate(-width * 0.05, 0) : d3.zoomIdentity;
+        // Calculate initial transform considering mobile safe area for x-dimension
+        const isMobile = checkMobile();
+        const leftMargin = isMobile ? paddingLeft : fadeEnd;
+        // Mobile needs more bottom padding for X-axis labels
+        const bottomMargin = isMobile ? 80 : fadeBottomHeight;
+
+        let initialTransform;
+        if (currentDimensionX === "none") {
+            initialTransform = d3.zoomIdentity.translate(-width * 0.05, 0);
+        } else {
+            // When x-dimension is active, we want to align the left edge with the leftMargin
+            // The default d3.zoomIdentity has tx=0. We need to shift it by leftMargin.
+            initialTransform = d3.zoomIdentity.translate(leftMargin, 0);
+        }
 
         if (dimChanged) {
-            svg.call(zoom.transform, initialTransform);
+            // Perform 'Reset Zoom' equivalent calculation using minZoom
+            const bounds = getDynamicBounds(minZoom);
+            if (bounds) {
+                // Align with axis layout logic (re-calc safe area)
+                // isMobile and mobileSafeLeft are already defined above
+                const bottomMargin = fadeBottomHeight;
+
+                const safeLeft = (currentDimensionX !== "none") ? leftMargin : 0;
+                const safeRight = width;
+                const safeTop = 0;
+                const safeBottom = (currentDimensionX !== "none") ? height - bottomMargin : height;
+
+                const safeCenterX = (safeLeft + safeRight) / 2;
+                const safeCenterY = (safeTop + safeBottom) / 2;
+                const cX = (bounds.minX + bounds.maxX) / 2;
+                const cY = (bounds.minY + bounds.maxY) / 2;
+                const tx = safeCenterX - (cX * minZoom);
+                const ty = safeCenterY - (cY * minZoom);
+
+                svg.call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(minZoom));
+            } else {
+                svg.call(zoom.transform, initialTransform);
+            }
+
         } else {
             render(d3.zoomTransform(svg.node()));
         }
@@ -1259,13 +1373,26 @@ export function createVisualization(container, config) {
 
             if (!bounds) return;
 
-            // Center in base coordinates (including label extents)
+            // Align with axis layout logic
+            const isMobile = checkMobile();
+            const leftMargin = isMobile ? paddingLeft : fadeEnd;
+            const bottomMargin = isMobile ? 80 : fadeBottomHeight;
+
+            const safeLeft = leftMargin;
+            const safeRight = width;
+            const safeTop = 0;
+            const safeBottom = (currentDimensionX !== "none") ? height - bottomMargin : height;
+
+            // Center in safe area
+            const safeCenterX = (safeLeft + safeRight) / 2;
+            const safeCenterY = (safeTop + safeBottom) / 2;
+
             const centerX = (bounds.minX + bounds.maxX) / 2;
             const centerY = (bounds.minY + bounds.maxY) / 2;
 
-            // Calculate translation to center the bounding box
-            const tx = (width / 2) - (centerX * targetK);
-            const ty = (height / 2) - (centerY * targetK);
+            // Calculate translation to center the bounding box in the safe area
+            const tx = safeCenterX - (centerX * targetK);
+            const ty = safeCenterY - (centerY * targetK);
 
             const transform = d3.zoomIdentity.translate(tx, ty).scale(targetK);
 
