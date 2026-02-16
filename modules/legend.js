@@ -122,7 +122,9 @@ export function createLegend(svg, g, gCombined) {
             const span = document.createElement('span');
             span.className = 'mobile-legend-item';
             span.textContent = cat;
+            span.style.fontWeight = 'bold';
             span.style.color = colorScale ? colorScale(cat) : '#fff';
+
             span.addEventListener('click', () => {
                 if (onCategoryClick) onCategoryClick(cat);
             });
