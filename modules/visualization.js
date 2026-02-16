@@ -278,20 +278,11 @@ export function createVisualization(container, config) {
 
         const getVisibleSubset = (data) => {
             if (data.length === 0) return [];
-            // Binary search for Y range since data is sorted by _cachedY in update()
-            const idxStart = bisector(data, yMin);
-            const idxEnd = bisector(data, yMax);
-            const yRange = data.slice(idxStart, idxEnd);
-
-            // X-visibility still O(K) where K is sub-array length
-            const result = [];
-            for (let i = 0; i < yRange.length; i++) {
-                const d = yRange[i];
-                if (d._cachedX >= xMin && d._cachedX <= xMax) {
-                    result.push(d);
-                }
-            }
-            return result;
+            // Linear filter since data is no longer sorted by Y
+            return data.filter(d =>
+                d._cachedY >= yMin && d._cachedY <= yMax &&
+                d._cachedX >= xMin && d._cachedX <= xMax
+            );
         };
 
         if (currentState.lastClickId === undefined) {
@@ -795,33 +786,33 @@ export function createVisualization(container, config) {
     // If we highlight something off screen, it won't exist.
     // But typically we zoom to it first.
     function highlightItem(d) {
-        // We can only class existing items
+        // 1. First render to apply classes/colors
+        render(d3.zoomTransform(svg.node()));
+
+        // 2. Then raise to ensure it is on top of what was just rendered
         g.selectAll('.item-group').classed("highlighted", false);
         gCombined.selectAll('.item-group').classed("highlighted", false);
 
         // If it's a combined item (from search result or internal logic)
         if (d._isCombined) {
+            gCombined.raise();
             gCombined.selectAll('.item-group.combined').filter(cd => cd.id === d.id).classed("highlighted", true).raise();
-            // Force re-render of layout for this item to pick up highlight color
-            render(d3.zoomTransform(svg.node()));
             return;
         }
 
         // Check if item is inside a cluster
         let parentClusterId = null;
-        // Search clusters to see if d is a member
         const clusters = currentState.clusters;
         const parent = clusters.find(c => c._members.some(m => m.id === d.id));
         if (parent) parentClusterId = parent.id;
 
         if (parentClusterId) {
+            gCombined.raise();
             gCombined.selectAll('.item-group.combined').filter(cd => cd.id === parentClusterId).classed("highlighted", true).raise();
         } else {
+            g.raise();
             g.selectAll('.item-group').filter(item => item.id === d.id).classed("highlighted", true).raise();
         }
-
-        // Re-render to apply color changes (highlight = white)
-        render(d3.zoomTransform(svg.node()));
     }
 
     function unhighlightItems() {

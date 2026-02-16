@@ -51,7 +51,6 @@ export function createLegend(svg, g, gCombined) {
 
     function unfade() {
         g.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
-        g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
         gCombined.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
 
         // Reset SVG Legend
