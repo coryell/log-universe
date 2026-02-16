@@ -565,7 +565,8 @@ export function createVisualization(container, config) {
                     grp.append('circle').attr('cx', 0).attr('cy', 0);
 
                     const textEl = grp.append('text').attr('class', 'label').attr('x', 10).attr('y', 0).attr('dy', '.35em')
-                        .style('font-family', 'monospace');
+                        .style('font-family', 'monospace').style('font-weight', 'bold');
+
 
                     // Build tspans ONCE on enter using pre-calculated groups
                     grp.each(function (d) {
