@@ -2719,7 +2719,7 @@
     },
     "x_coordinates": {
       "length": "5.8",
-      "mass": "-0.1"
+      "mass": "-0.4"
     },
     "description": {
       "en-us": "Bright spheres of plasma in space, so large they are held together by gravity."
@@ -3319,12 +3319,12 @@
     "reviewed": false
   },
   {
-    "id": "neutral_atoms",
+    "id": "atoms",
     "displayName": {
-      "en-us": "Neutral Atoms"
+      "en-us": "Atoms"
     },
     "description": {
-      "en-us": "Building blocks for our world of matter, neutral atoms consist of an equal number of protons and electrons, plus enough neutrons to bind protons together in the nucleus."
+      "en-us": "Building blocks for our world of matter, atoms are made of protons, neutrons, and electrons."
     },
     "category": {
       "en-us": "Atoms / Elements"
@@ -3343,8 +3343,8 @@
       "en-us": []
     },
     "x_coordinates": {
-      "length": "-0.1",
-      "mass": "-0.1"
+      "length": "-0.2",
+      "mass": "-0.4"
     },
     "reviewed": true
   },
@@ -5967,11 +5967,11 @@
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
-      "mass": "https://en.wikipedia.org/wiki/Standard_atomic_weight"
+      "mass": "https://www.chemlin.org/isotope/lead-208"
     },
     "dimensions": {
       "length": "1.80e-10",
-      "mass": "3.44e-25"
+      "mass": "3.45e-25"
     },
     "x_coordinates": {
       "length": "1.3",
