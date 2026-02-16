@@ -5,6 +5,8 @@ export function createRuler(svg, checkMobile) {
     let markedYData = null;
     let markedXData = null;
     let lastMousePos = null;
+    let lastMouseDataX = null;
+    let lastMouseDataY = null;
     let lastConfig = null;
     let _isDragging = false;
     let _isMarkDragging = false;
@@ -350,6 +352,24 @@ export function createRuler(svg, checkMobile) {
                 }
             } catch (e) {
                 // Ignore pointer errors
+            }
+        } else if (lastMouseDataY !== null && !_isDragging && !_isMarkDragging) {
+            // Re-calculate pixel position from data anchors (e.g. during resize/zoom)
+            // BUT ONLY if not currently dragging (mobile), to avoid fighting the drag handler
+            const py = yScale(lastMouseDataY);
+            let px = lastMousePos ? lastMousePos[0] : 0;
+            if (lastMouseDataX !== null && currentDimensionX !== "none") {
+                px = xScale(lastMouseDataX);
+            }
+            lastMousePos = [px, py];
+        }
+
+        // Sync data anchors with current pixel position (if valid)
+        // This ensures that after a drag or mousemove, we have the correct data for the next resize
+        if (lastMousePos) {
+            lastMouseDataY = yScale.invert(lastMousePos[1]);
+            if (currentDimensionX !== "none") {
+                lastMouseDataX = xScale.invert(lastMousePos[0]);
             }
         }
 
