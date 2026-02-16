@@ -17,3 +17,6 @@ export const colors = [
     "#00FFFF", "#FFD700", "#7CFC00", "#1E90FF", "#FF00FF",
     "#CD853F", "#ff0000ff", "#FF8C00", "#FF69B4", "#C0C0C0", "#9370DB"
 ];
+
+export const FADE_OPACITY = 0.2;
+

@@ -2,6 +2,8 @@ import * as d3 from 'd3';
 import './style.css';
 import { createSearchUI } from './modules/searchUI.js';
 import { getFilteredData } from './modules/utils.js';
+import { DOUBLE_CLICK_THRESHOLD } from './modules/constants.js';
+
 import { createInfobox } from './modules/infobox.js';
 import { createVisualization } from './modules/visualization.js';
 import { processData } from './modules/dataProcessor.js';
@@ -95,9 +97,10 @@ window.addEventListener('touchstart', (e) => {
 let lastTouchEnd = 0;
 document.addEventListener('touchend', (e) => {
   const now = (new Date()).getTime();
-  if (now - lastTouchEnd <= 300) {
+  if (now - lastTouchEnd <= DOUBLE_CLICK_THRESHOLD) {
     e.preventDefault();
   }
+
   lastTouchEnd = now;
 }, false);
 

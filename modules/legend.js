@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { getLocalized } from './utils.js';
+import { FADE_OPACITY } from './constants.js';
 
 /**
  * Creates a legend component that shows active categories with hover filtering.
@@ -16,17 +17,48 @@ export function createLegend(svg, g, gCombined) {
 
     function fadeToCategory(cat, language) {
         g.selectAll(".item-group").transition().duration(200)
-            .attr("opacity", d => getLocalized(d.category, language) === cat ? 1 : 0.2);
+            .attr("opacity", d => getLocalized(d.category, language) === cat ? 1 : FADE_OPACITY);
         g.selectAll(".item-group").filter(d => getLocalized(d.category, language) === cat).raise();
         gCombined.selectAll(".item-group").transition().duration(200)
-            .attr("opacity", d => d._members && d._members.some(m => getLocalized(m.category, language) === cat) ? 1 : 0.2);
+            .attr("opacity", d => d._members && d._members.some(m => getLocalized(m.category, language) === cat) ? 1 : FADE_OPACITY);
         gCombined.selectAll(".item-group").filter(d => d._members && d._members.some(m => getLocalized(m.category, language) === cat)).raise();
+
+        // Update SVG Legend
+        legendGroup.selectAll("text").transition().duration(200)
+            .style("font-weight", d => d === cat ? "bold" : "normal")
+            .attr("opacity", d => d === cat ? 1 : FADE_OPACITY);
+
+        // Update Mobile Legend
+        if (mobileLegend) {
+            Array.from(mobileLegend.querySelectorAll('.mobile-legend-item')).forEach(span => {
+                if (span.textContent.trim() === cat) {
+                    span.style.fontWeight = 'bold';
+                    span.style.opacity = '1';
+                } else {
+                    span.style.fontWeight = 'normal';
+                    span.style.opacity = String(FADE_OPACITY);
+                }
+            });
+        }
     }
 
     function unfade() {
         g.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
         g.selectAll(".item-group").sort((a, b) => d3.ascending(a.id, b.id));
         gCombined.selectAll(".item-group").transition().duration(200).attr("opacity", 1);
+
+        // Reset SVG Legend
+        legendGroup.selectAll("text").transition().duration(200)
+            .style("font-weight", "normal")
+            .attr("opacity", 1);
+
+        // Reset Mobile Legend
+        if (mobileLegend) {
+            Array.from(mobileLegend.querySelectorAll('.mobile-legend-item')).forEach(span => {
+                span.style.fontWeight = 'normal';
+                span.style.opacity = '1';
+            });
+        }
     }
 
     /**
