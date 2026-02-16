@@ -48,13 +48,16 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
             let lastPos = -Infinity;
             decadesXOnScreen.forEach(d => {
                 const pos = newXScale(d);
-                if (Math.abs(pos - lastPos) >= minGap) {
+                const isDecade = Number.isInteger(parseFloat(Math.log10(d).toFixed(10)));
+                // ALWAYS keep decades; only filter others if too close
+                if (isDecade || Math.abs(pos - lastPos) >= minGap) {
                     filtered.push(d);
                     lastPos = pos;
                 }
             });
             majorXLabelsOnScreen = filtered;
         }
+
         const showMinorXLabels = majorXLabelsOnScreen.length <= 1;
 
         const majorYLabelsOnScreen = yTickValues.filter(d => {
@@ -81,7 +84,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
             return "";
         };
 
-        const formatXTick = (d, showMinor) => {
+        const formatXTick = (d, showMinor, isFirst) => {
             const log10 = Math.log10(d);
             const isMajor = Number.isInteger(parseFloat(log10.toFixed(10)));
             if (isMajor) return `10^${Math.round(log10)} ${getUnit(currentDimensionX)}`;
@@ -96,12 +99,11 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                 const label = +ratio.toFixed(3);
                 return `${label} ×`;
             } else if (majorXLabelsOnScreen.length === 0) {
-                const firstVisible = allVisibleXTicks[0];
                 const exp = Math.floor(log10);
                 const rawCoeff = d / Math.pow(10, exp);
                 const coeff = +rawCoeff.toFixed(3);
 
-                if (d === firstVisible) {
+                if (isFirst) {
                     return `${coeff} × 10^${exp} ${getUnit(currentDimensionX)}`;
                 } else {
                     return `${coeff} ×`;
@@ -109,6 +111,7 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
             }
             return "";
         };
+
 
         // Y Axis Grid
         const majorYDecades = new Set();
@@ -175,7 +178,12 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
 
 
             gridGroup.select(".vertical-grid")
-                .call(d3.axisBottom(newXScale).tickValues(xTickValues).tickSize(height).tickFormat(d => formatXTick(d, showMinorXLabels)));
+                .call(d3.axisBottom(newXScale)
+                    .tickValues(xTickValues)
+                    .tickSize(height)
+                    .tickFormat(d => formatXTick(d, showMinorXLabels, d === allVisibleXTicks[0]))
+                );
+
 
             gridGroup.selectAll(".vertical-grid .tick line")
                 .attr("stroke", "#00aaff").attr("stroke-dasharray", "2,2")
@@ -195,15 +203,36 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                 const minGap = 80;
                 const filtered = [];
                 let lastPos = -Infinity;
+
+                // Pre-calculate major decade positions to use as "anchors"
+                const decadePositions = xTicksForLabels
+                    .filter(d => majorXDecades.has(d))
+                    .map(d => newXScale(d));
+
                 xTicksForLabels.forEach(d => {
                     const pos = newXScale(d);
-                    if (Math.abs(pos - lastPos) >= minGap) {
+                    const isDecade = majorXDecades.has(d);
+
+                    if (isDecade) {
+                        // ALWAYS keep decades
                         filtered.push(d);
                         lastPos = pos;
+                    } else {
+                        // For sub-decades: must be far from PREVIOUS label AND NEXT decade anchor
+                        const distToPrev = Math.abs(pos - lastPos);
+                        const nextDecadePos = decadePositions.find(p => p > pos);
+                        const distToNextDecade = nextDecadePos !== undefined ? Math.abs(nextDecadePos - pos) : Infinity;
+
+                        if (distToPrev >= minGap && distToNextDecade >= minGap) {
+                            filtered.push(d);
+                            lastPos = pos;
+                        }
                     }
                 });
                 xTicksForLabels = filtered;
             }
+
+
 
             xLabelGroup.selectAll(".x-label")
                 .data(xTicksForLabels, d => d)
@@ -217,8 +246,9 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                     update => update,
                     exit => exit.remove()
                 )
-                .text(d => formatXTick(d, showMinorXLabels))
+                .text((d, i) => formatXTick(d, showMinorXLabels, i === 0))
                 .attr("x", d => newXScale(d))
+
                 .attr("y", isMobile ? height - 60 : height - 20);
 
             // Y Labels (Custom D3 Join)
@@ -281,8 +311,9 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                     });
             } else {
                 // 2D: Labels in custom groups
-                xLabelGroup.selectAll(".x-label").each(function (d) {
-                    const text = formatXTick(d, showMinorXLabels);
+                xLabelGroup.selectAll(".x-label").each(function (d, i) {
+                    const text = formatXTick(d, showMinorXLabels, i === 0);
+
                     const textW = text.length * charWidth;
                     const x = parseFloat(d3.select(this).attr("x"));
                     const y = parseFloat(d3.select(this).attr("y"));
