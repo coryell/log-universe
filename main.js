@@ -82,9 +82,11 @@ d3.json('/data.json').then(rawData => {
   document.body.style.opacity = '1';
 
   // Trigger the initial zoom-out animation (from 10x to fit) only after reveal
-  setTimeout(() => {
-    viewState.updatePlot();
-  }, 500);
+  // Trigger the initial zoom-out animation (from 10x to fit) only after reveal
+  // Removed delay to ensure immediate transition on mobile
+  // Ensure we start at the top to prevent header clipping
+  window.scrollTo(0, 0);
+  viewState.updatePlot();
 });
 
 
