@@ -498,14 +498,11 @@ export function createVisualization(container, config) {
             })
             .style('opacity', d => {
                 if (currentState.hiddenIds.has(d.id)) return 0;
-
                 if (isTransitioning) {
                     if (d._isExiting) return 1 - p;
-
-                    // Entering: Has NO _prevX
-                    // d._prevX is set in update() for things present BEFORE.
-                    // So if d._prevX is missing/invalid, it's new.
-                    if (d._prevX === undefined || d._prevX === null) return p;
+                    // Robust check for "new" items: if no finite previous coordinate, it's new
+                    const isNew = !Number.isFinite(d._prevX) || !Number.isFinite(d._prevY);
+                    if (isNew) return p;
                 }
                 return null; // Default opacity (1)
             })
@@ -635,7 +632,12 @@ export function createVisualization(container, config) {
                 // For now, let's just snap clusters.
                 return `translate(${newXScale(d._cachedX)}, ${newYScale(d._cachedY)})`;
             })
-            .style('opacity', d => currentState.hiddenIds.has(d.id) ? 0 : null)
+            .style('opacity', d => {
+                if (currentState.hiddenIds.has(d.id)) return 0;
+                // Fade in clusters during transition
+                if (isTransitioning) return p;
+                return null;
+            })
             .style('pointer-events', d => currentState.hiddenIds.has(d.id) ? 'none' : null);
 
         // Update content of groups... 
