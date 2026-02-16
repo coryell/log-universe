@@ -159,8 +159,18 @@ export function createViewState({ viz, infobox, data }) {
             }
         });
 
-        window.addEventListener('resize', () => {
-            viz.resize();
+        let resizeTimeout;
+        const handleResize = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                viz.resize();
+            }, 200); // Debounce to allow layout to settle (especially on mobile rotation)
+        };
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', () => {
+            // Force resize after sufficient delay for rotation animation
+            setTimeout(handleResize, 300);
         });
     }
 
