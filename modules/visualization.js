@@ -1,5 +1,8 @@
 import * as d3 from 'd3';
-import { paddingLeft, fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD, paddingBottom, DEBUG_SHOW_BOUNDS, FADE_OPACITY } from './constants.js';
+import {
+    paddingLeft, fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD, paddingBottom,
+    DEBUG_SHOW_BOUNDS, FADE_OPACITY, INEQUALITY_ARROW_LENGTH_FACTOR
+} from './constants.js';
 
 import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData, parseValue } from './utils.js';
 import { setupItemAnnotations, updateAnnotationLayout } from './annotations.js';
@@ -80,7 +83,7 @@ function computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimens
         yDown = Math.max(yDown, precisionFS * 0.8);
 
         if (currentDimensionX === "none") {
-            const arrowLen = 20 * radius;
+            const arrowLen = INEQUALITY_ARROW_LENGTH_FACTOR * radius;
             if (yType === 'greater') yUp = Math.max(yUp, arrowLen);
             else if (yType === 'less') yDown = Math.max(yDown, arrowLen);
         }

@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { paddingLeft, fadeEnd, fadeBottomHeight, paddingBottom } from './constants.js';
+import { paddingLeft, fadeEnd, fadeBottomHeight, paddingBottom, INEQUALITY_ARROW_LENGTH_FACTOR } from './constants.js';
 
 /**
  * Creates SVG element, gradient definitions, and mask layers.
@@ -72,8 +72,14 @@ export function createSvgLayers(container, width, height) {
             .attr("y1", y1)
             .attr("x2", x2)
             .attr("y2", y2);
+
+        // Calculate the percentage of the rect that corresponds to half a point width (radius)
+        // Rect length = factor * radius. Desired opaque length = radius.
+        // Opaque stop = 1 / factor
+        const opaqueStop = 100 / INEQUALITY_ARROW_LENGTH_FACTOR;
+
         grad.append("stop").attr("offset", "0%").attr("stop-color", "white").attr("stop-opacity", 1);
-        grad.append("stop").attr("offset", "10%").attr("stop-color", "white").attr("stop-opacity", 1);
+        grad.append("stop").attr("offset", `${opaqueStop}%`).attr("stop-color", "white").attr("stop-opacity", 1);
         grad.append("stop").attr("offset", "100%").attr("stop-color", "white").attr("stop-opacity", 0);
 
         defs.append("mask")

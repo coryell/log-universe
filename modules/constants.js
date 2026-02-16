@@ -22,3 +22,5 @@ export const colors = [
 
 export const FADE_OPACITY = 0.2;
 
+export const INEQUALITY_ARROW_LENGTH_FACTOR = 4;
+

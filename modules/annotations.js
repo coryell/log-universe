@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { getLocalized, parseValue } from './utils.js';
+import { INEQUALITY_ARROW_LENGTH_FACTOR } from './constants.js';
 
 // Setup phase: computes static properties (text, color, angle, visibility) and applies them.
 // This should be called only when data or dimensions change.
@@ -159,7 +160,7 @@ export const updateAnnotationLayout = (selection, radius, fs, currentYScale, pre
         } else if (showInequality) {
             // Inequality Layout
             const thickness = (2 * radius) + (isHighlighted ? 2 : 0);
-            const length = 20 * radius;
+            const length = INEQUALITY_ARROW_LENGTH_FACTOR * radius;
 
             group.select('.inequality-rect')
                 .attr('y', -thickness / 2)
