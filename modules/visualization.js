@@ -1053,8 +1053,8 @@ export function createVisualization(container, config) {
 
         prevDimensionX = currentDimensionX;
         prevDimensionY = currentDimensionY;
-        isInitialLoad = false;
         // Pre-calculation removed: Proximity culling now happens in render() on visible subset
+
 
         currentState.filteredData = filteredData;
         currentState.clusters = clusters;
@@ -1271,8 +1271,9 @@ export function createVisualization(container, config) {
         legend.updateLegend(filteredData, { ...currentState, width, height, onCategoryClick: zoomToCategory });
         updateMask(width, height, currentDimensionX, checkMobile());
 
-        isInitialLoad = false;
+
         prevDimensionX = currentDimensionX;
+
         prevDimensionY = currentDimensionY;
 
         // Calculate initial transform considering mobile safe area for x-dimension
@@ -1290,14 +1291,28 @@ export function createVisualization(container, config) {
             initialTransform = d3.zoomIdentity.translate(leftMargin, 0);
         }
 
-        if (dimChanged) {
-            // Perform 'Reset Zoom' equivalent calculation using minZoom
+        if (isInitialLoad) {
+            // Initial Load: Set view to 10x zoom immediately
+            // We'll center on the data bounds if possible, but at scale=10
+            const startK = 2;
+
+            const bounds = getDynamicBounds(startK);
+            if (bounds) {
+                const cX = (bounds.minX + bounds.maxX) / 2;
+                const cY = (bounds.minY + bounds.maxY) / 2;
+                const tx = (width / 2) - (cX * startK);
+                const ty = (height / 2) - (cY * startK);
+                svg.call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(startK));
+            } else {
+                svg.call(zoom.transform, d3.zoomIdentity.scale(startK));
+            }
+            isInitialLoad = false;
+        }
+        else if (dimChanged) {
+            // Dimension change (not initial): Animate to fit all data
             const bounds = getDynamicBounds(minZoom);
             if (bounds) {
-                // Align with axis layout logic (re-calc safe area)
-                // isMobile and mobileSafeLeft are already defined above
                 const bottomMargin = fadeBottomHeight;
-
                 const safeLeft = (currentDimensionX !== "none") ? leftMargin : 0;
                 const safeRight = width;
                 const safeTop = 0;
@@ -1310,14 +1325,14 @@ export function createVisualization(container, config) {
                 const tx = safeCenterX - (cX * minZoom);
                 const ty = safeCenterY - (cY * minZoom);
 
-                svg.call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(minZoom));
+                svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(minZoom));
             } else {
                 svg.call(zoom.transform, initialTransform);
             }
-
         } else {
             render(d3.zoomTransform(svg.node()));
         }
+
     }
 
     // ... (rest of function remains same structure, just updated content above covers it) ...
