@@ -124,7 +124,7 @@ export function createVisualization(container, config) {
     } = createSvgLayers(container, width, height);
 
     function checkMobile() {
-        return window.matchMedia('(max-width: 768px)').matches;
+        return window.matchMedia('(max-width: 768px), (max-height: 768px) and (orientation: landscape)').matches;
     }
 
     updateMask(width, height, currentDimensionX, checkMobile());
@@ -1355,19 +1355,52 @@ export function createVisualization(container, config) {
 
             const availW = Math.max(1, width - effectivePadRight - effectiveFadeEnd);
             const availH = Math.max(1, (height - effectiveFadeBotH) - 50);
-            const ppdX = availW / xDecades;
-            const ppdY = availH / yDecades;
-            const ppd = Math.min(ppdX, ppdY);
 
-            const newW = xDecades * ppd;
-            const newH = yDecades * ppd;
+            // Preserve current scale (PPD) instead of fitting to screen
+            const currentRangeX = xScale.range();
+            const newW = currentRangeX[1] - currentRangeX[0];
+            const currentRangeY = yScale.range();
+            // Y range is inverted [bottom, top]
+            const newH = Math.abs(currentRangeY[0] - currentRangeY[1]);
+
             const xOff = (availW - newW) / 2;
             const yOff = (availH - newH) / 2;
 
             xScale.range([effectiveFadeEnd + xOff, effectiveFadeEnd + xOff + newW]);
             yScale.range([50 + yOff + newH, 50 + yOff]);
         } else {
-            yScale.range([height - 50, 50]);
+            // Preserve current scale (PPD) vertically too
+            const currentRangeY = yScale.range();
+            // Y range is inverted [bottom, top]
+            const currentHeight = Math.abs(currentRangeY[0] - currentRangeY[1]);
+            const yOff = (height - currentHeight) / 2;
+
+            // Center vertically within new height
+            // Assume 50 padding was original context, but now we center arbitrarily
+            // Actually, we want center to align.
+            // If scale was [bottom, top], center is (bottom+top)/2.
+            // New Bottom = yOff + currentHeight. New Top = yOff.
+            // Wait, D3 uses [max, min] for Y usually.
+            // So range should be [height - yOff, yOff].
+            yScale.range([height - yOff, yOff]);
+
+            // Fix: Update 1D xScale to match new Y-axis density (maintain aspect ratio)
+            const domain = xScale.domain();
+            const minX = domain[0];
+            const maxX = domain[1];
+
+            // Calculate new decade height based on updated yScale
+            const initialDecadeHeight = Math.abs(yScale(10) - yScale(1));
+            const screenCenter = width / 2;
+
+            if (minX === maxX) {
+                xScale.range([screenCenter, screenCenter + initialDecadeHeight]);
+            } else {
+                const xCenter = (minX + maxX) / 2;
+                const pixelMin = screenCenter + (minX - xCenter) * initialDecadeHeight;
+                const pixelMax = screenCenter + (maxX - xCenter) * initialDecadeHeight;
+                xScale.range([pixelMin, pixelMax]);
+            }
         }
 
         updateMask(width, height, currentDimensionX, checkMobile());

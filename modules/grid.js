@@ -21,6 +21,8 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
         const yStart = newYScale.invert(height + padding);
         const yEnd = newYScale.invert(-padding);
         const paddedYScale = newYScale.copy().domain([d3.min([yStart, yEnd]), d3.max([yStart, yEnd])]);
+
+        // Calculate dynamic tick count to maintain ~70px visual density
         let yTickValues = paddedYScale.ticks(15, "~e");
 
         const xStart = newXScale.invert(-padding);
@@ -133,14 +135,22 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
         // 1D Mode Logic
         if (currentDimensionX === "none") {
             const decadeHeight = Math.abs(newYScale(10) - newYScale(1));
-            const mainYTicks = yTickValues.filter(d => majorYDecades.has(d));
-            let stride = 1;
-            if (mainYTicks.length >= 2) {
-                stride = Math.abs(Math.round(Math.log10(mainYTicks[1])) - Math.round(Math.log10(mainYTicks[0])));
+
+            // Calculate visual spacing from Y-axis median tick distance to match density
+            const yTickPixels = yTickValues.map(d => newYScale(d)).sort((a, b) => a - b);
+            let targetPixelSpacing = 50; // Fallback
+
+            if (yTickPixels.length >= 2) {
+                const diffs = [];
+                for (let i = 1; i < yTickPixels.length; i++) {
+                    diffs.push(Math.abs(yTickPixels[i] - yTickPixels[i - 1]));
+                }
+                targetPixelSpacing = d3.median(diffs);
             }
+
             const xZero = newXScale.invert(0);
-            const xDist = newXScale.invert(decadeHeight) - xZero;
-            const spacing = Math.abs(xDist) * stride;
+            // Calculate data spacing required to achieve targetPixelSpacing from 0
+            const spacing = Math.abs(newXScale.invert(targetPixelSpacing) - xZero);
             const xTicks = [];
             const xMinPadded = newXScale.invert(-padding);
             const xMaxPadded = newXScale.invert(width + padding);

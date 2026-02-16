@@ -368,7 +368,8 @@ svg {
 }
 
 /* Mobile Layout */
-@media (max-width: 768px) {
+@media (max-width: 768px),
+(max-height: 768px) and (orientation: landscape) {
   header {
     padding: 10px;
     position: relative;
