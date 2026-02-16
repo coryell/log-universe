@@ -1333,62 +1333,22 @@ export function createVisualization(container, config) {
     function setCallbacks(newCallbacks) { callbacks = { ...callbacks, ...newCallbacks }; }
     function resize() {
         const t = d3.zoomTransform(svg.node());
-        const rescaledX = t.rescaleX(xScale);
-        const rescaledY = t.rescaleY(yScale);
-        const dataX = rescaledX.invert(width / 2);
-        const dataY = rescaledY.invert(height / 2);
+        const dataX = t.rescaleX(xScale).invert(width / 2);
+        const dataY = t.rescaleY(yScale).invert(height / 2);
 
         width = container.clientWidth;
         height = container.clientHeight;
         svg.attr('viewBox', [0, 0, width, height]);
 
-        // Re-calculate ranges based on aspect ratio logic (Sync with update())
-        if (currentDimensionX !== "none") {
-            const domainX = xScale.domain();
-            const domainY = yScale.domain();
-            const xDecades = Math.log10(domainX[1]) - Math.log10(domainX[0]) || 1;
-            const yDecades = Math.log10(domainY[1]) - Math.log10(domainY[0]) || 1;
-
-            const effectiveFadeEnd = Math.min(fadeEnd, width * 0.15);
-            const effectivePadRight = Math.min(paddingRight, width * 0.15);
-            const effectiveFadeBotH = Math.min(fadeBottomHeight, height * 0.15);
-
-            const availW = Math.max(1, width - effectivePadRight - effectiveFadeEnd);
-            const availH = Math.max(1, (height - effectiveFadeBotH) - 50);
-            const ppdX = availW / xDecades;
-            const ppdY = availH / yDecades;
-            const ppd = Math.min(ppdX, ppdY);
-
-            const newW = xDecades * ppd;
-            const newH = yDecades * ppd;
-            const xOff = (availW - newW) / 2;
-            const yOff = (availH - newH) / 2;
-
-            xScale.range([effectiveFadeEnd + xOff, effectiveFadeEnd + xOff + newW]);
-            yScale.range([50 + yOff + newH, 50 + yOff]);
-        } else {
-            yScale.range([height - 50, 50]);
-        }
+        if (currentDimensionX !== "none") yScale.range([height - fadeBottomHeight, 50]);
+        else yScale.range([height - 50, 50]);
 
         updateMask(width, height, currentDimensionX, checkMobile());
         legend.reposition(width, height);
 
-        // Update transform to preserve center
-        const newT = d3.zoomIdentity
-            .translate(width / 2, height / 2)
-            .scale(t.k)
-            .translate(-xScale(dataX), -yScale(dataY));
-
+        const newT = d3.zoomIdentity.translate(width / 2, height / 2).scale(t.k).translate(-xScale(dataX), -yScale(dataY));
         svg.call(zoom.transform, newT);
-
-        // Explicitly update ruler position after resize
-        const finalT = d3.zoomTransform(svg.node());
-        ruler.update({
-            width, height, currentDimensionX, currentDimensionY,
-            xScale: finalT.rescaleX(xScale), yScale: finalT.rescaleY(yScale)
-        });
     }
-
 
     svg.on("mousemove", (event) => {
         if (checkMobile()) return;

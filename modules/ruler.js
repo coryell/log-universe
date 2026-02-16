@@ -5,15 +5,12 @@ export function createRuler(svg, checkMobile) {
     let markedYData = null;
     let markedXData = null;
     let lastMousePos = null;
-    let lastMouseDataX = null;
-    let lastMouseDataY = null;
     let lastConfig = null;
     let _isDragging = false;
     let _isMarkDragging = false;
     let _markDragOffset = [0, 0];
     let _markStartData = { x: null, y: null };
-    let _startCursorPos = null;
-
+    let _startCursorPos = null; // Track cursor pos at drag start for 1D delta
 
     // Cursor Ruler (Create FIRST so it is below the Mark)
     const rulerGroup = svg.append("g")
@@ -350,23 +347,10 @@ export function createRuler(svg, checkMobile) {
                 const p = d3.pointer(event, svg.node());
                 if (isFinite(p[0]) && isFinite(p[1])) {
                     lastMousePos = p;
-                    // Update data-space anchors
-                    lastMouseDataY = yScale.invert(p[1]);
-                    if (currentDimensionX !== "none") {
-                        lastMouseDataX = xScale.invert(p[0]);
-                    }
                 }
             } catch (e) {
                 // Ignore pointer errors
             }
-        } else if (lastMouseDataY !== null) {
-            // Re-calculate pixel position from data anchors (e.g. during resize/zoom)
-            const py = yScale(lastMouseDataY);
-            let px = lastMousePos ? lastMousePos[0] : 0;
-            if (lastMouseDataX !== null && currentDimensionX !== "none") {
-                px = xScale(lastMouseDataX);
-            }
-            lastMousePos = [px, py];
         }
 
         if (!lastMousePos) return;
