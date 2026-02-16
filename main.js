@@ -80,7 +80,13 @@ d3.json('/data.json').then(rawData => {
 
   // Reveal the body now that initialization is complete
   document.body.style.opacity = '1';
+
+  // Trigger the initial zoom-out animation (from 10x to fit) only after reveal
+  setTimeout(() => {
+    viewState.updatePlot();
+  }, 500);
 });
+
 
 
 // Global Prevention of Browser-Level Zooming (Desktop Pinch)

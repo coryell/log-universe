@@ -17,7 +17,7 @@ export function createViewState({ viz, infobox, data }) {
     const colorScale = d3.scaleOrdinal().domain(categories).range(colors);
 
     // --- Plot Update ---
-    function updatePlot() {
+    function updatePlot(options = {}) {
         viz.update(data, {
             currentDimensionX,
             currentDimensionY,
@@ -25,8 +25,11 @@ export function createViewState({ viz, infobox, data }) {
             language: LANGUAGE,
             categories
         });
-        viz.resetZoom(); // Default view: Center on content
+        if (!options.skipResetZoom) {
+            viz.resetZoom(); // Default view: Center on content
+        }
     }
+
 
     // --- Selection / Infobox ---
     function showInfobox(d) {
@@ -194,7 +197,8 @@ export function createViewState({ viz, infobox, data }) {
         }
     });
 
-    updatePlot();
+    updatePlot({ skipResetZoom: true });
+
 
     // --- Public API ---
     return {
