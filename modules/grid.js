@@ -246,8 +246,20 @@ export function createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask) {
                     update => update,
                     exit => exit.remove()
                 )
-                .text((d, i) => formatXTick(d, showMinorXLabels, i === 0))
-                .attr("x", d => newXScale(d))
+                .each(function (d, i) {
+                    const text = formatXTick(d, showMinorXLabels, i === 0);
+                    const el = d3.select(this);
+                    el.text(text);
+
+                    const charWidth = 12 * 0.6; // 12px monospace approx
+                    const textWidth = text.length * charWidth;
+                    const halfWidth = textWidth / 2;
+
+                    const x = newXScale(d);
+                    // Constrain to screen edges with small padding
+                    const safeX = Math.max(halfWidth + 4, Math.min(width - halfWidth - 4, x));
+                    el.attr("x", safeX);
+                })
 
                 .attr("y", height - 20);
 
