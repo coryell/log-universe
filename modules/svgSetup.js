@@ -130,18 +130,28 @@ export function createSvgLayers(container, width, height) {
             .attr("fill", "white");
 
         if (currentDimensionX !== "none") {
-            svg.select("#fade-gradient-vertical")
-                .attr("y1", h)
-                .attr("y2", h - fadeBottomHeight);
+            // Dynamic vertical fade parameters
+            const mPaddingBottom = isMobile ? 75 : paddingBottom;
+            const mFadeHeight = isMobile ? 125 : fadeBottomHeight;
+
+            const vGrad = svg.select("#fade-gradient-vertical");
+            vGrad.attr("y1", h).attr("y2", h - mFadeHeight);
+
+            // Update stops for mobile if needed (they use paddingBottom / fadeBottomHeight)
+            // But wait, the stops are defined once in defs. We should update them too.
+            vGrad.selectAll("stop").remove();
+            vGrad.append("stop").attr("offset", 0).attr("stop-color", "black");
+            vGrad.append("stop").attr("offset", mPaddingBottom / mFadeHeight).attr("stop-color", "black");
+            vGrad.append("stop").attr("offset", "1").attr("stop-color", "white");
 
             maskBottom.append("rect")
-                .attr("x", 0).attr("y", h - fadeBottomHeight)
-                .attr("width", w).attr("height", fadeBottomHeight)
+                .attr("x", 0).attr("y", h - mFadeHeight)
+                .attr("width", w).attr("height", mFadeHeight)
                 .attr("fill", "url(#fade-gradient-vertical)");
 
             maskBottom.append("rect")
                 .attr("x", 0).attr("y", 0)
-                .attr("width", w).attr("height", h - fadeBottomHeight)
+                .attr("width", w).attr("height", h - mFadeHeight)
                 .attr("fill", "white");
         } else {
             maskBottom.append("rect")
@@ -149,6 +159,7 @@ export function createSvgLayers(container, width, height) {
                 .attr("width", w).attr("height", h)
                 .attr("fill", "white");
         }
+
 
         // 2. Apply masking based on mode
         if (isMobile) {
