@@ -67,8 +67,16 @@ export function getClusters(data, currentDimensionX, currentDimensionY, language
     const clusters = [];
     groups.forEach((members, key) => {
         if (members.length > 1) {
+            // Sort by localized label length (shortest to longest)
+            members.sort((a, b) => {
+                const nameA = getLocalized(a.displayName, language) || "";
+                const nameB = getLocalized(b.displayName, language) || "";
+                return nameA.length - nameB.length;
+            });
+
             const first = members[0];
             // Truncation Logic (Limit ~30 chars)
+
             const charLimit = 30;
             let currentLen = 0;
             const labelMembers = [];
