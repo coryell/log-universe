@@ -56,7 +56,7 @@ export function createRuler(svg, checkMobile) {
     // Interval connecting lines (Moved to markGroup for dragging)
     const intervalLineY = markGroup.append("line") // Vertical segment
         .attr("class", "interval-line-y")
-        .attr("stroke", "green").attr("stroke-width", 1);
+        .attr("stroke", "green").attr("stroke-width", 2);
 
     const intervalHitLineY = markGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
@@ -65,7 +65,7 @@ export function createRuler(svg, checkMobile) {
 
     const intervalLineX = markGroup.append("line") // Horizontal segment
         .attr("class", "interval-line-x")
-        .attr("stroke", "green").attr("stroke-width", 1);
+        .attr("stroke", "green").attr("stroke-width", 2);
 
     const intervalHitLineX = markGroup.append("line")
         .attr("stroke", "transparent").attr("stroke-width", 30)
@@ -79,7 +79,7 @@ export function createRuler(svg, checkMobile) {
         .attr("fill", "transparent").style("pointer-events", "all");
 
     const rulerLabel = rulerGroup.append("text")
-        .attr("fill", "white").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+        .attr("fill", "red").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
 
     const rulerLabelLine1 = rulerLabel.append("tspan");
     const rulerLabelLine2 = rulerLabel.append("tspan");
