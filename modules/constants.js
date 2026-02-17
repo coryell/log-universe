@@ -24,3 +24,4 @@ export const FADE_OPACITY = 0.2;
 
 export const INEQUALITY_ARROW_LENGTH_FACTOR = 4;
 
+export const ZOOM_NEIGHBOR_DISTANCE_PX = 30; // Screen pixels to nearest neighbor when zooming to a point

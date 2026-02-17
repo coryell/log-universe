@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import {
     paddingLeft, fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD, paddingBottom,
-    DEBUG_SHOW_BOUNDS, FADE_OPACITY, INEQUALITY_ARROW_LENGTH_FACTOR
+    DEBUG_SHOW_BOUNDS, FADE_OPACITY, INEQUALITY_ARROW_LENGTH_FACTOR, ZOOM_NEIGHBOR_DISTANCE_PX
 } from './constants.js';
 
 import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData, parseValue } from './utils.js';
@@ -1638,6 +1638,7 @@ export function createVisualization(container, config) {
             }
             targetScale = Math.max(1, Math.min(targetScale, 1000)); // Lower cap for ranges
 
+            let nearestItem = null;
             if (!Array.isArray(rawDimY)) {
                 // Single Point: Zoom until nearest neighbor is ~30px away
                 // NOTE: We must pass currentDimensionX/Y to filter correctly!
@@ -1665,15 +1666,8 @@ export function createVisualization(container, config) {
 
                 if (minDistSq !== Infinity) {
                     const nearestDistDecades = Math.sqrt(minDistSq);
-
-                    const currentTransform = d3.zoomTransform(svg.node());
-                    // Assume yScale is the rescaled scale (current zoom applied)
-
                     const basePPD = Math.abs(yScale(10) - yScale(1));
-                    const currentPPD = basePPD * currentTransform.k;
-                    const currentPixelDist = currentPPD * nearestDistDecades;
-
-                    targetScale = currentTransform.k * (30 / currentPixelDist);
+                    targetScale = ZOOM_NEIGHBOR_DISTANCE_PX / (basePPD * nearestDistDecades);
                 } else {
                     targetScale = 1000;
                 }
