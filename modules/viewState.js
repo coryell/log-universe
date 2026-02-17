@@ -159,19 +159,26 @@ export function createViewState({ viz, infobox, data }) {
             }
         });
 
-        let resizeTimeout;
-        const handleResize = () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
+        window.addEventListener('resize', () => {
+            viz.resize();
+        });
+
+        const handleOrientationChange = () => {
+            // Hide visualization immediately to cover layout snapping
+            d3.select('#app').style('opacity', 0);
+            // Force a second resize after delay for rotation animation to settle
+            setTimeout(() => {
                 viz.resize();
-            }, 200); // Debounce to allow layout to settle (especially on mobile rotation)
+                d3.select('#app').style('opacity', 1);
+            }, 300);
         };
 
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('orientationchange', () => {
-            // Force resize after sufficient delay for rotation animation
-            setTimeout(handleResize, 300);
-        });
+        if (screen.orientation) {
+            screen.orientation.addEventListener('change', handleOrientationChange);
+        } else {
+            // Fallback for older browsers
+            window.addEventListener('orientationchange', handleOrientationChange);
+        }
     }
 
     // --- Initialize ---
