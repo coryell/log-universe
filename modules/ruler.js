@@ -514,19 +514,34 @@ export function createRuler(svg, checkMobile) {
             return { x: bx, y: y - fs * 0.7, width: w, height: h };
         };
 
+        // Clamp a box {x, y, width, height} within [0,0,width,height], return {dx, dy} shift
+        const clampBox = (box, pad = 4) => {
+            let dx = 0, dy = 0;
+            if (box.x - pad < 0) dx = -(box.x - pad);
+            else if (box.x + box.width + pad > width) dx = width - (box.x + box.width + pad);
+            if (box.y - pad < 0) dy = -(box.y - pad);
+            else if (box.y + box.height + pad > height) dy = height - (box.y + box.height + pad);
+            return { dx, dy };
+        };
+
         const labelText = currentDimensionX !== "none"
             ? [`Y: ${formatVal(valY, getUnit(currentDimensionY))}`, `X: ${formatVal(xScale.invert(mouseX), getUnit(currentDimensionX))}`]
             : [formatVal(valY, getUnit(currentDimensionY))];
 
-        rulerLabel.attr("x", labelX).attr("y", labelY).attr("text-anchor", anchor);
+        let lbox = getEstBBox(labelText, labelX, labelY, anchor);
+        const { dx: ldx, dy: ldy } = clampBox(lbox);
+        const clampedLabelX = labelX + ldx;
+        const clampedLabelY = labelY + ldy;
+        lbox = { ...lbox, x: lbox.x + ldx, y: lbox.y + ldy };
+
+        rulerLabel.attr("x", clampedLabelX).attr("y", clampedLabelY).attr("text-anchor", anchor);
         rulerLabel.selectAll("tspan")
             .data(labelText)
             .join("tspan")
-            .attr("x", labelX)
+            .attr("x", clampedLabelX)
             .attr("dy", (d, i) => i === 0 ? 0 : "1.2em")
             .text(d => d);
 
-        const lbox = getEstBBox(labelText, labelX, labelY, anchor);
         rulerLabelBackground.attr("x", lbox.x - 4).attr("y", lbox.y - 4).attr("width", lbox.width + 8).attr("height", lbox.height + 8);
         rulerLabelHitRect.attr("x", lbox.x - 12).attr("y", lbox.y - 12).attr("width", lbox.width + 24).attr("height", lbox.height + 24);
 
@@ -576,14 +591,17 @@ export function createRuler(svg, checkMobile) {
                 .attr("dy", (d, i) => i === 0 ? 0 : "1.2em")
                 .text(d => d);
 
-            const box = getEstBBox([relText, absText], baseLabelX, parseFloat(label.attr("y")), anchor);
+            let box = getEstBBox([relText, absText], baseLabelX, parseFloat(label.attr("y")), anchor);
             if (isHorizontal) {
-                label.attr("x", baseLabelX);
-                tspans.attr("x", baseLabelX);
                 if (isFlipped) label.attr("y", parseFloat(label.attr("y")) - box.height + 15);
-            } else {
-                tspans.attr("x", baseLabelX);
+                box = getEstBBox([relText, absText], baseLabelX, parseFloat(label.attr("y")), anchor);
             }
+            const { dx: idxShift, dy: idyShift } = clampBox(box);
+            const clampedX = baseLabelX + idxShift;
+            const clampedY = parseFloat(label.attr("y")) + idyShift;
+            label.attr("x", clampedX).attr("y", clampedY);
+            tspans.attr("x", clampedX);
+            box = { ...box, x: box.x + idxShift, y: box.y + idyShift };
             bg.attr("x", box.x - 4).attr("y", box.y - 4).attr("width", box.width + 8).attr("height", box.height + 8);
         };
 
