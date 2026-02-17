@@ -406,21 +406,56 @@ export function createRuler(svg, checkMobile) {
             }
         }
 
-        if (!lastMousePos) return;
-
-        rulerGroup.style("display", null);
-
-        // Always fetch transform from SVG node as it's the source of truth
-        // Always fetch transform from SVG node as it's the source of truth
-        // const t = d3.zoomTransform(svg.node()); // REMOVED: scales are already rescaled
-        const [mouseX, mouseY] = lastMousePos;
-        if (!isFinite(mouseX) || !isFinite(mouseY)) return;
-
         // Update Lines lengths based on current width/height
         markLineY.attr("x2", width);
         markLineX.attr("y2", height);
         rulerLineX.attr("x2", width);
         rulerLineY.attr("y2", height);
+
+        // Update Persistent Marks (even if lastMousePos is null)
+        let my = null;
+        let mx = null;
+        if (markedYData !== null || markedXData !== null) {
+            markGroup.style("display", null);
+            if (markedYData !== null) {
+                my = yScale(markedYData);
+                markLineY.style("display", null).attr("y1", my).attr("y2", my).attr("x2", width);
+                markHitLineY.style("display", null).attr("y1", my).attr("y2", my).attr("x2", width);
+            } else {
+                markLineY.style("display", "none");
+                markHitLineY.style("display", "none");
+            }
+
+            if (markedXData !== null && currentDimensionX !== "none") {
+                mx = xScale(markedXData);
+                markLineX.style("display", null).attr("x1", mx).attr("x2", mx).attr("y2", height);
+                markHitLineX.style("display", null).attr("x1", mx).attr("x2", mx).attr("y2", height);
+            } else {
+                markLineX.style("display", "none");
+                markHitLineX.style("display", "none");
+            }
+
+
+        } else {
+            markGroup.style("display", "none");
+        }
+
+        if (!lastMousePos) {
+            rulerGroup.style("display", "none");
+            yIntervalLabel.style("display", "none");
+            yIntervalBackground.style("display", "none");
+            intervalLineY.style("display", "none");
+            intervalHitLineY.style("display", "none");
+            xIntervalLabel.style("display", "none");
+            xIntervalBackground.style("display", "none");
+            intervalLineX.style("display", "none");
+            intervalHitLineX.style("display", "none");
+            return;
+        }
+
+        rulerGroup.style("display", null);
+        const [mouseX, mouseY] = lastMousePos;
+        if (!isFinite(mouseX) || !isFinite(mouseY)) return;
 
         // Update Ruler Cursor Lines
         rulerLineX.attr("x1", 0).attr("y1", mouseY).attr("y2", mouseY); // Horizontal
@@ -552,53 +587,18 @@ export function createRuler(svg, checkMobile) {
             bg.attr("x", box.x - 4).attr("y", box.y - 4).attr("width", box.width + 8).attr("height", box.height + 8);
         };
 
-        // Update Marks
-        if (markedYData !== null || markedXData !== null) {
-            markGroup.style("display", null);
-            let my = null;
-            if (markedYData !== null) {
-                my = yScale(markedYData); // Use passed rescaled scale
-                markLineY.style("display", null).attr("y1", my).attr("y2", my).attr("x2", width);
-                markHitLineY.style("display", null).attr("y1", my).attr("y2", my).attr("x2", width);
-            } else {
-                markLineY.style("display", "none");
-                markHitLineY.style("display", "none");
-            }
-
-            let mx = null;
-            if (markedXData !== null && currentDimensionX !== "none") {
-                mx = xScale(markedXData); // Use passed rescaled scale
-                markLineX.style("display", null).attr("x1", mx).attr("x2", mx).attr("y2", height);
-                markHitLineX.style("display", null).attr("x1", mx).attr("x2", mx).attr("y2", height);
-            } else {
-                markLineX.style("display", "none");
-                markHitLineX.style("display", "none");
-            }
-
-            // Update Interval UI
-            if (markedYData !== null) {
-                updateIntervalUI(yIntervalLabel, yIntervalBackground, intervalLineY, intervalHitLineY, valY, markedYData, mouseY, my, false, currentDimensionY, mouseX, mx);
-            } else {
-                yIntervalLabel.style("display", "none");
-                yIntervalBackground.style("display", "none");
-                intervalLineY.style("display", "none");
-                intervalHitLineY.style("display", "none");
-            }
-
-            if (markedXData !== null && currentDimensionX !== "none") {
-                updateIntervalUI(xIntervalLabel, xIntervalBackground, intervalLineX, intervalHitLineX, xScale.invert(mouseX), markedXData, mouseX, mx, true, currentDimensionX, mouseY, my);
-            } else {
-                xIntervalLabel.style("display", "none");
-                xIntervalBackground.style("display", "none");
-                intervalLineX.style("display", "none");
-                intervalHitLineX.style("display", "none");
-            }
+        if (markedYData !== null) {
+            updateIntervalUI(yIntervalLabel, yIntervalBackground, intervalLineY, intervalHitLineY, valY, markedYData, mouseY, my, false, currentDimensionY, mouseX, mx);
         } else {
-            markGroup.style("display", "none");
             yIntervalLabel.style("display", "none");
             yIntervalBackground.style("display", "none");
             intervalLineY.style("display", "none");
             intervalHitLineY.style("display", "none");
+        }
+
+        if (markedXData !== null && currentDimensionX !== "none") {
+            updateIntervalUI(xIntervalLabel, xIntervalBackground, intervalLineX, intervalHitLineX, xScale.invert(mouseX), markedXData, mouseX, mx, true, currentDimensionX, mouseY, my);
+        } else {
             xIntervalLabel.style("display", "none");
             xIntervalBackground.style("display", "none");
             intervalLineX.style("display", "none");
