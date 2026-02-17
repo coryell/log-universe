@@ -1667,7 +1667,17 @@ export function createVisualization(container, config) {
                 if (minDistSq !== Infinity) {
                     const nearestDistDecades = Math.sqrt(minDistSq);
                     const basePPD = Math.abs(yScale(10) - yScale(1));
-                    targetScale = ZOOM_NEIGHBOR_DISTANCE_PX / (basePPD * nearestDistDecades);
+
+                    // 1. Scale to separate nearest neighbor
+                    const scaleForNeighbor = ZOOM_NEIGHBOR_DISTANCE_PX / (basePPD * nearestDistDecades);
+
+                    // 2. Scale to maximize font size (target 12px)
+                    // baseFS = Math.min(12, basePPD * scale);
+                    // To get 12px, we need basePPD * scale >= 12  =>  scale >= 12 / basePPD
+                    const scaleForText = 12 / basePPD;
+
+                    // Choose the larger scale (zoom in more if needed for text readability)
+                    targetScale = Math.max(scaleForNeighbor, scaleForText);
                 } else {
                     targetScale = 1000;
                 }
