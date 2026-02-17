@@ -59,6 +59,16 @@ export function createViewState({ viz, infobox, data }) {
         if (result.dimensions[currentDimensionY] === undefined) return;
         if (currentDimensionX !== "none" && result.dimensions[currentDimensionX] === undefined) return;
 
+        // Clear green mark logic on all devices. 
+        // Hide red ruler cursor ONLY on mobile.
+        const isMobile = window.matchMedia('(max-width: 768px), (max-height: 768px) and (orientation: landscape)').matches;
+        if (viz.ruler) {
+            viz.ruler.clearMark();
+            if (isMobile) {
+                viz.ruler.hide();
+            }
+        }
+
         viz.zoomToItem(result);
         if (options.preservePosition) {
             showInfobox(result); // Use currentPositionMode

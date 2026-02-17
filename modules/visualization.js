@@ -827,6 +827,11 @@ export function createVisualization(container, config) {
     }
 
     function zoomToCategory(cat) {
+        // Clear ruler mark on desktop when focusing on a category
+        if (!checkMobile() && ruler) {
+            ruler.clearMark();
+        }
+
         // Use pre-filtered data (guarantees valid coordinates and visibility logic consistency)
         const data = currentState.filteredData || [];
         const language = currentState.language;
