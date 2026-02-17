@@ -724,7 +724,7 @@ export function createVisualization(container, config) {
         ruler.update({
             width, height, currentDimensionX, currentDimensionY,
             xScale: newXScale, yScale: newYScale,
-            event: checkMobile() ? undefined : event
+            event: (checkMobile() && event && event.pointerType !== 'mouse') ? undefined : event
         });
 
         if (isTransitioning) {
@@ -1427,8 +1427,9 @@ export function createVisualization(container, config) {
         });
     }
 
-    svg.on("mousemove", (event) => {
-        if (checkMobile()) return;
+    svg.on("pointermove", (event) => {
+        const isMobile = checkMobile();
+        if (isMobile && event.pointerType !== 'mouse') return;
         const t = d3.zoomTransform(svg.node());
         ruler.update({
             width, height, currentDimensionX, currentDimensionY,
@@ -1436,9 +1437,9 @@ export function createVisualization(container, config) {
         });
     });
 
-    svg.on("mouseleave", () => {
+    svg.on("pointerleave", (event) => {
         const isMobile = checkMobile();
-        if (!isMobile) ruler.hide();
+        if (!isMobile || event.pointerType === 'mouse') ruler.hide();
     });
 
     svg.on("click", (e) => {
