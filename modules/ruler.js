@@ -13,6 +13,8 @@ export function createRuler(svg, checkMobile) {
     let _markDragOffset = [0, 0];
     let _markStartData = { x: null, y: null };
     let _startCursorPos = null; // Track cursor pos at drag start for 1D delta
+    let _didMarkMove = false; // Track if mark was dragged or just tapped
+    let _rulerLongPressOccurred = false; // Track if a mark was set via long-press during this touch
 
     // Cursor Ruler (Create FIRST so it is below the Mark)
     const rulerGroup = svg.append("g")
@@ -121,6 +123,7 @@ export function createRuler(svg, checkMobile) {
         e.preventDefault();
         _isDragging = true;
         _didMove = false;
+        _rulerLongPressOccurred = false;
         // Check if touch started on the label or its background
         const target = e.target;
         const labelNode = rulerLabel.node();
@@ -148,6 +151,7 @@ export function createRuler(svg, checkMobile) {
                     xVal = lastConfig.xScale.invert(startMousePos[0]);
                 }
                 setMark(xVal, yVal, lastConfig.currentDimensionX);
+                _rulerLongPressOccurred = true;
                 update(lastConfig);
                 if (navigator.vibrate) navigator.vibrate(50);
             }
@@ -170,11 +174,16 @@ export function createRuler(svg, checkMobile) {
 
     rulerGroup.node().addEventListener('touchend', (e) => {
         _isDragging = false;
+        if (checkMobile && checkMobile()) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
         if (_rulerLongPressTimer) { clearTimeout(_rulerLongPressTimer); _rulerLongPressTimer = null; }
-        if (_touchStartedOnLabel && !_didMove) {
+        if (!_didMove && !_rulerLongPressOccurred) {
             hide();
+            clearMark();
             lastMousePos = null;
-        } else if (!_didMove && lastMousePos) {
+        } else if (_touchStartedOnLabel && (!checkMobile || !checkMobile())) {
             // Click-through logic: if it was a tap (not a drag), verify what's underneath
             const touch = e.changedTouches[0];
             const clientX = touch.clientX;
@@ -214,6 +223,7 @@ export function createRuler(svg, checkMobile) {
         e.stopPropagation();
         e.preventDefault();
         _isMarkDragging = true;
+        _didMarkMove = false;
         const p = d3.pointer(e.touches[0], svg.node());
         _markDragOffset = [p[0], p[1]]; // Store initial touch pos
         _markStartData = { x: markedXData, y: markedYData };
@@ -226,6 +236,7 @@ export function createRuler(svg, checkMobile) {
 
     const handleMarkDragMove = (e) => {
         if (!_isMarkDragging || !lastConfig) return;
+        _didMarkMove = true;
         e.stopPropagation(); // Prevent red ruler from moving
         e.preventDefault();
 
@@ -265,6 +276,11 @@ export function createRuler(svg, checkMobile) {
         if (_isMarkDragging) {
             e.stopPropagation();
             e.preventDefault();
+            if (!_didMarkMove) {
+                hide();
+                clearMark();
+                lastMousePos = null;
+            }
         }
         _isMarkDragging = false;
     };
@@ -274,11 +290,28 @@ export function createRuler(svg, checkMobile) {
     markGroup.node().addEventListener('touchend', handleMarkDragEnd, { passive: false });
     markGroup.node().addEventListener('touchcancel', handleMarkDragEnd, { passive: false });
 
+    markGroup.node().addEventListener('click', (e) => {
+        if (checkMobile && checkMobile()) {
+            e.stopPropagation();
+            e.preventDefault();
+            hide();
+            clearMark();
+            lastMousePos = null;
+        }
+    });
+
     // Fix for ruler intercepting clicks when it moves under the cursor/finger
     rulerGroup.node().addEventListener('click', (e) => {
         // Stop bubbling to prevent window click listener from deselecting
         e.stopPropagation();
         e.preventDefault();
+
+        if (checkMobile && checkMobile()) {
+            hide();
+            clearMark();
+            lastMousePos = null;
+            return;
+        }
 
         const clientX = e.clientX;
         const clientY = e.clientY;
@@ -576,6 +609,8 @@ export function createRuler(svg, checkMobile) {
     function hide() {
         rulerGroup.style("display", "none");
         lastMousePos = null;
+        lastMouseDataX = null;
+        lastMouseDataY = null;
     }
 
     return {

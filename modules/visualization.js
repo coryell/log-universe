@@ -1444,8 +1444,11 @@ export function createVisualization(container, config) {
 
     svg.on("click", (e) => {
         const isMobile = checkMobile();
-        if (isMobile) ruler.hide();
-    }); // Hide ruler on background click/tap (mobile only)
+        if (isMobile) {
+            ruler.hide();
+            ruler.clearMark();
+        }
+    }); // Hide ruler and mark on background click/tap (mobile only)
 
     svg.on("contextmenu", (event) => {
         event.preventDefault();
