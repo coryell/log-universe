@@ -458,6 +458,15 @@ export function createRuler(svg, checkTouch) {
         const [mouseX, mouseY] = lastMousePos;
         if (!isFinite(mouseX) || !isFinite(mouseY)) return;
 
+        // 2D Touch: draw label on top of lines; otherwise draw lines on top of label background
+        if (isMobile && currentDimensionX !== "none") {
+            rulerLabelBackground.raise();
+            rulerLabel.raise();
+        } else {
+            rulerLineX.raise();
+            rulerLineY.raise();
+        }
+
         // Update Ruler Cursor Lines
         rulerLineX.attr("x1", 0).attr("y1", mouseY).attr("y2", mouseY); // Horizontal
         rulerHitLineX.attr("x1", 0).attr("x2", width).attr("y1", mouseY).attr("y2", mouseY);
@@ -492,9 +501,10 @@ export function createRuler(svg, checkTouch) {
 
         // On mobile 2D, force label much higher up to avoid finger occlusion
         if (isMobile && currentDimensionX !== "none") {
-            labelY = mouseY - 80;
+            labelY = mouseY - 45;
         }
 
+        const is2DMode = currentDimensionX !== "none";
         const anchor = isMobile ? "middle" : "start";
         const labelX = isMobile ? mouseX : (mouseX + (currentDimensionX !== "none" ? 5 : 15));
 
@@ -536,10 +546,15 @@ export function createRuler(svg, checkTouch) {
         lbox = { ...lbox, x: lbox.x + ldx, y: lbox.y + ldy };
 
         rulerLabel.attr("x", clampedLabelX).attr("y", clampedLabelY).attr("text-anchor", anchor);
+
+        // For 2D mode: left-align text within the centered background box
+        const tspanX = is2DMode ? (lbox.x + 4) : clampedLabelX;
+        const tspanAnchor = is2DMode ? "start" : anchor;
         rulerLabel.selectAll("tspan")
             .data(labelText)
             .join("tspan")
-            .attr("x", clampedLabelX)
+            .attr("x", tspanX)
+            .attr("text-anchor", tspanAnchor)
             .attr("dy", (d, i) => i === 0 ? 0 : "1.2em")
             .text(d => d);
 
@@ -601,8 +616,13 @@ export function createRuler(svg, checkTouch) {
             const clampedX = baseLabelX + idxShift;
             const clampedY = parseFloat(label.attr("y")) + idyShift;
             label.attr("x", clampedX).attr("y", clampedY);
-            tspans.attr("x", clampedX);
             box = { ...box, x: box.x + idxShift, y: box.y + idyShift };
+
+            // For 2D mode: left-align text within the centered background box
+            const tspanXPos = is2DMode ? (box.x + 4) : clampedX;
+            const tspanAnchorVal = is2DMode ? "start" : anchor;
+            tspans.attr("x", tspanXPos).attr("text-anchor", tspanAnchorVal);
+
             bg.attr("x", box.x - 4).attr("y", box.y - 4).attr("width", box.width + 8).attr("height", box.height + 8);
         };
 
