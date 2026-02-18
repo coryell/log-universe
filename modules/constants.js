@@ -31,3 +31,7 @@ export const MOBILE_QUERY = '(max-width: 512px), (max-height: 512px)';
 export function checkMobile() {
     return window.matchMedia(MOBILE_QUERY).matches;
 }
+
+export function checkTouch() {
+    return window.matchMedia('(pointer: coarse)').matches;
+}

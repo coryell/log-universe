@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import {
     paddingLeft, fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD, paddingBottom,
     DEBUG_SHOW_BOUNDS, FADE_OPACITY, INEQUALITY_ARROW_LENGTH_FACTOR, ZOOM_NEIGHBOR_DISTANCE_PX,
-    checkMobile
+    checkMobile, checkTouch
 } from './constants.js';
 
 import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData, parseValue } from './utils.js';
@@ -131,7 +131,7 @@ export function createVisualization(container, config) {
 
     updateMask(width, height, currentDimensionX, checkMobile());
 
-    const ruler = createRuler(svg, checkMobile);
+    const ruler = createRuler(svg, checkTouch);
     const grid = createGrid(gridGroup, xLabelGroup, yLabelGroup, mobileMask);
     const legend = createLegend(svg, g, gCombined);
 
@@ -723,7 +723,7 @@ export function createVisualization(container, config) {
         ruler.update({
             width, height, currentDimensionX, currentDimensionY,
             xScale: newXScale, yScale: newYScale,
-            event: (checkMobile() && event && event.pointerType !== 'mouse') ? undefined : event
+            event: (checkTouch() && event && event.pointerType !== 'mouse') ? undefined : event
         });
 
         if (isTransitioning) {
@@ -771,7 +771,7 @@ export function createVisualization(container, config) {
     // Recenter Wheel Logic (Desktop Only)
     let lastRecenterTime = 0;
     svg.node().addEventListener('wheel', (event) => {
-        if (checkMobile()) return;
+        if (checkTouch()) return;
 
         const t = d3.zoomTransform(svg.node());
         if (t.k <= minZoom * 1.05 && event.deltaY > 0) {
@@ -827,7 +827,7 @@ export function createVisualization(container, config) {
 
     function zoomToCategory(cat) {
         // Clear ruler mark on desktop when focusing on a category
-        if (!checkMobile() && ruler) {
+        if (!checkTouch() && ruler) {
             ruler.clearMark();
         }
 
@@ -1527,8 +1527,8 @@ export function createVisualization(container, config) {
     }
 
     svg.on("pointermove", (event) => {
-        const isMobile = checkMobile();
-        if (isMobile && event.pointerType !== 'mouse') return;
+        const isTouch = checkTouch();
+        if (isTouch && event.pointerType !== 'mouse') return;
         const t = d3.zoomTransform(svg.node());
         ruler.update({
             width, height, currentDimensionX, currentDimensionY,
@@ -1537,13 +1537,13 @@ export function createVisualization(container, config) {
     });
 
     svg.on("pointerleave", (event) => {
-        const isMobile = checkMobile();
-        if (!isMobile || event.pointerType === 'mouse') ruler.hide();
+        const isTouch = checkTouch();
+        if (!isTouch || event.pointerType === 'mouse') ruler.hide();
     });
 
     svg.on("click", (e) => {
-        const isMobile = checkMobile();
-        if (isMobile) {
+        const isTouch = checkTouch();
+        if (isTouch) {
             ruler.hide();
             ruler.clearMark();
         }

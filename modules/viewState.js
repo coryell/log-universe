@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { LANGUAGE, categories, colors, DOUBLE_CLICK_THRESHOLD, checkMobile } from './constants.js';
+import { LANGUAGE, categories, colors, DOUBLE_CLICK_THRESHOLD, checkMobile, checkTouch } from './constants.js';
 import { getLocalized, getFilteredData } from './utils.js';
 
 /**
@@ -61,10 +61,10 @@ export function createViewState({ viz, infobox, data }) {
 
         // Clear green mark logic on all devices. 
         // Hide red ruler cursor ONLY on mobile.
-        const isMobile = checkMobile();
+        const isTouch = checkTouch();
         if (viz.ruler) {
             viz.ruler.clearMark();
-            if (isMobile) {
+            if (isTouch) {
                 viz.ruler.hide();
             }
         }
@@ -155,7 +155,7 @@ export function createViewState({ viz, infobox, data }) {
                     viz.ruler.clearMark(); // Always clear mark on click
 
                     // Only hide the ruler cursor itself on mobile
-                    if (checkMobile()) {
+                    if (checkTouch()) {
                         viz.ruler.hide();
                     }
                 }

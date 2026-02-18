@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { getUnit, parseValue, formatRelative, formatAbsolute } from './utils.js';
 
-export function createRuler(svg, checkMobile) {
+export function createRuler(svg, checkTouch) {
     let markedYData = null;
     let markedXData = null;
     let lastMousePos = null;
@@ -118,7 +118,7 @@ export function createRuler(svg, checkMobile) {
     let _rulerLongPressTimer = null;
 
     rulerGroup.node().addEventListener('touchstart', (e) => {
-        if (!checkMobile || !checkMobile()) return;
+        if (!checkTouch || !checkTouch()) return;
         e.stopPropagation();
         e.preventDefault();
         _isDragging = true;
@@ -174,7 +174,7 @@ export function createRuler(svg, checkMobile) {
 
     rulerGroup.node().addEventListener('touchend', (e) => {
         _isDragging = false;
-        if (checkMobile && checkMobile()) {
+        if (checkTouch && checkTouch()) {
             e.stopPropagation();
             e.preventDefault();
         }
@@ -183,7 +183,7 @@ export function createRuler(svg, checkMobile) {
             hide();
             clearMark();
             lastMousePos = null;
-        } else if (_touchStartedOnLabel && (!checkMobile || !checkMobile())) {
+        } else if (_touchStartedOnLabel && (!checkTouch || !checkTouch())) {
             // Click-through logic: if it was a tap (not a drag), verify what's underneath
             const touch = e.changedTouches[0];
             const clientX = touch.clientX;
@@ -219,7 +219,7 @@ export function createRuler(svg, checkMobile) {
     });
     // Mark Drag Handlers (Mobile Only)
     const handleMarkDragStart = (e) => {
-        if (!checkMobile || !checkMobile()) return;
+        if (!checkTouch || !checkTouch()) return;
         e.stopPropagation();
         e.preventDefault();
         _isMarkDragging = true;
@@ -291,7 +291,7 @@ export function createRuler(svg, checkMobile) {
     markGroup.node().addEventListener('touchcancel', handleMarkDragEnd, { passive: false });
 
     markGroup.node().addEventListener('click', (e) => {
-        if (checkMobile && checkMobile()) {
+        if (checkTouch && checkTouch()) {
             e.stopPropagation();
             e.preventDefault();
             hide();
@@ -306,7 +306,7 @@ export function createRuler(svg, checkMobile) {
         e.stopPropagation();
         e.preventDefault();
 
-        if (checkMobile && checkMobile()) {
+        if (checkTouch && checkTouch()) {
             hide();
             clearMark();
             lastMousePos = null;
@@ -372,7 +372,7 @@ export function createRuler(svg, checkMobile) {
         lastConfig = { ...config, event: undefined };
 
         // Toggle pointer-events based on mobile state
-        const isMobile = checkMobile && checkMobile();
+        const isMobile = checkTouch && checkTouch();
         rulerGroup.style("pointer-events", isMobile ? "all" : "none");
 
         // We rely on main loop to pass event or just update if we have lastMousePos
