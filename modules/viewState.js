@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { LANGUAGE, categories, colors, DOUBLE_CLICK_THRESHOLD, checkMobile, checkTouch } from './constants.js';
+import { LANGUAGE, categories, DOUBLE_CLICK_THRESHOLD, checkMobile, checkTouch } from './constants.js';
 import { getLocalized, getFilteredData } from './utils.js';
 
 /**
@@ -15,7 +15,9 @@ export function createViewState({ viz, infobox, data }) {
     let selectedItem = null;
     let currentPositionMode = 'bottom'; // Track position mode
 
-    const colorScale = d3.scaleOrdinal().domain(categories).range(colors);
+    const categoryNames = Object.keys(categories);
+    const categoryColors = categoryNames.map(name => categories[name].color);
+    const colorScale = d3.scaleOrdinal().domain(categoryNames).range(categoryColors);
 
     // --- Plot Update ---
     function updatePlot(options = {}) {
@@ -24,7 +26,7 @@ export function createViewState({ viz, infobox, data }) {
             currentDimensionY,
             colorScale,
             language: LANGUAGE,
-            categories
+            categories: categoryNames
         });
         if (!options.skipResetZoom) {
             viz.resetZoom(); // Default view: Center on content

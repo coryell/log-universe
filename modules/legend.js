@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { getLocalized } from './utils.js';
-import { FADE_OPACITY } from './constants.js';
+import { categories, FADE_OPACITY, LANGUAGE } from './constants.js';
 
 /**
  * Creates a legend component that shows active categories with hover filtering.
@@ -78,10 +78,10 @@ export function createLegend(svg, g, gCombined) {
      * @param {Object} state - { categories, colorScale, language, width, height, onCategoryClick }
      */
     function updateLegend(currentData, state) {
-        const { categories, colorScale, language, width, height } = state;
-        if (!categories) return;
+        const { categories: categoryKeys, colorScale, language, width, height } = state;
+        if (!categoryKeys) return;
 
-        const activeCats = categories.filter(cat =>
+        const activeCats = categoryKeys.filter(cat =>
             currentData.some(d => getLocalized(d.category, language) === cat)
         );
 
@@ -111,7 +111,7 @@ export function createLegend(svg, g, gCombined) {
 
         // Update positions and text content
         itemMerge.select(".legend-item-text")
-            .text(d => d)
+            .text(d => categories[d]?.displayName[LANGUAGE] ?? d)
             .attr("fill", d => colorScale ? colorScale(d) : 'white');
 
         // Calculate dimensions
@@ -185,7 +185,7 @@ export function createLegend(svg, g, gCombined) {
         activeCats.forEach(cat => {
             const span = document.createElement('span');
             span.className = 'mobile-legend-item';
-            span.textContent = cat;
+            span.textContent = categories[cat]?.displayName[LANGUAGE] ?? cat;
             span.style.fontWeight = 'bold';
             span.style.color = colorScale ? colorScale(cat) : '#fff';
 

@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { getLocalized, getUnit } from './utils.js';
-import { checkMobile } from './constants.js';
+import { categories, checkMobile } from './constants.js';
 
 export function createInfobox(selection) {
     const infobox = selection.append("div")
@@ -38,7 +38,8 @@ export function createInfobox(selection) {
 
         members.forEach((member, index) => {
             const localizedDisplayName = getLocalized(member.displayName, language);
-            const localizedCategory = getLocalized(member.category, language);
+            const categoryKey = getLocalized(member.category, language);
+            const categoryDisplayName = categories[categoryKey]?.displayName[language] ?? categoryKey;
             let tagsContent = "";
             if (member.tags && member.tags[language]) {
                 tagsContent = `<div class="infobox-row"><span class="infobox-label">Tags:</span>${member.tags[language].join(", ")}</div>`;
@@ -99,7 +100,7 @@ export function createInfobox(selection) {
                 dimsContent += addDimRow(currentDimensionX);
             }
 
-            const categoryColor = colorScale(localizedCategory);
+            const categoryColor = colorScale(categoryKey);
 
             const entrySeparator = (index > 0) ? '<div class="infobox-divider"></div>' : '';
 
@@ -109,7 +110,7 @@ export function createInfobox(selection) {
           <div class="infobox-title">${localizedDisplayName}</div>
           ${member.description && getLocalized(member.description, language) ? `<div class="infobox-description">${getLocalized(member.description, language)}</div>` : ''}
           ${dimsContent}
-          <div class="infobox-row"><span class="infobox-label">Category:</span><span style="color: ${categoryColor}">${localizedCategory}</span></div>
+          <div class="infobox-row"><span class="infobox-label">Category:</span><span style="color: ${categoryColor}">${categoryDisplayName}</span></div>
           ${tagsContent}
         </div>
       `;

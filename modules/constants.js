@@ -10,15 +10,19 @@ export const paddingBottom = 35;
 export const DEBUG_SHOW_BOUNDS = false; // Toggle debug bounding box
 
 
-export const categories = [
-    "Atoms / Elements", "Astronomy", "Biology", "Electromagnetic", "Fundamental / Nuclear",
-    "Geology", "Molecules", "Spacing", "Sound", "Technology", "Waves"
-];
-
-export const colors = [
-    "#00FFFF", "#FFD700", "#7CFC00", "#1E90FF", "#FF00FF",
-    "#CD853F", "#ff0000ff", "#FF8C00", "#FF69B4", "#C0C0C0", "#9370DB"
-];
+export const categories = {
+    "Atoms / Elements": { color: "#00FFFF", displayName: { "en-us": "Atoms / Elements" } },
+    "Astronomy": { color: "#FFD700", displayName: { "en-us": "Astronomy" } },
+    "Biology": { color: "#7CFC00", displayName: { "en-us": "Biology" } },
+    "Electromagnetic": { color: "#1E90FF", displayName: { "en-us": "Electromagnetic" } },
+    "Fundamental / Nuclear": { color: "#FF00FF", displayName: { "en-us": "Fundamental / Nuclear" } },
+    "Geology": { color: "#CD853F", displayName: { "en-us": "Geology" } },
+    "Molecules": { color: "#ff0000ff", displayName: { "en-us": "Molecules" } },
+    "Spacing": { color: "#FF8C00", displayName: { "en-us": "Spacing" } },
+    "Sound": { color: "#FF69B4", displayName: { "en-us": "Sound" } },
+    "Technology": { color: "#C0C0C0", displayName: { "en-us": "Technology" } },
+    "Waves": { color: "#9370DB", displayName: { "en-us": "Waves" } },
+};
 
 export const FADE_OPACITY = 0.2;
 
