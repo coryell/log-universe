@@ -10,6 +10,7 @@
     "data-editor": "node data_editor/server.js"
   },
   "devDependencies": {
+    "rollup-plugin-license": "^3.7.0",
     "vite": "^7.2.4"
   },
   "dependencies": {
