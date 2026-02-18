@@ -28,13 +28,6 @@ export function createRuler(svg, checkTouch) {
         .style("pointer-events", "none")
         .style("display", "none");
 
-    // Vertical line (tracks X position)
-    const rulerLineX = rulerGroup.append("line")
-        .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
-
-    const rulerLineY = rulerGroup.append("line") // This will be the vertical line tracking X
-        .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
-
     // Mark Lines (Append to markGroup)
     const markLineY = markGroup.append("line") // Horizontal line at fixed Y
         .attr("stroke", "green").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
@@ -72,18 +65,6 @@ export function createRuler(svg, checkTouch) {
         .style("cursor", "move")
         .style("pointer-events", "stroke");
 
-    const rulerLabelBackground = rulerGroup.append("rect")
-        .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
-
-    const rulerLabelHitRect = rulerGroup.append("rect")
-        .attr("fill", "transparent").style("pointer-events", "all");
-
-    const rulerLabel = rulerGroup.append("text")
-        .attr("fill", "red").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
-
-    const rulerLabelLine1 = rulerLabel.append("tspan");
-    const rulerLabelLine2 = rulerLabel.append("tspan");
-
     // Y-Interval Label (Moved to markGroup)
     const yIntervalBackground = markGroup.append("rect")
         .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7)
@@ -101,6 +82,26 @@ export function createRuler(svg, checkTouch) {
     const xIntervalLabel = markGroup.append("text")
         .attr("fill", "green").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start")
         .style("pointer-events", "none");
+
+    // Label background and text (drawn FIRST so lines render on top)
+    const rulerLabelBackground = rulerGroup.append("rect")
+        .attr("fill", "black").attr("rx", 4).attr("ry", 4).attr("opacity", 0.7);
+
+    const rulerLabelHitRect = rulerGroup.append("rect")
+        .attr("fill", "transparent").style("pointer-events", "all");
+
+    const rulerLabel = rulerGroup.append("text")
+        .attr("fill", "red").style("font-family", "monospace").style("font-size", "12px").attr("dy", "0.35em").attr("text-anchor", "start");
+
+    const rulerLabelLine1 = rulerLabel.append("tspan");
+    const rulerLabelLine2 = rulerLabel.append("tspan");
+
+    // Ruler lines (drawn AFTER label so they render on top of the background)
+    const rulerLineX = rulerGroup.append("line")
+        .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
+
+    const rulerLineY = rulerGroup.append("line") // This will be the vertical line tracking X
+        .attr("stroke", "red").attr("stroke-width", 1).attr("stroke-dasharray", "4,2");
 
     // Invisible hit lines for mobile touch targets (Red Ruler)
     const rulerHitLineX = rulerGroup.append("line")
