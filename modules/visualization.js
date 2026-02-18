@@ -1416,10 +1416,105 @@ export function createVisualization(container, config) {
         updateMask(width, height, currentDimensionX, checkMobile());
         legend.reposition(width, height);
 
+        // Rebuild boundsHulls and recalculate minZoom for the new viewport/scales
+        const allPoints = (currentState.filteredData || []).concat(currentState.clusters || []);
+        if (allPoints.length > 0) {
+            const baseDecadeHeight = Math.abs(yScale(10) - yScale(1));
+            const precisionFS = 12;
+            const boundsCandidates = [];
+
+            allPoints.forEach(d => {
+                const visuals = computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimensionY, precisionFS);
+                if (visuals) boundsCandidates.push(visuals);
+            });
+
+            const filterHull = (list, keyPos, keyExt, isMin) => {
+                list.sort((a, b) => isMin ? a[keyPos] - b[keyPos] : b[keyPos] - a[keyPos]);
+                const hull = [];
+                let maxExt = -Infinity;
+                for (const p of list) {
+                    if (p[keyExt] > maxExt) {
+                        hull.push(p);
+                        maxExt = p[keyExt];
+                    }
+                }
+                return hull;
+            };
+
+            const hulls = {
+                minX: filterHull([...boundsCandidates], 'x', 'l', true),
+                maxX: filterHull([...boundsCandidates], 'x', 'r', false),
+                minY: filterHull([...boundsCandidates], 'y', 'u', true),
+                maxY: filterHull([...boundsCandidates], 'y', 'd', false),
+                baseDecadeHeight
+            };
+            currentState.boundsHulls = hulls;
+
+            // Recalculate dataBounds
+            const getLowZoomBound = (list, sign, keyPos, keyExt) => {
+                let best = (sign < 0) ? Infinity : -Infinity;
+                for (const p of list) {
+                    const worldExt = (p[keyExt] / 12) * baseDecadeHeight;
+                    const val = p[keyPos] + (sign * worldExt);
+                    if (sign < 0) best = Math.min(best, val);
+                    else best = Math.max(best, val);
+                }
+                return best;
+            };
+
+            if (boundsCandidates.length > 0) {
+                const dataMinX = getLowZoomBound(hulls.minX, -1, 'x', 'l');
+                const dataMaxX = getLowZoomBound(hulls.maxX, 1, 'x', 'r');
+                const dataMinY = getLowZoomBound(hulls.minY, -1, 'y', 'u');
+                const dataMaxY = getLowZoomBound(hulls.maxY, 1, 'y', 'd');
+                currentState.dataBounds = { minX: dataMinX, maxX: dataMaxX, minY: dataMinY, maxY: dataMaxY };
+            }
+
+            // Recalculate minZoom
+            const isMobile = checkMobile();
+            const leftMargin = isMobile ? paddingLeft : fadeEnd;
+            const bottomMargin = isMobile ? paddingBottom : fadeBottomHeight;
+
+            const safeLeft = leftMargin;
+            const safeRight = width;
+            const safeTop = 0;
+            const safeBottom = (currentDimensionX !== "none") ? height - bottomMargin : height;
+
+            const availWidth = Math.max(1, safeRight - safeLeft);
+            const availHeight = Math.max(1, safeBottom - safeTop);
+
+            const db = currentState.dataBounds;
+            if (db) {
+                const dataW = (db.maxX - db.minX) || 1;
+                const dataH = (db.maxY - db.minY) || 1;
+                let bestK = Math.min(availWidth / dataW, availHeight / dataH);
+                bestK = Math.min(Math.max(bestK, 0.00001), 100000);
+
+                for (let i = 0; i < 5; i++) {
+                    const b = getDynamicBounds(bestK);
+                    if (!b) break;
+                    const w = (b.maxX - b.minX) * bestK;
+                    const h = (b.maxY - b.minY) * bestK;
+                    if (w <= 0 || h <= 0) break;
+
+                    const fX = availWidth / w;
+                    const fY = availHeight / h;
+                    const factor = Math.min(fX, fY);
+
+                    if (Math.abs(factor - 1) < 0.01) break;
+                    bestK = bestK * factor;
+                }
+
+                bestK = bestK * 0.95;
+                minZoom = Math.max(0.000001, Math.min(bestK, 1));
+                zoom.scaleExtent([minZoom, 1000000]);
+            }
+        }
+
         // Update transform to preserve center
         const newT = d3.zoomIdentity
             .translate(width / 2, height / 2)
-            .scale(t.k)
+            .scale(Math.max(t.k, minZoom))
             .translate(-xScale(dataX), -yScale(dataY));
 
         svg.call(zoom.transform, newT);
