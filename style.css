@@ -369,9 +369,9 @@ svg {
   border-color: #00aaff;
 }
 
-/* Mobile Layout */
-@media (max-width: 768px),
-(max-height: 768px) and (orientation: landscape) {
+/* Mobile Layout — SYNC: Keep in sync with MOBILE_QUERY in constants.js */
+@media (max-width: 512px),
+(max-height: 512px) {
   header {
     padding: 10px;
     position: relative;

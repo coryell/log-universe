@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
 import {
     paddingLeft, fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD, paddingBottom,
-    DEBUG_SHOW_BOUNDS, FADE_OPACITY, INEQUALITY_ARROW_LENGTH_FACTOR, ZOOM_NEIGHBOR_DISTANCE_PX
+    DEBUG_SHOW_BOUNDS, FADE_OPACITY, INEQUALITY_ARROW_LENGTH_FACTOR, ZOOM_NEIGHBOR_DISTANCE_PX,
+    checkMobile
 } from './constants.js';
 
 import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData, parseValue } from './utils.js';
@@ -126,9 +127,7 @@ export function createVisualization(container, config) {
         dataLayerOuter, g, gCombined, updateMask
     } = createSvgLayers(container, width, height);
 
-    function checkMobile() {
-        return window.matchMedia('(max-width: 768px), (max-height: 768px) and (orientation: landscape)').matches;
-    }
+    // checkMobile imported from constants.js
 
     updateMask(width, height, currentDimensionX, checkMobile());
 

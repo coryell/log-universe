@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { getLocalized, getUnit } from './utils.js';
+import { checkMobile } from './constants.js';
 
 export function createInfobox(selection) {
     const infobox = selection.append("div")
@@ -20,7 +21,7 @@ export function createInfobox(selection) {
 
         // Smart Positioning (Mobile Only)
         // We use matchMedia here to stay consistent with CSS
-        if (window.matchMedia('(max-width: 768px)').matches) {
+        if (checkMobile()) {
             if (positionMode === 'top') {
                 const headerHeight = document.querySelector('header') ? document.querySelector('header').offsetHeight : 60;
                 infobox.style("bottom", "auto").style("top", (headerHeight + 10) + "px");
