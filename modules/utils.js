@@ -72,8 +72,6 @@ export const formatRelative = (ratio) => {
     const exp = ratio.toExponential(2);
     const [mantissa, exponent] = exp.split('e');
     const expVal = parseInt(exponent, 10);
-    // If exponent is 0, just show the number (e.g. 5.12 instead of 5.12 × 10^0)
-    if (expVal === 0) return mantissa;
     return `${mantissa} × 10^${expVal}`;
 };
 
