@@ -177,9 +177,14 @@ header {
   border-bottom: none;
 }
 
-.search-result-item:hover,
 .search-result-item.selected {
   background-color: rgba(0, 170, 255, 0.2);
+}
+
+@media (hover: hover) {
+  .search-result-item:hover {
+    background-color: rgba(0, 170, 255, 0.2);
+  }
 }
 
 /* Recenter Button Styling */
@@ -195,9 +200,11 @@ header {
   transition: background-color 0.2s, color 0.2s;
 }
 
-#recenter-btn:hover {
-  background-color: #00aaff;
-  color: black;
+@media (hover: hover) {
+  #recenter-btn:hover {
+    background-color: #00aaff;
+    color: black;
+  }
 }
 
 /* Dimension Select Styling */
@@ -229,8 +236,10 @@ header {
   /* Space for arrow */
 }
 
-.select-container select:hover {
-  background-color: rgba(0, 170, 255, 0.1);
+@media (hover: hover) {
+  .select-container select:hover {
+    background-color: rgba(0, 170, 255, 0.1);
+  }
 }
 
 .select-container label {
@@ -364,9 +373,11 @@ svg {
   /* Ensure clickable */
 }
 
-.copy-btn:hover {
-  background-color: rgba(0, 170, 255, 0.2);
-  border-color: #00aaff;
+@media (hover: hover) {
+  .copy-btn:hover {
+    background-color: rgba(0, 170, 255, 0.2);
+    border-color: #00aaff;
+  }
 }
 
 /* Mobile Layout — SYNC: Keep in sync with MOBILE_QUERY in constants.js */

@@ -157,8 +157,14 @@ export function createLegend(svg, g, gCombined) {
         );
 
         itemMerge
-            .on("mouseover", (event, cat) => fadeToCategory(cat, language))
-            .on("mouseout", () => unfade())
+            .on("pointerenter", (event, cat) => {
+                if (event.pointerType === 'touch') return;
+                fadeToCategory(cat, language);
+            })
+            .on("pointerleave", (event) => {
+                if (event.pointerType === 'touch') return;
+                unfade();
+            })
             .on("click", function (event, cat) {
                 event.stopPropagation();
                 if (state.onCategoryClick) state.onCategoryClick(cat);
