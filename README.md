@@ -1,6 +1,6 @@
-# log(Universe) - Physics Poster
+# log(Universe)
 
-An interactive physics poster visualizing the scales of the universe.
+An interactive visualization of the scales of the universe.
 
 ## Setup and Development
 
