@@ -380,6 +380,76 @@ svg {
   }
 }
 
+/* About Modal */
+#about-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#about-modal {
+  background: #000;
+  border: 1px solid #00aaff;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  color: #00aaff;
+  font-family: monospace;
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
+}
+
+#about-modal h2 {
+  margin: 0 0 15px 0;
+  font-size: 22px;
+  color: white;
+}
+
+#about-modal p {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#about-modal .about-links {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0, 170, 255, 0.3);
+}
+
+#about-modal a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  #about-modal a:hover {
+    text-decoration: underline;
+  }
+}
+
+#about-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #00aaff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
 /* Mobile Layout — SYNC: Keep in sync with MOBILE_QUERY in constants.js */
 @media (max-width: 512px),
 (max-height: 512px) {

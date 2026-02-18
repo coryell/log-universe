@@ -75,8 +75,27 @@ d3.json('/data.json').then(rawData => {
     }
   }
 
-  // internally in the visualization module, while standard item clicks/taps
-  // are relayed via callbacks through the viewState.
+  // About Modal
+  const aboutOverlay = document.getElementById('about-overlay');
+  const pageTitle = document.getElementById('page-title');
+  const aboutClose = document.getElementById('about-close');
+
+  if (pageTitle && aboutOverlay) {
+    pageTitle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      aboutOverlay.style.display = 'flex';
+    });
+
+    aboutClose.addEventListener('click', () => {
+      aboutOverlay.style.display = 'none';
+    });
+
+    aboutOverlay.addEventListener('click', (e) => {
+      if (e.target === aboutOverlay) {
+        aboutOverlay.style.display = 'none';
+      }
+    });
+  }
 
   // Reveal the body now that initialization is complete
   document.body.style.opacity = '1';

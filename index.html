@@ -25,7 +25,7 @@
 <body>
   <header>
     <div class="header-left">
-      <h1 id="page-title">log(Universe)</h1>
+      <h1 id="page-title" style="cursor: pointer;">log(Universe)</h1>
     </div>
     <div class="header-center">
       <div id="search-container">
@@ -63,6 +63,19 @@
         <div id="mobile-legend"></div>
       </div>
   </header>
+
+  <!-- About Modal -->
+  <div id="about-overlay" style="display: none;">
+    <div id="about-modal">
+      <button id="about-close" aria-label="Close">&times;</button>
+      <h2>log(Universe)</h2>
+      <p>An interactive visualization of physical quantities across the observable universe.</p>
+      <p class="about-links">
+        <a href="/THIRD-PARTY-LICENSES.txt" target="_blank">Third-Party Licenses</a>
+      </p>
+    </div>
+  </div>
+
   <div id="app"></div>
   <script type="module" src="/main.js"></script>
 </body>
