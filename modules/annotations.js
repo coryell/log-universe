@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { getLocalized, parseValue } from './utils.js';
+import { getLocalized, parseValue, getLabelWithIsotopeOverride } from './utils.js';
 import { INEQUALITY_ARROW_LENGTH_FACTOR } from './constants.js';
 
 // Setup phase: computes static properties (text, color, angle, visibility) and applies them.
@@ -12,9 +12,12 @@ export const setupItemAnnotations = (selection, { currentDimensionX, currentDime
         const xInfo = currentDimensionX === "none" ? { type: "equal" } : parseValue(dataItem._orig_dimensions[currentDimensionX]);
         const yInfo = parseValue(dataItem._orig_dimensions[currentDimensionY]);
 
-        const text = getLocalized(d.displayName || (d._members && d._members[0].displayName), language);
         const cat = getLocalized(dataItem.category, language);
         const color = colorScale(cat);
+
+        let text = getLocalized(d.displayName || (d._members && d._members[0].displayName), language);
+        const tags = (dataItem.tags && dataItem.tags[language]) || [];
+        text = getLabelWithIsotopeOverride(text, tags, currentDimensionX, currentDimensionY);
 
         let angle = 0;
         let showInequality = false;

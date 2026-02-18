@@ -83,3 +83,27 @@ export const formatAbsolute = (diff, dim) => {
     const sign = diff > 0 ? "+" : "";
     return `${sign}${mantissa} × 10^${parseInt(exponent, 10)} ${unit}`;
 };
+
+/**
+ * Overrides a display name with an isotope-specific tag if applicable.
+ * 
+ * @param {string} name - The localized display name.
+ * @param {string[]} tags - The localized tags array for the item.
+ * @param {string} dimX - Current X dimension name.
+ * @param {string} dimY - Current Y dimension name.
+ * @returns {string} The original name or the isotope override.
+ */
+export const getLabelWithIsotopeOverride = (name, tags, dimX, dimY) => {
+    const isMassOrDuration = dimX === "mass" || dimX === "duration" ||
+        dimY === "mass" || dimY === "duration";
+
+    if (isMassOrDuration && name && name.match(/^[A-Z][a-z]?$/)) {
+        const isotopeTag = (tags || []).find(tag => {
+            const match = tag.match(/^([A-Z][a-z]?)-\d+$/);
+            return match && match[1] === name;
+        });
+        return isotopeTag || name;
+    }
+    return name;
+};
+

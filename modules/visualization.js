@@ -5,7 +5,7 @@ import {
     checkMobile, checkTouch
 } from './constants.js';
 
-import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData, parseValue } from './utils.js';
+import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData, parseValue, getLabelWithIsotopeOverride } from './utils.js';
 import { setupItemAnnotations, updateAnnotationLayout } from './annotations.js';
 import { createRuler } from './ruler.js';
 import { createSvgLayers } from './svgSetup.js';
@@ -567,8 +567,14 @@ export function createVisualization(container, config) {
 
                         // Use members determined by grouping.js to fit in limit
                         if (d._labelMembers) {
+                            const isMassOrDuration = currentDimensionX === "mass" || currentDimensionX === "duration" ||
+                                currentDimensionY === "mass" || currentDimensionY === "duration";
+
                             d._labelMembers.forEach((m, i) => {
-                                const name = getLocalized(m.displayName, currentState.language);
+                                let name = getLocalized(m.displayName, currentState.language);
+                                const tags = (m.tags && m.tags[currentState.language]) || [];
+                                name = getLabelWithIsotopeOverride(name, tags, currentDimensionX, currentDimensionY);
+
                                 const cat = getLocalized(m.category, currentState.language);
                                 textEl.append('tspan').text(name).attr('fill', currentState.colorScale(cat));
 
@@ -583,7 +589,10 @@ export function createVisualization(container, config) {
                             }
                         } else {
                             // Fallback for safety (though _labelMembers should always exist)
-                            const name = getLocalized(d.displayName, currentState.language);
+                            let name = getLocalized(d.displayName, currentState.language);
+                            const m = d._members ? d._members[0] : d;
+                            const tags = (m.tags && m.tags[currentState.language]) || [];
+                            name = getLabelWithIsotopeOverride(name, tags, currentDimensionX, currentDimensionY);
                             textEl.text(name);
                         }
 

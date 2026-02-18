@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { getLocalized, getUnit } from './utils.js';
+import { getLocalized, getUnit, getLabelWithIsotopeOverride } from './utils.js';
 import { categories, checkMobile } from './constants.js';
 
 export function createInfobox(selection) {
@@ -37,7 +37,10 @@ export function createInfobox(selection) {
         let fullContent = "";
 
         members.forEach((member, index) => {
-            const localizedDisplayName = getLocalized(member.displayName, language);
+            let localizedDisplayName = getLocalized(member.displayName, language);
+            const tags = (member.tags && member.tags[language]) || [];
+            localizedDisplayName = getLabelWithIsotopeOverride(localizedDisplayName, tags, currentDimensionX, currentDimensionY);
+
             const categoryKey = getLocalized(member.category, language);
             const categoryDisplayName = categories[categoryKey]?.displayName[language] ?? categoryKey;
             let tagsContent = "";
