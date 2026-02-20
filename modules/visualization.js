@@ -848,6 +848,11 @@ export function createVisualization(container, config) {
 
         if (categoryData.length === 0) return;
 
+        if (categoryData.length === 1) {
+            zoomToItem(categoryData[0], false);
+            return;
+        }
+
         // Calculate "Base" extents (at Zoom=1 equivalent, used for inputs)
         const candidates = categoryData.map(d => computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimensionY, 12));
 
@@ -1701,133 +1706,139 @@ export function createVisualization(container, config) {
         svg.transition().duration(duration).call(zoom.transform, transform);
     }
 
+    function zoomToItem(item, highlight = true) {
+        let matchItem = currentState.data.find(d => d.id === item.id);
+        if (!matchItem && currentState.clusters) {
+            matchItem = currentState.clusters.find(c => c.id === item.id);
+        }
+        if (!matchItem) return;
+
+
+        const rawDimY = matchItem.dimensions[currentDimensionY];
+        const valY = Array.isArray(rawDimY)
+            ? Math.sqrt(Number(rawDimY[0]) * Number(rawDimY[1]))
+            : getDimensionValueY(matchItem, currentDimensionY);
+
+        const availableHeight = height - 100;
+        const availableWidth = width - 100;
+        let targetScale = 1;
+
+        if (Array.isArray(rawDimY)) {
+            // Range Item: Zoom to fit the range
+            const y1_raw = yScale(Number(rawDimY[0]));
+            const y2_raw = yScale(Number(rawDimY[1]));
+            const deltaY = Math.abs(y1_raw - y2_raw);
+            if (deltaY > 0) {
+                // Fit range into 70% of available height
+                // deltaY is in BASE pixels (zoom=1).
+                // We want deltaY * targetScale = availableHeight * 0.7
+                targetScale = (availableHeight * 0.7) / deltaY;
+            } else {
+
+                targetScale = 1000; // Fallback
+            }
+        }
+        targetScale = Math.max(1, Math.min(targetScale, 1000)); // Lower cap for ranges
+
+        let nearestItem = null;
+        if (!Array.isArray(rawDimY)) {
+            // Single Point: Zoom until nearest neighbor is ~30px away
+            // NOTE: We must pass currentDimensionX/Y to filter correctly!
+            const filteredData = getFilteredData(currentState.data || [], currentDimensionX, currentDimensionY);
+
+            // Calculate distance in "decades" (log space) to find nearest neighbor
+            const cx = (currentDimensionX === "none") ? matchItem._cachedX : Math.log10(matchItem._cachedX);
+            const cy = Math.log10(matchItem._cachedY);
+
+            let minDistSq = Infinity;
+            let nearestItem = null;
+
+            filteredData.forEach((d, i) => {
+                if (d.id === matchItem.id) return;
+                const dx = (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX);
+                const dy = Math.log10(d._cachedY);
+                const distSq = (dx - cx) ** 2 + (dy - cy) ** 2;
+
+                // Ignore effectively coincident points (duplicates) to prevent infinite zoom
+                if (distSq > 0.00000001 && distSq < minDistSq) {
+                    minDistSq = distSq;
+                    nearestItem = d;
+                }
+            });
+
+            if (minDistSq !== Infinity) {
+                const nearestDistDecades = Math.sqrt(minDistSq);
+                const basePPD = Math.abs(yScale(10) - yScale(1));
+
+                // 1. Scale to separate nearest neighbor
+                const scaleForNeighbor = ZOOM_NEIGHBOR_DISTANCE_PX / (basePPD * nearestDistDecades);
+
+                // 2. Scale to maximize font size (target 12px)
+                // baseFS = Math.min(12, basePPD * scale);
+                // To get 12px, we need basePPD * scale >= 12  =>  scale >= 12 / basePPD
+                const scaleForText = 12 / basePPD;
+
+                // Choose the larger scale (zoom in more if needed for text readability)
+                targetScale = Math.max(scaleForNeighbor, scaleForText);
+            } else {
+                targetScale = 1000;
+            }
+
+            targetScale = Math.max(1, Math.min(targetScale, 100000));
+        }
+
+        const x = xScale(getDimensionValueX(matchItem, currentDimensionX, currentDimensionY));
+        const y = yScale(valY);
+
+        // Shift X center to the left to account for label
+        // The label is to the right of the point. To center "point + label", we need to shift the Viewport Center LEFT relative to the point.
+
+        const isRange = Array.isArray(rawDimY);
+        const basePPD = Math.abs(yScale(10) - yScale(1));
+        const targetPPD = basePPD * targetScale;
+        // Match annotations.js: fs is capped at 12, rangeFS is fs * 1.75
+        const baseFS = Math.min(12, targetPPD);
+        const targetFS = isRange ? baseFS * 1.75 : baseFS;
+
+
+
+        // _estTextWidth is a factor (char count * 0.6), need to multiply by Font Size to get pixels
+        const estTextWidthFactor = matchItem._estTextWidth || 5;
+        const labelWidth = estTextWidthFactor * targetFS;
+        const labelGap = isRange ? 20 : 10; // Match annotations.js labelX = -thickness - 20
+
+        // For ranges, label is on the LEFT. We shift viewport center RIGHT to accommodate.
+        const centerOffsetX = isRange ? -(labelGap + labelWidth) / 2 : (labelGap + labelWidth) / 2;
+
+
+        // Vertical Centering: User wants center of SCREEN, not center of container.
+        // Calculate center relative to the container.
+        const screenCenterY = window.innerHeight / 2;
+        const containerTop = container.getBoundingClientRect().top;
+        const targetCenterY = screenCenterY - containerTop;
+
+        const targetTransform = d3.zoomIdentity
+            .translate(width / 2 - centerOffsetX, targetCenterY)
+            .scale(targetScale)
+            .translate(-x, -y);
+
+        svg.transition()
+            .duration(750)
+            .call(zoom.transform, targetTransform)
+            .on("end", () => {
+                if (highlight) {
+                    highlightItem(matchItem);
+                }
+            });
+    }
+
     return {
         update,
         highlightItem,
         unhighlightItems,
         setCallbacks,
         resize,
-        zoomToItem: (item) => {
-            let matchItem = currentState.data.find(d => d.id === item.id);
-            if (!matchItem && currentState.clusters) {
-                matchItem = currentState.clusters.find(c => c.id === item.id);
-            }
-            if (!matchItem) return;
-
-
-            const rawDimY = matchItem.dimensions[currentDimensionY];
-            const valY = Array.isArray(rawDimY)
-                ? Math.sqrt(Number(rawDimY[0]) * Number(rawDimY[1]))
-                : getDimensionValueY(matchItem, currentDimensionY);
-
-            const availableHeight = height - 100;
-            const availableWidth = width - 100;
-            let targetScale = 1;
-
-            if (Array.isArray(rawDimY)) {
-                // Range Item: Zoom to fit the range
-                const y1_raw = yScale(Number(rawDimY[0]));
-                const y2_raw = yScale(Number(rawDimY[1]));
-                const deltaY = Math.abs(y1_raw - y2_raw);
-                if (deltaY > 0) {
-                    // Fit range into 70% of available height
-                    // deltaY is in BASE pixels (zoom=1).
-                    // We want deltaY * targetScale = availableHeight * 0.7
-                    targetScale = (availableHeight * 0.7) / deltaY;
-                } else {
-
-                    targetScale = 1000; // Fallback
-                }
-            }
-            targetScale = Math.max(1, Math.min(targetScale, 1000)); // Lower cap for ranges
-
-            let nearestItem = null;
-            if (!Array.isArray(rawDimY)) {
-                // Single Point: Zoom until nearest neighbor is ~30px away
-                // NOTE: We must pass currentDimensionX/Y to filter correctly!
-                const filteredData = getFilteredData(currentState.data || [], currentDimensionX, currentDimensionY);
-
-                // Calculate distance in "decades" (log space) to find nearest neighbor
-                const cx = (currentDimensionX === "none") ? matchItem._cachedX : Math.log10(matchItem._cachedX);
-                const cy = Math.log10(matchItem._cachedY);
-
-                let minDistSq = Infinity;
-                let nearestItem = null;
-
-                filteredData.forEach((d, i) => {
-                    if (d.id === matchItem.id) return;
-                    const dx = (currentDimensionX === "none") ? d._cachedX : Math.log10(d._cachedX);
-                    const dy = Math.log10(d._cachedY);
-                    const distSq = (dx - cx) ** 2 + (dy - cy) ** 2;
-
-                    // Ignore effectively coincident points (duplicates) to prevent infinite zoom
-                    if (distSq > 0.00000001 && distSq < minDistSq) {
-                        minDistSq = distSq;
-                        nearestItem = d;
-                    }
-                });
-
-                if (minDistSq !== Infinity) {
-                    const nearestDistDecades = Math.sqrt(minDistSq);
-                    const basePPD = Math.abs(yScale(10) - yScale(1));
-
-                    // 1. Scale to separate nearest neighbor
-                    const scaleForNeighbor = ZOOM_NEIGHBOR_DISTANCE_PX / (basePPD * nearestDistDecades);
-
-                    // 2. Scale to maximize font size (target 12px)
-                    // baseFS = Math.min(12, basePPD * scale);
-                    // To get 12px, we need basePPD * scale >= 12  =>  scale >= 12 / basePPD
-                    const scaleForText = 12 / basePPD;
-
-                    // Choose the larger scale (zoom in more if needed for text readability)
-                    targetScale = Math.max(scaleForNeighbor, scaleForText);
-                } else {
-                    targetScale = 1000;
-                }
-
-                targetScale = Math.max(1, Math.min(targetScale, 100000));
-            }
-
-            const x = xScale(getDimensionValueX(matchItem, currentDimensionX, currentDimensionY));
-            const y = yScale(valY);
-
-            // Shift X center to the left to account for label
-            // The label is to the right of the point. To center "point + label", we need to shift the Viewport Center LEFT relative to the point.
-
-            const isRange = Array.isArray(rawDimY);
-            const basePPD = Math.abs(yScale(10) - yScale(1));
-            const targetPPD = basePPD * targetScale;
-            // Match annotations.js: fs is capped at 12, rangeFS is fs * 1.75
-            const baseFS = Math.min(12, targetPPD);
-            const targetFS = isRange ? baseFS * 1.75 : baseFS;
-
-
-
-            // _estTextWidth is a factor (char count * 0.6), need to multiply by Font Size to get pixels
-            const estTextWidthFactor = matchItem._estTextWidth || 5;
-            const labelWidth = estTextWidthFactor * targetFS;
-            const labelGap = isRange ? 20 : 10; // Match annotations.js labelX = -thickness - 20
-
-            // For ranges, label is on the LEFT. We shift viewport center RIGHT to accommodate.
-            const centerOffsetX = isRange ? -(labelGap + labelWidth) / 2 : (labelGap + labelWidth) / 2;
-
-
-            // Vertical Centering: User wants center of SCREEN, not center of container.
-            // Calculate center relative to the container.
-            const screenCenterY = window.innerHeight / 2;
-            const containerTop = container.getBoundingClientRect().top;
-            const targetCenterY = screenCenterY - containerTop;
-
-            const targetTransform = d3.zoomIdentity
-                .translate(width / 2 - centerOffsetX, targetCenterY)
-                .scale(targetScale)
-                .translate(-x, -y);
-
-            svg.transition()
-                .duration(750)
-                .call(zoom.transform, targetTransform)
-                .on("end", () => highlightItem(matchItem));
-        },
+        zoomToItem,
         resetZoom,
         zoomTo: (transform, duration = 750, onEnd) => {
             if (duration > 0) {
