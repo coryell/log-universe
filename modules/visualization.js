@@ -1843,6 +1843,43 @@ export function createVisualization(container, config) {
         resize,
         zoomToItem,
         resetZoom,
+        getCurrentItem: (item) => {
+            if (!item) return null;
+            // If the item itself exists in the raw data, use it as the base
+            let baseItem = currentState.data.find(d => d.id === item.id);
+            if (!baseItem) {
+                // If it was a cluster, and the cluster survived (rare because IDs regenerate based on members), find it
+                if (currentState.clusters) {
+                    const exactCluster = currentState.clusters.find(c => c.id === item.id);
+                    if (exactCluster) return exactCluster;
+                }
+                // If it was a cluster that broke apart, pick its first member to track
+                // But only pick one that actually survived the dimension change filters!
+                if (item._isCombined && item._members && item._members.length > 0) {
+                    for (const m of item._members) {
+                        // Check if this member survived into filteredData
+                        if (currentState.filteredData && currentState.filteredData.some(fd => fd.id === m.id)) {
+                            baseItem = currentState.data.find(d => d.id === m.id);
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!baseItem) return null;
+
+            // Now we have a real data item. Check if it's currently inside a cluster.
+            if (currentState.clusters) {
+                const parentCluster = currentState.clusters.find(c => c._members.some(m => m.id === baseItem.id));
+                if (parentCluster) return parentCluster;
+            }
+
+            // Not inside a cluster, so it must be in the filtered data (if it passes filters)
+            if (currentState.filteredData && currentState.filteredData.some(d => d.id === baseItem.id)) {
+                return baseItem;
+            }
+
+            return null;
+        },
         zoomTo: (transform, duration = 750, onEnd) => {
             if (duration > 0) {
                 svg.transition().duration(duration).call(zoom.transform, transform).on("end", onEnd);

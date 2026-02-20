@@ -34,17 +34,36 @@ export function createViewState({ viz, infobox, data }) {
 
         // Re-apply selection if it's still valid in the new view
         if (selectedItem) {
-            const hasX = currentDimensionX === "none" || selectedItem.dimensions[currentDimensionX] !== undefined;
-            const hasY = selectedItem.dimensions[currentDimensionY] !== undefined;
-            if (hasX && hasY) {
-                viz.highlightItem(selectedItem);
-                infobox.show(selectedItem, {
-                    currentDimensionX,
-                    currentDimensionY,
-                    colorScale,
-                    language: LANGUAGE,
-                    positionMode: currentPositionMode
-                });
+            const currentVisItem = viz.getCurrentItem(selectedItem);
+
+            if (currentVisItem) {
+                // If it was a cluster that broke apart, we have to update the selectedItem to its new form (a single point).
+                // If it was a single point that got clustered, the user wants the infobox to still show the single point.
+                let nextItem = selectedItem;
+                if (selectedItem._isCombined) {
+                    nextItem = currentVisItem;
+                } else {
+                    // It was a specific point. Ensure it still has valid dimensions in the new view.
+                    const hasX = currentDimensionX === "none" || selectedItem.dimensions[currentDimensionX] !== undefined;
+                    const hasY = selectedItem.dimensions[currentDimensionY] !== undefined;
+                    if (!hasX || !hasY) {
+                        nextItem = null;
+                    }
+                }
+
+                if (nextItem) {
+                    selectedItem = nextItem;
+                    viz.highlightItem(currentVisItem); // Highlight the cluster visually
+                    infobox.show(selectedItem, {       // But show the specific point in the infobox
+                        currentDimensionX,
+                        currentDimensionY,
+                        colorScale,
+                        language: LANGUAGE,
+                        positionMode: currentPositionMode
+                    });
+                } else {
+                    hideInfobox();
+                }
             } else {
                 hideInfobox();
             }
