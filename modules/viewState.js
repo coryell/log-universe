@@ -31,6 +31,24 @@ export function createViewState({ viz, infobox, data }) {
         if (!options.skipResetZoom) {
             viz.resetZoom(); // Default view: Center on content
         }
+
+        // Re-apply selection if it's still valid in the new view
+        if (selectedItem) {
+            const hasX = currentDimensionX === "none" || selectedItem.dimensions[currentDimensionX] !== undefined;
+            const hasY = selectedItem.dimensions[currentDimensionY] !== undefined;
+            if (hasX && hasY) {
+                viz.highlightItem(selectedItem);
+                infobox.show(selectedItem, {
+                    currentDimensionX,
+                    currentDimensionY,
+                    colorScale,
+                    language: LANGUAGE,
+                    positionMode: currentPositionMode
+                });
+            } else {
+                hideInfobox();
+            }
+        }
     }
 
 
@@ -151,6 +169,22 @@ export function createViewState({ viz, infobox, data }) {
         });
 
         window.addEventListener("click", (event) => {
+            // We want to dismiss selection if clicking on the background.
+            // The background could be the <svg> itself, or a background <rect>.
+            // We DO NOT want to dismiss if clicking on:
+            // 1. Controls (select-container)
+            // 2. Data Points (.item-group)
+            // 3. Legend (.legend or .mobile-legend-item)
+            // 4. Modal overlay
+
+            if (event.target.closest('.select-container') ||
+                event.target.closest('.item-group') ||
+                event.target.closest('.legend') ||
+                event.target.closest('.mobile-legend-item') ||
+                event.target.id === 'about-overlay' ||
+                event.target.closest('#about-modal')) {
+                return;
+            }
             if (event.button === 0) {
                 hideInfobox();
                 if (viz.ruler) {
@@ -166,10 +200,19 @@ export function createViewState({ viz, infobox, data }) {
 
         window.addEventListener("keydown", (event) => {
             if (event.key === "Escape") {
+                // Highest priority: Close about modal if open
+                const aboutOverlay = document.getElementById('about-overlay');
+                if (aboutOverlay && aboutOverlay.style.display !== 'none') {
+                    aboutOverlay.style.display = 'none';
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    return;
+                }
+
                 if (viz.ruler) viz.ruler.clearMark();
                 hideInfobox();
             }
-        });
+        }, { capture: true });
 
         window.addEventListener('resize', () => {
             viz.resize();
@@ -198,6 +241,9 @@ export function createViewState({ viz, infobox, data }) {
     initEventListeners();
 
     viz.setCallbacks({
+        onCategoryClick: () => {
+            hideInfobox();
+        },
         onClick: (event, d) => {
             // Visual feedback is immediate
             viz.highlightItem(d);

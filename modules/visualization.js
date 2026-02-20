@@ -850,8 +850,11 @@ export function createVisualization(container, config) {
 
         if (categoryData.length === 1) {
             zoomToItem(categoryData[0], false);
+            if (callbacks.onCategoryClick) callbacks.onCategoryClick(cat);
             return;
         }
+
+        if (callbacks.onCategoryClick) callbacks.onCategoryClick(cat);
 
         // Calculate "Base" extents (at Zoom=1 equivalent, used for inputs)
         const candidates = categoryData.map(d => computePointVisuals(d, xScale, yScale, currentDimensionX, currentDimensionY, 12));
