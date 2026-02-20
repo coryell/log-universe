@@ -270,16 +270,34 @@ export function createViewState({ viz, infobox, data }) {
             window.addEventListener('orientationchange', handleOrientationChange);
         }
 
-        // Interrupt tour on manual user interaction
+        // Interrupt tour on manual user interaction + inactivity auto-start
+        const INACTIVITY_TIMEOUT = 30000; // 30 seconds
+        let inactivityTimerId = null;
+
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimerId);
+            inactivityTimerId = setTimeout(() => {
+                if (!tour.isActive) {
+                    tour.startTour();
+                }
+            }, INACTIVITY_TIMEOUT);
+        }
+
         const stopTourEvents = ['mousedown', 'touchstart', 'wheel', 'keydown', 'pointerdown'];
         stopTourEvents.forEach(evt => {
             window.addEventListener(evt, (e) => {
                 // Ignore if it's the tour button itself or inside it
                 if (e.target.closest && e.target.closest('#tour-btn')) return;
-                // Ignore Escape key here if we want the specific Escape listener to handle it, but stopping the tour is fine.
                 tour.stopTour();
+                resetInactivityTimer();
             }, { capture: true });
         });
+
+        // Also reset on mousemove (activity without clicking)
+        window.addEventListener('mousemove', resetInactivityTimer);
+
+        // Start the initial inactivity timer
+        resetInactivityTimer();
     }
 
     // --- Initialize ---
