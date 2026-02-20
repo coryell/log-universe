@@ -30,6 +30,8 @@ export const INEQUALITY_ARROW_LENGTH_FACTOR = 4;
 
 export const ZOOM_NEIGHBOR_DISTANCE_PX = 30; // Screen pixels to nearest neighbor when zooming to a point
 
+export const GROUP_SEPARATOR = ' + '; // Separator between grouped point labels
+
 // SYNC: Keep in sync with the @media query in style.css (search "Mobile Layout")
 export const MOBILE_QUERY = '(max-width: 512px), (max-height: 512px)';
 export function checkMobile() {

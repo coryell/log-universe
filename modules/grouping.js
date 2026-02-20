@@ -1,4 +1,5 @@
 import { getDimensionValueX, getDimensionValueY, getLocalized, getFilteredData } from './utils.js';
+import { GROUP_SEPARATOR } from './constants.js';
 
 /**
  * Identifies groups of data points that share the same coordinates.
@@ -86,7 +87,7 @@ export function getClusters(data, currentDimensionX, currentDimensionY, language
                 // Always include at least one
                 if (labelMembers.length === 0 || (currentLen + name.length + 3) <= charLimit) {
                     labelMembers.push(m);
-                    currentLen += name.length + (labelMembers.length > 1 ? 3 : 0); // +3 for " / "
+                    currentLen += name.length + (labelMembers.length > 1 ? GROUP_SEPARATOR.length : 0);
                 } else {
                     break;
                 }
@@ -95,7 +96,7 @@ export function getClusters(data, currentDimensionX, currentDimensionY, language
             const hiddenCount = members.length - labelMembers.length;
 
             // Construct display string for text width estimation
-            let combinedDisplayName = labelMembers.map(m => getLocalized(m.displayName, language)).join(" / ");
+            let combinedDisplayName = labelMembers.map(m => getLocalized(m.displayName, language)).join(GROUP_SEPARATOR);
             if (hiddenCount > 0) {
                 combinedDisplayName += ` (+ ${hiddenCount} ${hiddenCount === 1 ? 'other' : 'others'})`;
             }

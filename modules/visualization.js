@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import {
     paddingLeft, fadeEnd, fadeBottomHeight, DOUBLE_CLICK_THRESHOLD, paddingBottom,
     DEBUG_SHOW_BOUNDS, FADE_OPACITY, INEQUALITY_ARROW_LENGTH_FACTOR, ZOOM_NEIGHBOR_DISTANCE_PX,
-    checkMobile, checkTouch
+    GROUP_SEPARATOR, checkMobile, checkTouch
 } from './constants.js';
 
 import { getDimensionValueY, getDimensionValueX, getLocalized, getFilteredData, parseValue, getLabelWithIsotopeOverride } from './utils.js';
@@ -580,7 +580,7 @@ export function createVisualization(container, config) {
 
                                 if (i < d._labelMembers.length - 1) {
                                     // Use separator styling
-                                    textEl.append('tspan').text(' / ').attr('fill', currentState.colorScale(cat));
+                                    textEl.append('tspan').text(GROUP_SEPARATOR).attr('fill', currentState.colorScale(cat));
                                 }
                             });
 
