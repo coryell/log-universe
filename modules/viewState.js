@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { LANGUAGE, categories, DOUBLE_CLICK_THRESHOLD, checkMobile, checkTouch } from './constants.js';
 import { getLocalized, getFilteredData } from './utils.js';
+import { createTourState } from './tourState.js';
 
 /**
  * Creates and manages the application's view state:
@@ -98,7 +99,7 @@ export function createViewState({ viz, infobox, data }) {
         if (result.dimensions[currentDimensionY] === undefined) return;
         if (currentDimensionX !== "none" && result.dimensions[currentDimensionX] === undefined) return;
 
-        // Clear green mark logic on all devices. 
+        // Clear green mark logic on all devices.
         // Hide red ruler cursor ONLY on mobile.
         const isTouch = checkTouch();
         if (viz.ruler) {
@@ -175,6 +176,21 @@ export function createViewState({ viz, infobox, data }) {
             updateHash();
         }
     }
+
+    // Define public API first so we can pass it to tourState
+    const publicApi = {
+        get currentDimensionX() { return currentDimensionX; },
+        get currentDimensionY() { return currentDimensionY; },
+        get selectedItem() { return selectedItem; },
+        get colorScale() { return colorScale; },
+        showInfobox,
+        hideInfobox,
+        selectResult,
+        updatePlot,
+        getFilteredData: (matches) => getFilteredData(matches, currentDimensionX, currentDimensionY)
+    };
+
+    const tour = createTourState({ viz, viewState: publicApi });
 
     // --- Global Event Listeners ---
     function initEventListeners() {
@@ -253,6 +269,17 @@ export function createViewState({ viz, infobox, data }) {
             // Fallback for older browsers
             window.addEventListener('orientationchange', handleOrientationChange);
         }
+
+        // Interrupt tour on manual user interaction
+        const stopTourEvents = ['mousedown', 'touchstart', 'wheel', 'keydown', 'pointerdown'];
+        stopTourEvents.forEach(evt => {
+            window.addEventListener(evt, (e) => {
+                // Ignore if it's the tour button itself or inside it
+                if (e.target.closest && e.target.closest('#tour-btn')) return;
+                // Ignore Escape key here if we want the specific Escape listener to handle it, but stopping the tour is fine.
+                tour.stopTour();
+            }, { capture: true });
+        });
     }
 
     // --- Initialize ---
@@ -269,7 +296,7 @@ export function createViewState({ viz, infobox, data }) {
 
             // On mobile, if click is in bottom 40% of screen (where infobox appears), delay showing it
             // but now that it repositions to top, we don't need delay.
-            // Note: event might be a D3 event or native event. 
+            // Note: event might be a D3 event or native event.
             // Visualization passes 'event' which is the D3 event wrapper, event.clientY should exist on sourceEvent or directly?
             // In visualization.js: callbacks.onClick(event, d). 'event' is the DOM event usually.
             const clientY = event.clientY || (event.sourceEvent ? event.sourceEvent.clientY : 0);
@@ -287,15 +314,5 @@ export function createViewState({ viz, infobox, data }) {
 
 
     // --- Public API ---
-    return {
-        get currentDimensionX() { return currentDimensionX; },
-        get currentDimensionY() { return currentDimensionY; },
-        get selectedItem() { return selectedItem; },
-        get colorScale() { return colorScale; },
-        showInfobox,
-        hideInfobox,
-        selectResult,
-        updatePlot,
-        getFilteredData: (matches) => getFilteredData(matches, currentDimensionX, currentDimensionY)
-    };
+    return publicApi;
 }

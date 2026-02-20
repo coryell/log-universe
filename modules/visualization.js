@@ -1709,7 +1709,7 @@ export function createVisualization(container, config) {
         svg.transition().duration(duration).call(zoom.transform, transform);
     }
 
-    function zoomToItem(item, highlight = true) {
+    function zoomToItem(item, highlight = true, duration = 750) {
         let matchItem = currentState.data.find(d => d.id === item.id);
         if (!matchItem && currentState.clusters) {
             matchItem = currentState.clusters.find(c => c.id === item.id);
@@ -1826,7 +1826,7 @@ export function createVisualization(container, config) {
             .translate(-x, -y);
 
         svg.transition()
-            .duration(750)
+            .duration(duration)
             .call(zoom.transform, targetTransform)
             .on("end", () => {
                 if (highlight) {
@@ -1836,6 +1836,7 @@ export function createVisualization(container, config) {
     }
 
     return {
+        get currentState() { return currentState; },
         update,
         highlightItem,
         unhighlightItems,

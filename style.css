@@ -187,8 +187,9 @@ header {
   }
 }
 
-/* Recenter Button Styling */
-#recenter-btn {
+/* Recenter and Tour Button Styling */
+#recenter-btn,
+#tour-btn {
   padding: 8px 16px;
   background-color: black;
   border: 1px solid #00aaff;
@@ -198,13 +199,22 @@ header {
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.2s, color 0.2s;
+  margin-left: 10px;
 }
 
 @media (hover: hover) {
-  #recenter-btn:hover {
+
+  #recenter-btn:hover,
+  #tour-btn:hover {
     background-color: #00aaff;
     color: black;
   }
+}
+
+#tour-btn.active {
+  background-color: #00aaff;
+  color: black;
+  box-shadow: 0 0 10px 2px rgba(0, 170, 255, 0.5);
 }
 
 /* Dimension Select Styling */
@@ -526,7 +536,8 @@ svg {
     max-width: 200px;
   }
 
-  #recenter-btn {
+  #recenter-btn,
+  #tour-btn {
     max-width: 200px;
   }
 
