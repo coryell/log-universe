@@ -13,7 +13,8 @@
     "dimensions": {
       "length": "1e+0",
       "mass": "1e+0",
-      "duration": "1e+0"
+      "duration": "1e+0",
+      "energy": "1e+0"
     },
     "tags": {
       "en-us": [
@@ -23,7 +24,8 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Metre",
       "mass": "https://en.wikipedia.org/wiki/Kilogram",
-      "duration": "https://en.wikipedia.org/wiki/Second"
+      "duration": "https://en.wikipedia.org/wiki/Second",
+      "energy": "https://en.wikipedia.org/wiki/Joule"
     },
     "reviewed": true
   },
@@ -109,6 +111,33 @@
     "reviewed": true
   },
   {
+    "id": "joule",
+    "displayName": {
+      "en-us": "Joule"
+    },
+    "description": {
+      "en-us": "The base unit of energy in the International System of Units (SI), equal to one kilogram meter squared per second squared."
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "energy": "1e+0"
+    },
+    "tags": {
+      "en-us": [
+        "measurement unit"
+      ]
+    },
+    "x_coordinates": {
+      "energy": "0"
+    },
+    "sources": {
+      "energy": "https://en.wikipedia.org/wiki/Joule"
+    },
+    "reviewed": true
+  },
+  {
     "id": "planck_units",
     "displayName": {
       "en-us": "Planck Units"
@@ -120,9 +149,10 @@
       "en-us": "Fundamental / Nuclear"
     },
     "dimensions": {
-      "length": "1.6e-35",
-      "duration": "5.39e-44",
-      "mass": "2.176434e-8"
+      "length": "1.616255e-35",
+      "duration": "5.391247e-44",
+      "mass": "2.176434e-8",
+      "energy": "1.9561e+9"
     },
     "tags": {
       "en-us": [
@@ -132,7 +162,8 @@
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Planck_units",
       "duration": "https://en.wikipedia.org/wiki/Planck_units",
-      "mass": "https://en.wikipedia.org/wiki/Planck_units"
+      "mass": "https://en.wikipedia.org/wiki/Planck_units",
+      "energy": "https://en.wikipedia.org/wiki/Planck_units"
     },
     "reviewed": true
   },
@@ -150,7 +181,7 @@
       ]
     },
     "dimensions": {
-      "length": "1.6e-35"
+      "length": "1.616255e-35"
     },
     "x_coordinates": {
       "length": "0"
@@ -199,7 +230,7 @@
       "en-us": "Fundamental / Nuclear"
     },
     "dimensions": {
-      "duration": "5.39e-44"
+      "duration": "5.391247e-44"
     },
     "x_coordinates": {
       "duration": "0"
@@ -218,6 +249,64 @@
     "reviewed": true
   },
   {
+    "id": "planck_energy",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Planck Energy"
+    },
+    "description": {
+      "en-us": "The \"natural\" unit of energy, constructed from fundamental constants. Current theories can't describe particles of this mass energy."
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "energy": "1.9561e+9"
+    },
+    "tags": {
+      "en-us": [
+        "quantum"
+      ]
+    },
+    "x_coordinates": {
+      "energy": "0"
+    },
+    "sources": {
+      "energy": "https://en.wikipedia.org/wiki/Planck_units"
+    }
+  },
+  {
+    "id": "neutrino",
+    "reviewed": false,
+    "displayName": {
+      "en-us": "Neutrino"
+    },
+    "description": {
+      "en-us": "The lightest fundamental particle, thought for a long time to be massless."
+    },
+    "category": {
+      "en-us": "Fundamental / Nuclear"
+    },
+    "dimensions": {
+      "mass": "<2.14e-37",
+      "energy": "<1.92e-20"
+    },
+    "tags": {
+      "en-us": [
+        "subatomic",
+        "particle"
+      ]
+    },
+    "x_coordinates": {
+      "mass": "0",
+      "energy": "30"
+    },
+    "sources": {
+      "mass": "https://en.wikipedia.org/wiki/Neutrino",
+      "energy": "https://en.wikipedia.org/wiki/Neutrino"
+    }
+  },
+  {
     "id": "electron",
     "displayName": {
       "en-us": "Electron"
@@ -228,7 +317,8 @@
     "dimensions": {
       "length": "1e-22",
       "mass": "9.1093837139e-31",
-      "duration": ">6.6e+28"
+      "duration": ">6.6e+28",
+      "energy": "8.187e-14"
     },
     "tags": {
       "en-us": [
@@ -239,12 +329,14 @@
     "x_coordinates": {
       "mass": "0",
       "length": "0",
-      "duration": "10"
+      "duration": "10",
+      "energy": "0"
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Electron_mass",
       "length": "https://iopscience.iop.org/article/10.1088/0031-8949/1988/T22/016",
-      "duration": "https://en.wikipedia.org/wiki/Electron"
+      "duration": "https://en.wikipedia.org/wiki/Electron",
+      "energy": "https://en.wikipedia.org/wiki/Electron_mass"
     },
     "description": {
       "en-us": "A subatomic particle that carries a negative charge and surrounds the atomic nucleus."
@@ -262,7 +354,8 @@
     "dimensions": {
       "mass": "1.67e-27",
       "length": "8e-16",
-      "duration": ">9.6e+29"
+      "duration": ">9.6e+29",
+      "energy": "1.50e-10"
     },
     "tags": {
       "en-us": [
@@ -273,12 +366,14 @@
     "x_coordinates": {
       "mass": "0",
       "length": "0",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "sources": {
       "mass": "https://en.wikipedia.org/wiki/Nucleon",
       "length": "https://arxiv.org/pdf/2401.05404v1",
-      "duration": "https://en.wikipedia.org/wiki/Proton_decay"
+      "duration": "https://en.wikipedia.org/wiki/Proton_decay",
+      "energy": "https://en.wikipedia.org/wiki/Nucleon"
     },
     "description": {
       "en-us": "A positively charged subatomic particle that, along with the neutron, makes up the atomic nucleus."
@@ -296,7 +391,8 @@
     "dimensions": {
       "duration": "8.78e+2",
       "length": "8e-16",
-      "mass": "1.67e-27"
+      "mass": "1.67e-27",
+      "energy": "1.50e-10"
     },
     "tags": {
       "en-us": [
@@ -307,12 +403,14 @@
     "x_coordinates": {
       "length": "0",
       "mass": "0",
-      "duration": "10"
+      "duration": "10",
+      "energy": "0"
     },
     "sources": {
       "duration": "https://en.wikipedia.org/wiki/Free_neutron_decay",
       "length": "https://arxiv.org/pdf/2401.05404v1",
-      "mass": "https://en.wikipedia.org/wiki/Nucleon"
+      "mass": "https://en.wikipedia.org/wiki/Nucleon",
+      "energy": "https://en.wikipedia.org/wiki/Nucleon"
     },
     "description": {
       "en-us": "An uncharged subatomic particle that helps bind protons together in the nucleus."
@@ -448,18 +546,21 @@
     },
     "dimensions": {
       "length": "5.0e-22",
-      "duration": "1.7e-30"
+      "duration": "1.7e-30",
+      "energy": "4e-4"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The record-holding gamma ray from space, detected by the Large High Altitude Air Shower Observatory."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray",
-      "duration": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray"
+      "duration": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray",
+      "energy": "https://en.wikipedia.org/wiki/Ultra-high-energy_gamma_ray"
     },
     "reviewed": true
   },
@@ -479,11 +580,13 @@
     },
     "dimensions": {
       "length": "1e-11",
-      "duration": "3e-20"
+      "duration": "3e-20",
+      "energy": "2e-14"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "Gamma rays are very high energy photons often produced by radioactive decay. X-rays are high energy photons, though not as high energy as gamma rays, often produced by the collisions of charged particles."
@@ -491,7 +594,8 @@
     "id": "gamma_ray_x_ray_boundary",
     "sources": {
       "length": "https://en.wikipedia.org/wiki/X-ray",
-      "duration": "https://en.wikipedia.org/wiki/X-ray"
+      "duration": "https://en.wikipedia.org/wiki/X-ray",
+      "energy": "https://en.wikipedia.org/wiki/X-ray"
     },
     "reviewed": true
   },
@@ -513,18 +617,21 @@
     },
     "dimensions": {
       "length": "1e-8",
-      "duration": "3e-17"
+      "duration": "3e-17",
+      "energy": "2e-17"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The fuzzy transition point where ultraviolet light becomes ionizing X-ray radiation."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Extreme_ultraviolet",
-      "duration": "https://en.wikipedia.org/wiki/Extreme_ultraviolet"
+      "duration": "https://en.wikipedia.org/wiki/Extreme_ultraviolet",
+      "energy": "https://en.wikipedia.org/wiki/Extreme_ultraviolet"
     },
     "reviewed": true
   },
@@ -546,18 +653,21 @@
     },
     "dimensions": {
       "length": "3.80e-7",
-      "duration": "1.27e-15"
+      "duration": "1.27e-15",
+      "energy": "5.2e-19"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The shortest wavelength of light that the human eye can perceive."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Visible_spectrum",
-      "duration": "https://en.wikipedia.org/wiki/Visible_spectrum"
+      "duration": "https://en.wikipedia.org/wiki/Visible_spectrum",
+      "energy": "https://en.wikipedia.org/wiki/Visible_spectrum"
     },
     "reviewed": true
   },
@@ -579,18 +689,21 @@
     },
     "dimensions": {
       "length": "7.50e-7",
-      "duration": "2.50e-15"
+      "duration": "2.50e-15",
+      "energy": "2.6e-19"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The longest wavelength of light that the human eye can perceive."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Visible_spectrum",
-      "duration": "https://en.wikipedia.org/wiki/Visible_spectrum"
+      "duration": "https://en.wikipedia.org/wiki/Visible_spectrum",
+      "energy": "https://en.wikipedia.org/wiki/Visible_spectrum"
     },
     "reviewed": true
   },
@@ -613,18 +726,21 @@
     },
     "dimensions": {
       "length": "1e-3",
-      "duration": "3e-12"
+      "duration": "3e-12",
+      "energy": "2e-22"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The boundary near 1 millimeter where thermal infrared heat transitions into microwave radiation."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Microwave",
-      "duration": "https://en.wikipedia.org/wiki/Microwave"
+      "duration": "https://en.wikipedia.org/wiki/Microwave",
+      "energy": "https://en.wikipedia.org/wiki/Microwave"
     },
     "reviewed": true
   },
@@ -646,18 +762,21 @@
     },
     "dimensions": {
       "length": "1e+0",
-      "duration": "3e-9"
+      "duration": "3e-9",
+      "energy": "2e-25"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The 1-meter mark where shorter microwaves are categorized as longer radio waves."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Microwave",
-      "duration": "https://en.wikipedia.org/wiki/Microwave"
+      "duration": "https://en.wikipedia.org/wiki/Microwave",
+      "energy": "https://en.wikipedia.org/wiki/Microwave"
     },
     "reviewed": true
   },
@@ -679,18 +798,21 @@
     },
     "dimensions": {
       "length": "4.2e-3",
-      "duration": "1.4e-11"
+      "duration": "1.4e-11",
+      "energy": "4.7e-23"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "20"
+      "duration": "20",
+      "energy": "0"
     },
     "description": {
       "en-us": "The high-frequency signals used by mobile networks to transmit data at high speeds over short ranges."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/5G",
-      "duration": "https://en.wikipedia.org/wiki/5G"
+      "duration": "https://en.wikipedia.org/wiki/5G",
+      "energy": "https://en.wikipedia.org/wiki/5G"
     },
     "reviewed": true
   },
@@ -712,18 +834,21 @@
     },
     "dimensions": {
       "length": "5.0e-1",
-      "duration": "1.7e-9"
+      "duration": "1.7e-9",
+      "energy": "4e-25"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "20"
+      "duration": "20",
+      "energy": "0"
     },
     "description": {
       "en-us": "Lower frequency radio waves used by mobile phones for better range and penetration through obstacles."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Wireless_device_radiation_and_health",
-      "duration": "https://en.wikipedia.org/wiki/5G"
+      "duration": "https://en.wikipedia.org/wiki/5G",
+      "energy": "https://en.wikipedia.org/wiki/Wireless_device_radiation_and_health"
     },
     "reviewed": true
   },
@@ -746,18 +871,21 @@
     },
     "dimensions": {
       "length": "1.06e-3",
-      "duration": "3.55e-12"
+      "duration": "3.55e-12",
+      "energy": "1.87e-22"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The stretched-out light from the early universe that now permeates space as a microwave glow."
     },
     "sources": {
       "length": "https://en.wikipedia.org/wiki/Cosmic_microwave_background",
-      "duration": "https://en.wikipedia.org/wiki/Cosmic_microwave_background"
+      "duration": "https://en.wikipedia.org/wiki/Cosmic_microwave_background",
+      "energy": "https://en.wikipedia.org/wiki/Cosmic_microwave_background"
     },
     "reviewed": true
   },
@@ -778,11 +906,13 @@
     },
     "dimensions": {
       "length": "3e+5",
-      "duration": "1e-3"
+      "duration": "1e-3",
+      "energy": "7e-31"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "20"
+      "duration": "20",
+      "energy": "0"
     },
     "description": {
       "en-us": "A theoretical limit set by the \"plasma frequency\" of ionized gas between stars."
@@ -806,11 +936,13 @@
     },
     "dimensions": {
       "length": "3.3e+4",
-      "duration": "1.1e-4"
+      "duration": "1.1e-4",
+      "energy": "6.0e-30"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "20"
+      "duration": "20",
+      "energy": "0"
     },
     "description": {
       "en-us": "Radio waves so long they are reflected by the thin plasma filling our solar system."
@@ -834,11 +966,13 @@
     },
     "dimensions": {
       "length": "3e+1",
-      "duration": "1e-7"
+      "duration": "1e-7",
+      "energy": "7e-27"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The longest radio waves that can pass through Earth's atmosphere without being bounced back into space."
@@ -864,11 +998,13 @@
     },
     "dimensions": {
       "length": "1.2e-7",
-      "duration": "4.0e-16"
+      "duration": "4.0e-16",
+      "energy": "1.7e-18"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "A famous ultraviolet spectral line used by astronomers to map the distribution of hydrogen across the cosmos."
@@ -894,11 +1030,13 @@
     },
     "dimensions": {
       "length": "9.3e-6",
-      "duration": "3.1e-14"
+      "duration": "3.1e-14",
+      "energy": "2.1e-20"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The specific infrared frequency at which you are glowing right now due to your body heat."
@@ -924,11 +1062,13 @@
     },
     "dimensions": {
       "length": "4e-6",
-      "duration": "1e-14"
+      "duration": "1e-14",
+      "energy": "5e-20"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The infrared wavelength emitted by metal just before it begins to glow a visible red."
@@ -952,11 +1092,13 @@
     },
     "dimensions": {
       "length": "2.1e-1",
-      "duration": "7.0e-10"
+      "duration": "7.0e-10",
+      "energy": "9.5e-25"
     },
     "x_coordinates": {
       "length": "20",
-      "duration": "0"
+      "duration": "0",
+      "energy": "0"
     },
     "description": {
       "en-us": "The 21-centimeter radio signal emitted by cold hydrogen that allows us to map the spiral arms of our galaxy."
@@ -7394,5 +7536,141 @@
       "en-us": "The estimated age of the universe, currently calculated to be roughly 13.8 billion years."
     },
     "reviewed": true
+  },
+  {
+    "id": "brightest_supernova",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Brightest Supernova"
+    },
+    "description": {
+      "en-us": "The most energetic supernova yet recorded was SN 2016aps resulting from the collapse of the core of a massive star, 50 to 100 times the mass of our sun."
+    },
+    "category": {
+      "en-us": "Astronomy"
+    },
+    "dimensions": {
+      "energy": "1e+45"
+    },
+    "tags": {
+      "en-us": [
+        "SN 2016aps"
+      ]
+    },
+    "x_coordinates": {
+      "energy": "0"
+    },
+    "sources": {
+      "energy": "https://arxiv.org/abs/2012.13283"
+    }
+  },
+  {
+    "id": "tsar_bomba",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Tsar Bomba"
+    },
+    "description": {
+      "en-us": "The largest nuclear explosion created by humans was the detonation of Tsar Bomba in the Soviet Union in 1961."
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "energy": "2.1e+17"
+    },
+    "tags": {
+      "en-us": [
+        "atomic bomb",
+        "nuclear detonation",
+        "nuclear weapon"
+      ]
+    },
+    "x_coordinates": {
+      "energy": "0"
+    },
+    "sources": {
+      "energy": "https://en.wikipedia.org/wiki/Tsar_Bomba"
+    }
+  },
+  {
+    "id": "food_calorie",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Food Calorie"
+    },
+    "description": {
+      "en-us": "Commonly used to describe the amount of energy in food, the Calorie is the amount of heat needed to raise the temperature of one liter of water by one degree Celsius."
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "energy": "4.184e+3"
+    },
+    "tags": {
+      "en-us": [
+        "big calorie",
+        "kilocalorie"
+      ]
+    },
+    "x_coordinates": {
+      "energy": "0"
+    },
+    "sources": {
+      "energy": "https://en.wikipedia.org/wiki/Calorie"
+    }
+  },
+  {
+    "id": "fireworks",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Fireworks"
+    },
+    "description": {
+      "en-us": "The amount of energy released by the largest consumer fireworks shells allowed in the United States."
+    },
+    "category": {
+      "en-us": "Technology"
+    },
+    "dimensions": {
+      "energy": "1.8e+5"
+    },
+    "tags": {
+      "en-us": []
+    },
+    "x_coordinates": {
+      "energy": "0"
+    },
+    "sources": {
+      "energy": "https://en.wikipedia.org/wiki/Consumer_fireworks"
+    }
+  },
+  {
+    "id": "hydrogen_ionization",
+    "reviewed": true,
+    "displayName": {
+      "en-us": "Hydrogen Ionization"
+    },
+    "description": {
+      "en-us": "The amount of energy needed to strip a hydrogen atom of its electron."
+    },
+    "category": {
+      "en-us": "Atoms / Elements"
+    },
+    "dimensions": {
+      "energy": "2.18e-18"
+    },
+    "tags": {
+      "en-us": [
+        "Rydberg"
+      ]
+    },
+    "x_coordinates": {
+      "energy": "30"
+    },
+    "sources": {
+      "energy": "https://en.wikipedia.org/wiki/Ionization_energy"
+    }
   }
 ]

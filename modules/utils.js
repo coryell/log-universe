@@ -12,6 +12,7 @@ export function getLocalized(val, language) {
 export const getUnit = (dim) => {
     if (dim === "mass") return "kg";
     if (dim === "duration") return "s";
+    if (dim === "energy") return "J";
     return "m";
 };
 

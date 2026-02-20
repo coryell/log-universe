@@ -296,10 +296,13 @@
                 <th class="dim-col">Src: Mass</th>
                 <th class="dim-col">Dim: Duration (s)</th>
                 <th class="dim-col">Src: Duration</th>
+                <th class="dim-col">Dim: Energy (J)</th>
+                <th class="dim-col">Src: Energy</th>
                 <th id="header-tags" class="tag-col">Tags</th>
                 <th class="dim-col">X: Length (decades)</th>
                 <th class="dim-col">X: Mass (decades)</th>
                 <th class="dim-col">X: Duration (decades)</th>
+                <th class="dim-col">X: Energy (decades)</th>
                 <th style="width: 30px;"></th>
             </tr>
         </thead>
@@ -402,10 +405,13 @@
                     <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.mass'))}" onchange="updateData(${index}, 'sources.mass', this.value)"></td>
                     <td><input type="text" class="dim-col" data-field="dimensions.duration" value="${escapeHTML(formatDim(getVal(row, 'dimensions.duration')))}" onchange="updateData(${index}, 'dimensions.duration', this.value)"></td>
                     <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.duration'))}" onchange="updateData(${index}, 'sources.duration', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="dimensions.energy" value="${escapeHTML(formatDim(getVal(row, 'dimensions.energy')))}" onchange="updateData(${index}, 'dimensions.energy', this.value)"></td>
+                    <td><input type="text" class="dim-col" value="${escapeHTML(getVal(row, 'sources.energy'))}" onchange="updateData(${index}, 'sources.energy', this.value)"></td>
                     <td><input type="text" value="${escapeHTML(tagsToString(getVal(row, `tags.${lang}`, [])))}" onchange="updateTags(${index}, 'tags.${lang}', this.value)"></td>
                     <td><input type="text" class="dim-col" data-field="x_coordinates.length" value="${escapeHTML(getVal(row, 'x_coordinates.length'))}" onchange="updateX(${index}, 'x_coordinates.length', this.value)"></td>
                     <td><input type="text" class="dim-col" data-field="x_coordinates.mass" value="${escapeHTML(getVal(row, 'x_coordinates.mass'))}" onchange="updateX(${index}, 'x_coordinates.mass', this.value)"></td>
                     <td><input type="text" class="dim-col" data-field="x_coordinates.duration" value="${escapeHTML(getVal(row, 'x_coordinates.duration'))}" onchange="updateX(${index}, 'x_coordinates.duration', this.value)"></td>
+                    <td><input type="text" class="dim-col" data-field="x_coordinates.energy" value="${escapeHTML(getVal(row, 'x_coordinates.energy'))}" onchange="updateX(${index}, 'x_coordinates.energy', this.value)"></td>
                     <td style="text-align: center; vertical-align: middle;"><button class="remove-btn" onclick="deleteRow(${index})" title="Remove">×</button></td>
                 `;
                 const handle = tr.querySelector('.drag-handle');
@@ -660,7 +666,7 @@
                 const id = row.id || row.displayName?.['en-us'] || `Row ${i + 1}`;
 
                 // Validate dimensions
-                const dims = ['length', 'mass', 'duration'];
+                const dims = ['length', 'mass', 'duration', 'energy'];
                 for (const dim of dims) {
                     const val = row.dimensions?.[dim];
                     if (val) {
@@ -734,6 +740,7 @@
                         if (cleanRow.x_coordinates.length === "") delete cleanRow.x_coordinates.length;
                         if (cleanRow.x_coordinates.mass === "") delete cleanRow.x_coordinates.mass;
                         if (cleanRow.x_coordinates.duration === "") delete cleanRow.x_coordinates.duration;
+                        if (cleanRow.x_coordinates.energy === "") delete cleanRow.x_coordinates.energy;
                         if (Object.keys(cleanRow.x_coordinates).length === 0) delete cleanRow.x_coordinates;
                     }
 
@@ -742,6 +749,7 @@
                         if (cleanRow.dimensions.length === "") delete cleanRow.dimensions.length;
                         if (cleanRow.dimensions.mass === "") delete cleanRow.dimensions.mass;
                         if (cleanRow.dimensions.duration === "") delete cleanRow.dimensions.duration;
+                        if (cleanRow.dimensions.energy === "") delete cleanRow.dimensions.energy;
                         if (Object.keys(cleanRow.dimensions).length === 0) delete cleanRow.dimensions;
                     }
 
@@ -750,6 +758,7 @@
                         if (cleanRow.sources.length === "") delete cleanRow.sources.length;
                         if (cleanRow.sources.mass === "") delete cleanRow.sources.mass;
                         if (cleanRow.sources.duration === "") delete cleanRow.sources.duration;
+                        if (cleanRow.sources.energy === "") delete cleanRow.sources.energy;
                         if (Object.keys(cleanRow.sources).length === 0) delete cleanRow.sources;
                     }
 
