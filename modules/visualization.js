@@ -1833,6 +1833,8 @@ export function createVisualization(container, config) {
                     highlightItem(matchItem);
                 }
             });
+
+        return targetTransform;
     }
 
     return {
@@ -1893,6 +1895,8 @@ export function createVisualization(container, config) {
             const t = d3.zoomTransform(svg.node());
             return { xScale: t.rescaleX(xScale), yScale: t.rescaleY(yScale), width, height };
         },
+        getTransform: () => d3.zoomTransform(svg.node()),
+        interruptZoom: () => svg.interrupt(),
         ruler
     };
 }

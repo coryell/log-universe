@@ -1,13 +1,24 @@
+import * as d3 from 'd3';
 import { getLocalized } from './utils.js';
 import { LANGUAGE } from './constants.js';
 
 export function createTourState({ viz, viewState }) {
     let isActive = false;
     let tourTimeoutId = null;
+    let driftAnimId = null;
+
+    // Current drift velocity in data space (persists across stops for crossfade)
+    let activeDriftDx = 0;
+    let activeDriftDy = 0;
 
     // Round-robin state for category and point selection
-    let categoryQueue = [];        // shuffled list of category names still to visit
-    let pointQueues = new Map();   // categoryName -> shuffled array of points still to visit
+    let categoryQueue = [];
+    let pointQueues = new Map();
+
+    // Timing constants
+    const ZOOM_DURATION = 4000;
+    const DWELL_TIME = 10000;
+    const DRIFT_SCREEN_PX_PER_SEC = 10;
 
     function getTourBtn() {
         return document.getElementById('tour-btn');
@@ -24,7 +35,6 @@ export function createTourState({ viz, viewState }) {
 
     /**
      * Build a map of category -> visible points from the current filtered data.
-     * Returns a Map<string, Array<item>>.
      */
     function buildCategoryMap() {
         const currentData = viz.currentState.filteredData;
@@ -41,51 +51,35 @@ export function createTourState({ viz, viewState }) {
 
     /**
      * Get the next tour item using round-robin categories without replacement.
-     * 1. If categoryQueue is empty, reshuffle all visible categories.
-     * 2. Pop the next category from the queue.
-     * 3. If that category's pointQueue is empty, reshuffle its visible points.
-     * 4. Pop the next point from the queue.
-     * 5. If the point isn't currently visible (data changed), skip and try next.
      */
     function getNextItem() {
         const catMap = buildCategoryMap();
         if (catMap.size === 0) return null;
 
-        // Refill category queue if empty
         if (categoryQueue.length === 0) {
             categoryQueue = shuffle([...catMap.keys()]);
         }
 
-        // Try each category in the queue until we find a valid point
         let attempts = categoryQueue.length;
         while (attempts > 0) {
             const cat = categoryQueue.shift();
             attempts--;
 
             const visiblePoints = catMap.get(cat);
-            if (!visiblePoints || visiblePoints.length === 0) {
-                // Category has no visible points in current view, skip it
-                continue;
-            }
+            if (!visiblePoints || visiblePoints.length === 0) continue;
 
-            // Get or create the point queue for this category
             if (!pointQueues.has(cat) || pointQueues.get(cat).length === 0) {
-                // Reshuffle all visible points for this category
                 pointQueues.set(cat, shuffle([...visiblePoints]));
             }
 
             const queue = pointQueues.get(cat);
-
-            // Find a point that's still in the visible data
             while (queue.length > 0) {
                 const candidate = queue.shift();
-                // Verify it's still visible
                 if (visiblePoints.some(p => p.id === candidate.id)) {
                     return candidate;
                 }
             }
 
-            // All points in queue were stale, reshuffle and try once more
             pointQueues.set(cat, shuffle([...visiblePoints]));
             const retryQueue = pointQueues.get(cat);
             if (retryQueue.length > 0) {
@@ -94,6 +88,181 @@ export function createTourState({ viz, viewState }) {
         }
 
         return null;
+    }
+
+    function stopDrift() {
+        if (driftAnimId) {
+            cancelAnimationFrame(driftAnimId);
+            driftAnimId = null;
+        }
+        activeDriftDx = 0;
+        activeDriftDy = 0;
+    }
+
+    /**
+     * Convert a d3 zoom transform to the [cx, cy, w] view format
+     * used by d3.interpolateZoom.
+     */
+    function transformToView(t, vpW, vpH) {
+        return [
+            (vpW / 2 - t.x) / t.k,
+            (vpH / 2 - t.y) / t.k,
+            vpW / t.k
+        ];
+    }
+
+    /**
+     * Convert a [cx, cy, w] view back to a d3 zoom transform.
+     */
+    function viewToTransform(view, vpW, vpH) {
+        const [cx, cy, w] = view;
+        const k = vpW / w;
+        return d3.zoomIdentity
+            .translate(vpW / 2 - cx * k, vpH / 2 - cy * k)
+            .scale(k);
+    }
+
+    /**
+     * Start constant-velocity drift in data space.
+     */
+    function startDrift(dataDx, dataDy) {
+        if (driftAnimId) {
+            cancelAnimationFrame(driftAnimId);
+            driftAnimId = null;
+        }
+        activeDriftDx = dataDx;
+        activeDriftDy = dataDy;
+
+        let lastTime = performance.now();
+
+        function driftFrame(now) {
+            if (!isActive) { stopDrift(); return; }
+
+            const dt = (now - lastTime) / 1000;
+            lastTime = now;
+
+            if (dt > 0 && dt < 0.1) {
+                const currentT = viz.getTransform();
+                const newT = d3.zoomIdentity
+                    .translate(currentT.x - dataDx * currentT.k * dt, currentT.y - dataDy * currentT.k * dt)
+                    .scale(currentT.k);
+                viz.zoomTo(newT, 0);
+            }
+
+            driftAnimId = requestAnimationFrame(driftFrame);
+        }
+
+        driftAnimId = requestAnimationFrame(driftFrame);
+    }
+
+    /**
+     * Animate zoom to an item using our own rAF loop with d3.interpolateZoom
+     * for the flyover, plus an additive drift that crossfades from the
+     * previous drift direction to the new one during the zoom.
+     *
+     * At t=0: drift is 100% old direction (continuous with previous stop).
+     * At t=1: drift is 100% new direction at full speed.
+     */
+    function zoomWithDrift(nextItem, onZoomEnd) {
+        const { width: vpW, height: vpH } = viz.getScales();
+
+        // Capture the outgoing drift velocity before stopping it
+        const oldDriftDx = activeDriftDx;
+        const oldDriftDy = activeDriftDy;
+
+        // Stop the previous drift rAF (but don't zero activeDrift — we just captured it)
+        if (driftAnimId) {
+            cancelAnimationFrame(driftAnimId);
+            driftAnimId = null;
+        }
+
+        // Get current transform and start the D3 zoom to compute target
+        const startT = viz.getTransform();
+        const targetT = viz.zoomToItem(nextItem, false, ZOOM_DURATION);
+
+        // Immediately interrupt D3's transition — we'll drive the animation ourselves
+        viz.interruptZoom();
+
+        if (!targetT) {
+            if (onZoomEnd) onZoomEnd();
+            return;
+        }
+
+        // Convert transforms to [cx, cy, w] views for d3.interpolateZoom
+        const startView = transformToView(startT, vpW, vpH);
+        const targetView = transformToView(targetT, vpW, vpH);
+
+        // Create the Gustafson smooth zoom interpolator (same as D3 uses internally)
+        const zoomInterpolator = d3.interpolateZoom(startView, targetView);
+
+        // Compute NEW drift direction in data space (start center → target center)
+        const dirDx = targetView[0] - startView[0];
+        const dirDy = targetView[1] - startView[1];
+        const dirDist = Math.sqrt(dirDx * dirDx + dirDy * dirDy);
+
+        // New drift velocity in data space at the TARGET zoom level
+        const targetK = vpW / targetView[2];
+        const driftDataSpeed = DRIFT_SCREEN_PX_PER_SEC / targetK;
+        const newDriftDx = dirDist > 0 ? (dirDx / dirDist) * driftDataSpeed : 0;
+        const newDriftDy = dirDist > 0 ? (dirDy / dirDist) * driftDataSpeed : 0;
+
+        // Accumulated drift offset in data space
+        let accDriftX = 0;
+        let accDriftY = 0;
+
+        const animStart = performance.now();
+        let lastTime = animStart;
+
+        function frame(now) {
+            if (!isActive) { stopDrift(); return; }
+
+            const elapsed = now - animStart;
+            const dt = (now - lastTime) / 1000;
+            lastTime = now;
+
+            // Normalized time [0, 1] for the zoom
+            const rawT = Math.min(elapsed / ZOOM_DURATION, 1);
+
+            // D3's default cubic-in-out easing
+            const eased = rawT < 0.5
+                ? 4 * rawT * rawT * rawT
+                : 1 - Math.pow(-2 * rawT + 2, 3) / 2;
+
+            // Get the interpolated view at this easing progress
+            const currentView = zoomInterpolator(eased);
+            const zoomT = viewToTransform(currentView, vpW, vpH);
+
+            // Crossfade drift: old drift eases out, new drift eases in
+            // At t=0: fully old drift. At t=1: fully new drift.
+            const blendIn = rawT * rawT;       // ease-in for new drift
+            const blendOut = 1 - blendIn;       // ease-out for old drift
+
+            const blendedDx = oldDriftDx * blendOut + newDriftDx * blendIn;
+            const blendedDy = oldDriftDy * blendOut + newDriftDy * blendIn;
+
+            if (dt > 0 && dt < 0.1) {
+                accDriftX += blendedDx * dt;
+                accDriftY += blendedDy * dt;
+            }
+
+            // Combine: zoom transform + drift offset (in data space → screen space shift)
+            const k = zoomT.k;
+            const finalT = d3.zoomIdentity
+                .translate(zoomT.x - accDriftX * k, zoomT.y - accDriftY * k)
+                .scale(k);
+
+            viz.zoomTo(finalT, 0);
+
+            if (rawT < 1) {
+                driftAnimId = requestAnimationFrame(frame);
+            } else {
+                // Zoom complete. Drift is already at full speed in new direction.
+                startDrift(newDriftDx, newDriftDy);
+                if (onZoomEnd) onZoomEnd();
+            }
+        }
+
+        driftAnimId = requestAnimationFrame(frame);
     }
 
     function scheduleNextTourStop() {
@@ -105,33 +274,23 @@ export function createTourState({ viz, viewState }) {
             return;
         }
 
-        // 1. Zoom and pan slowly to the item (4 seconds)
-        viz.zoomToItem(nextItem, false, 4000);
-
-        // Wait for zoom to finish, then show infobox and wait
-        tourTimeoutId = setTimeout(() => {
+        zoomWithDrift(nextItem, () => {
             if (!isActive) return;
 
-            // Show infobox for the item (showInfobox handles highlighting internally)
             viewState.showInfobox(nextItem);
 
-            // 2. Wait 10 seconds to let the user read/view
             tourTimeoutId = setTimeout(() => {
                 if (!isActive) return;
                 viewState.hideInfobox();
-
-                // 3. Loop: pick next point
-                tourTimeoutId = setTimeout(scheduleNextTourStop, 500);
-            }, 10000);
-
-        }, 4000);
+                scheduleNextTourStop();
+            }, DWELL_TIME);
+        });
     }
 
     function startTour() {
         if (isActive) return;
         isActive = true;
 
-        // Reset selection state
         categoryQueue = [];
         pointQueues = new Map();
 
@@ -148,6 +307,8 @@ export function createTourState({ viz, viewState }) {
     function stopTour() {
         if (!isActive) return;
         isActive = false;
+
+        stopDrift();
 
         if (tourTimeoutId) {
             clearTimeout(tourTimeoutId);
@@ -176,7 +337,6 @@ export function createTourState({ viz, viewState }) {
         toggleTour
     };
 
-    // Bind click after DOM is ready via setTimeout(0)
     setTimeout(() => {
         const btn = getTourBtn();
         if (btn) {
