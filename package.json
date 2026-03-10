@@ -1,7 +1,9 @@
 {
   "name": "log-universe",
+  "description": "An interactive visualization of the scales of the universe.",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
