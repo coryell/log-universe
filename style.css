@@ -431,6 +431,11 @@ svg {
   color: rgba(255, 255, 255, 0.8);
 }
 
+#about-modal strong {
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+
 #about-modal .about-links {
   margin-top: 20px;
   padding-top: 15px;
