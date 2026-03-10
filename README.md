@@ -1,5 +1,7 @@
 # log(Universe)
 
+**[Visit the live site →](https://coryell.github.io/log-universe)**
+
 An interactive visualization of the scales of the universe.
 
 ## Setup and Development
