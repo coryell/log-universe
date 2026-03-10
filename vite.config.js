@@ -2,6 +2,7 @@ import license from 'rollup-plugin-license';
 import { resolve } from 'path';
 
 export default {
+    base: '/log-universe/',
     build: {
         rollupOptions: {
             plugins: [
