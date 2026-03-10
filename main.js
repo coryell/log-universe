@@ -21,7 +21,7 @@ const viz = createVisualization(app, {
 
 const infobox = createInfobox(d3.select("body"));
 
-d3.json('/data.json').then(rawData => {
+d3.json(`${import.meta.env.BASE_URL}data.json`).then(rawData => {
   const data = processData(rawData);
 
   // Initialize view state (owns dimensions, selection, dropdowns, plot updates)
