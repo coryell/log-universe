@@ -277,12 +277,12 @@
   },
   {
     "id": "neutrino",
-    "reviewed": false,
+    "reviewed": true,
     "displayName": {
       "en-us": "Neutrino"
     },
     "description": {
-      "en-us": "The lightest fundamental particle, thought for a long time to be massless."
+      "en-us": "The lightest fundamental particle, long-believed to be massless."
     },
     "category": {
       "en-us": "Fundamental / Nuclear"
@@ -901,13 +901,15 @@
       "en-us": [
         "light",
         "photon",
-        "radiation"
+        "radiation",
+        "interstellar medium",
+        "ISM"
       ]
     },
     "dimensions": {
-      "length": "3e+5",
-      "duration": "1e-3",
-      "energy": "7e-31"
+      "length": "3e+3",
+      "duration": "1e-5",
+      "energy": "7e-29"
     },
     "x_coordinates": {
       "length": "20",
@@ -915,9 +917,14 @@
       "energy": "0"
     },
     "description": {
-      "en-us": "A theoretical limit set by the \"plasma frequency\" of ionized gas between stars."
+      "en-us": "Ionized gas between stars will reflect radio waves with longer wavelength than this."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Interstellar_medium",
+      "duration": "https://en.wikipedia.org/wiki/Interstellar_medium",
+      "energy": "https://en.wikipedia.org/wiki/Interstellar_medium"
+    }
   },
   {
     "id": "longest_radio_possible_in_solar_system",
@@ -931,13 +938,15 @@
       "en-us": [
         "light",
         "photon",
-        "radiation"
+        "radiation",
+        "interplanetary medium",
+        "IPM"
       ]
     },
     "dimensions": {
-      "length": "3.3e+4",
-      "duration": "1.1e-4",
-      "energy": "6.0e-30"
+      "duration": "4e-5",
+      "length": "1e+4",
+      "energy": "2e-29"
     },
     "x_coordinates": {
       "length": "20",
@@ -945,9 +954,14 @@
       "energy": "0"
     },
     "description": {
-      "en-us": "Radio waves so long they are reflected by the thin plasma filling our solar system."
+      "en-us": "The thin plasma filling our solar system will reflect radio waves with longer wavelength than this."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "duration": "https://en.wikipedia.org/wiki/Interplanetary_medium",
+      "length": "https://en.wikipedia.org/wiki/Interplanetary_medium",
+      "energy": "https://en.wikipedia.org/wiki/Interplanetary_medium"
+    }
   },
   {
     "id": "longest_radio_that_penetrates_ionosphere",
@@ -975,9 +989,14 @@
       "energy": "0"
     },
     "description": {
-      "en-us": "The longest radio waves that can pass through Earth's atmosphere without being bounced back into space."
+      "en-us": "The longest radio waves that can pass through the Earth's atmosphere."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Ionosphere",
+      "duration": "https://en.wikipedia.org/wiki/Ionosphere",
+      "energy": "https://en.wikipedia.org/wiki/Interplanetary_medium"
+    }
   },
   {
     "id": "lyman_alpha",
@@ -1007,9 +1026,14 @@
       "energy": "0"
     },
     "description": {
-      "en-us": "A famous ultraviolet spectral line used by astronomers to map the distribution of hydrogen across the cosmos."
+      "en-us": "A famous ultraviolet spectral line used by astronomers to map the distribution of hot hydrogen across the cosmos. It is created by electrons dropping from the first excited state to the ground state."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Lyman-alpha",
+      "duration": "https://en.wikipedia.org/wiki/Lyman-alpha",
+      "energy": "https://en.wikipedia.org/wiki/Lyman-alpha"
+    }
   },
   {
     "id": "ir_wavelength_of_human_body",
@@ -1029,9 +1053,9 @@
       ]
     },
     "dimensions": {
-      "length": "9.3e-6",
-      "duration": "3.1e-14",
-      "energy": "2.1e-20"
+      "length": "9e-6",
+      "duration": "3e-14",
+      "energy": "2e-20"
     },
     "x_coordinates": {
       "length": "20",
@@ -1039,9 +1063,14 @@
       "energy": "0"
     },
     "description": {
-      "en-us": "The specific infrared frequency at which you are glowing right now due to your body heat."
+      "en-us": "The peak infrared wavelength at which you are glowing right now due to your body heat."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Human_body_temperature",
+      "duration": "https://en.wikipedia.org/wiki/Human_body_temperature",
+      "energy": "https://en.wikipedia.org/wiki/Human_body_temperature"
+    }
   },
   {
     "id": "ir_wavelength_of_red_hot_metal",
@@ -1061,9 +1090,9 @@
       ]
     },
     "dimensions": {
-      "length": "4e-6",
-      "duration": "1e-14",
-      "energy": "5e-20"
+      "length": "2e-6",
+      "duration": "7e-15",
+      "energy": "1e-19"
     },
     "x_coordinates": {
       "length": "20",
@@ -1071,9 +1100,14 @@
       "energy": "0"
     },
     "description": {
-      "en-us": "The infrared wavelength emitted by metal just before it begins to glow a visible red."
+      "en-us": "The peak infrared wavelength emitted by cherry-red-hot metal."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Red_heat",
+      "duration": "https://en.wikipedia.org/wiki/Red_heat",
+      "energy": "https://en.wikipedia.org/wiki/Red_heat"
+    }
   },
   {
     "id": "hydrogen_line",
@@ -1101,9 +1135,14 @@
       "energy": "0"
     },
     "description": {
-      "en-us": "The 21-centimeter radio signal emitted by cold hydrogen that allows us to map the spiral arms of our galaxy."
+      "en-us": "A famous radio spectral line used by astronomers to map the distribution of cold hydrogen across the cosmos. It is created when electrons with spin aligned with their protons transition to the lower energy, anti-aligned state."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Hydrogen_line",
+      "duration": "https://en.wikipedia.org/wiki/Hydrogen_line",
+      "energy": "https://en.wikipedia.org/wiki/Hydrogen_line"
+    }
   },
   {
     "id": "between_particles_ipm",
@@ -1116,6 +1155,7 @@
     "tags": {
       "en-us": [
         "interplanetary medium",
+        "IPM",
         "space"
       ]
     },
@@ -1126,9 +1166,12 @@
       "length": "40"
     },
     "description": {
-      "en-us": "The vast average distance between the sparse particles of plasma that fill the space between planets."
+      "en-us": "The average distance between the sparse particles of plasma that fill the vast space between planets."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Interplanetary_medium"
+    }
   },
   {
     "id": "between_particles_ism",
@@ -1145,15 +1188,18 @@
       ]
     },
     "dimensions": {
-      "length": "1e-1"
+      "length": "3e-2"
     },
     "x_coordinates": {
       "length": "40"
     },
     "description": {
-      "en-us": "The average separation between gas and dust particles in the interstellar medium of our galaxy."
+      "en-us": "The separation between particles in the interstellar medium of our galaxy, as measured by Voyager 2."
     },
-    "reviewed": false
+    "reviewed": true,
+    "sources": {
+      "length": "https://www.nature.com/articles/s41550-019-0918-5"
+    }
   },
   {
     "id": "between_particles_igm",
@@ -1178,7 +1224,10 @@
     "description": {
       "en-us": "The immense distance between the extremely sparse hydrogen ions that make up the Intergalactic Medium, the stuff in the gaps between galaxies."
     },
-    "reviewed": true
+    "reviewed": true,
+    "sources": {
+      "length": "https://en.wikipedia.org/wiki/Warm%E2%80%93hot_intergalactic_medium"
+    }
   },
   {
     "id": "between_particles_in_best_artificial_vacuum",
