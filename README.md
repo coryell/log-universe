@@ -38,3 +38,9 @@ To start the development server and view the application:
 - `style.css`: Application styling.
 - `modules/`: JavaScript modules for various functionalities (constants, utils, etc.).
 - `data_editor/`: Components for editing the project's data.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+Copyright (c) 2026 Cutter Coryell

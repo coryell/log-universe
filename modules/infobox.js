@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 import * as d3 from 'd3';
 import { getLocalized, getUnit, getLabelWithIsotopeOverride } from './utils.js';
 import { categories, checkMobile } from './constants.js';

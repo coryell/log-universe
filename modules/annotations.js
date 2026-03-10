@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 import * as d3 from 'd3';
 import { getLocalized, parseValue, getLabelWithIsotopeOverride } from './utils.js';
 import { INEQUALITY_ARROW_LENGTH_FACTOR } from './constants.js';

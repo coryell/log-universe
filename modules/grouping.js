@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 import { getDimensionValueX, getDimensionValueY, getLocalized, getFilteredData } from './utils.js';
 import { GROUP_SEPARATOR } from './constants.js';
 

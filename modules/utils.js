@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 /**
  * Helper to get localized string from data.
  * Handles object (i18n) formats only.

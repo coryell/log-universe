@@ -28,3 +28,9 @@ node data_editor/server.js
 -   **Server**: A lightweight Express server (`server.js`) that handles reading/writing the JSON file.
 -   **Client**: A vanilla JS frontend (`index.html`) that fetches data and posts updates.
 -   **Data Location**: Reads from and writes exclusively to `../public/data.json`.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+Copyright (c) 2026 Cutter Coryell

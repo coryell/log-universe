@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 /**
  * Data Processor Module
  * Handles validation and numerical coercion of the raw JSON data.

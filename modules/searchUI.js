@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 import { getMatches, getSearchResultContent } from './search.js';
 import { getLocalized } from './utils.js';
 

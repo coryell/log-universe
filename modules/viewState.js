@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 import * as d3 from 'd3';
 import { LANGUAGE, categories, DOUBLE_CLICK_THRESHOLD, checkMobile, checkTouch } from './constants.js';
 import { getLocalized, getFilteredData } from './utils.js';

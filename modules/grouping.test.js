@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
 
 // grouping.test.js
 import assert from 'assert';

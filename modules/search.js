@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
 
 import { getLocalized } from './utils.js';
 

@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 import * as d3 from 'd3';
 import './style.css';
 import { createSearchUI } from './modules/searchUI.js';

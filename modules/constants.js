@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 export const LANGUAGE = "en-us";
 
 export const paddingLeft = 80;

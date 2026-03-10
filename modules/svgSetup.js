@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 import * as d3 from 'd3';
 import { paddingLeft, fadeEnd, fadeBottomHeight, paddingBottom, INEQUALITY_ARROW_LENGTH_FACTOR } from './constants.js';
 

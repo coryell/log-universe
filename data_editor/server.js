@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Cutter Coryell
+// SPDX-License-Identifier: MIT
+
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
