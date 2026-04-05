@@ -250,6 +250,57 @@ export function createViewState({ viz, infobox, data }) {
                 if (viz.ruler) viz.ruler.clearMark();
                 hideInfobox();
             }
+
+            // Arrow key navigation between points
+            // Skip when focus is in a text input (e.g. search box)
+            const tag = document.activeElement?.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+            const arrowDirs = {
+                ArrowUp: [0, -1],
+                ArrowDown: [0, 1],
+                ArrowLeft: [-1, 0],
+                ArrowRight: [1, 0],
+            };
+            const dir = arrowDirs[event.key];
+            if (!dir || !selectedItem) return;
+
+            event.preventDefault();
+
+            const { xScale: sx, yScale: sy } = viz.getScales();
+            const filteredData = getFilteredData(
+                viz.currentState.data || [],
+                currentDimensionX,
+                currentDimensionY
+            );
+
+            // Screen position of the currently selected point
+            const selX = sx(selectedItem._cachedX);
+            const selY = sy(selectedItem._cachedY);
+
+            let bestDist = Infinity;
+            let bestItem = null;
+
+            for (const d of filteredData) {
+                if (d.id === selectedItem.id) continue;
+
+                const dx = sx(d._cachedX) - selX;
+                const dy = sy(d._cachedY) - selY;
+
+                // Dot product with direction vector (positive = same half-plane)
+                const dot = dx * dir[0] + dy * dir[1];
+                if (dot <= 0) continue;
+
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    bestItem = d;
+                }
+            }
+
+            if (bestItem) {
+                selectResult(bestItem, { preservePosition: true });
+            }
         }, { capture: true });
 
         window.addEventListener('resize', () => {
